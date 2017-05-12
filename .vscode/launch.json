@@ -1,0 +1,59 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch localhost with sourcemaps",
+      "type": "edge",
+      "request": "launch",
+      "url": "http://localhost:4200/index.html",
+      "webRoot": "${workspaceRoot}/src",
+      "sourceMaps": true
+    },
+    {
+      "name": "Launch index.html (without sourcemaps)",
+      "type": "edge",
+      "request": "launch",
+      "url": "http://localhost:4200/index.html",
+      "file": "${workspaceRoot}/src/index.html"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:4200/index.html",
+      "webRoot": "${workspaceRoot}/src",
+      "sourceMaps": true
+    },
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "webRoot": "${workspaceRoot}"
+    },
+     {
+            "name": "Launch Chrome against localhost, with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:4200/",
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}/src",
+            "sourceMapPathOverrides": {
+                "webpack:///*": "/*"
+            }
+        },
+        {
+            "name": "Attach to Chrome, with sourcemaps",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "sourceMaps": true,
+            /*"diagnosticLogging": true,*/
+            "webRoot": "${workspaceRoot}/src",
+            "url": "http://localhost:4200/*",
+            "sourceMapPathOverrides": {
+                "webpack:///*": "/*"
+            }
+        }
+  ]
+}
