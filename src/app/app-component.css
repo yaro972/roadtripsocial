@@ -1,0 +1,77 @@
+.navbar{
+	background-color: #353434;
+}
+
+
+/*header {
+  height: 436px;
+  background: url('../assets/img/bg_header.png');
+  background-repeat: no-repeat;
+  /*background-size: cover; */
+  /*margin-top: 70px;
+}*/
+
+.navbar-brand {   
+  font-family: Lato;
+  color:  #ffffff;
+  text-align: left;
+  font-size: 33.33px;/* Approximation causée par une substitution de police */
+}
+
+.navbar-brand img {
+  display: inline-block;
+}
+/*.navbar-brand:before{
+  content:url('../assets/img/earth_globe.png')
+}*/
+
+
+.navbar-brand {
+  font-weight: 700;  
+}
+
+.navbar-brand img {
+  padding: 8px 30px 8px 100px;
+  border-right: 1px solid #404040;
+}
+
+.navbar-brand span {  
+  font-weight: 300;
+}
+
+ul {
+  margin-top: 20px;  
+}
+
+li {
+  padding-left:  26px;
+}
+
+ul li a {
+  font-family: Lato;
+  color:  #ffffff;
+  font-size: 14.58px;/* Approximation causée par une substitution de police */
+  font-weight: 400;
+  text-align: left;  
+  height: 40px;
+	width: 120px;
+}
+
+ul li a:hover {
+  border-top-style: none;
+  border-left-style: none;
+  border: 2px solid #00c5ff;
+  color: #00c5ff;
+  /*color: rgb(163, 204, 255);*/
+  text-decoration: none;
+  background-color: rgba(0,0,0,0);
+  font-weight: 700;
+}
+
+.icon-bar{
+  color: #fff;
+}
+
+.navbar-inverse {
+  border-color: transparent;
+}

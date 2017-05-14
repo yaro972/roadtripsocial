@@ -1,7 +1,7 @@
 {
   "name": "roadtripsocial",
   "version": "1.0.0",
-    "description": "Road Trip Social - reseau social =====================",
+  "description": "Road Trip Social - reseau social =====================",
   "scripts": {
     "build": "tsc -p src/",
     "build:watch": "tsc -p src/ -w",
@@ -20,9 +20,8 @@
     "test:once": "karma start karma.conf.js --single-run",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "cover": "nyc jasmine",
-    "postinstall": "bower install",
     "doc": "jsdoc -c ./jsdoc.conf.json"
-  },  
+  },
   "license": "MIT",
   "dependencies": {
     "@angular/common": "~4.0.0",
@@ -33,15 +32,11 @@
     "@angular/platform-browser": "~4.0.0",
     "@angular/platform-browser-dynamic": "~4.0.0",
     "@angular/router": "~4.0.0",
-
     "angular-in-memory-web-api": "~0.3.0",
-    "systemjs": "0.19.40",
-    "core-js": "^2.4.1",
-    "rxjs": "5.0.1",
-    "zone.js": "^0.8.4",     
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
-    "compression": "^1.6.2",    
+    "compression": "^1.6.2",
+    "core-js": "^2.4.1",
     "debug": "^2.6.3",
     "debug-log": "^1.0.1",
     "express": "^4.15.2",
@@ -51,15 +46,16 @@
     "mongoose": "^4.9.8",
     "morgan": "^1.8.1",
     "ngx-bootstrap": "^1.6.6",
-    "path": "^0.12.7",    
-    "socket.io": "^1.7.3"
-    
+    "path": "^0.12.7",
+    "rxjs": "5.0.1",
+    "socket.io": "^1.7.3",
+    "systemjs": "0.19.40",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "concurrently": "^3.2.0",
     "lite-server": "^2.2.2",
     "typescript": "~2.1.0",
-
     "canonical-path": "0.0.2",
     "tslint": "^3.15.1",
     "lodash": "^4.16.4",
@@ -71,13 +67,11 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~4.0.14",
     "rimraf": "^2.5.4",
-
     "@types/node": "^6.0.46",
     "@types/jasmine": "2.5.36",
     "@angular/cli": "1.0.2",
     "@angular/compiler-cli": "^4.0.0",
-    
-    "@types/jquery": "^2.0.43",    
+    "@types/jquery": "^2.0.43",
     "babel-cli": "^6.24.0",
     "babel-eslint": "^7.2.0",
     "bundle": "^0.2.3",
@@ -90,16 +84,16 @@
     "gulp-nodemon": "^2.1.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
-    "jasmine": "^2.5.3",    
+    "jasmine": "^2.5.3",
     "jasmine-spec-reporter": "~3.2.0",
-    "jshint": "^2.9.4",    
-    "karma-coverage-istanbul-reporter": "^0.2.0",    
-    "nyc": "^10.1.2",    
+    "jshint": "^2.9.4",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
+    "nyc": "^10.1.2",
     "sass-lint": "^1.10.2",
     "ts-node": "~2.0.0"
   },
   "repository": {
-     "type": "git",
+    "type": "git",
     "url": "git+ssh://git@gitlab.com/yaro1976/rsk.git"
   },
   "keywords": [

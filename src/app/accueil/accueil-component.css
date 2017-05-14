@@ -1,0 +1,8 @@
+.slider {
+  height: 436px;
+  background: url('../assets/img/bg_header.png') center;
+  /*background: url('../assets/img/bg_header.png');*/
+  background-repeat: no-repeat;
+  background-size: cover; 
+  /*margin-top: 70px;*/
+}
