@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
-var confdb = require('./config/database');
+const express = require('express');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const confdb = require('./config/database');
 
 var UserSchema = mongoose.Schema({
   first_name: {

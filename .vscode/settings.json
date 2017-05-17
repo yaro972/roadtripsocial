@@ -6,5 +6,6 @@
   "editor.minimap.enabled": true,
   "typescript.check.tscVersion": false,
   "editor.tabCompletion": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "eslint.enable": true
 }

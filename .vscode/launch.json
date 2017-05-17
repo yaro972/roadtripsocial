@@ -1,6 +1,33 @@
 {
   "version": "0.2.0",
-  "configurations": [
+  "configurations": [    
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceRoot}/server/server.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "nodemon",
+      "runtimeExecutable": "nodemon",
+      "runtimeArgs": [
+        "--debug=5858"
+      ],
+      "program": "${workspaceRoot}/server/server.js",
+      "restart": true,
+      "port": 5858,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach",
+      "port": 5858,
+      "restart": true
+    },
     {
       "name": "Launch localhost with sourcemaps",
       "type": "edge",
