@@ -2,7 +2,9 @@
 
 const express = require( 'express' );
 let router = express.Router();
-const passport = require('passport');
+const config = require('../config/config');
+// const db = require( '../models/user' );
+
 
 router.get( '/', function ( req, res, next ) {
   res.json( {
@@ -11,7 +13,8 @@ router.get( '/', function ( req, res, next ) {
   } );  
 } );
 
-router.post( '/login', passport.authenticate('local'), function ( req, res, next ) {
+router.post( '/login', 
+  function ( req, res, next ) {
   res.json( {
     status: true,
     msg: '/login route not implemented'

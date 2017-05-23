@@ -3,8 +3,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const confdb = require('./config/database');
 
+// Création du schéma à la base de données
 var UserSchema = mongoose.Schema({
   first_name: {
     type: String,
@@ -58,7 +58,7 @@ var UserSchema = mongoose.Schema({
 
 });
 
-var User = module.exports = mongoose.model('User', 'UserSchema');
+var User =  mongoose.model('User', UserSchema);
 
 module.exports.getUserById = function(id, callback) {
   User.findById(id, callback);

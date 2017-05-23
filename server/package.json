@@ -1,0 +1,42 @@
+{
+  "name": "roadtripsocial",
+  "version": "1.0.0",
+  "description": "Road Trip Social - reseau social =====================",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "lint": "eslint ./src/**/*.js",
+    "test": "mocha",
+    "cover": "nyc mocha",
+    "doc": "jsdoc -c ./jsdoc.conf.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.2",
+    "morgan": "^1.8.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^4.3.1",
+    "mocha": "^3.4.1",
+    "nyc": "^10.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/yaro1976/roadtripsocial.git"
+  },
+  "keywords": [
+    "nodeJS",
+    "AngularJS"
+  ],
+  "author": "Thierry Aronoff",
+  "bugs": {
+    "url": "https://gitlab.com/yaro1976/roadtripsocial/issues"
+  },
+  "homepage": "https://gitlab.com/yaro1976/roadtripsocial#README"
+}

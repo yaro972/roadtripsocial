@@ -1,11 +1,10 @@
 'use strict';
 
 // Appel des modules
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const passport = require('passport');
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
 
 // Initialisation de l'app
 var app = express();
@@ -13,7 +12,7 @@ var app = express();
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(morgan('combined'));
+app.use( morgan( 'combined' ) );
 
 // fichiers statiques (css, img...)
 app.use(express.static(path.join(__dirname, '..','dist')));
