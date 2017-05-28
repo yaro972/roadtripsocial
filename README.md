@@ -1,4 +1,4 @@
-rsk - reseau social
+Road Trip Social - reseau social
 =====================
 
 
@@ -31,15 +31,15 @@ Stack technique et contraintes
 -------------
 > Le site doit être **compatible avec tous les navigateurs modernes**. Il doit être **ergonomique**, **Responsive desktop / tablette / mobile**.
 
-> **Outils obligatoires côté serveur:**
+> **Dépendances Javascript obligatoires côté serveur:**
 >  
 > - **NodeJS**
-> - **Express JS**
+> - **Express**
 > - **MongoDB**
 > - **Socket IO**
 
-> **Outils obligatoires côté client**
-> - **AngularJS**
+> **Frameworks et librairies obligatoires côté client**
+> - **Angular 4**
 > - **jQuery**
 > - **Bootstrap**
 
