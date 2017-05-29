@@ -6,23 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var platform_browser_1 = require("@angular/platform-browser");
-var app_component_1 = require("./app.component");
-var accueil_component_1 = require("./accueil/accueil.component");
-var AppModule = (function () {
-    function AppModule() {
+var Accueil = (function () {
+    function Accueil() {
     }
-    return AppModule;
+    return Accueil;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule],
-        declarations: [
-            app_component_1.AppComponent,
-            accueil_component_1.Accueil
-        ],
-        bootstrap: [app_component_1.AppComponent]
+Accueil = __decorate([
+    core_1.Component({
+        selector: 'rts-accueil',
+        templateUrl: './accueil.component.html',
+        styleUrls: ['./accueil.component.css']
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], Accueil);
+exports.Accueil = Accueil;
+//# sourceMappingURL=accueil.component.js.map

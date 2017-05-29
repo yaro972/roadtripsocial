@@ -13,7 +13,7 @@ var Accueil = (function () {
 }());
 Accueil = __decorate([
     core_1.Component({
-        selector: 'my-accueil',
+        selector: 'rts-accueil',
         templateUrl: './accueil-component.html',
         styleUrls: ['./accueil-component.css']
     })
