@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }  from './app.component';
 import { Accueil } from './accueil/accueil-component';
+import { ListMembres } from './listMembres/listMembres.component';
+import { DetailsMembres } from './detailsMembres/detailsMembres.component';
 
 
 @NgModule({
