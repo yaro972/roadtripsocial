@@ -14,7 +14,7 @@ var Register = (function () {
 Register = __decorate([
     core_1.Component({
         selector: 'rts-register',
-        templateUrl: '/.register.component.html',
+        templateUrl: './register.component.html',
         styleUrls: ['./register.component.css']
     })
 ], Register);

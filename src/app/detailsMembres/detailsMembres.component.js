@@ -15,7 +15,7 @@ DetailsMembres = __decorate([
     core_1.Component({
         selector: 'rts-details',
         templateUrl: './detailsMembres.component.html',
-        styleUrls: ['./detailsMembres.css']
+        styleUrls: ['./detailsMembres.component.css']
     })
 ], DetailsMembres);
 exports.DetailsMembres = DetailsMembres;
