@@ -4,9 +4,10 @@ const express = require( 'express' );
 let router = express.Router();
 const config = require('../config/config');
 // const db = require( '../models/user' );
+const middle = require('../inc/middleware');
 
-
-router.get( '/', function ( req, res, next ) {
+var auth = middle.auth;
+router.get( '/', auth ,function ( req, res, next ) {
   res.json( {
     status: true,
     msg: '/api/ route not implemented'
