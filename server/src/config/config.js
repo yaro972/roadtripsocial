@@ -1,5 +1,9 @@
 'use strict';
 
 module.exports = {
-  dbUrl : 'mongodb://vps354082.ovh.net/rskdb',
+  db: {
+    Url: 'mongodb://vps354082.ovh.net/rskdb',
+    user: '',
+    pass: ''
+  }
 }
