@@ -1,8 +1,9 @@
 'use strict';
 
-var express = require('express');
-var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
+const express = require('express');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const config = require('../inc/config');
 
 // Création du schéma à la base de données
 var UserSchema = mongoose.Schema({
@@ -103,5 +104,25 @@ module.exports.addNewUser = function (userDetails, callback) {
         } else {
             callback(null, 'New member saved');
         }
+    });
+};
+
+module.exports.addUser = function (newUser, callback) {
+    bcrypt.genSalt();
+
+    bcrypt.genSalt(10, function (err, salt) {
+        if (err) { 
+            callback(true, err);
+        } else {
+            bcrypt.hash(newUser.password, salt, function (err, hash) {
+                if (err) {
+                    callback(true, err);
+                } else {
+                    // Store hash in your password DB. 
+                    newUser.password = hash;
+                }
+        });
+        }
+        
     });
 };

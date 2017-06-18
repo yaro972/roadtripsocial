@@ -2,6 +2,9 @@
 
 var express = require('express');
 var router = express.Router();
+const User = require('../models/user');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 router.get('/', function (req, res, next) {
     res.send('Home : Not implemented');
@@ -12,10 +15,34 @@ router.post('/register', function (req, res, next) {
     // Enregistre le nom, le mot de passe crypté dans la Db
     // Vérifie que le compte n'existe pas déjà dans la Db
     // et retourne le status de l'enregistrement en cas de réussite
-
-    res.json({
-        txt: 'PAS ENCORE IMPLEMENTE : Formulaire d\'inscription'
+    let newUser = new User({
+        nickname: req.body.nickname,
+        password: req.body.password,
+        first_name: req.body.firstName,
+        last_name: req.body.lastName,
+        birthdate: req.body.BirthDate,
+        city: req.body.city,
+        country: req.body.country,
+        mail: req.body.mail,
+        avatar: req.body.avatar,
+        gender: req.body.gender,
+        presentation: req.body.presentation
     });
+
+    User.addUser(newUser, function (err, user) {
+        if (err) {
+            res.json({
+                status: false,
+                msg: 'Erreur lors de l\'ajout d\'un nouvel utilisateur'
+            });
+        } else {
+            res.json({
+                status: true,
+                msg: 'L\'utilisateur  ' + user + 'a bien été rajouté'
+            });
+        }
+    });
+
     // res.send('PAS ENCORE IMPLEMENTE : Formulaire d\'inscription');
 });
 

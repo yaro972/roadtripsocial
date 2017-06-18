@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/admin', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.send('PAS ENCORE IMPLEMENTE : Administration du site');
 });
 

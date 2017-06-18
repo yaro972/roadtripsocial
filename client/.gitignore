@@ -100,3 +100,6 @@ typings/
 # dotenv environment variables file
 .env
 public/img/sources/
+
+ # Database files
+ /.db

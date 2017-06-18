@@ -12,13 +12,16 @@ const passport = require('passport');
 const passportJwt = require('passport-jwt');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+
 // Mise en place du debogage
 var debug = require('debug')('http');
+// Compression des données Http
 var compression = require('compression');
+// Sécurisation des données Http
 var helmet = require('helmet');
 
 const config = require('./inc/config');
-const UserModel = require('./database/models/user.js');
+const UserModel = require('./models/user.js');
 
 const port = process.env.PORT || config.srv.port;
 
