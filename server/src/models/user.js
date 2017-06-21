@@ -23,12 +23,12 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    mail: {
+    email: {
         type: String,
         required: true
     },
     gender: {
-        type: String,
+        type: Number,
         enum: ['home', 'femme']
     },
     age: {
@@ -37,9 +37,7 @@ var UserSchema = mongoose.Schema({
         max: 90
     },
     birthdate: {
-        type: Number,
-        min: 1900,
-        max: 2020
+        type: String
     },
     city: {
         type: String,
@@ -56,10 +54,6 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    pref: {
-        type: String,
-        required: true
-    },
     role: {
         type: String,
         enum: ['invite', 'membre', 'admin'],
@@ -67,15 +61,16 @@ var UserSchema = mongoose.Schema({
     }
 });
 
-var User = mongoose.model('User', UserSchema);
+var User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.getUserById = function (id, callback) {
     User.findById(id, callback);
 };
 
 module.exports.getUserByNickname = function (nickname, callback) {
-    var query = { nickname: nickname };
-    User.findOne(query, callback);
+    User.findOne({
+        'nickname': nickname
+    }, callback);
 };
 
 module.exports.getUserByName = function (name, callback) {
@@ -83,46 +78,32 @@ module.exports.getUserByName = function (name, callback) {
     User.findOne(query, callback);
 };
 
-module.exports.addNewUser = function (userDetails, callback) {
-    var member = new User({
-        nickname: userDetails.nickname,
-        password: userDetails.password,
-        first_name: userDetails.firstName,
-        last_name: userDetails.lastName,
-        birthdate: userDetails.BirthDate,
-        city: userDetails.city,
-        country: userDetails.country,
-        mail: userDetails.mail,
-        avatar: userDetails.avatar,
-        gender: userDetails.gender,
-        presentation: userDetails.presentation
-    });
-
-    member.save(function (err) {
-        if (err) {
-            callback(err, err);
-        } else {
-            callback(null, 'New member saved');
-        }
-    });
-};
-
 module.exports.addUser = function (newUser, callback) {
-    bcrypt.genSalt();
-
     bcrypt.genSalt(10, function (err, salt) {
-        if (err) { 
+        if (err) {
             callback(true, err);
         } else {
             bcrypt.hash(newUser.password, salt, function (err, hash) {
                 if (err) {
-                    callback(true, err);
+                    // callback(true, err);
+                    throw err;
                 } else {
                     // Store hash in your password DB. 
                     newUser.password = hash;
+                    newUser.save(callback);
                 }
-        });
+            });
         }
-        
+
+    });
+};
+
+module.exports.comparePassword = function (candidatePassword, hash, callback) {
+    bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
+        if (err) {
+            throw err;
+        }
+
+        callback(null, isMatch);
     });
 };

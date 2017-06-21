@@ -14,7 +14,7 @@ module.exports = {
             if (this.user.length && this.pass.length) {
                 connStr += this.user + ":" + this.pass + '@';
             }
-            connStr += this.address + '/' + this.dbName + ':' + this.port;
+            connStr += this.address + ':' + this.port + '/' + this.dbName;
             return connStr;
         }
     },
@@ -24,5 +24,8 @@ module.exports = {
     security: {
         salt: '',
         hash: '',
+    },
+    passport: {
+        secret:'secret'
     }
 };

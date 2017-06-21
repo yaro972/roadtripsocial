@@ -25,8 +25,6 @@ const UserModel = require('./models/user.js');
 
 const port = process.env.PORT || config.srv.port;
 
-
-
 // Initialisation de l'app
 var app = express();
 
@@ -41,8 +39,6 @@ app.use(compression());
 // Security 
 app.use(helmet());
 
-
-
 // Securisation des requêtes
 app.use(cors());
 
@@ -50,6 +46,15 @@ app.use(cors());
 // app.use(express.static(path.join(__dirname, '../..', 'client/dist')));
 // app.use(express.static(path.join(__dirname, '../..', 'client/src')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ===========================
+// Passport Config
+// ===========================
+app.use(passport.initialize());
+app.use(passport.session());
+require('./inc/passport')(passport);
+
+
 
 // Fichiers de configuration des routes
 var client = require('./routes/public');
@@ -66,11 +71,13 @@ mongoose.connect(config.db.connString());
 // Detection de la connection à la base de donnée
 db.on('connected', () => {
   console.log('connected on Db ' + config.db.dbName);
+  debug('connected on Db ' + config.db.dbName);
 });
 
 // En cas d'erreur de connecion à la Db, affichage de celle-ci
 db.on('error', (err) => {
   console.log('connection error :', err);
+  debug('connection error :', err);
 });
 
 db.once('open', () => {
