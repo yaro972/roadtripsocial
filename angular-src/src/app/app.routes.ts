@@ -4,6 +4,7 @@ import { Accueil } from './accueil/accueil.component';
 import { ListMembres } from './listMembres/listMembres.component';
 import { DetailsMembres } from './detailsMembres/detailsMembres.component';
 import { Register } from './register/register.component';
+import { Login } from './login/login-component';
 import { About } from './about/about-component';
 
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'list-membres', component: ListMembres },
   { path: 'details-membres', component: DetailsMembres },
   { path: 'register', component: Register },
+   { path: 'login', component: Login },
   {path: 'about', component: About}
 ];
 

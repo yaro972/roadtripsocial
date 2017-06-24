@@ -3,6 +3,7 @@
   background: url('../assets/img/bg_header.png') center;  
   background-repeat: no-repeat;
   background-size: cover;   
+  margin-top: 82px;
 }
 
 .title-text {
