@@ -102,4 +102,4 @@ typings/
 public/img/sources/
 
  # Database files
- /.db
+**/.db/**
