@@ -1,8 +1,0 @@
-Protractor results for: 2017-5-16 20:54:16
-
-AppDir:./
-  Suite: QuickStart E2E Tests -- failed
-    failed - should display: Hello Angular
-      message: Expected 'Voyage et partage
-tes expériences avec tes amis' to equal 'Hello Angular'.
-
