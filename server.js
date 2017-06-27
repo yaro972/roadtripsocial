@@ -24,6 +24,7 @@ const config = require('./app/inc/config');
 const UserModel = require('./app/models/user.js');
 
 const port = process.env.PORT || config.srv.port;
+const ip = process.env.IP || config.srv.ip;
 
 // Initialisation de l'app
 var app = express();
@@ -117,6 +118,6 @@ app.use(function (err, req, res, next) {
 
 
 // Activation du port d'écoute du serveur
-app.listen(port, function () {
+app.listen(port, ip, function () {
   console.log('Serveur démarré sur le port : ' + port);
 });

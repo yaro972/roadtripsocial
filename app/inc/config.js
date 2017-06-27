@@ -4,7 +4,8 @@ module.exports = {
     db: {
         // url: 'mongodb://vps354082.ovh.net/rskdb',
         // url: 'mongodb://192.168.0.104/rskdb:27017',
-        address: 'localhost',        
+        // address: 'localhost',        
+        address: '192.168.0.116',   
         dbName: 'rskdb',        
         user: '',
         pass: '',
@@ -19,7 +20,8 @@ module.exports = {
         }
     },
     srv: {
-        port: 3000
+        port: 3000,
+        ip: '127.0.0.1'
     },
     security: {
         salt: '',
