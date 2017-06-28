@@ -103,3 +103,6 @@ public/img/sources/
 
  # Database files
 **/.db/**
+
+## Config File
+app/inc/config.js
