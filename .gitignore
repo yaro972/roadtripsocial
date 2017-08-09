@@ -106,3 +106,7 @@ public/img/sources/
 
 ## Config File
 app/inc/config.js
+
+server/uploads/*
+**/config.js
+**/.config.js

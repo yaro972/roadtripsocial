@@ -1,0 +1,16 @@
+.road-content{
+  box-shadow: 0px 0px 20px 0px #3a3737;
+}
+
+.back-messages{
+  position: fixed;
+  top:15px;
+  /* bottom: 65px; */
+   /* left: 100px;  */
+
+   left: calc(50% - 125px);
+  min-height: 30px;
+  width: 250px;
+  z-index: 1000;
+    /* border: 5px solid red;   */
+}

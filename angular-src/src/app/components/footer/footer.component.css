@@ -1,0 +1,36 @@
+footer {}
+
+.footer {
+  background-color: #42515f;
+}
+
+footer p {
+  font-family: Lato;
+  color: #ffffff;
+  /* font-size: 16.67px; */
+  font-size: 13px;
+  /* padding: 10px 0; */
+}
+
+footer p span:first-child {
+  color: #ffffff;
+  /* font-size: 16.67px; */
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+}
+
+footer p span {
+  font-weight: 400;
+  text-align: left;
+  font-family: Lato;
+  color: #ffffff;
+  font-size: 16.67px;
+}
+
+footer p a {
+  font-weight: 300;
+  text-align: left;
+  font-family: Lato;
+  color: #ffffff;
+}
