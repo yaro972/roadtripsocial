@@ -1,0 +1,30 @@
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar ul {
+   padding-top: 18px; 
+}
+
+.navbar-inverse {
+  background-color: #42515f;
+}
+
+.nav {
+  background-color: #42515f;
+}
+
+.navbar-brand img {
+  display: inline-block;
+}
+
+.navbar-brand span {
+  color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+  color: #a3ccff;
+  background-color: #48535e;
+}

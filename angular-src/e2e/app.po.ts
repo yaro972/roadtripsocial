@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 export class AngularSrcPage {
   navigateTo() {
@@ -6,6 +6,6 @@ export class AngularSrcPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('rts-accueil h1')).getText();
   }
 }
