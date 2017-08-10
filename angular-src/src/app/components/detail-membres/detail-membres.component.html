@@ -10,6 +10,10 @@
       </div>
     </div>
 
-    <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage"> </rts-profile-view>
+    <div class="separation"></div>
+
+    <div *ngIf="getUserProfile">
+      <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage"> </rts-profile-view>
+    </div>
   </div>
 </div>

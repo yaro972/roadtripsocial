@@ -1,10 +1,107 @@
-<div class="row">
+<div class="row search">
+  <!-- Entête -->
+  <div class="row">
+    <div class="container-fluid">
+      <div class="search-page">
+        <div class="row">
+          <div class="page-header col-sm-6 title-text">
+            <h1>
+              Voyages et <span>partages</span><br /> tes expériences avec tes amis
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin entete -->
+
   <h2> Liste des membres</h2>
 
+  <!-- Recherche d'un utilisateur  -->
   <div class="row">
-    <form action="" class="col-xs-4 col-xs-push-4">
-      <label for="searchInput">Rechercher</label>
-      <input type="text" name="search" id="searchInput">
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <form action="" class="search-form">
+            <div class="form-group has-feedback">
+              <label for="search" class="sr-only">Search</label>
+              <input type="text" class="form-control" name="search" id="search" placeholder="Chercher un membre" [(ngModel)]="searchInput"
+                (keypress)="searchInput=$event.target.value" #search (ngModelChange)="onSearchChange($event)">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+
+
+
+  <!-- Fin recherche d'un utilisateur -->
+
+  <div class="separation"></div>
+
+  <!-- Affichage des utilisateurs correspondants à la recherche -->
+  <div class="row search-list">
+    <div class="container">
+      <h3>Liste des membres</h3>
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+
+
+          <!-- affichage de la liste -->
+          <div class="row search-result-line" *ngFor="let member of membersList">
+            <div class="col-xs-5" (click)="onShowDetail(member)">
+              <div class="row">
+                <div class="col-xs-6"><img src=" {{member.avatar}}" alt="" class="img img-responsive img-circle"></div>
+                <div class="col-xs-6">
+                  <div class="row">
+                    <div class="col-xs-12 search-name">
+                      {{member.firstname}} {{member.lastname}}
+                    </div>
+                    <div class="col-xs-12 search-city">
+                      {{member.city}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-2" (click)="onFollow(member)">
+              <button class="btn btn-default btn-toFollow" *ngIf="!member.followed">Suivre <span class="glyphicon glyphicon-share-alt"></span>
+             </button>
+              <button class="btn btn-default btn-followed" *ngIf="member.followed"><span class="glyphicon glyphicon-ok"> Suivi</span>
+            </button>
+            </div>
+            <div class="col-xs-3 search-visitedCountries" title="{{member.visitedCountries}}"><img src="/assets/images//pin1.png" alt="" width="25">
+              <p *ngIf="member.visitedCountries.length">Pays visités...</p>
+              <p *ngIf="!member.visitedCountries.length">Aucun pays</p>
+              <!-- <ul *ngFor="let country of member.visitedCountries">
+                <li>{{country}}</li>
+              </ul> -->
+              <!-- <div class="row">
+                <div *ngFor="let country of member.visitedCountries">
+                  <p class="col-xs-6">{{country}}</p>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-xs-1" (click)="onSendMessage(member)">
+              <p class="glyphicon glyphicon-comment action" title="Ecrire">
+              </p>
+            </div>
+            <div class="col-xs-1" (click)="onSendPrivateMessage(member)">
+              <p title="Envoyer un message privé" class="glyphicon glyphicon-envelope action">
+              </p>
+            </div>
+          </div>
+          <!-- affichage de la liste -->
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Affichage des utilisateurs correspondants à la recherche -->
+
 </div>

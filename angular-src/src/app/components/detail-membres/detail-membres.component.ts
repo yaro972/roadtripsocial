@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 import { User } from '../../core/user';
 
 @Component({
@@ -12,30 +13,64 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   user: User;
   suivi: false;
   isOwnProfile: Boolean;
+  getUserProfile: Boolean;
+
   sub: any;
+  subRoute: any;
+  subGetMember: any;
+  id: String;
 
   constructor(
-    private _router: Router,
+    private _route: ActivatedRoute,
     private _authService: AuthService
   ) {
     this.isOwnProfile = false;
   }
   ngOnInit() {
-    if (this._authService.loggedIn()) {
-      this.sub = this._authService.getProfile().subscribe(profile => {
-        this.user = profile.user;
-        this.addFakeData();
 
-        this._authService.changeUserEvent(this.user);
-        this._authService.closeSubMenu(true);
-      },
-        err => {
-          console.log(err);
-          return false;
-        });
-    }
+    console.log('details')
+    this.getUserProfile = false;
+    this.getUserId();
+
+
+    // if (this._authService.loggedIn()) {
+    //   this.sub = this._authService.getProfile().subscribe(profile => {
+    //     this.user = profile.user;
+    //     this.addFakeData();
+
+    //     this._authService.changeUserEvent(this.user);
+    //     this._authService.closeSubMenu(true);
+    //   },
+    //     err => {
+    //       console.log(err);
+    //       return false;
+    //     });
+    // }
   }
 
+
+  getUserId() {
+
+    this.subRoute = this._route.params.subscribe(params => {
+      this.id = params['id'];
+
+      this.getUserDetails(this.id);
+    });
+  }
+
+  getUserDetails(id) {
+    this.subGetMember = this._authService.memberdetails(id).subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+
+        this.user = data.memberDetails;
+        this.getUserProfile = true;
+
+        this.addFakeData();
+      }
+    });
+  }
 
   lastPostMessage: String = 'Canada is the Best country ever !';
 
@@ -82,6 +117,13 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
-  }
 
+    if (this.subRoute) {
+      this.subRoute.unsubscribe();
+    }
+
+    if (this.subGetMember) {
+      this.subGetMember.unsubscribe();
+    }
+  }
 }

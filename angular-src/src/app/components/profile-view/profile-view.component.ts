@@ -46,13 +46,6 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   ngOnInit() {
-
-
-    console.log(this.user.gender);
-    // this.genderIco = 'fa fa-mars';
-    // if (this.user.gender === 1) {
-    //   this.genderIco = 'fa fa-venus';
-    // }
     this.age = this._profileService.calcAge(this.user.birthdate);
   }
 

@@ -20,14 +20,14 @@
 
           <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/list-membres">
-                            Liste des membres
+                            Membres
                             </a>
           </li>
-          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/details-membres">
                             Fiche d'un membre
                             </a>
-          </li>
+          </li> -->
           <li *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/register">
                             Inscription

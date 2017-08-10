@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
+  BACKENDURL = 'http://localhost:3000';
   authToken: any;
   user: User;
 
@@ -25,7 +26,7 @@ export class AuthService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .put('http://localhost:3000/api/user/register', user, { headers: headers })
+      .put(this.BACKENDURL + '/api/user/register', user, { headers: headers })
       .map(res => res.json());
   }
 
@@ -37,7 +38,7 @@ export class AuthService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/register-civility',
+      .post(this.BACKENDURL + '/api/user/register-civility',
       {
         nickname: nickname,
         civility: civility
@@ -56,7 +57,7 @@ export class AuthService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/register-extra-details',
+      .post(this.BACKENDURL + '/api/user/register-extra-details',
       {
         nickname: nickname,
         extraDetails: details
@@ -73,7 +74,7 @@ export class AuthService {
       .append('Content-type', 'application/json');
 
     return this._http
-      .post('http://localhost:3000/api/user/login', user, { headers: headers })
+      .post(this.BACKENDURL + '/api/user/login', user, { headers: headers })
       .map(res => res.json());
   }
 
@@ -92,7 +93,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this._http
-      .get('http://localhost:3000/api/user/profile', { headers: headers })
+      .get(this.BACKENDURL + '/api/user/profile', { headers: headers })
       .map(res => res.json());
   }
 
@@ -123,7 +124,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/find-user-by-mail', mail, { headers: headers })
+      .post(this.BACKENDURL + '/api/user/find-user-by-mail', mail, { headers: headers })
       .map(res => res.json());
   }
 
@@ -153,7 +154,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/nickname-availability', {
+      .post(this.BACKENDURL + '/api/user/nickname-availability', {
         'nickname': nickname
       }, {
         headers: headers
@@ -171,7 +172,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/update-profile', {
+      .post(this.BACKENDURL + '/api/user/update-profile', {
         newUserProfile
       }, {
         headers: headers
@@ -188,7 +189,7 @@ export class AuthService {
 
     headers.append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/lost-password', userMail, {
+      .post(this.BACKENDURL + '/api/user/lost-password', userMail, {
         headers: headers
       })
       .map(res => res.json());
@@ -204,7 +205,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/change-password', {
+      .post(this.BACKENDURL + '/api/user/change-password', {
         nickname: JSON.parse(localStorage.getItem('user')).nickname,
         oldPass: oldPass,
         newPass: newPass
@@ -225,7 +226,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post('http://localhost:3000/api/user/reset-password', {
+      .post(this.BACKENDURL + '/api/user/reset-password', {
         token: token,
         newPass: newPass
       }, {
@@ -233,4 +234,40 @@ export class AuthService {
       })
       .map(res => res.json());
   }
+
+  /**
+ * Fonction de recherche d'un membre'
+ * @param itemToFind Element à rechercher
+ */
+  searchMembers(itemToFind) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(this.BACKENDURL + '/api/user/search-member', {
+        itemToFind: itemToFind
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+
+  memberdetails(id) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(this.BACKENDURL + '/api/user/member-details', {
+        memberId: id
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
 }
