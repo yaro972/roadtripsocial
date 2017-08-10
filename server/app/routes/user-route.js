@@ -388,4 +388,80 @@ router.post('/change-password', passport.authenticate('jwt', {
 
 });
 
+router.post('/search-member', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  User.searchMembers(req.body.itemToFind, function (err, rslt) {
+    console.log('searchMembers /search', err, rslt);
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        membersList: rslt
+      });
+    }
+  });
+
+  // res.json({
+  //   'membersList': [{
+  //       'id': '0',
+  //       'avatar': '/assets/images/avatar/Anonymous.png',
+  //       'name': 'Lucie T.',
+  //       'city': 'Le Havre',
+  //       'followed': false,
+  //       'visitedCountries': 'France'
+  //     },
+  //     {
+  //       'id': '1',
+  //       'avatar': '/assets/images/avatar/Anonymous.png',
+  //       'name': 'Evans A.',
+  //       'city': 'Los Angeles',
+  //       'followed': true,
+  //       'visitedCountries': 'US'
+  //     },
+  //     {
+  //       'id': '2',
+  //       'avatar': '/assets/images/avatar/Anonymous.png',
+  //       'name': 'Hans W.',
+  //       'city': 'Liden',
+  //       'followed': false,
+  //       'visitedCountries': 'Suède'
+  //     },
+  //     {
+  //       'id': '3',
+  //       'avatar': '/assets/images/avatar/Anonymous.png',
+  //       'name': 'Malik D.',
+  //       'city': 'Mararaba',
+  //       'followed': true,
+  //       'visitedCountries': 'Cameroun'
+  //     }
+  //   ]
+  // });
+});
+
+/**
+ * Permet de récupérer le détail d'un profil
+ */
+router.post('/member-details', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  User.memberDetails(req.body.memberId, function (err, memberDetail) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        memberDetails: memberDetail
+      });
+    }
+  });
+});
+
+
 module.exports = router;

@@ -21,6 +21,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthService } from './services/auth.service';
 import { FileUploadService } from './services/file-upload.service';
 
+import { ListMembersService } from './services/list-members.service';
+
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
@@ -64,7 +66,8 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
     AuthGuard,
     AuthService,
     FileUploadService,
-    ProfileEditService
+    ProfileEditService,
+    ListMembersService
   ],
   bootstrap: [AppComponent]
 })
