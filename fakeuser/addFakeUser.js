@@ -56,10 +56,10 @@ let extractImageName = function (user) {
 
 };
 
-let downloadImage = function (user, imageName) {
+let downloadImage = function (url, imageName) {
   // Configuration d'image-downloader
   const options = {
-    url: user.avatar,
+    url: url,
     dest: path.join(__dirname, 'download', imageName)
   };
 
@@ -88,19 +88,21 @@ let downloadImage = function (user, imageName) {
  * Sauvegarde dans la base de données
  * @param {Object} user profil de l'utilisateur généré 
  */
-let saveToDb = function (user) {
+let saveToDb = function (user, urlImage, imageName, callback) {
   // Url de connection 
   let url = config.db.connString();
 
   MongoClient.connect(url, function (err, db) {
     if (err) {
-      console.log(err);
+      callback(err);
     } else {
       db.collection('users').insertOne(user, function (err, db) {
         if (err) {
-          console.log(err);
+          callback(err);
+
         } else {
           console.log('Profil sauvegardé');
+          callback(null, urlImage, imageName);
         }
       });
     }
@@ -111,9 +113,16 @@ let saveToDb = function (user) {
 
 let user = generateFafkeUser();
 let imageName = extractImageName(user);
+let url = user.avatar;
 user.avatar = imageName;
-downloadImage(user, imageName);
-saveToDb(user);
+
+saveToDb(user, url, imageName, function (err, url, imageName) {
+  if (err) {
+    console.log(err);
+  } else {
+    downloadImage(url, imageName);
+  }
+});
 
 
 
