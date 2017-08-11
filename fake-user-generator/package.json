@@ -1,9 +1,10 @@
 {
-  "name": "fakeuser",
+  "name": "fake-user-generator",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Générateur de faux profils utilisateurs",
+  "main": "addFakeUser.js",
   "scripts": {
+    "start": "node ./addFakeUser.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
