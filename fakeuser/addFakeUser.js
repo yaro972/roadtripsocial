@@ -1,13 +1,13 @@
 'use strict';
 
 const Charlatan = require('charlatan');
-const faker = require('faker');
-const mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 const download = require('image-downloader');
 const path = require('path');
 
 // Configuration des accès à mongoDb
-var config = path.join(__dirname, '../', '/server/app/inc/.config');
+var config = require('../server/app/inc/.config');
 
 // Configuration du module charlatan pour utiliser des noms à consonnance française
 Charlatan.setLocale('fr');
@@ -21,12 +21,12 @@ var generateFafkeUser = function () {
   /**
    * generate a fake User content
    */
-  var user = {
+  return {
     'nickname': Charlatan.Internet.userName(),
     'firstname': Charlatan.Name.firstName(),
     'lastname': Charlatan.Name.lastName(),
     'password': Charlatan.Internet.password(),
-    'avatar': faker.image.avatar(),
+    'avatar': Charlatan.Avatar.image(),
     'city': Charlatan.Address.city(),
     'country': Charlatan.Address.country(),
     'email': Charlatan.Internet.email(),
@@ -43,65 +43,78 @@ var generateFafkeUser = function () {
     'role': 'membre'
   };
 
-  return user;
 };
 
 /**
  * Extrait le nom de l'image
- * @param {string} url Url de l'image
+ * @param {string} user Profil de l'utilisateur généré
  */
-let extractImageName = function (url) {
+let extractImageName = function (user) {
   let url = user.avatar.split('/');
-  let imageName = url[url.length - 1];
+  let name = url[url.length - 1]
+  return name.split('?')[0];
 
-}
-
-
-// Configuration d'image-downloader
-const options = {
-  url: user.avatar,
-  dest: path.join(__dirname, 'download', imageName)
 };
 
+let downloadImage = function (user, imageName) {
+  // Configuration d'image-downloader
+  const options = {
+    url: user.avatar,
+    dest: path.join(__dirname, 'download', imageName)
+  };
 
-download.image(options)
-  .then(({
-    filename,
-    image
-  }) => {
-    console.log('File saved to', filename)
-  }).catch((err) => {
-    throw err
-  })
+  download.image(options)
+    .then(({
+      filename,
+      image
+    }) => {
+      console.log('File saved to', filename)
+    }).catch((err) => {
+      throw err
+    });
 
-// Download to a directory and save with an another filename 
-// options = {
-//   url: 'http://someurl.com/image2.jpg',
-//   dest: '/path/to/dest/photo.jpg'        // Save to /path/to/dest/photo.jpg 
-// }
+  download.image(options)
+    .then(({
+      filename,
+      image
+    }) => {
+      console.log('File saved to', filename)
+    }).catch((err) => {
+      throw err
+    });
+};
 
-download.image(options)
-  .then(({
-    filename,
-    image
-  }) => {
-    console.log('File saved to', filename)
-  }).catch((err) => {
-    throw err
-  })
+/**
+ * Sauvegarde dans la base de données
+ * @param {Object} user profil de l'utilisateur généré 
+ */
+let saveToDb = function (user) {
+  // Url de connection 
+  let url = config.db.connString();
 
-// downloadIMG()
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log(err);
+    } else {
+      db.collection('users').insertOne(user, function (err, db) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Profil sauvegardé');
+        }
+      });
+    }
 
-// console.log('Name: ', name);
-// console.log('Email: ', email);
-// console.log('Company: ', company);
-// console.log('Birthday: ', birthday);
-// console.log('City: ', city);
-// console.log('Country: ', country);
-// console.log('CountryCode: ', countryCode);
+    db.close();
+  });
+};
+
+let user = generateFafkeUser();
+let imageName = extractImageName(user);
+user.avatar = imageName;
+downloadImage(user, imageName);
+saveToDb(user);
 
 
-// console.log(faker.helpers.contextualCard());
-// console.log(faker.helpers.createCard());
 
 console.log('user :', user, 'Image name :', imageName);

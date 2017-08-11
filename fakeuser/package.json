@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "charlatan": "^1.1.0",
-    "faker": "^4.1.0",
     "image-downloader": "^3.2.2",
     "mongodb": "^2.2.31"
   }
