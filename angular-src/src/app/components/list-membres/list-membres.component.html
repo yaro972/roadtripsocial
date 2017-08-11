@@ -53,7 +53,8 @@
           <div class="row search-result-line" *ngFor="let member of membersList">
             <div class="col-xs-5" (click)="onShowDetail(member)">
               <div class="row">
-                <div class="col-xs-6"><img src=" {{member.avatar}}" alt="" class="img img-responsive img-circle"></div>
+                <div class="col-xs-6"><img src="http://localhost:3000/api/display-photo/{{member.avatar}}" alt="" class="img img-responsive img-circle"></div>
+
                 <div class="col-xs-6">
                   <div class="row">
                     <div class="col-xs-12 search-name">
