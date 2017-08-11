@@ -60,7 +60,7 @@ let downloadImage = function (url, imageName) {
   // Configuration d'image-downloader
   const options = {
     url: url,
-    dest: path.join(__dirname, 'download', imageName)
+    dest: path.join(__dirname, '../server/uploads', imageName)
   };
 
   download.image(options)
@@ -111,11 +111,13 @@ let saveToDb = function (user, urlImage, imageName, callback) {
   });
 };
 
+// Variables globales
 let user = generateFafkeUser();
 let imageName = extractImageName(user);
 let url = user.avatar;
 user.avatar = imageName;
 
+// Sauvegarde des profils
 saveToDb(user, url, imageName, function (err, url, imageName) {
   if (err) {
     console.log(err);
@@ -123,7 +125,3 @@ saveToDb(user, url, imageName, function (err, url, imageName) {
     downloadImage(url, imageName);
   }
 });
-
-
-
-console.log('user :', user, 'Image name :', imageName);
