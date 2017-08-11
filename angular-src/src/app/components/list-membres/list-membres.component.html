@@ -15,7 +15,7 @@
   </div>
   <!-- fin entete -->
 
-  <h2> Liste des membres</h2>
+  <h2> Rechercher un voyageur</h2>
 
   <!-- Recherche d'un utilisateur  -->
   <div class="row">
@@ -44,7 +44,7 @@
   <!-- Affichage des utilisateurs correspondants à la recherche -->
   <div class="row search-list">
     <div class="container">
-      <h3>Liste des membres</h3>
+      <!-- <h3>Liste des membres</h3> -->
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
 
@@ -53,7 +53,8 @@
           <div class="row search-result-line" *ngFor="let member of membersList">
             <div class="col-xs-5" (click)="onShowDetail(member)">
               <div class="row">
-                <div class="col-xs-6"><img src=" {{member.avatar}}" alt="" class="img img-responsive img-circle"></div>
+                <div class="col-xs-6"><img src="http://localhost:3000/api/display-photo/{{member.avatar}}" alt="" class="img img-responsive img-circle"></div>
+
                 <div class="col-xs-6">
                   <div class="row">
                     <div class="col-xs-12 search-name">
