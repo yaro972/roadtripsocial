@@ -35,6 +35,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ProfileEditService } from './components/profile-view/profile-edit/profile-edit.service';
 
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { PostViewComponent } from './components/post-view/post-view.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
     ProfileViewComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    PostViewComponent
   ],
   imports: [
     BrowserModule,
