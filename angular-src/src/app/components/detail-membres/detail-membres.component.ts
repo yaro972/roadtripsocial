@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 import { User } from '../../core/user';
+import { PostViewComponent } from '../post-view/post-view.component';
+
 
 @Component({
   selector: 'rts-detail-membres',
@@ -19,6 +22,7 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   subRoute: any;
   subGetMember: any;
   id: String;
+  isPostActive: Boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -27,10 +31,9 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
     this.isOwnProfile = false;
   }
   ngOnInit() {
-
-    console.log('details')
     this.getUserProfile = false;
     this.getUserId();
+    this.isPostActive = true;
 
 
     // if (this._authService.loggedIn()) {
@@ -107,6 +110,13 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
         },
   */
 
+  postActiveMode() {
+    this.isPostActive = true;
+  }
+
+  profilActiveMode() {
+    this.isPostActive = false;
+  }
 
   addFakeData() {
 
