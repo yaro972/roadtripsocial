@@ -47,7 +47,12 @@ export class TopMenuComponent implements OnInit, OnDestroy {
     if (userProfile && userProfile !== 'undefined') {
       this.user = JSON.parse(userProfile);
 
-      this.imageFace = this.user.avatar || '/assets/images/Anonymous.png';
+      if (this.user.avatar) {
+        this.imageFace = 'http://localhost:3000/api/display-photo/' + this.user.avatar;
+      } else {
+        this.imageFace = 'Anonymous.png';
+      }
+
     }
   }
 
@@ -71,7 +76,11 @@ export class TopMenuComponent implements OnInit, OnDestroy {
     if (userProfile && userProfile !== 'undefined') {
       this.user = JSON.parse(userProfile);
 
-      this.imageFace = this.user.avatar || '/assets/images/Anonymous.png';
+      if (this.user.avatar) {
+        this.imageFace = 'http://localhost:3000/api/display-photo/' + this.user.avatar;
+      } else {
+        this.imageFace = 'Anonymous.png';
+      }
     }
 
   }

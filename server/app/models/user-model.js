@@ -43,7 +43,7 @@ var UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: '/assets/images/avatar/Anonymous.png'
+    default: 'Anonymous.png'
   },
   presentation: {
     type: String,
