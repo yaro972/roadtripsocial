@@ -32,10 +32,15 @@ router.post('/uploadFile', upload.any(), function (req, res) {
  */
 router.get('/display-photo/:img', function (req, res) {
   fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
-    if (err) throw err;
-    console.log(data);
+    if (err) {
+      console.log(err);
+      res.sendStatus(200);
+    } else {
+      console.log(data);
 
-    res.send(data);
+      res.send(data);
+    }
+
   });
 });
 module.exports = router;
