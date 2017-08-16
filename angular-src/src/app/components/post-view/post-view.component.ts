@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
+
+import { AuthService } from '../../services/auth/auth.service';
+import { PostsService } from '../../services/posts/posts.service';
 
 @Component({
   selector: 'rts-post-view',
   templateUrl: './post-view.component.html',
   styleUrls: ['./post-view.component.css']
 })
-export class PostViewComponent implements OnInit {
+export class PostViewComponent implements OnInit, OnDestroy {
 
   postItems = [{
     id: 1,
@@ -67,11 +70,13 @@ export class PostViewComponent implements OnInit {
         datePost: '04/08/2017'
       },
     ]
-  },
+  }
   ];
 
 
-  constructor() { }
+  constructor(
+    private _postsService: PostsService
+  ) { }
 
   ngOnInit() {
 
@@ -81,8 +86,16 @@ export class PostViewComponent implements OnInit {
     console.log('comment', id);
   }
 
+  dropComment(id) {
+    console.log('dropComment/comment', id);
+  }
+
+
   addResponse(id) {
     console.log('response', id);
   }
 
+  ngOnDestroy() {
+
+  }
 }

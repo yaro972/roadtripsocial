@@ -8,19 +8,20 @@
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: rgb(66, 85, 103);
-  margin-bottom: 10px;
-  margin-top: 5px;
+  /* margin-bottom: 10px; */
+  margin-top: 20px;
   margin-bottom: 5px;
 }
 
 .comment {
   background-color: #646b79;
   border-left: 1px solid #4B4848;
+  /* border-bottom: 1px solid #4B4848; */
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+   /* margin-top: 5px; */
+  margin-bottom: 1px; 
 }
 
 .btn-response {
