@@ -7,7 +7,7 @@ import { User } from '../../core/user';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { AuthGuard } from '../../guard/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
 

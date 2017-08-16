@@ -3,8 +3,8 @@ import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
-import { ListMembersService } from '../../services/list-members.service';
-import { AuthService } from '../../services/auth.service';
+import { ListMembersService } from '../../services/list-members/list-members.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'rts-list-membres',

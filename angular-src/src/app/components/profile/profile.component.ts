@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../core/user';
 import { ProfileEditService } from '../profile-view/profile-edit/profile-edit.service';

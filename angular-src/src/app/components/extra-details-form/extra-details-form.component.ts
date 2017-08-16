@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { FormControl, FormGroup, Validators, FormBuilder, NgModel } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-import { FileUploadService } from '../../services/file-upload.service';
+import { FileUploadService } from '../../services/file-upload/file-upload.service';
 
 @Component({
   selector: 'rts-extra-details-form',

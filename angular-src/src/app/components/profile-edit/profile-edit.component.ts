@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { NgModel } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { ProfileEditService } from '../profile-view/profile-edit/profile-edit.service';
 
-import { FileUploadService } from '../../services/file-upload.service';
+import { FileUploadService } from '../../services/file-upload/file-upload.service';
 import { CitiesClass } from '../profile-view/profile-edit/list-cities';
 
 

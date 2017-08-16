@@ -3,7 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 // import { resetpasswd } from './resetPasswd';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({

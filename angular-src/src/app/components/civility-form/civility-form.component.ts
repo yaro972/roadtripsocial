@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { User } from '../../core/user';

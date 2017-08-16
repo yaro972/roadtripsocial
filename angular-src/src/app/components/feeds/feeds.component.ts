@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'rts-feeds',
@@ -17,4 +17,10 @@ export class FeedsComponent implements OnInit {
     this.userAvatar = 'http://localhost:3000/api/display-photo/' + JSON.parse(localStorage.getItem('user')).avatar;
   }
 
+  // Ajout d'un post
+  addPost() {
+    // this._postService
+
+    return false;
+  }
 }

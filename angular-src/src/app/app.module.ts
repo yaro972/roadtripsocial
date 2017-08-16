@@ -18,10 +18,12 @@ import { RegisterModule } from './components/register/register.module';
 import { LoginModule } from './components/login/login.module';
 import { ProfileComponent } from './components/profile/profile.component';
 // Services
-import { AuthService } from './services/auth.service';
-import { FileUploadService } from './services/file-upload.service';
+import { AuthService } from './services/auth/auth.service';
+import { FileUploadService } from './services/file-upload/file-upload.service';
 
-import { ListMembersService } from './services/list-members.service';
+import { ListMembersService } from './services/list-members/list-members.service';
+
+// import { ListMembersService } from './services/list-members.service';
 
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
@@ -38,6 +40,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { FeedsComponent } from './components/feeds/feeds.component';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
+import { ListFriendsComponent } from './components/list-friends/list-friends.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,8 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     ProfileEditComponent,
     PostViewComponent,
     FeedsComponent,
-    SubMenuComponent
+    SubMenuComponent,
+    ListFriendsComponent
   ],
   imports: [
     BrowserModule,

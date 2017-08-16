@@ -3,7 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Subject } from 'rxjs/Subject';
 
-import { User } from '../core/user';
+import { User } from '../../core/user';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';

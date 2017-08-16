@@ -47,14 +47,17 @@
 
     <div class="separation"></div>
     <div class="row">
-      <div class="col-xs-4 col-xs-offset-4">
+      <div class="col-xs-12">
         <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage" *ngIf="!isOnModif">
         </rts-profile-view>
       </div>
     </div>
 
-
-    <rts-profile-edit [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage" [onSave]="onSave"
-      (newUser)="loadNewUser($event)" *ngIf="isOnModif"></rts-profile-edit>
+    <div class="row">
+      <div class="col-xs-12">
+        <rts-profile-edit [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage" [onSave]="onSave"
+          (newUser)="loadNewUser($event)" *ngIf="isOnModif"></rts-profile-edit>
+      </div>
+    </div>
   </div>
 </div>
