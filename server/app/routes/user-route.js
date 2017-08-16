@@ -405,42 +405,6 @@ router.post('/search-member', passport.authenticate('jwt', {
       });
     }
   });
-
-  // res.json({
-  //   'membersList': [{
-  //       'id': '0',
-  //       'avatar': '/assets/images/avatar/Anonymous.png',
-  //       'name': 'Lucie T.',
-  //       'city': 'Le Havre',
-  //       'followed': false,
-  //       'visitedCountries': 'France'
-  //     },
-  //     {
-  //       'id': '1',
-  //       'avatar': '/assets/images/avatar/Anonymous.png',
-  //       'name': 'Evans A.',
-  //       'city': 'Los Angeles',
-  //       'followed': true,
-  //       'visitedCountries': 'US'
-  //     },
-  //     {
-  //       'id': '2',
-  //       'avatar': '/assets/images/avatar/Anonymous.png',
-  //       'name': 'Hans W.',
-  //       'city': 'Liden',
-  //       'followed': false,
-  //       'visitedCountries': 'Suède'
-  //     },
-  //     {
-  //       'id': '3',
-  //       'avatar': '/assets/images/avatar/Anonymous.png',
-  //       'name': 'Malik D.',
-  //       'city': 'Mararaba',
-  //       'followed': true,
-  //       'visitedCountries': 'Cameroun'
-  //     }
-  //   ]
-  // });
 });
 
 /**

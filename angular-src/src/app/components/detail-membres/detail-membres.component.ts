@@ -75,7 +75,7 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
     });
   }
 
-  lastPostMessage: String = 'Canada is the Best country ever !';
+
 
 
   profileImg = 'https://randomuser.me/api/portraits/men/80.jpg';

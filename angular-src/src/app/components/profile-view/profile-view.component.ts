@@ -20,7 +20,6 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   @Input() user: User;
   @Input() suivi: Boolean;
   @Input() isOwnProfile: Boolean;
-  @Input() lastPostMessage: String;
 
   @ViewChild("fileInput") fileInput;
 

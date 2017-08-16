@@ -9,6 +9,7 @@ const config = require('../inc/.config');
 let path = require('path');
 const fs = require('fs');
 
+const Posts = require('../models/post-model');
 
 var multer = require('multer');
 var upload = multer({
@@ -45,4 +46,54 @@ router.get('/display-photo/:img', function (req, res) {
 
   });
 });
+
+/**
+ * ajout d'un nouveau post
+ */
+router.post('/new-post', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  let newPostItem = new Posts({
+    "datePost": req.body.datePost,
+    "details": req.body.details,
+    "autors": req.body.autors,
+    "avatar": req.body.avatar
+  });
+
+  Posts.addNewPost(newPostItem, function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        post: result._doc
+      });
+    }
+  });
+});
+
+/**
+ * Récupère le dernier post
+ */
+router.post('/get-last-post', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  Posts.findLast(req.body.nickname, function (err, data) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        lastPost: data
+      });
+    }
+  });
+});
+
 module.exports = router;

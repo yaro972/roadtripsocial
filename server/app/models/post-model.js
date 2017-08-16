@@ -1,12 +1,12 @@
 'use strict';
 
-const Mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // Création du schéma à la base de données
 
-let postSchema = Mongoose.Schema({
+let postSchema = mongoose.Schema({
   datePost: {
-    type: date,
+    type: Date,
     required: true
   },
   details: {
@@ -34,3 +34,24 @@ posts.getPostElement = function (owner, callback) {
     owner: owner
   }, callback);
 }
+
+/**
+ * Ajoute un nouveau post
+ */
+posts.addNewPost = function (newPost, callback) {
+  newPost.save(callback);
+}
+
+/**
+ * Récupère le dernier post d'un utilisateur
+ */
+posts.findLast = function (nickname, callback) {
+  posts.findOne({
+    autors: nickname
+  }, {
+
+    }, {
+      sort: { 'datePost': -1 }
+    },
+    callback);
+};

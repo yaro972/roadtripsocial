@@ -299,8 +299,7 @@
       <!-- Partie droite -->
       <div class="col-sm-3">
         <div class="rows">
-          <h3>Derniers posts</h3>
-          <div class="col-sm-10 post-box">{{lastPostMessage}}</div>
+          <rts-last-message-view [user]="user"></rts-last-message-view>
         </div>
         <div class="rows" *ngIf="user.friendsList">
           <h3>Mes amis</h3>

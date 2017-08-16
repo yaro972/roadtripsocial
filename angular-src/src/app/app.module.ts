@@ -23,7 +23,7 @@ import { FileUploadService } from './services/file-upload/file-upload.service';
 
 import { ListMembersService } from './services/list-members/list-members.service';
 
-// import { ListMembersService } from './services/list-members.service';
+import { PostsService } from './services/posts/posts.service';
 
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
@@ -41,6 +41,7 @@ import { PostViewComponent } from './components/post-view/post-view.component';
 import { FeedsComponent } from './components/feeds/feeds.component';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
 import { ListFriendsComponent } from './components/list-friends/list-friends.component';
+import { LastMessageViewComponent } from './components/last-message-view/last-message-view.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ListFriendsComponent } from './components/list-friends/list-friends.com
     PostViewComponent,
     FeedsComponent,
     SubMenuComponent,
-    ListFriendsComponent
+    ListFriendsComponent,
+    LastMessageViewComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,8 @@ import { ListFriendsComponent } from './components/list-friends/list-friends.com
     AuthService,
     FileUploadService,
     ProfileEditService,
-    ListMembersService
+    ListMembersService,
+    PostsService
   ],
   bootstrap: [AppComponent]
 })

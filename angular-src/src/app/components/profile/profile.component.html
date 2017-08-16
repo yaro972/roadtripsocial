@@ -48,15 +48,15 @@
     <div class="separation"></div>
     <div class="row">
       <div class="col-xs-12">
-        <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage" *ngIf="!isOnModif">
+        <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" *ngIf="!isOnModif">
         </rts-profile-view>
       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-12">
-        <rts-profile-edit [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage" [onSave]="onSave"
-          (newUser)="loadNewUser($event)" *ngIf="isOnModif"></rts-profile-edit>
+        <rts-profile-edit [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [onSave]="onSave" (newUser)="loadNewUser($event)"
+          *ngIf="isOnModif"></rts-profile-edit>
       </div>
     </div>
   </div>

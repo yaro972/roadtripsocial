@@ -23,7 +23,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   @Input() user: User;
   @Input() suivi: Boolean;
   @Input() isOwnProfile: Boolean;
-  @Input() lastPostMessage: String;
   @Input() onSave: Boolean;
 
   @Output() newUser: EventEmitter<User> = new EventEmitter();

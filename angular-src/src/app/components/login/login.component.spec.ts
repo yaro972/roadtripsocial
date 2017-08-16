@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';

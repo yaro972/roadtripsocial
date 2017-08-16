@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from './../../services/auth/auth.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ describe('RegisterComponent', () => {
       //   AuthService
       // ]
     })
-      // .compileComponents();
+    // .compileComponents();
   }));
 
   beforeEach(() => {

@@ -3,18 +3,13 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "compounds": [{
-    "name": "System",
-    "configurations": [
-      "nodemon",
-      "Launch Chrome"
-    ],
-  }],
-  "configurations": [{
+  "configurations": [
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceRoot}/server/server.js"
+      "program": "${workspaceRoot}/server/server.js",
+      "restart": true
     },
     {
       "type": "chrome",
@@ -32,6 +27,15 @@
       "restart": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "System",
+      "configurations": [
+        "nodemon",
+        "Launch Chrome"
+      ]
     }
   ]
 }
