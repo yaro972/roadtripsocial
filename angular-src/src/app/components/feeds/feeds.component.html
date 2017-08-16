@@ -1,8 +1,4 @@
-<!-- <div class="row">
-  <div class="container"> -->
 <div class="row">
-
-
   <div class="feeds-page">
 
     <!-- Entete -->
@@ -30,25 +26,14 @@
 
             <!-- partie gauche -->
             <div class="col-xs-2 separation-vr">
-              <p>Partie Gauche</p>
 
-              <ul>
-                <li><a href="">Lien 01</a></li>
-                <li><a href="">Lien 02</a></li>
-                <li><a href="">Lien 03</a></li>
-                <li><a href="">Lien 04</a></li>
-                <li><a href="">Lien 05</a></li>
-                <li><a href="">Lien 06</a></li>
-                <li><a href="">Lien 07</a></li>
-                <li><a href="">Lien 08</a></li>
-                <li><a href="">Lien 09</a></li>
-                <li><a href="">Lien 10</a></li>
+              <ul class="links-list">
+                <li *ngFor="let link of links"><a class="links-text" href="{{link.url}}">{{link.text}}</a></li>
               </ul>
 
             </div>
             <!-- partie gauche -->
 
-            <!-- <div class="separation-vr"></div> -->
 
             <!-- Zone publication -->
             <div class="col-xs-8">
@@ -60,20 +45,19 @@
                             <input type="text" name="" id="" placeholder="Partagez un article, une nouvelle" class="form-control">
                           </div> -->
 
-
+                      <!-- Formulaire de posts -->
                       <div class="send-wrap ">
-
                         <textarea class="form-control send-message" rows="3" placeholder="Partagez un article, une nouvelle..."></textarea>
-
-
                       </div>
+                      <!-- Formulaire de posts -->
+
+                      <!-- Bouton de validation de post -->
                       <div class="btn-panel">
-                        <!-- <a href="" class=" col-lg-3 btn   send-message-btn " role="button"><i class="fa fa-cloud-upload"></i> Add Files</a> -->
                         <a href="" class=" col-lg-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>
                       </div>
+                      <!-- Bouton de validation de post -->
+
                     </div>
-
-
                   </div>
 
                   <div class="separation-hz"></div>
@@ -91,7 +75,6 @@
             </div>
             <!-- Zone publication -->
 
-            <div class="separation-vl"></div>
 
             <!-- Liste d'amis -->
             <div class="col-xs-2 separation-vl">
@@ -118,11 +101,5 @@
     </div>
 
     <!-- partie principale -->
-
-    <!-- <p>
-  feeds works!
-</p> -->
   </div>
 </div>
-<!-- </div>
-</div> -->

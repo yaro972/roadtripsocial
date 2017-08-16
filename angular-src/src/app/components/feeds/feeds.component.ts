@@ -8,6 +8,24 @@ import { AuthService } from '../../services/auth.service';
 })
 export class FeedsComponent implements OnInit {
   userAvatar: String;
+  links = [
+    {
+      url: '',
+      text: 'Voir mon profil'
+    },
+    {
+      url: '',
+      text: 'Changer mon mot de passe'
+    },
+    {
+      url: '',
+      text: 'Rechercher un ami'
+    },
+    {
+      url: '',
+      text: ''
+    }
+  ]
 
 
   constructor(
