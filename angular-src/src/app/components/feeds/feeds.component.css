@@ -6,6 +6,8 @@
 
 .feeds-header{
   background:linear-gradient(45deg,  #2c3e50, #CCE0F8);
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 /* Mise en page générale */
 
@@ -17,7 +19,7 @@
   border-bottom-color: #e77b20;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  margin: 10px 0;
+  margin: 5px 0;
   width: 100%;
 }
 
