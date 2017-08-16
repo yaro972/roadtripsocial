@@ -10,20 +10,20 @@ export class FeedsComponent implements OnInit {
   userAvatar: String;
   links = [
     {
-      url: '',
+      url: '/profile',
       text: 'Voir mon profil'
     },
     {
-      url: '',
+      url: '/change-password',
       text: 'Changer mon mot de passe'
     },
     {
-      url: '',
+      url: '/list-membres',
       text: 'Rechercher un ami'
     },
     {
       url: '',
-      text: ''
+      text: 'Se Déconnecter'
     }
   ]
 
