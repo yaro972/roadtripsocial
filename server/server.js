@@ -92,16 +92,16 @@ mongoose.Promise = global.Promise;
 mongoose.connect(config.db.connString(), options)
   .then(function (db) {
     // Db connectée
-    // console.log('connected on Db ' + db.db.s.databaseName);
+    console.log('connected on Db ' + db.db.s.databaseName);
     debug('connected on Db ' + db.db.s.databaseName);
 
-    // console.log('Db', db.db.s.databaseName, 'opened');
+    console.log('Db', db.db.s.databaseName, 'opened');
     debug('Db', db.db.s.databaseName, 'opened');
 
   })
   .catch(function (err) {
     //  Erreur de connection
-    // console.log('connection error :', err);
+    console.log('connection error :', err);
     debug('connection error :', err);
   });
 
@@ -138,14 +138,14 @@ app.use(function (req, res) {
 
 // Traitement des erreurs du serveur
 app.use(function (err, req, res) {
-  // console.error(err.stack);
+  console.error(err.stack);
   debug(err.stack);
   res.status(500).send('Something broke!');
 });
 
 // Activation du port d'écoute du serveur
 app.listen(port, ip, function () {
-  // console.log('Serveur démarré sur le port : ' + port);
+  console.log('Serveur démarré sur le port : ' + port);
   debug('Serveur démarré sur le port : ' + port);
 });
 

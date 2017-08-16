@@ -37,7 +37,9 @@ router.get('/display-photo/:img', function (req, res) {
       res.sendStatus(200);
     } else {
       console.log(data);
-
+      // res.writeHead({
+      //   'Content-type': 'image'
+      // });
       res.send(data);
     }
 

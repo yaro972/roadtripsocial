@@ -346,4 +346,4 @@ User.memberDetails = function (memberId, callback) {
   }, {
     password: 0
   }, callback);
-}
+};
