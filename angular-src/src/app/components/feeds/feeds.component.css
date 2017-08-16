@@ -7,6 +7,7 @@
   background:linear-gradient(45deg,  #2c3e50, #CCE0F8);
 }
 
+/* Classes de séparation */
 .separation-hz {
   border-bottom-color: #e77b20;
   border-bottom-style: solid;
@@ -18,75 +19,78 @@
 .separation-vl {
   border-left-color: #e77b20;
   border-left-style: solid;
-  border-left-width: 1px;
-  margin: 0 10px;
+  border-left-width: 1px;  
   height: 100%;
 }
 
 .separation-vr {
   border-right-color: #e77b20;
   border-right-style: solid;
-  border-right-width: 1px;
-  margin: 0 10px;
+  border-right-width: 1px;  
   height: 100%;
 }
+/* Classes de séparation */
 
+/* Mise en forme du formulaire du post */
 .send-message {
     resize: none;
 }
 
 .send-wrap
-  {
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-      padding:10px;
-      /*background: #f8f8f8;*/
-  }
+{
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding:10px;
+    background: #f8f8f8;
+}
 
+.send-message-btn
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
 
-  .send-message-btn
-    {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
-        border-bottom-right-radius: 0;
-    }
-    .btn-panel
-    {
-        background: #f7f7f9;
-    }
+.btn-panel
+{
+    background: #f7f7f9;
+}
 
-    .btn-panel .btn
-    {
-        color:#b8b8b8;
+.btn-panel .btn
+{
+    color:#b8b8b8;
 
-        transition: 0.2s all ease-in-out;
-    }
+    transition: 0.2s all ease-in-out;
+}
 
-    .btn-panel .btn:hover
-    {
-        color:#666;
-        background: #f8f8f8;
-    }
-    .btn-panel .btn:active
-    {
-        background: #f8f8f8;
-        box-shadow: 0 0 1px #ddd;
-    }
+.btn-panel .btn:hover
+{
+    color:#666;
+    background: #f8f8f8;
+}
 
-    .btn-panel-conversation .btn,.btn-panel-msg .btn
-    {
+.btn-panel .btn:active
+{
+    background: #f8f8f8;
+    box-shadow: 0 0 1px #ddd;
+}
 
-        background: #f8f8f8;
-    }
-    .btn-panel-conversation .btn:first-child
-    {
-        border-right: 1px solid #ddd;
-    }
+.btn-panel-conversation .btn,.btn-panel-msg .btn
+{
 
-    .msg-wrap .media-heading
-    {
-        color:#003bb3;
-        font-weight: 700;
-    }
+    background: #f8f8f8;
+}
+
+.btn-panel-conversation .btn:first-child
+{
+    border-right: 1px solid #ddd;
+}
+
+.msg-wrap .media-heading
+{
+    color:#003bb3;
+    font-weight: 700;
+}
+/* Mise en forme du formulaire du post */
