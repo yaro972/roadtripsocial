@@ -37,6 +37,7 @@ import { ProfileEditService } from './components/profile-view/profile-edit/profi
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { FeedsComponent } from './components/feeds/feeds.component';
+import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FeedsComponent } from './components/feeds/feeds.component';
     ChangePasswordComponent,
     ProfileEditComponent,
     PostViewComponent,
-    FeedsComponent
+    FeedsComponent,
+    SubMenuComponent
   ],
   imports: [
     BrowserModule,

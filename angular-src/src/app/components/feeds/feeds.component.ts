@@ -8,25 +8,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class FeedsComponent implements OnInit {
   userAvatar: String;
-  links = [
-    {
-      url: '/profile',
-      text: 'Voir mon profil'
-    },
-    {
-      url: '/change-password',
-      text: 'Changer mon mot de passe'
-    },
-    {
-      url: '/list-membres',
-      text: 'Rechercher un ami'
-    },
-    {
-      url: '',
-      text: 'Se Déconnecter'
-    }
-  ]
-
 
   constructor(
     private _authService: AuthService
@@ -34,8 +15,6 @@ export class FeedsComponent implements OnInit {
 
   ngOnInit() {
     this.userAvatar = 'http://localhost:3000/api/display-photo/' + JSON.parse(localStorage.getItem('user')).avatar;
-
-
   }
 
 }
