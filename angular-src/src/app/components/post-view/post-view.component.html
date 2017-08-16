@@ -1,161 +1,174 @@
 <div class="row">
-  <div class="container">
-    <div class="row">
+  <!--  <div class="container"> -->
+  <!-- <div class="row"> -->
 
-      <div class="col-xs-8 col-xs-offset-2">
+  <!-- <div class="col-xs-8 col-xs-offset-2"> -->
 
-        <!-- Post-1 -->
-        <div class="row post">
-          <div class="col-xs-10 col-xs-offset-1">
-
-            <div class="post-content row">
-              <div class="col-xs-1">
-                <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-              </div>
-              <div class="col-xs-2">User Name</div>
-              <div class="col-xs-8">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                  voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt, dolor aspernatur saepe assumenda ab
-                  eligendi explicabo earum. Quam exercitationem voluptatibus necessitatibus atque. Quis quibusdam maiores
-                  repudiandae laboriosam delectus fugit autem dolore, omnis itaque ipsa dignissimos, suscipit ipsum iure
-                  atque.
-                </p>
-              </div>
+  <!-- Post-1 -->
+  <div class="post" *ngFor="let postItem of postItems">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="post-content row">
+        <div class="col-xs-1">
+          <img src="http://localhost:3000/api/display-photo/{{postItem.avatar}}" alt="" class="img img-responsive img-thumbnail">
+        </div>
+        <div class="col-xs-2 ">
+          <div class="row">
+            <div class="col-xs-12">
+              {{postItem.autor}}
             </div>
-
-            <div class="row">
-              <div class="col-xs-12">
-
-                <div class="comment row">
-                  <div class="comment col-xs-8 col-xs-offset-2">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-                      </div>
-                      <div class="col-xs-2">User Name</div>
-                      <div class="col-xs-8">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="comment col-xs-8 col-xs-offset-4">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-                      </div>
-                      <div class="col-xs-2">User Name</div>
-                      <div class="col-xs-8">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="comment col-xs-8 col-xs-offset-2">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-                      </div>
-                      <div class="col-xs-2">User Name</div>
-                      <div class="col-xs-8">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="col-xs-8">
+              {{postItem.datePost}}
             </div>
-
           </div>
         </div>
-
-
-
-        <!-- Post-1 -->
-
-
-        <!-- Post-2 -->
-        <div class="row post">
-          <div class="col-xs-10 col-xs-offset-1">
-
-            <div class="post-content row">
-              <div class="col-xs-1">
-                <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-              </div>
-              <div class="col-xs-2">User Name</div>
-              <div class="col-xs-8">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                  voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt, dolor aspernatur saepe assumenda ab
-                  eligendi explicabo earum. Quam exercitationem voluptatibus necessitatibus atque. Quis quibusdam maiores
-                  repudiandae laboriosam delectus fugit autem dolore, omnis itaque ipsa dignissimos, suscipit ipsum iure
-                  atque.
-                </p>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-12">
-
-                <div class="comment row">
-                  <div class="comment col-xs-8 col-xs-offset-2">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-                      </div>
-                      <div class="col-xs-2">User Name</div>
-                      <div class="col-xs-8">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="comment col-xs-8 col-xs-offset-4">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-                      </div>
-                      <div class="col-xs-2">User Name</div>
-                      <div class="col-xs-8">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="comment col-xs-8 col-xs-offset-2">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
-                      </div>
-                      <div class="col-xs-2">User Name</div>
-                      <div class="col-xs-8">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
-                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-
-
-        <!-- Post-2 -->
-
-        <!-- <div class="text-center">
-          <p>
-            post-view works!
+        <div class="col-xs-8">
+          <p>{{postItem.details}}
           </p>
-        </div> -->
+          <div class="col-xs-12 text-center"> <button class="btn btn-default btn-comment" (click)="addComment(postItem.id)"><span class="glyphicon glyphicon-pencil"></span> Commenter</button></div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+          <div class="comment row" *ngFor="let comment of postItem.comments">
+            <div class="comment col-xs-8 col-xs-offset-2">
+              <div class="row">
+                <div class="col-xs-2">
+                  <img src="http://localhost:3000/api/display-photo/{{comment.avatar}}" alt="" class="img img-responsive img-thumbnail">
+                </div>
+                <div class="col-xs-2 ">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      {{comment.autor}}
+                    </div>
+                    <div class="col-xs-8 ">
+                      {{comment.datePost}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-8">
+                  <p>{{comment.details}}</p>
+                  <div class="col-xs-12 text-center"> <button class="btn btn-default btn-response" (click)="addResponse(comment.id)"><span class="fa fa-reply"></span> Répondre</button>                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- <div class="comment col-xs-8 col-xs-offset-4">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
+                      </div>
+                      <div class="col-xs-2">User Name</div>
+                      <div class="col-xs-8">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
+                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="comment col-xs-8 col-xs-offset-2">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
+                      </div>
+                      <div class="col-xs-2">{{comment.autors}}</div>
+                      <div class="col-xs-8">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
+                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
+                      </div>
+                    </div>
+                  </div> -->
+
+          </div>
+        </div>
       </div>
 
     </div>
   </div>
+  <!-- Post-1 -->
+
+
+  <!-- Post-2 -->
+  <!-- <div class="row post">
+          <div class="col-xs-10 col-xs-offset-1">
+
+            <div class="post-content row">
+              <div class="col-xs-1">
+                <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
+              </div>
+              <div class="col-xs-2">User Name</div>
+              <div class="col-xs-8">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
+                  voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt, dolor aspernatur saepe assumenda ab
+                  eligendi explicabo earum. Quam exercitationem voluptatibus necessitatibus atque. Quis quibusdam maiores
+                  repudiandae laboriosam delectus fugit autem dolore, omnis itaque ipsa dignissimos, suscipit ipsum iure
+                  atque.
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+
+                <div class="comment row">
+                  <div class="comment col-xs-8 col-xs-offset-2">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
+                      </div>
+                      <div class="col-xs-2">User Name</div>
+                      <div class="col-xs-8">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
+                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="comment col-xs-8 col-xs-offset-4">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
+                      </div>
+                      <div class="col-xs-2">User Name</div>
+                      <div class="col-xs-8">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
+                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="comment col-xs-8 col-xs-offset-2">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        <img src="http://localhost:3000/api/display-photo/Anonymous.png" alt="" class="img img-responsive img-thumbnail">
+                      </div>
+                      <div class="col-xs-2">User Name</div>
+                      <div class="col-xs-8">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius obcaecati laudantium ipsa, omnis temporibus
+                          voluptatibus ipsum sint dolores qui exercitationem quasi nesciunt</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div> -->
+
+
+
+  <!-- Post-2 -->
+
+  <!-- <div class="text-center">
+          <p>
+            post-view works!
+          </p>
+        </div> -->
+  <!-- </div> -->
+
+  <!-- </div>
+  </div> -->
 </div>
