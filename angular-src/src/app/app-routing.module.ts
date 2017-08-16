@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
+import { FeedsComponent } from './components/feeds/feeds.component';
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'accueil',
     component: AccueilComponent
+  },
+  {
+    path: 'feeds',
+    component: FeedsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'list-membres',
@@ -78,7 +84,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/accueil',
+    redirectTo: '/',
     pathMatch: 'full'
   }
 ];
