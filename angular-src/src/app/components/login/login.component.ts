@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this._router.navigate(['/profile']);
           } else {
             // => Routage vers l'accueil des messages
-            this._router.navigate(['/']);
+            this._router.navigate(['/feeds']);
           }
         } else {
           // Erreur de chargement du profil
