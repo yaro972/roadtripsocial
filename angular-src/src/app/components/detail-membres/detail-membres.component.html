@@ -27,18 +27,6 @@
     <!-- sous menu -->
     <div class="separation"></div>
 
-    <!-- ajout d'un post -->
-    <!-- <div class="row">
-      <div class="container">
-        <div class="row">
-          <p class="text-center">Ajouter un post</p>
-          <textarea name="" id="" cols="30" rows="10">Ajouter un post</textarea>
-          <button class="btn btn-default">Publier</button>
-          <input type="button" value="Publier" class="btn btn-default">
-        </div>
-      </div>
-    </div> -->
-    <!-- ajout d'un post -->
 
     <!-- liste des posts -->
     <div class="row" *ngIf="isPostActive">
@@ -55,7 +43,11 @@
 
     <!-- affichage du détail du profil de l'utilisateur -->
     <div *ngIf="getUserProfile && !isPostActive">
-      <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage"> </rts-profile-view>
+      <div class="row">
+        <div class="col-xs-12">
+          <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [lastPostMessage]="lastPostMessage"> </rts-profile-view>
+        </div>
+      </div>
     </div>
   </div>
   <!-- affichage du détail du profil de l'utilisateur -->
