@@ -34,7 +34,7 @@ import { ExtraDetailsFormComponent } from './components/extra-details-form/extra
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
-import { ProfileEditService } from './components/profile-view/profile-edit/profile-edit.service';
+import { ProfileEditService } from './services/profile-edit/profile-edit.service';
 
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { PostViewComponent } from './components/post-view/post-view.component';

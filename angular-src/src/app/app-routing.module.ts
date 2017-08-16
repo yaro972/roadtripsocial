@@ -16,7 +16,7 @@ import { FeedsComponent } from './components/feeds/feeds.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [

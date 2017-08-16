@@ -3,10 +3,10 @@ import { AuthService } from './../../services/auth/auth.service';
 import { NgModel } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-import { ProfileEditService } from './profile-edit/profile-edit.service';
+import { ProfileEditService } from './../../services/profile-edit/profile-edit.service';
 
 import { FileUploadService } from '../../services/file-upload/file-upload.service';
-import { CitiesClass } from './profile-edit/list-cities';
+import { CitiesClass } from './../../services/profile-edit/list-cities';
 import { User } from '../../core/user';
 
 import { Subscription } from 'rxjs/Subscription';
