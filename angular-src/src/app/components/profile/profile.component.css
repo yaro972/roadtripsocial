@@ -30,6 +30,11 @@
   width: 100%;
 }
 
+.change-password {
+  padding-right: 1px;
+  color: #e7dee7;
+}
+
 @media screen and (max-width: 640px) {
   .slider {
     height: 150px;
