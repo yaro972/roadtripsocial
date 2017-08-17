@@ -25,7 +25,7 @@
 
                       <!-- http://localhost:3000/api/display-photo/{{photoProfUpload}} -->
 
-                      <img src="{{photoProfUpload}}" alt="" class="img img-thumbnail img-responsive">
+                      <img src="http://localhost:3000/api/display-photo/{{photoProfUpload}}" alt="" class="img img-thumbnail img-responsive">
 
                     </div>
                   </div>
@@ -245,7 +245,7 @@
       <div class="col-sm-6">
         <!-- Descriptif de l'inscrit -->
         <div class="row">
-          <h3>A propos</h3>
+          <h4>A propos</h4>
 
           <div class="col-sm-8">
             <textarea type="text" name="presentation" value="{{user.presentation}}" rows="4" cols="50" [(ngModel)]="user.presentation"></textarea>
@@ -256,7 +256,7 @@
 
         <!-- Liste des pays visités -->
         <div class="row">
-          <h3>Pays visités</h3>
+          <h4>Pays visités</h4>
 
 
           <!-- New Country -->
@@ -302,7 +302,9 @@
           <rts-last-message-view [user]="user"></rts-last-message-view>
         </div>
         <div class="rows" *ngIf="user.friendsList">
-          <h3>Mes amis</h3>
+          <div class="col-xs-12">
+            <h4>Mes amis</h4>
+          </div>
           <div class="col-sm-12 col-md-8">
             <div class="row">
               <div *ngFor="let friend of user.friendsList">
