@@ -31,11 +31,18 @@ router.post('/uploadFile', upload.any(), function (req, res) {
  * Permet d'afficher l'image de l'utilisateur
  */
 router.get('/display-photo/:img', function (req, res) {
-  fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
-    if (err) throw err;
-    console.log(data);
+  if (fs.existsSync(path.join(__dirname, '../../uploads', req.params.img))) {
+    fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
+      if (err) throw err;
+      console.log(data);
 
-    res.send(data);
-  });
+      res.send(data);
+
+    });
+  } else {
+    res.json({
+      err: 'File do not exists'
+    });
+  }
 });
 module.exports = router;
