@@ -17,6 +17,7 @@ export class ListMembresComponent implements OnInit, OnDestroy {
 
   membersList: any[];
   isCountriesVisited: Boolean;
+  searchInput: any;
 
   constructor(
     private _router: Router,
