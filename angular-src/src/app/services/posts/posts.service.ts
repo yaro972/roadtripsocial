@@ -56,4 +56,19 @@ export class PostsService {
       .map(res => res.json());
   }
 
+  /**
+   * Récupère tous les posts
+   */
+  getPosts() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(this.BACKENDURL + '/api/get-post', { headers: headers })
+      .map(res => res.json());
+  }
+
 }

@@ -53,11 +53,10 @@
           </li>
           <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/change-password">
-              <img src="/assets/images/change_password.png" alt="" width="40" title="Changer son mot de passe"  class="img img-responsive"></a>
+              Changer son mot de passe</a>
           </li>
           <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
-            <img src="/assets/images/search.png" alt="" width="30" title="Rechercher un membre" class="img img-responsive">
-            <a routerLink="/list-membres">
+            <a routerLink="/list-membres">Rechercher un membre
                             
                             </a>
           </li>

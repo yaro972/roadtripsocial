@@ -96,4 +96,22 @@ router.post('/get-last-post', passport.authenticate('jwt', {
   });
 });
 
+
+router.get('/get-post', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Posts.getPosts(function (err, data) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        posts: data
+      });
+    }
+  });
+});
+
 module.exports = router;

@@ -24,14 +24,14 @@
 }
 
 .separation-vl {
-  border-left-color: #e77b20;
+  border-left-color: #666;
   border-left-style: solid;
   border-left-width: 1px;  
   height: 100%;
 }
 
 .separation-vr {
-  border-right-color: #e77b20;
+  border-right-color: #666;
   border-right-style: solid;
   border-right-width: 1px;  
   height: 100%;

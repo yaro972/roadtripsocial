@@ -42,8 +42,6 @@ export class FeedsComponent implements OnInit, OnDestroy {
     }
 
     );
-
-    return false;
   }
 
   ngOnDestroy() {

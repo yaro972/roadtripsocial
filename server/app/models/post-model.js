@@ -55,3 +55,17 @@ posts.findLast = function (nickname, callback) {
     },
     callback);
 };
+
+/**
+ * Récupère l'ensemble des posts
+ */
+posts.getPosts = function (callback) {
+  posts.find(
+    {},
+    {},
+    {
+      sort: { 'datePost': -1 }
+    },
+    callback
+  );
+}
