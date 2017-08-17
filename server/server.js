@@ -145,8 +145,8 @@ app.use(function (err, req, res) {
 
 // Activation du port d'écoute du serveur
 app.listen(port, ip, function () {
-  console.log('Serveur démarré sur le port : ' + port);
-  debug('Serveur démarré sur le port : ' + port);
+  console.log('Serveur démarré sur le port : ' + port + ' IP :' + ip);
+  debug('Serveur démarré sur le port : ' + port + ' IP :' + ip);
 });
 
 // Pour les tests unitaires
