@@ -32,19 +32,19 @@ router.post('/uploadFile', upload.any(), function (req, res) {
  * Permet d'afficher l'image de l'utilisateur
  */
 router.get('/display-photo/:img', function (req, res) {
-  fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
-    if (err) {
-      console.log(err);
-      res.sendStatus(200);
-    } else {
+  if (fs.existsSync(path.join(__dirname, '../../uploads', req.params.img))) {
+    fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
+      if (err) throw err;
       console.log(data);
-      // res.writeHead({
-      //   'Content-type': 'image'
-      // });
-      res.send(data);
-    }
 
-  });
+      res.send(data);
+
+    });
+  } else {
+    res.json({
+      err: 'File do not exists'
+    });
+  }
 });
 
 /**
