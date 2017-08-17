@@ -74,7 +74,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-var User = module.exports = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
 
 /**
  * Recherche du nom de l'utilisateur à partir de son Id
@@ -140,16 +140,16 @@ User.addCivility = function (userNickname, civility, callback) {
   User.update({
     nickname: userNickname
   }, {
-    $set: {
-      firstname: civility.firstname,
-      lastname: civility.lastname,
-      gender: civility.gender,
-      city: civility.city,
-      country: civility.country,
-      birthdate: civility.birthdate,
-      firstConn: false
-    }
-  }, callback);
+      $set: {
+        firstname: civility.firstname,
+        lastname: civility.lastname,
+        gender: civility.gender,
+        city: civility.city,
+        country: civility.country,
+        birthdate: civility.birthdate,
+        firstConn: false
+      }
+    }, callback);
 
 };
 
@@ -160,13 +160,13 @@ User.addExtraDetails = function (userNickname, extraDetails, callback) {
   User.update({
     nickname: userNickname
   }, {
-    $set: {
-      presentation: extraDetails.presentation,
-      visitedCountries: extraDetails.visitedCountries,
-      avatar: extraDetails.avatar,
-      firstConn: false
-    }
-  }, callback);
+      $set: {
+        presentation: extraDetails.presentation,
+        visitedCountries: extraDetails.visitedCountries,
+        avatar: extraDetails.avatar,
+        firstConn: false
+      }
+    }, callback);
 };
 
 /**
@@ -203,8 +203,8 @@ User.updateProfile = function (user, callback) {
   user.firstConn = false;
 
   User.update({
-      nickname: user.nickname
-    }, {
+    nickname: user.nickname
+  }, {
       $set: user
     },
     callback);
@@ -216,8 +216,8 @@ User.updateProfile = function (user, callback) {
  */
 User.addToken = function (userMail, token, callback) {
   User.update({
-      email: userMail
-    }, {
+    email: userMail
+  }, {
       $set: {
         token: token
       }
@@ -244,11 +244,11 @@ User.resetPassword = function (token, newPassword, callback) {
           User.update({
             token: token
           }, {
-            $set: {
-              token: '',
-              password: password
-            }
-          }, callback);
+              $set: {
+                token: '',
+                password: password
+              }
+            }, callback);
         }
       });
     }
@@ -274,10 +274,10 @@ User.updatePassword = function (nickname, newPassword, callback) {
           User.update({
             nickname: nickname
           }, {
-            $set: {
-              password: password
-            }
-          }, callback);
+              $set: {
+                password: password
+              }
+            }, callback);
         }
       });
     }
@@ -298,52 +298,54 @@ User.searchMembers = function (toFind, callback) {
   let regEx = new RegExp(toFind, 'i');
   User.find({
     $or: [{
-        nickname: {
-          $regex: regEx
-        }
-      }, {
-        firstname: {
-          $regex: regEx
-        }
-      },
-      {
-        lastname: {
-          $regex: regEx
-        }
-      },
-      {
-        city: {
-          $regex: regEx
-        }
-      },
-      {
-        visitedCountries: {
-          $regex: regEx
-        }
-      },
-      {
-        country: {
-          $regex: regEx
-        }
+      nickname: {
+        $regex: regEx
       }
+    }, {
+      firstname: {
+        $regex: regEx
+      }
+    },
+    {
+      lastname: {
+        $regex: regEx
+      }
+    },
+    {
+      city: {
+        $regex: regEx
+      }
+    },
+    {
+      visitedCountries: {
+        $regex: regEx
+      }
+    },
+    {
+      country: {
+        $regex: regEx
+      }
+    }
     ]
   }, {
-    _id: 1,
-    nickname: 1,
-    firstname: 1,
-    lastname: 1,
-    avatar: 1,
-    city: 1,
-    country: 1,
-    visitedCountries: 1
+      _id: 1,
+      nickname: 1,
+      firstname: 1,
+      lastname: 1,
+      avatar: 1,
+      city: 1,
+      country: 1,
+      visitedCountries: 1
 
-  }, callback);
+    }, callback);
 };
 
 User.memberDetails = function (memberId, callback) {
   User.findOne({
     _id: memberId
   }, {
-    password: 0
-  }, callback);
+      password: 0
+    }, callback);
 };
+
+module.exports = User;

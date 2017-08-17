@@ -71,4 +71,37 @@ export class PostsService {
       .map(res => res.json());
   }
 
-}
+  /**
+   * Supprime un post
+   * @param id Clef liée au commentaire
+   */
+  deletePost(id) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .delete(this.BACKENDURL + '/api/delete-post/' + id, { headers: headers })
+      .map(res => res.json());
+  };
+
+  /**
+   *Ajout un nouveau commentaire
+   */
+  addComment(comment) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .post(this.BACKENDURL + '/api/add-comment', comment, { headers: headers })
+      .map(res => res.json());
+  };
+
+
+
+};

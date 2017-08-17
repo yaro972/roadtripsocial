@@ -26,11 +26,12 @@ let postSchema = mongoose.Schema({
   }
 });
 
-var posts = module.exports = mongoose.model('Posts', postSchema);
+
+var posts = mongoose.model('Posts', postSchema);
 
 // Récupère un post
 posts.getPostElement = function (owner, callback) {
-  post.findOne({
+  posts.findOne({
     owner: owner
   }, callback);
 }
@@ -68,4 +69,16 @@ posts.getPosts = function (callback) {
     },
     callback
   );
-}
+};
+
+/**
+ * Supprime un post de la Db
+ */
+posts.deletePost = function (id, callback) {
+  posts.deleteOne({
+    _id: id
+  }, callback);
+};
+
+
+module.exports = posts;

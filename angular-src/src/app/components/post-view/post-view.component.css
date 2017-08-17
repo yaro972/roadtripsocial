@@ -4,6 +4,8 @@
   margin-bottom: 15px;
 }
 
+
+/* Contenu des posts */
 .post-content {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -14,6 +16,13 @@
   border-top: 2px solid #e77b20;
 }
 
+.date-post{
+  font-size: 1.0rem;
+}
+/* Contenu des posts */
+
+
+/* Commentaires */
 .comment {
   background-color: #646b79;
   border-left: 1px solid #4B4848;
@@ -36,3 +45,35 @@
   color: #FEFEFE;
   font-size: 1.2rem;
 }
+
+
+.form-control{
+  /* background-color: #464a50; */
+  background-color: rgba(255, 255, 255, 0);
+  color:#FEFEFE;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #cac1c1;  
+}
+
+input{  
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    
+  }
+
+.form-control button{
+  background-color: #464a50;
+}
+
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+  /* background-color: #464a50; */
+  background-color: rgba(255, 255, 255, 0);
+  border:0;
+}
+/* Commentaires */
+
+
+

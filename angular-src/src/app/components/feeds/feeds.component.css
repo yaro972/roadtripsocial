@@ -9,6 +9,17 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+.form-control{
+/* background-color: #464a50; */
+background-color: rgba(255, 255, 255, 0);
+color:#FEFEFE;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: #cac1c1;
+}
+
 /* Mise en page générale */
 
 
@@ -45,10 +56,12 @@
 
 .send-wrap
 {
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    /* border-top: 1px solid #eee; */
+    /* border-bottom: 1px solid #eee; */
+    
     padding:10px;
-    background: #f8f8f8;
+    /* background: #f8f8f8; */
+    background: #2c3e50;
 }
 
 .send-message-btn

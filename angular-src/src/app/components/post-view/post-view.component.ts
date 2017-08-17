@@ -12,6 +12,8 @@ import { PostsService } from '../../services/posts/posts.service';
 export class PostViewComponent implements OnInit, OnDestroy {
 
   postItems: String[];
+  commentShow: Boolean;
+
   // postItems = [{
   //   id: 1,
   //   avatar: 'Anonymous.png',
@@ -80,6 +82,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.commentShow = false;
     this.showPosts();
   }
 
@@ -92,18 +95,30 @@ export class PostViewComponent implements OnInit, OnDestroy {
         console.log(data.err);
       } else {
         this.postItems = data.posts;
-        console.log(data);
       }
     });
   };
 
 
-  addComment(id) {
+  onClickAddComment(id) {
     console.log('comment', id);
+    this.commentShow = id;
   }
 
-  dropComment(id) {
-    console.log('dropComment/comment', id);
+  addComment(postItemId) {
+    
+  }
+
+  dropPost(id) {
+    this._postsService.deletePost(id).subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        this.postItems = data.posts;
+        console.log(data);
+        this.showPosts();
+      }
+    });
   }
 
 

@@ -39,11 +39,12 @@ export class FeedsComponent implements OnInit, OnDestroy {
       } else {
 
       }
-    }
+    });
+  };
 
-    );
-  }
-
+  /**
+   * Nettoyage lors de la destruction de la vue
+   */
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
