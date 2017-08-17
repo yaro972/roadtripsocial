@@ -1,5 +1,6 @@
 apps:  
-  - script : worker.js
+  - script : server.js
+    name : 'frondend'
     watch  : true
     instances: 4
     env    :
