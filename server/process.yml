@@ -1,13 +1,13 @@
 apps:  
   - script : server.js
-    name : 'frontend'
+    name : 'backend'
     watch  : true
     instances: 4
     env    :
       NODE_ENV: development
-      FRONTPORT: 3200
-      FRONTIP: 192.168.0.104
+      BACKPORT: 3000
+      BACKIP: 192.168.0.104
     env_production:
       NODE_ENV: production
-      FRONTPORT: 3200
-      FRONTIP: 192.168.0.104
+      BACKPORT: 3000
+      BACKIP: 192.168.0.104

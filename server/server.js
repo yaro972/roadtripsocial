@@ -24,8 +24,8 @@ const config = require('./app/inc/.config');
 
 
 // Port par défaut de l'application
-let port = process.env.PORT || config.srv.port;
-let ip = process.env.IP || config.srv.ip;
+let port = process.env.BACKPORT || config.srv.port;
+let ip = process.env.BACKIP || config.srv.ip;
 
 if (process.env.NODE_ENV === 'test') {
   // Lancement des test unitaires
