@@ -5,11 +5,10 @@ import { tokenNotExpired } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { AuthService } from '../auth/auth.service';
-
+import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class PostsService {
-  BACKENDURL = 'http://localhost:3000';
   authToken: any;
 
   constructor(
@@ -34,7 +33,7 @@ export class PostsService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/new-post', newPost, { headers: headers })
+      .post(environment.BACKENDURL + '/api/new-post', newPost, { headers: headers })
       .map(res => res.json());
   }
 
@@ -50,7 +49,7 @@ export class PostsService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/get-last-post', {
+      .post(environment.BACKENDURL + '/api/get-last-post', {
         nickname: nickname
       }, { headers: headers })
       .map(res => res.json());
@@ -67,7 +66,7 @@ export class PostsService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .get(this.BACKENDURL + '/api/get-post', { headers: headers })
+      .get(environment.BACKENDURL + '/api/get-post', { headers: headers })
       .map(res => res.json());
   }
 
@@ -83,7 +82,7 @@ export class PostsService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .delete(this.BACKENDURL + '/api/delete-post/' + id, { headers: headers })
+      .delete(environment.BACKENDURL + '/api/delete-post/' + id, { headers: headers })
       .map(res => res.json());
   };
 
@@ -98,7 +97,7 @@ export class PostsService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/add-comment', comment, { headers: headers })
+      .post(environment.BACKENDURL + '/api/add-comment', comment, { headers: headers })
       .map(res => res.json());
   };
 

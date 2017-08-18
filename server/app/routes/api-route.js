@@ -33,6 +33,10 @@ router.post('/uploadFile', upload.any(), function (req, res) {
  * Permet d'afficher l'image de l'utilisateur
  */
 router.get('/display-photo/:img', function (req, res) {
+  // Si le nom de l'image n'a pas été donné, l'image par défaut d'avatar est renvoyé
+  if (!req.params.img) {
+    req.params.img = 'Anonymous.png'
+  }
   if (fs.existsSync(path.join(__dirname, '../../uploads', req.params.img))) {
     fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
       if (err) throw err;

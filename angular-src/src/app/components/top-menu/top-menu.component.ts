@@ -10,7 +10,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from '../../services/auth/auth.service';
 import { AuthGuard } from '../../guard/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
-
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'rts-top-menu',
@@ -48,7 +48,7 @@ export class TopMenuComponent implements OnInit, OnDestroy {
       this.user = JSON.parse(userProfile);
 
       if (this.user.avatar) {
-        this.imageFace = 'http://localhost:3000/api/display-photo/' + this.user.avatar;
+        this.imageFace = environment.BACKENDURL + '/api/display-photo/' + this.user.avatar;
       } else {
         this.imageFace = 'Anonymous.png';
       }
@@ -77,7 +77,7 @@ export class TopMenuComponent implements OnInit, OnDestroy {
       this.user = JSON.parse(userProfile);
 
       if (this.user.avatar) {
-        this.imageFace = 'http://localhost:3000/api/display-photo/' + this.user.avatar;
+        this.imageFace = environment.BACKENDURL + '/api/display-photo/' + this.user.avatar;
       } else {
         this.imageFace = 'Anonymous.png';
       }

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  BACKENDURL: 'http://localhost:3000'
+  BACKENDURL: 'http://192.168.0.104:3000'
 };

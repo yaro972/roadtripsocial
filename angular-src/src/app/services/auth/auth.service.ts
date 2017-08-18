@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Subject } from 'rxjs/Subject';
+import { environment } from './../../../environments/environment';
 
 import { User } from '../../core/user';
 
@@ -10,7 +11,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
-  BACKENDURL = 'http://localhost:3000';
   authToken: any;
   user: User;
 
@@ -26,7 +26,7 @@ export class AuthService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .put(this.BACKENDURL + '/api/user/register', user, { headers: headers })
+      .put(environment.BACKENDURL + '/api/user/register', user, { headers: headers })
       .map(res => res.json());
   }
 
@@ -38,7 +38,7 @@ export class AuthService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/register-civility',
+      .post(environment.BACKENDURL + '/api/user/register-civility',
       {
         nickname: nickname,
         civility: civility
@@ -57,7 +57,7 @@ export class AuthService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/register-extra-details',
+      .post(environment.BACKENDURL + '/api/user/register-extra-details',
       {
         nickname: nickname,
         extraDetails: details
@@ -74,7 +74,7 @@ export class AuthService {
       .append('Content-type', 'application/json');
 
     return this._http
-      .post(this.BACKENDURL + '/api/user/login', user, { headers: headers })
+      .post(environment.BACKENDURL + '/api/user/login', user, { headers: headers })
       .map(res => res.json());
   }
 
@@ -93,7 +93,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this._http
-      .get(this.BACKENDURL + '/api/user/profile', { headers: headers })
+      .get(environment.BACKENDURL + '/api/user/profile', { headers: headers })
       .map(res => res.json());
   }
 
@@ -124,7 +124,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/find-user-by-mail', mail, { headers: headers })
+      .post(environment.BACKENDURL + '/api/user/find-user-by-mail', mail, { headers: headers })
       .map(res => res.json());
   }
 
@@ -154,7 +154,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/nickname-availability', {
+      .post(environment.BACKENDURL + '/api/user/nickname-availability', {
         'nickname': nickname
       }, {
         headers: headers
@@ -172,7 +172,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/update-profile', {
+      .post(environment.BACKENDURL + '/api/user/update-profile', {
         newUserProfile
       }, {
         headers: headers
@@ -189,7 +189,7 @@ export class AuthService {
 
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/lost-password', userMail, {
+      .post(environment.BACKENDURL + '/api/user/lost-password', userMail, {
         headers: headers
       })
       .map(res => res.json());
@@ -205,7 +205,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/change-password', {
+      .post(environment.BACKENDURL + '/api/user/change-password', {
         nickname: JSON.parse(localStorage.getItem('user')).nickname,
         oldPass: oldPass,
         newPass: newPass
@@ -226,7 +226,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/reset-password', {
+      .post(environment.BACKENDURL + '/api/user/reset-password', {
         token: token,
         newPass: newPass
       }, {
@@ -246,7 +246,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/search-member', {
+      .post(environment.BACKENDURL + '/api/user/search-member', {
         itemToFind: itemToFind
       }, {
         headers: headers
@@ -262,7 +262,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(this.BACKENDURL + '/api/user/member-details', {
+      .post(environment.BACKENDURL + '/api/user/member-details', {
         memberId: id
       }, {
         headers: headers

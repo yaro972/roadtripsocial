@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-
+import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class FileUploadService {
@@ -21,6 +21,6 @@ export class FileUploadService {
     headers
       .append('Content-type', 'image');
     return this._http
-      .post("http://localhost:3000/api/uploadFile", input);
+      .post(environment.BACKENDURL + "/api/uploadFile", input);
   }
 }
