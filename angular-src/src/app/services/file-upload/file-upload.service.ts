@@ -23,4 +23,5 @@ export class FileUploadService {
     return this._http
       .post(environment.BACKENDURL + "/api/uploadFile", input);
   }
+
 }

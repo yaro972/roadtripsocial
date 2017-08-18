@@ -20,12 +20,13 @@
               <div class="row" *ngIf="photoProfUpload">
                 <p>Previsualisation</p>
                 <div class="col-xs-5 col-xs-offset-3">
-                  <img src="http://localhost:3000/api/display-photo/{{photoProfUpload}}" alt="" class="img img-thumbnail img-responsive"></div>
+                  <img src="{{photoProfUpload | showImage }}" alt="" class="img img-thumbnail img-responsive">
+                </div>
               </div>
               <!-- Preview -->
               <div class="row">
                 <div class="col-xs-10 text-center">
-                  <input #fileInput type="file" (change)="addFileEvent(fileInput)" />
+                  <input #fileInput type="file" (change)="addFileEvent(fileInput)" accept="image/*" />
                   <button class="btn btn-default addFileButton" (click)="addFile()" [disabled]="!isAddFile">Choisir</button>
                 </div>
               </div>

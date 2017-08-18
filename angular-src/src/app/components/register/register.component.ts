@@ -45,4 +45,9 @@ export class RegisterComponent implements OnInit {
     this.registerCivility = true;
     this.register = false;
   }
+
+  onValidateExtraDetails(ev) {
+    this.registerCivility = false;
+    this.register = false;
+  }
 }

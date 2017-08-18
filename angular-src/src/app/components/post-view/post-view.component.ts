@@ -3,6 +3,9 @@ import { NgClass } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { PostsService } from '../../services/posts/posts.service';
+import { FileUploadService } from '../../services/file-upload/file-upload.service';
+
+import { ShowImagePipe } from './../../pipes/show-image.pipe';
 
 @Component({
   selector: 'rts-post-view',
@@ -78,7 +81,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private _postsService: PostsService
+    private _postsService: PostsService,
+    private _fileService: FileUploadService
   ) { }
 
   ngOnInit() {
@@ -106,7 +110,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
   }
 
   addComment(postItemId) {
-    
+
   }
 
   dropPost(id) {

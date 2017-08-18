@@ -5,6 +5,9 @@ import { FormControl, FormGroup, Validators, FormBuilder, NgModel } from '@angul
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { FileUploadService } from '../../services/file-upload/file-upload.service';
+import { ShowImagePipe } from './../../pipes/show-image.pipe';
+
+
 
 @Component({
   selector: 'rts-extra-details-form',

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 
 import { ListMembersService } from '../../services/list-members/list-members.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { FileUploadService } from '../../services/file-upload/file-upload.service';
+import { ShowImagePipe } from './../../pipes/show-image.pipe';
 
 @Component({
   selector: 'rts-list-membres',
@@ -22,7 +24,8 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router,
     private _authService: AuthService,
-    private _membersService: ListMembersService
+    private _membersService: ListMembersService,
+    private _fileService: FileUploadService
   ) { }
 
   ngOnInit() {

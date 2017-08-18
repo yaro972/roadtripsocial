@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+
 
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { DetailMembresComponent } from './components/detail-membres/detail-membres.component';
@@ -14,7 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { ListMembresComponent } from './components/list-membres/list-membres.component';
 
-import { RegisterModule } from './components/register/register.module';
+import { RegisterComponent } from './components/register/register.component';
 import { LoginModule } from './components/login/login.module';
 import { ProfileComponent } from './components/profile/profile.component';
 // Services
@@ -42,6 +45,7 @@ import { FeedsComponent } from './components/feeds/feeds.component';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
 import { ListFriendsComponent } from './components/list-friends/list-friends.component';
 import { LastMessageViewComponent } from './components/last-message-view/last-message-view.component';
+import { ShowImagePipe } from './pipes/show-image.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { LastMessageViewComponent } from './components/last-message-view/last-me
     DetailMembresComponent,
     FooterComponent,
     TopMenuComponent,
+    RegisterComponent,
+    RegistrationFormComponent,
+    CivilityFormComponent,
+    ExtraDetailsFormComponent,
     ListMembresComponent,
     ProfileComponent,
     ProfileViewComponent,
@@ -61,18 +69,19 @@ import { LastMessageViewComponent } from './components/last-message-view/last-me
     FeedsComponent,
     SubMenuComponent,
     ListFriendsComponent,
-    LastMessageViewComponent
+    LastMessageViewComponent,
+    ShowImagePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CollapseModule,
+    HttpClientModule,
+    HttpModule,
     ReactiveFormsModule,
     FormsModule,
     LoginModule,
-    RegisterModule,
     FlashMessagesModule,
-
   ],
   providers: [
     AuthGuard,
