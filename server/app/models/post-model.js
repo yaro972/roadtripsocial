@@ -80,5 +80,4 @@ posts.deletePost = function (id, callback) {
   }, callback);
 };
 
-
 module.exports = posts;

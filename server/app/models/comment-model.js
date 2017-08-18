@@ -32,8 +32,17 @@ let comment = mongoose.model('comment', modelSchema);
 /**
  * Ajoute un commentaire
  */
-comment.addComment = function (comment, callback) {
+comment.addComment = function (newComment, callback) {
+  let newCommentObj = new comment({
+    "parent_id": newComment.parent_id,
+    "dateComment": newComment.dateComment,
+    "autor": newComment.autor,
+    "avatar": newComment.avatar,
+    "text": newComment.text
+  });
 
+
+  newCommentObj.save(callback);
 };
 
 module.exports = comment;

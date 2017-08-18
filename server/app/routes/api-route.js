@@ -10,7 +10,7 @@ let path = require('path');
 const fs = require('fs');
 
 const Posts = require('../models/post-model');
-const comments = require('../models/comment-model');
+const Comments = require('../models/comment-model');
 
 var multer = require('multer');
 var upload = multer({
@@ -149,8 +149,8 @@ router.delete('/delete-post/:id', passport.authenticate('jwt', {
 router.post('/add-comment', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-  debugger
-  Posts.addComment(req.params.id, function (err, data) {
+
+  Comments.addComment(req.body, function (err, data) {
     if (err) {
       res.json({
         err: err

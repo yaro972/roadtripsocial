@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { NgModel } from '@angular/forms';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { PostsService } from '../../services/posts/posts.service';
@@ -16,6 +17,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
   @Input() owner: any;
   postItems: String[];
   commentShow: Boolean;
+  newComment: String;
+  sub: any;
+  commentList: any[];
 
   // postItems = [{
   //   id: 1,
@@ -105,14 +109,39 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
 
   onClickAddComment(id) {
-    console.log('comment', id);
     this.commentShow = id;
   }
 
+  /**
+   * Ajout d'un nouveau commentaire
+   * @param postItemId Id du post commenté
+   */
   addComment(postItemId) {
+    let u = JSON.parse(localStorage.getItem('user'));
 
-  }
+    let newCommentObj = {
+      text: this.newComment,
+      avatar: u.avatar,
+      dateComment: new Date(),
+      autor: u.nickname,
+      parent_id: postItemId
+    };
 
+    this.sub = this._postsService.addComment(newCommentObj).subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        console.log(data);
+        // this.showPosts();
+        this.commentList.push(data.posts);
+      }
+    });
+  };
+
+  /**
+   * Suppression d'un post
+   * @param id Id du post à supprimer
+   */
   dropPost(id) {
     this._postsService.deletePost(id).subscribe(data => {
       if (data.err) {
@@ -128,9 +157,14 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
   addResponse(id) {
     console.log('response', id);
-  }
+  };
 
+  /**
+   * Nettoyage de la vue lors de la destruction
+   */
   ngOnDestroy() {
-
-  }
+    if (this.sub) {
+      this.sub.subscribe();
+    }
+  };
 }
