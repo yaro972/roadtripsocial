@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { AuthService } from './../../services/auth/auth.service';
 import { NgModel } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -20,7 +20,7 @@ import { User } from '../../core/user';
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.css']
 })
-export class ProfileEditComponent implements OnInit, OnDestroy {
+export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() user: User;
   @Input() suivi: Boolean;
   @Input() isOwnProfile: Boolean;
@@ -49,7 +49,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   moisNaissance: String;
   jourNaissance: String;
   anneeNaissance: String;
-
+  isAddFile: Boolean;
   photoProfUpload: String;
 
   constructor(
@@ -63,6 +63,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isOnModif = false;
+    this.isAddFile = false;
 
     this.genderIco = 'fa fa-mars';
     if (this.user.gender === 1) {
@@ -101,11 +102,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
    * Savegarde des éléments modifiés de la page
    */
   save() {
+
     // Reconstitution de la date de naissance
     const birthdate = new Date(this.moisNaissance + '/' + this.jourNaissance + '/' + this.anneeNaissance);
 
     // Stockage de cette date dans l'objet this.registerForm.value, avant envoi au backend
     this.user.birthdate = birthdate;
+    this.user.avatar = this.photoProfUpload;
 
     this.newUser.emit(this.user);
     this.sub = this._authService.updateProfile(this.user).subscribe(data => {
@@ -162,7 +165,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.anneeNaissance = '' + birthD.getFullYear();
   };
 
-  addFileEvent(e): Boolean {
+  addFileEvent(input) {
+    if (input.files.length) {
+      this.isAddFile = true;
+    } else {
+      this.isAddFile = false;
+    }
+  };
+
+  addFile(): Boolean {
     let fi = this.fileInput.nativeElement;
 
     if (fi.files && fi.files[0]) {
@@ -179,19 +190,11 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
 
     return false;
-  };
-
-
+  }
 
   ngAfterViewChecked() {
-
-    // this.ageSubsciption = this._profileService.getAge()
-    //   .subscribe((userAge) => {
-    //     this.age = userAge;
-    //     console.log(this.age);
-
-    //   });
   }
+
 
   ngOnDestroy() {
     if (this.sub) {

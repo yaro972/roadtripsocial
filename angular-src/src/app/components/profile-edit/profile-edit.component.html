@@ -1,5 +1,5 @@
 <!-- <div class="row" *ngIf="user"> -->
-<div class="container">
+<div class="col-xs-12">
   <div *ngIf="user">
 
     <div class="row">
@@ -32,9 +32,7 @@
                   <!-- <div class="row">  -->
                   <div class="input-group">
                     <input type="file" class="form-control" #fileInput (change)="addFileEvent(fileInput)" aria-describedby="basic-addon1" accept="image/*">
-
                   </div>
-
 
                   <button class="btn btn-default addFileButton" (click)="addFile()" [disabled]="!isAddFile">Choisir</button>
                 </div>

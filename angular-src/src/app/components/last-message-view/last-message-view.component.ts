@@ -29,7 +29,9 @@ export class LastMessageViewComponent implements OnInit, OnDestroy {
       if (data.err) {
         console.log(data.err);
       } else {
-        this.lastPostMessage = data.lastPost.details;
+        if (data.lastPost) {
+          this.lastPostMessage = data.lastPost.details;
+        }
       }
     });
   }

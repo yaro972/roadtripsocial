@@ -34,21 +34,6 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
     this.getUserProfile = false;
     this.getUserId();
     this.isPostActive = true;
-
-
-    // if (this._authService.loggedIn()) {
-    //   this.sub = this._authService.getProfile().subscribe(profile => {
-    //     this.user = profile.user;
-    //     this.addFakeData();
-
-    //     this._authService.changeUserEvent(this.user);
-    //     this._authService.closeSubMenu(true);
-    //   },
-    //     err => {
-    //       console.log(err);
-    //       return false;
-    //     });
-    // }
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { AuthService } from '../../services/auth/auth.service';
@@ -13,7 +13,7 @@ import { ShowImagePipe } from './../../pipes/show-image.pipe';
   styleUrls: ['./post-view.component.css']
 })
 export class PostViewComponent implements OnInit, OnDestroy {
-
+  @Input() owner: any;
   postItems: String[];
   commentShow: Boolean;
 
@@ -93,7 +93,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
   /**
    * Affiche tous les posts
    */
-  showPosts() {
+  showPosts(author?: any) {
     this._postsService.getPosts().subscribe(data => {
       if (data.err) {
         console.log(data.err);
