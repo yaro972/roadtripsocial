@@ -15,3 +15,196 @@
 body {
   background-color: rgba(147, 158, 169, 0.37);
 } */
+
+
+.accueil-back {
+  background-color: #222222;
+}
+
+.slider {
+  /* height: 436px; */
+  background-image: url('/assets/images/bg_header.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title-text {
+  padding-top: 135px;
+  padding-left: 74px;
+}
+
+.title-text h1 {
+  font-family: Lato;
+  color: #ffffff;
+  font-weight: 300;
+  text-align: left;
+}
+
+.title-text h1 span {
+  font-family: Lato;
+  color: #ffffff;
+  font-weight: 400;
+  text-align: left;
+}
+
+.title-text a {
+  margin: 10px 5px;
+}
+
+.second-block {
+  background-color: rgba(44, 62, 80, .9);
+}
+
+.second-block-back {
+  background: url('/assets/images/himesh-kumar-behera-216019.png') center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.second-block p {
+  font-family: Lato;
+  color: #ffffff;
+  font-weight: 300;
+  text-align: left;
+}
+
+.second-block p span {
+  font-family: Lato;
+  color: #a3ccff;
+  font-weight: 700;
+  text-align: left;
+}
+
+.map-monde {
+  background: url('/assets/images/map_monde.png') center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.btn-home {
+  background-color: #423f3c;
+  border-color: #968778;
+}
+
+@media screen and (max-width: 640px) {
+  .map-monde {
+    height: 250px;
+  }
+  .slider {
+    height: 250px;
+    padding-top: 20px;
+  }
+  .second-block {
+    height: 250px;
+    padding-top: 45px;
+  }
+  .title-text {
+    padding-top: 5px;
+    padding-left: 40px;
+  }
+  .second-block p {
+    font-size: 30px;
+  }
+  .second-block p span {
+    font-size: 30px;
+  }
+  .title-text h1 {
+    font-size: 30px;
+  }
+  .title-text h1 span {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width:800px) {
+  .slider {
+    height: 380px;
+  }
+  .title-text {
+    padding-top: 65px;
+    padding-left: 120px;
+  }
+  .title-text h1 {
+    font-size: 38px;
+  }
+  .title-text h1 span {
+    font-size: 41px;
+  }
+  .second-block {
+    height: 380px;
+    padding-top: 65px;
+  }
+  .second-block p {
+    font-size: 26px;
+  }
+  .second-block p span {
+    font-size: 26px;
+  }
+  .map-monde {
+    height: 380px;
+  }
+}
+
+@media screen and (min-width:801px) and (max-width: 1025px) {
+  .slider {
+    height: 380px;
+  }
+  .second-block {
+    height: 380px;
+  }
+  .title-text {
+    padding-top: 65px;
+    padding-left: 120px;
+  }
+  .second-block {
+    padding-top: 80px;
+  }
+  .second-block p {
+    font-size: 39px;
+  }
+  .second-block p span {
+    font-size: 39px;
+  }
+  .title-text h1 {
+    font-size: 38px;
+  }
+  .title-text h1 span {
+    font-size: 41px;
+  }
+  .map-monde {
+    height: 380px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .slider {
+    height: 450px;
+  }
+  .title-text {
+    padding-top: 70px;
+    padding-left: 60px;
+  }
+  .title-text h1 {
+    font-size: 45.87px;
+    padding-bottom: 55px;
+  }
+  .title-text h1 span {
+    font-size: 45.87px;
+  }
+  .second-block {
+    height: 450px;
+    padding-top: 65px;
+  }
+  .second-block p {
+    font-size: 52.08px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .second-block p span {
+    font-size: 52.08px;
+  }
+  .map-monde {
+    height: 450px;
+  }
+}
