@@ -200,6 +200,12 @@ User.updateProfile = function (user, callback) {
   delete user.jourNaissance;
   delete user.moisNaissance;
   delete user.anneeNaissance;
+
+
+  if (user.avatar === '') {
+    user.avatar = 'Anonymous.png';
+  }
+
   user.firstConn = false;
 
   User.update({
