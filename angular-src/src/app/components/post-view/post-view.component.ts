@@ -19,7 +19,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
   commentShow: Boolean;
   newComment: String;
   sub: any;
-  commentList: any[];
+  // commentList: any[];
+  commentList: any;
 
   // postItems = [{
   //   id: 1,
@@ -92,6 +93,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.commentShow = false;
     this.showPosts();
+    this.commentList = {};
+
   }
 
   /**
@@ -133,7 +136,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
       } else {
         console.log(data);
         // this.showPosts();
-        this.commentList.push(data.posts);
+        // this.commentList.push(data.posts);
+        this.commentList = data.posts;
+        debugger
       }
     });
   };

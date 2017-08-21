@@ -9,6 +9,7 @@ const config = require('../inc/.config');
 const mail = require('../inc/mail');
 const crypto = require('crypto');
 
+
 var WEBURL = 'http://localhost:4200';
 // WEBURL = 'https://f0fed797.ngrok.io';
 
@@ -224,17 +225,52 @@ router.post('/nickname-availability', function (req, res) {
 router.post('/update-profile', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
+  // Chargement des modules manquants  
 
-  User.updateProfile(req.body.newUserProfile, function (err, newUserProfile) {
+  const fs = require('fs');
+  const path = require('path');
+
+  let originalAvatarFileName = req.body.avatar;
+  let newAvatarFilenameTab = originalAvatarFileName.split('.');
+  newAvatarFilenameTab.pop();
+  newAvatarFilenameTab[0] = req.body.nickname;
+
+  let newAvatarFilename = newAvatarFilenameTab.join('.');
+
+  // Remplacement du nom de l'avatar
+  req.body.avatar = newAvatarFilename;
+
+  // Enregistrement de l'emplacement du fichier original
+  let filePathName = path.join(__dirname, '../../uploads/', originalAvatarFileName);
+
+
+  // Test si le fichier existe
+  fs.access(filePathName, fs.constants.F_OK | fs.constants.R_OK | fs.constants.W_OK, function (err) {
 
     if (err) {
       res.json({
-        succeed: false
+        err: "Fichier inexistant"
       });
     } else {
-      res.json({
-        succeed: true,
-        newProfile: newUserProfile
+      // Renomme le fichier
+      fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
+        if (err) {
+          debugger
+        }
+        // Sauvegarde le profile dans la Db
+        User.updateProfile(req.body, function (err, newUserProfile) {
+          if (err) {
+            res.json({
+              err: err
+            });
+          } else {
+            res.json({
+              err: null,
+              newProfile: newUserProfile
+            });
+          }
+        });
+
       });
     }
   });

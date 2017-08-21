@@ -24,11 +24,11 @@
                 <div class="col-xs-1 col-lg-1 col-md-1 col-sm-1" *ngIf="!isOnModif">
                   <span class="glyphicon glyphicon-pencil" style="color:#e0e0e0; padding-top: 27px;" (click)="modify()" title="Modifier"></span>
                 </div>
-                <div class="col-xs-1 col-lg-1 col-md-1 col-sm-1" *ngIf="isOnModif">
-                  <span class="glyphicon  glyphicon-ok" style="color:#1fb734; padding-top: 27px;" (click)="save()" title="Sauver"></span>
+                <div class="col-xs-1 col-lg-1 col-md-1 col-sm-1" *ngIf="isOnModif" style="padding-top: 27px;">
+                  <img src="/assets/images/ok.png" alt="" height="20" srcset="" (click)="save()" title="Sauver">
                 </div>
-                <div class="col-xs-1 col-lg-1 col-md-1 col-sm-1" *ngIf="isOnModif">
-                  <span class="glyphicon glyphicon-remove" style="color:#c44; padding-top: 27px;" (click)="reset()" title="Annuler"></span>
+                <div class="col-xs-1 col-lg-1 col-md-1 col-sm-1" *ngIf="isOnModif" style="padding-top: 26px;">
+                  <img src="/assets/images/remove.png" alt="" height="25" srcset="" (click)="reset()" title="Annuler">
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <rts-profile-edit [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [onSave]="onSave" (newUser)="loadNewUser($event)"
+        <rts-profile-edit [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile" [onSavedEvent]="onSavedEvent" (newUser)="loadNewUser($event)"
           *ngIf="isOnModif"></rts-profile-edit>
       </div>
     </div>

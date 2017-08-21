@@ -201,17 +201,19 @@ User.updateProfile = function (user, callback) {
   delete user.moisNaissance;
   delete user.anneeNaissance;
 
-
-  if (user.avatar === '') {
+  if (!user.avatar.length) {
     user.avatar = 'Anonymous.png';
   }
 
   user.firstConn = false;
 
-  User.update({
+  User.findOneAndUpdate({
     nickname: user.nickname
   }, {
       $set: user
+    },
+    {
+      new: true
     },
     callback);
 };

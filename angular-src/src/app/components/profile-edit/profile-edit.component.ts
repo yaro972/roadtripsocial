@@ -24,14 +24,18 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   @Input() user: User;
   @Input() suivi: Boolean;
   @Input() isOwnProfile: Boolean;
-  @Input() onSave: Boolean;
 
+  @Input() onSavedEvent: Boolean;
   @Output() newUser: EventEmitter<User> = new EventEmitter();
 
   [x: string]: any;
   @ViewChild("fileInput") fileInput;
 
-  sub: any;
+  // Stockage des flux en cours
+  sub: Subscription;
+  ageSubsciption: Subscription;
+  subUpdateProfile: Subscription;
+  subGetSaveStatus: Subscription;
 
   isOnModif: Boolean; // Page en cours de modification
 
@@ -43,7 +47,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   visitedCountryList: CitiesClass[];
 
   age: Number;
-  ageSubsciption: Subscription;
+
   genderIco: String;
 
   moisNaissance: String;
@@ -62,9 +66,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   ngOnInit() {
-    this.isOnModif = false;
-    this.isAddFile = false;
-
     this.genderIco = 'fa fa-mars';
     if (this.user.gender === 1) {
       this.genderIco = 'fa fa-venus';
@@ -80,56 +81,55 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
     this.visitedCountryList = this._profileService.getallCities();
     this.photoProfUpload = this.user.avatar;
 
-    this._profileService.getSaveStatus().subscribe((saveStatus) => {
+    this.subGetSaveStatus = this._profileService.getSaveStatus().subscribe((saveStatus) => {
       if (saveStatus === true) {
         this.save();
       }
     });
+
+    if (this.onSavedEvent) {
+      this.save();
+    };
   }
 
   onFollow() {
     this.suivi = !this.suivi;
   }
 
-  modify() {
-    this.isOnModif = true;
-  }
-
-  reset() {
-    this.isOnModif = false;
-  }
   /**
    * Savegarde des éléments modifiés de la page
    */
   save() {
-
     // Reconstitution de la date de naissance
     const birthdate = new Date(this.moisNaissance + '/' + this.jourNaissance + '/' + this.anneeNaissance);
 
     // Stockage de cette date dans l'objet this.registerForm.value, avant envoi au backend
     this.user.birthdate = birthdate;
+
     this.user.avatar = this.photoProfUpload;
 
-    this.newUser.emit(this.user);
-    this.sub = this._authService.updateProfile(this.user).subscribe(data => {
+    this.subUpdateProfile = this._authService.updateProfile(this.user).subscribe(data => {
+
       if (data.err) {
         this._flashMessage.grayOut(true);
         this._flashMessage.show('Une Erreur est apparue lors de la mise à jour de votre profile', {
           cssClass: 'alert alert-danger text-center',
           timeout: 2500
         });
+        this.newUser.emit(this.user);
       } else {
         const uTmp = JSON.parse(localStorage.getItem('user'));
-        uTmp.birthdate = this.user.birthdate;
+        uTmp.birthdate = data.newProfile.birthdate;
+        uTmp.avatar = data.newProfile.avatar;
         localStorage.setItem('user', JSON.stringify(uTmp));
 
         this._flashMessage.grayOut(true);
-        this._flashMessage.show('Votre profile a bien été mis à jour', {
-          cssClass: 'alert alert-success text-center',
+        this._flashMessage.show('Votre profil a bien été mis à jour', {
+          cssClass: 'alert alert-success text-centePr',
           timeout: 2500
         });
 
-        this.newUser.emit(this.user);
+        this.newUser.emit(data.newProfile);
       }
     });
   }
@@ -168,28 +168,29 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   addFileEvent(input) {
     if (input.files.length) {
       this.isAddFile = true;
+      this.addFile();
     } else {
       this.isAddFile = false;
     }
   };
 
-  addFile(): Boolean {
+  addFile() {
     let fi = this.fileInput.nativeElement;
 
     if (fi.files && fi.files[0]) {
       let fileToUpload = fi.files[0];
+
       this.sub = this._uploadService
         .upload(fileToUpload)
         .subscribe(res => {
           console.log(res);
           let response = res.json().filename;
 
-
           this.photoProfUpload = res.json().filename;
         });
     }
 
-    return false;
+    // return false;
   }
 
   ngAfterViewChecked() {
@@ -197,6 +198,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
 
 
   ngOnDestroy() {
+    if (this.subGetSaveStatus) {
+      this.subGetSaveStatus.unsubscribe();
+    }
+
+    if (this.subUpdateProfile) {
+      this.subUpdateProfile.unsubscribe();
+    }
+
     if (this.sub) {
       this.sub.unsubscribe();
     }

@@ -106,8 +106,9 @@ mongoose.connect(config.db.connString(), options)
   });
 
 // Routes
-app.use('/api', api);
 app.use('/api/user', userApi);
+app.use('/api', api);
+
 
 
 app.use('/admin', admin);

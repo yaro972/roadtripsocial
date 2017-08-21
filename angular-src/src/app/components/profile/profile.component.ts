@@ -14,8 +14,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   user: User;
   suivi: false;
   isOwnProfile: Boolean;
-  sub: any;
-  onSave: Boolean;
+  onSavedEvent: Boolean;
 
   isOnModif: Boolean;
 
@@ -28,8 +27,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.isOnModif = false;
+    this.onSavedEvent = false;
     this._editService.onSaveEvent(false);
-    // this.onSave = false;
 
     let u = localStorage.getItem('user');
     if (u && u !== 'undefined') {
@@ -37,19 +36,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     this.addFakeData();
     this._authService.closeSubMenu(false);
-    // if (this._authService.loggedIn()) {
-    //   this.sub = this._authService.getProfile().subscribe(profile => {
-    //     this.user = profile.user;
-    //     this.addFakeData();
-    //
-    //     this._authService.changeUserEvent(this.user);
-    //     this._authService.closeSubMenu(false);
-    //   },
-    //     err => {
-    //       console.log(err);
-    //       return false;
-    //     });
-    // }
   }
 
 
@@ -62,13 +48,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.onSave = true;
+    this.onSavedEvent = true;
     this._editService.onSaveEvent(true);
-    this.isOnModif = false;
   }
 
   loadNewUser($event) {
     this.user = $event;
+    this.isOnModif = false;
+
+    return true;
   }
 
   profileImg = 'https://randomuser.me/api/portraits/men/80.jpg';
@@ -110,8 +98,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
+
   }
 }

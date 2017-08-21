@@ -105,6 +105,7 @@ export class ExtraDetailsFormComponent implements OnInit, OnDestroy {
 
     if (fi.files && fi.files[0]) {
       let fileToUpload = fi.files[0];
+
       this.sub = this._uploadService
         .upload(fileToUpload)
         .subscribe(res => {
