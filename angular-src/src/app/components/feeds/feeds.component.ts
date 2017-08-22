@@ -24,9 +24,9 @@ export class FeedsComponent implements OnInit, OnDestroy {
 
   // Ajout d'un post
   addPost() {
-    let userElem = JSON.parse(localStorage.getItem('user'));
+    const userElem = JSON.parse(localStorage.getItem('user'));
 
-    let newPostObject = {
+    const newPostObject = {
       datePost: new Date,
       details: this.newPost,
       autors: userElem.nickname,

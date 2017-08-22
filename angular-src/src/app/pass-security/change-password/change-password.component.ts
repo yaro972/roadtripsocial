@@ -51,26 +51,28 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   onPasswordChangeSubmit() {
     // Validation du changement du mot de passe
-    this.sub = this._authService.passwordChange(this.PasswordChangeForm.value.lastPassword, this.PasswordChangeForm.value.newPassword).subscribe(data => {
+    this.sub = this._authService
+      .passwordChange(this.PasswordChangeForm.value.lastPassword, this.PasswordChangeForm.value.newPassword)
+      .subscribe(data => {
 
-      if (data.succeed) {
-        this._flashMessage.grayOut(true);
-        this._flashMessage.show('Le mot de passe a été modifié', {
-          cssClass: 'alert alert-success text-center',
-          timeout: 2500
-        });
+        if (data.succeed) {
+          this._flashMessage.grayOut(true);
+          this._flashMessage.show('Le mot de passe a été modifié', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
 
-        this._router.navigate(['/profile']);
+          this._router.navigate(['/profile']);
 
-      } else {
-        this._flashMessage.grayOut(true);
-        this._flashMessage.show('Le mot de passe n\'a pas été modifié', {
-          cssClass: 'alert alert-danger text-center',
-          timeout: 2500
-        });
-        this._router.navigate(['/']);
-      }
-    });
+        } else {
+          this._flashMessage.grayOut(true);
+          this._flashMessage.show('Le mot de passe n\'a pas été modifié', {
+            cssClass: 'alert alert-danger text-center',
+            timeout: 2500
+          });
+          this._router.navigate(['/']);
+        }
+      });
   }
 
   ngOnDestroy() {

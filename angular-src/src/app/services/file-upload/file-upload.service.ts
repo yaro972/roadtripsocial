@@ -14,14 +14,14 @@ export class FileUploadService {
   * https://stackoverflow.com/questions/43444440/how-to-include-a-file-upload-control-in-an-angular2-reactive-form
   */
   upload(fileToUpload: any) {
-    let input = new FormData();
-    input.append("file", fileToUpload);
+    const input = new FormData();
+    input.append('file', fileToUpload);
     const headers = new Headers();
 
     headers
       .append('Content-type', 'image');
     return this._http
-      .post(environment.BACKENDURL + "/api/uploadFile", input);
+      .post(environment.BACKENDURL + '/api/uploadFile', input);
   }
 
 }

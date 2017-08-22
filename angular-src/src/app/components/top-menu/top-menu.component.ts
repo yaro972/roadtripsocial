@@ -17,7 +17,7 @@ import { environment } from './../../../environments/environment';
   templateUrl: './top-menu.component.html',
   styleUrls: ['./top-menu.component.css']
 })
-export class TopMenuComponent implements OnInit, OnDestroy {
+export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   collapseSubMen: Boolean;
   logo = 'assets/images/earth_globe.png';

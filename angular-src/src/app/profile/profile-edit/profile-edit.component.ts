@@ -29,7 +29,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   @Output() newUser: EventEmitter<User> = new EventEmitter();
 
   [x: string]: any;
-  @ViewChild("fileInput") fileInput;
+  @ViewChild('fileInput') fileInput;
 
   // Stockage des flux en cours
   sub: Subscription;
@@ -175,16 +175,16 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   };
 
   addFile() {
-    let fi = this.fileInput.nativeElement;
+    const fi = this.fileInput.nativeElement;
 
     if (fi.files && fi.files[0]) {
-      let fileToUpload = fi.files[0];
+      const fileToUpload = fi.files[0];
 
       this.sub = this._uploadService
         .upload(fileToUpload)
         .subscribe(res => {
           console.log(res);
-          let response = res.json().filename;
+          const response = res.json().filename;
 
           this.photoProfUpload = res.json().filename;
         });

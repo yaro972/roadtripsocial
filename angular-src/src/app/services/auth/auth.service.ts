@@ -171,7 +171,14 @@ export class AuthService {
 
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
-    return this._http.post(environment.BACKENDURL + '/api/user/update-profile', newUserProfile, { headers: headers }).map(res => res.json());
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/update-profile',
+      newUserProfile, {
+        headers: headers
+      })
+      .map(res =>
+        res.json()
+      );
   };
 
   /**
