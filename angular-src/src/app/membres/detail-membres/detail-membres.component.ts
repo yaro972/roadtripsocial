@@ -24,6 +24,41 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   id: String;
   isPostActive: Boolean;
 
+
+
+
+  profileImg = 'https://randomuser.me/api/portraits/men/80.jpg';
+  profileFriendsList = [{
+    name: 'Joe',
+    imgProfile: 'https://randomuser.me/api/portraits/men/81.jpg',
+    link: ''
+  },
+  {
+    name: 'Jack',
+    imgProfile: 'https://randomuser.me/api/portraits/men/82.jpg',
+    link: ''
+  },
+  {
+    name: 'Duke',
+    imgProfile: 'https://randomuser.me/api/portraits/men/83.jpg',
+    link: ''
+  },
+  {
+    name: 'Elton',
+    imgProfile: 'https://randomuser.me/api/portraits/men/84.jpg',
+    link: ''
+  }
+  ];
+
+  /*
+  => https://randomuser.me/
+  "picture": {
+          "large": "https://randomuser.me/api/portraits/men/83.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/83.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/83.jpg"
+        },
+  */
+
   constructor(
     private _route: ActivatedRoute,
     private _authService: AuthService
@@ -61,39 +96,6 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   }
 
 
-
-
-  profileImg = 'https://randomuser.me/api/portraits/men/80.jpg';
-  profileFriendsList = [{
-    name: 'Joe',
-    imgProfile: 'https://randomuser.me/api/portraits/men/81.jpg',
-    link: ''
-  },
-  {
-    name: 'Jack',
-    imgProfile: 'https://randomuser.me/api/portraits/men/82.jpg',
-    link: ''
-  },
-  {
-    name: 'Duke',
-    imgProfile: 'https://randomuser.me/api/portraits/men/83.jpg',
-    link: ''
-  },
-  {
-    name: 'Elton',
-    imgProfile: 'https://randomuser.me/api/portraits/men/84.jpg',
-    link: ''
-  }
-  ];
-
-  /*
-  => https://randomuser.me/
-  "picture": {
-          "large": "https://randomuser.me/api/portraits/men/83.jpg",
-          "medium": "https://randomuser.me/api/portraits/med/men/83.jpg",
-          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/83.jpg"
-        },
-  */
 
   postActiveMode() {
     this.isPostActive = true;
