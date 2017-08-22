@@ -5,7 +5,7 @@ import { NgClass } from '@angular/common';
 
 import { User } from '../../core/user';
 import { PostViewComponent } from './../../posts/post-view/post-view.component';
-
+import { ProfileViewComponent } from './../../profile/profile-view/profile-view.component';
 
 @Component({
   selector: 'rts-detail-membres',

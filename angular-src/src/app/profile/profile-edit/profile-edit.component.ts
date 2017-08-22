@@ -11,7 +11,7 @@ import { CitiesClass } from './../../services/profile-edit/list-cities';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { ShowImagePipe } from './../../pipes/show-image.pipe';
+import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
 import { User } from '../../core/user';
 

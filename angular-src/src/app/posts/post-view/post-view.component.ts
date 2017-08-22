@@ -6,67 +6,9 @@ import { AuthService } from '../../services/auth/auth.service';
 import { PostsService } from '../../services/posts/posts.service';
 import { FileUploadService } from '../../services/file-upload/file-upload.service';
 
-import { ShowImagePipe } from './../../pipes/show-image.pipe';
+import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
-const postItemList = [{
-  id: 1,
-  avatar: 'Anonymous.png',
-  autor: 'J.Doe',
-  details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-  datePost: '01/08/2017',
-  comments: [{
-    id: 3,
-    autor: 'G. America',
-    avatar: 'Anonymous.png',
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '02/08/2017'
-  },
-  {
-    id: 4,
-    autor: 'France',
-    avatar: 'Anonymous.png',
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '04/08/2017'
-  },
-  {
-    id: 5,
-    autor: 'Madininina',
-    avatar: 'Anonymous.png',
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '04/08/2017'
-  },
-  ]
-},
-{
-  id: 2,
-  avatar: 'Anonymous.png',
-  autor: 'J.Doe1',
-  details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-  datePost: '01/08/2017',
-  comments: [{
-    id: 6,
-    autor: 'G. America1',
-    avatar: 'Anonymous.png',
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '02/08/2017'
-  },
-  {
-    id: 7,
-    autor: 'France1',
-    avatar: 'Anonymous.png',
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '04/08/2017'
-  },
-  {
-    id: 8,
-    autor: 'Madininina1',
-    avatar: 'Anonymous.png',
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '04/08/2017'
-  },
-  ]
-}
-];
+
 
 @Component({
   selector: 'rts-post-view',
@@ -82,7 +24,73 @@ export class PostViewComponent implements OnInit, OnDestroy {
   // commentList: any[];
   commentList: any;
 
-
+  postItemList = [{
+    id: 1,
+    avatar: 'Anonymous.png',
+    autor: 'J.Doe',
+    // tslint:disable-next-line:max-line-length
+    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+    datePost: '01/08/2017',
+    comments: [{
+      id: 3,
+      autor: 'G. America',
+      avatar: 'Anonymous.png',
+      // tslint:disable-next-line:max-line-length
+      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+      datePost: '02/08/2017'
+    },
+    {
+      id: 4,
+      autor: 'France',
+      avatar: 'Anonymous.png',
+      // tslint:disable-next-line:max-line-length
+      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+      datePost: '04/08/2017'
+    },
+    {
+      id: 5,
+      autor: 'Madininina',
+      avatar: 'Anonymous.png',
+      // tslint:disable-next-line:max-line-length
+      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+      datePost: '04/08/2017'
+    },
+    ]
+  },
+  {
+    id: 2,
+    avatar: 'Anonymous.png',
+    autor: 'J.Doe1',
+    // tslint:disable-next-line:max-line-length
+    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+    datePost: '01/08/2017',
+    comments: [{
+      id: 6,
+      autor: 'G. America1',
+      avatar: 'Anonymous.png',
+      // tslint:disable-next-line:max-line-length
+      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+      datePost: '02/08/2017'
+    },
+    {
+      id: 7,
+      autor: 'France1',
+      avatar: 'Anonymous.png',
+      // tslint:disable-next-line:max-line-length
+      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+      datePost: '04/08/2017'
+    },
+    {
+      id: 8,
+      autor: 'Madininina1',
+      avatar: 'Anonymous.png',
+      // tslint:disable-next-line:max-line-length
+      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
+      datePost: '04/08/2017'
+    },
+    ]
+  }
+  ];
 
   constructor(
     private _postsService: PostsService,

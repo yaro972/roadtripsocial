@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { AccueilComponent } from './components/accueil/accueil.component';
-import { ListMembresComponent } from './components/list-membres/list-membres.component';
-import { DetailMembresComponent } from './components/detail-membres/detail-membres.component';
+import { ListMembresComponent } from './membres/list-membres/list-membres.component';
+import { DetailMembresComponent } from './membres/detail-membres/detail-membres.component';
 import { RegisterComponent } from './login-register/register/register.component';
 import { LoginComponent } from './login-register/login/login.component';
 import { AboutComponent } from './components/about/about.component';

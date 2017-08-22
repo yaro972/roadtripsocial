@@ -8,7 +8,7 @@ import { ProfileEditService } from './../../services/profile-edit/profile-edit.s
 import { FileUploadService } from '../../services/file-upload/file-upload.service';
 import { CitiesClass } from './../../services/profile-edit/list-cities';
 import { User } from '../../core/user';
-import { ShowImagePipe } from './../../pipes/show-image.pipe';
+import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -22,7 +22,7 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   @Input() suivi: Boolean;
   @Input() isOwnProfile: Boolean;
 
-  @ViewChild("fileInput") fileInput;
+  @ViewChild('fileInput') fileInput;
 
   sub: any;
 

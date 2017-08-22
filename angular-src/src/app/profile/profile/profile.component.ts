@@ -3,7 +3,7 @@ import { AuthService } from './../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../core/user';
 import { ProfileEditService } from './../../services/profile-edit/profile-edit.service';
-
+import { ProfileViewComponent } from './../profile-view/profile-view.component';
 
 @Component({
   selector: 'rts-profile',

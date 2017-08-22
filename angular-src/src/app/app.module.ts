@@ -12,10 +12,10 @@ import { HttpModule } from '@angular/http';
 
 
 import { AccueilComponent } from './components/accueil/accueil.component';
-import { DetailMembresComponent } from './components/detail-membres/detail-membres.component';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
-import { ListMembresComponent } from './components/list-membres/list-membres.component';
+
 
 
 // Services
@@ -30,30 +30,26 @@ import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 
 import { LoginRegisterModule } from './login-register/login-register.module';
-
+import { MembresModule } from './membres/membres.module';
 import { PostsModule } from './posts/posts.module';
 
-
-
+import { ProfileModule } from './profile/profile.module';
+import { PassSecurityModule } from './pass-security/pass-security.module';
 import { FeedsComponent } from './components/feeds/feeds.component';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
-import { ListFriendsComponent } from './components/list-friends/list-friends.component';
 
-import { ShowImagePipe } from './pipes/show-image.pipe';
+import { ShowImagesModule } from './show-images/show-images.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     AccueilComponent,
-    DetailMembresComponent,
     FooterComponent,
     TopMenuComponent,
-    ListMembresComponent,
     FeedsComponent,
     SubMenuComponent,
-    ListFriendsComponent,
-    ShowImagePipe
+
   ],
   imports: [
     BrowserModule,
@@ -65,7 +61,11 @@ import { ShowImagePipe } from './pipes/show-image.pipe';
     FormsModule,
     LoginRegisterModule,
     FlashMessagesModule,
-    PostsModule
+    PostsModule,
+    ProfileModule,
+    PassSecurityModule,
+    ShowImagesModule,
+    MembresModule
   ],
   providers: [
     AuthGuard,
