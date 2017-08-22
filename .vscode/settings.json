@@ -1,3 +1,30 @@
 {
-    "javascript.implicitProjectConfig.checkJs": true
+    "javascript.implicitProjectConfig.checkJs": true,
+    "extensions.autoUpdate": true,
+    "editor.minimap.enabled": true,
+    "editor.wordWrap": "bounded",
+    "git.confirmSync": false,
+    "editor.rulers": [
+        120
+    ],
+    "editor.tabSize": 2,
+    "clock.dateFormat": "HH:MM",
+    "window.menuBarVisibility": "toggle",
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "emmet.triggerExpansionOnTab": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.indentHandlebars": true,
+    "files.autoSaveDelay": 300000,
+    "files.autoSave": "afterDelay",
+    "files.useExperimentalFileWatcher": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "mongoShell.host": "ds153682.mlab.com",
+    "mongoShell.port": "53682",
+    "mongoShell.username": "rskdbuser"
 }

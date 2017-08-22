@@ -17,7 +17,7 @@ import { ShowImagePipe } from './../../pipes/show-image.pipe';
 export class ExtraDetailsFormComponent implements OnInit, OnDestroy {
   @Input() nickname: String;
 
-  @ViewChild("fileInput") fileInput;
+  @ViewChild('fileInput') fileInput;
 
   countriesList: String[];
   registerForm: FormGroup;
@@ -90,27 +90,27 @@ export class ExtraDetailsFormComponent implements OnInit, OnDestroy {
 
   addCountry() {
     this.countriesList.push(this.registerForm.value.visitedCountry);
-    this.visitedCountryValue = "";
+    this.visitedCountryValue = '';
   }
 
   removeCountry(country) {
-    let index: number = this.countriesList.indexOf(country);
+    const index: number = this.countriesList.indexOf(country);
     if (index !== -1) {
       this.countriesList.splice(index, 1);
     }
   }
 
-  addFile(e): Boolean {
-    let fi = this.fileInput.nativeElement;
+  addFile(): Boolean {
+    const fi = this.fileInput.nativeElement;
 
     if (fi.files && fi.files[0]) {
-      let fileToUpload = fi.files[0];
+      const fileToUpload = fi.files[0];
 
       this.sub = this._uploadService
         .upload(fileToUpload)
         .subscribe(res => {
           console.log(res);
-          let response = res.json().filename;
+          const response = res.json().filename;
 
 
           this.photoProfUpload = res.json().filename;
@@ -122,6 +122,7 @@ export class ExtraDetailsFormComponent implements OnInit, OnDestroy {
   addFileEvent(input) {
     if (input.files.length) {
       this.isAddFile = true;
+      this.addFile();
     } else {
       this.isAddFile = false;
     }
