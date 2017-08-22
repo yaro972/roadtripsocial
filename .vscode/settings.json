@@ -8,7 +8,6 @@
         120
     ],
     "editor.tabSize": 2,
-    "clock.dateFormat": "HH:MM",
     "window.menuBarVisibility": "toggle",
     "editor.formatOnType": true,
     "editor.formatOnPaste": true,
@@ -23,8 +22,5 @@
     "files.autoSaveDelay": 300000,
     "files.autoSave": "afterDelay",
     "files.useExperimentalFileWatcher": true,
-    "workbench.startupEditor": "newUntitledFile",
-    "mongoShell.host": "ds153682.mlab.com",
-    "mongoShell.port": "53682",
-    "mongoShell.username": "rskdbuser"
+    "workbench.startupEditor": "newUntitledFile"
 }
