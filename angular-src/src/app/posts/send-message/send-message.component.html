@@ -14,10 +14,12 @@
         </div>
       </div>
       <div *ngIf="memberList && onShowMemberList">
-        <div class="row" *ngFor="let member of memberList; let i=index">
-
-          <p (click)="onSelectReceiver(i)"><span><img src="{{member.avatar | showImage}}" alt="Photo du membre" class="img img-thumbnail img-responsive" width="30"></span>            {{member.nickname}}</p>
-
+        <div class="row">
+          <div *ngFor="let member of memberList; let i=index" class="col-md-4 " (click)="onSelectReceiver(i)">
+            <p class="member-button">
+              <span><img src="{{member.avatar | showImage}}" alt="Photo du membre" class="img img-thumbnail img-responsive" width="30"></span>{{member.nickname}}
+            </p>
+          </div>
         </div>
 
 

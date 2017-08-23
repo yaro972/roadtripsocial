@@ -76,6 +76,7 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.onShowMemberList = false;
   }
   onSendMessage() {
+
     alert('Send message');
   };
 
