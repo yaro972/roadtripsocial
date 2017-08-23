@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-xs-12 feeds-page">
+
+    <!-- Entete -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row feeds-header">
+          <div class="col-xs-1">
+            <img src="{{userAvatar}}" alt="" class="img img-responsive img-rounded">
+          </div>
+          <div class="col-xs-10 text-center">
+            <h2>Votre flux d'actualité</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Entete -->
+
+    <div class="separation-hz"></div>
+
+    <!-- partie principale -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="text-center">
+
+            <!-- partie gauche -->
+            <div class="col-xs-2">
+              <rts-sub-menu></rts-sub-menu>
+            </div>
+            <!-- partie gauche -->
+
+
+            <!-- Zone publication -->
+            <div class="col-xs-8 separation-vr separation-vl">
+              <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                  <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                      <!-- Formulaire de posts -->
+                      <div class="send-wrap ">
+                        <textarea class="form-control send-message" rows="3" placeholder="Partagez un article, une nouvelle..." [(ngModel)]=newPost></textarea>
+                      </div>
+                      <!-- Formulaire de posts -->
+
+                      <!-- Bouton de validation de post -->
+                      <div class="btn-panel">
+                        <a href="" class=" col-lg-4 text-right btn   send-message-btn pull-right" role="button" (click)="addPost()">Poster <i class="fa fa-plus"></i> </a>
+                      </div>
+                      <!-- Bouton de validation de post -->
+
+                    </div>
+                  </div>
+
+                  <!-- <div class="separation-hz"></div> -->
+
+                  <!-- <p>Publication</p> -->
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <!-- Affichage de tous les posts -->
+                      <rts-post-view></rts-post-view>
+                      <!-- Affichage de tous les posts -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Zone publication -->
+
+
+            <!-- Liste d'amis -->
+            <div class="col-xs-2 ">
+              <rts-list-friends></rts-list-friends>
+            </div>
+            <!-- Liste d'amis -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- partie principale -->
+  </div>
+</div>

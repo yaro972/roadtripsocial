@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="profile-page">
+    <div class="slider">
+      <div class="row">
+        <div class="col-sm-6 title-text">
+          <h1>
+            Voyages et <span>partages</span><br /> tes expériences avec tes amis
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="separation"></div>
+    <!-- sous menu -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-4 text-center">
+            <ul>
+              <li (click)="postActiveMode()" [ngClass]="{'activeMenuLeftClass': isPostActive}"><a>Ses derniers posts</a></li>
+              <li (click)="profilActiveMode()" [ngClass]="{'activeMenuRightClass': !isPostActive}"><a>Voir le profil complet</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- sous menu -->
+    <div class="separation"></div>
+
+
+    <!-- liste des posts -->
+    <div class="row" *ngIf="isPostActive">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+            <rts-post-view [owner]="user"></rts-post-view>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- liste des posts -->
+
+    <!-- affichage du détail du profil de l'utilisateur -->
+    <div *ngIf="getUserProfile && !isPostActive">
+      <div class="row">
+        <div class="col-xs-12">
+          <rts-profile-view [user]="user" [suivi]="suivi" [isOwnProfile]="isOwnProfile"> </rts-profile-view>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- affichage du détail du profil de l'utilisateur -->
+</div>

@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="register-container">
+    <h2 class="text-center">S'inscrire | Se connecter</h2>
+
+
+    <div class="row" *ngIf="register">
+      <!-- Formulaire raccourci Etape 1-->
+      <rts-registration-form (register)="onRegister($event)" (userNickname)="onUserNickname($event)"></rts-registration-form>
+      <!-- Fin  Formulaire raccourci Etape 1-->
+    </div>
+
+    <div class="row" *ngIf="registerCivility">
+      <h3 style="color:#fff;">Etape 2/3</h3>
+      <!-- Civilité - Etape 2 -->
+      <rts-civility-form [nickname]="nickname" (validateCivility)="onValidateCivility($event)"></rts-civility-form>
+      <!-- Fin Civilité - Etape 2 -->
+    </div>
+
+    <div class="row" *ngIf="registerExtraDetails">
+      <h3 style="color:#fff;">Etape 3/3</h3>
+      <!-- Pays habités et visités - Etape 3 -->
+      <rts-extra-details-form [nickname]="nickname" (extraDetails)="onValidateExtraDetails($event)"></rts-extra-details-form>
+      <!-- Fin Pays habités et visités - Etape 3 -->
+    </div>
+    <!-- 
+    <div class="row">
+      <rts-civility-form [nickname]="nickname" (validateCivility)="onValidateCivility($event)"></rts-civility-form>
+    </div>
+    <div class="row">
+      <rts-extra-details-form [nickname]="nickname" (extraDetails)="onValidateExtraDetails($event)"></rts-extra-details-form>
+    </div> -->
+
+  </div>
+</div>

@@ -7,17 +7,17 @@ import { User } from '../../core/user';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { AuthGuard } from '../../guard/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
-
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'rts-top-menu',
   templateUrl: './top-menu.component.html',
   styleUrls: ['./top-menu.component.css']
 })
-export class TopMenuComponent implements OnInit, OnDestroy {
+export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   collapseSubMen: Boolean;
   logo = 'assets/images/earth_globe.png';
@@ -47,7 +47,12 @@ export class TopMenuComponent implements OnInit, OnDestroy {
     if (userProfile && userProfile !== 'undefined') {
       this.user = JSON.parse(userProfile);
 
-      this.imageFace = this.user.avatar || '/assets/images/Anonymous.png';
+      if (this.user.avatar) {
+        this.imageFace = environment.BACKENDURL + '/api/display-photo/' + this.user.avatar;
+      } else {
+        this.imageFace = 'Anonymous.png';
+      }
+
     }
   }
 
@@ -71,7 +76,11 @@ export class TopMenuComponent implements OnInit, OnDestroy {
     if (userProfile && userProfile !== 'undefined') {
       this.user = JSON.parse(userProfile);
 
-      this.imageFace = this.user.avatar || '/assets/images/Anonymous.png';
+      if (this.user.avatar) {
+        this.imageFace = environment.BACKENDURL + '/api/display-photo/' + this.user.avatar;
+      } else {
+        this.imageFace = 'Anonymous.png';
+      }
     }
 
   }

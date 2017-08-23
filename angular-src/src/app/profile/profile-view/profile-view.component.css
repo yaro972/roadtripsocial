@@ -1,0 +1,156 @@
+input,
+textarea,
+select {
+  background-color: #2c3e50;
+  border-color: #ecebcb;
+  color: #e7dee7;
+}
+
+.avatarFace {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-page {
+  background-color: #2c3e50;
+  color: #e7dee7;
+}
+
+.map-monde {
+  background: url('/assets/images/map_monde.png') center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.action {
+  color: #e7dee7;
+  height: 30px;
+  line-height: 30px;
+}
+
+.action-follow {
+  border-radius: 3px;
+  border: 1px solid #526478;
+  /* padding: 5px 10px; */
+}
+
+.action-follow:hover {
+  border-radius: 3px;
+  background-color: #395a7b;
+}
+
+.action-follow>a {
+  color: #e7dee7;
+  /* border: 1px solid #395a7b; */
+  text-decoration: none;
+}
+
+.visited {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  color: #bec1c5;
+}
+
+.visited-border {
+  border-radius: 3px;
+  border: 1px solid #526478;
+}
+
+.separation {
+  border-bottom-color: #e77b20;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.profile-face {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.citiesList {
+  /* text-decoration: none; */
+  list-style-type: none;
+}
+
+@media screen and (max-width: 640px) {
+  .second-block {
+    min-height: 160px;
+  }
+  .second-block p {
+    font-size: 30px;
+  }
+  .second-block p span {
+    font-size: 30px;
+  }
+  .presentation-text {
+    padding: 5px 25px 5px 25px;
+  }
+  .countryList {
+    padding: 5px 5px 5px 25px;
+  }
+  .map-monde {
+    height: 200px;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width:800px) {
+  .second-block {
+    min-height: 150px;
+  }
+  .second-block p {
+    font-size: 26px;
+  }
+  .second-block p span {
+    font-size: 26px;
+  }
+  .countryList {
+    padding: 5px 5px 5px 78px;
+  }
+  .map-monde {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width:801px) and (max-width: 1025px) {
+  .second-block {
+    height: 220px;
+  }
+  .second-block p {
+    font-size: 39px;
+  }
+  .second-block p span {
+    font-size: 39px;
+  }
+  .visited {
+    padding: 2px 10px;
+  }
+  .countryList {
+    padding: 5px 5px 5px 78px;
+  }
+  .map-monde {
+    height: 390px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .second-block {
+    height: 300px;
+  }
+  .second-block p {
+    font-size: 52.08px;
+  }
+  .second-block p span {
+    font-size: 52.08px;
+  }
+  .visited {
+    padding: 2px;
+  }
+  .countryList {
+    padding: 5px 5px 5px 78px;
+  }
+  .map-monde {
+    height: 400px;
+  }
+}

@@ -1,0 +1,226 @@
+  .search {
+    background-color: #2c3e50;
+    color: #e7dee7;
+  }
+  /* Entete */
+
+  .search-page {
+    background-image: url('/assets/images/people.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .title-text {
+    border: 0;
+  }
+
+  .title-text h1 {
+    /* color: rgba(123, 114, 114, 0.84); */
+    /* color: rgb(41, 25, 25); */
+    font-family: Lato;
+    font-weight: 300;
+    text-align: left;
+  }
+
+  .title-text h1 span {
+    font-family: Lato;
+    font-weight: 400;
+    text-align: left;
+    /* color: #2568a0; */
+  }
+
+  .title-text h1 span:hover {
+    font-family: Lato;
+    font-weight: 400;
+    text-align: left;
+    color: #a3ccff;
+  }
+  /* Entete */
+
+
+  /* Zone Recherche */
+
+  h2 {
+    padding-left: 5px;
+  }
+
+  .search-form .form-group {
+    /* float: right !important; */
+    /* transition: all 0.35s, border-radius 0s; */
+    /* width: 32px; */
+    height: 32px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+  }
+
+  .search-form .form-group input.form-control {
+    padding-right: 20px;
+    border: 0 none;
+    background: transparent;
+    box-shadow: none;
+    display: block;
+  }
+  /* .search-form .form-group input.form-control::-webkit-input-placeholder {
+      display: none;
+    }
+
+    .search-form .form-group input.form-control:-moz-placeholder {
+      /* Firefox 18- */
+  /* display: none;
+  } */
+  /* .search-form .form-group input.form-control::-moz-placeholder { */
+  /* Firefox 19+ */
+  /* display: none; */
+  /* } */
+  /* .search-form .form-group input.form-control:-ms-input-placeholder { */
+  /* display: none; */
+  /* } */
+
+  */ .search-form .form-group:hover,
+  .search-form .form-group.hover {
+    width: 100%;
+    border-radius: 4px 25px 25px 4px;
+  }
+
+  .search-form .form-group span.form-control-feedback {
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    color: #3596e0;
+    left: initial;
+    font-size: 14px;
+  }
+  /* Zone Recherche */
+
+  .separation {
+    border-bottom-color: #e77b20;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin: 10px 0;
+    width: 100%;
+  }
+  /* Zone d'affichage de la liste des membres */
+
+  .search-list {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* overflow-y: scroll; */
+    /* overflow-x: none; */
+  }
+
+  .search-result-line {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #666;
+  }
+
+  .search-name {
+    color: #e7dee7;
+  }
+
+  .search-city {
+    color: #a3ccff;
+  }
+
+  .search-visitedCountries {
+    cursor: pointer;
+  }
+
+  .btn-toFollow {
+    background-color: #a3ccff;
+    border-color: #a3ccff;
+  }
+
+  .btn-followed {
+    background-color: #23922c;
+    border-color: #23922c;
+    color: #e7dee7;
+  }
+  /* Media Queries */
+
+  @media screen and (max-width: 640px) {
+    .search-page {
+      height: 150px;
+    }
+    .title-text {
+      padding-top: 2px;
+      padding-left: 15px;
+      margin-top: 3px;
+    }
+    .title-text h1 {
+      font-size: 25px;
+    }
+    .title-text h1 span {
+      font-size: 25px;
+    }
+    .search-list {
+      height: calc(100% -350px);
+    }
+  }
+
+  @media screen and (min-width: 641px) and (max-width:800px) {
+    .search-page {
+      height: 150px;
+    }
+    .title-text {
+      padding-top: 6px;
+      padding-left: 60px;
+      margin-top: 5px;
+    }
+    .title-text h1 {
+      font-size: 25px;
+    }
+    .title-text h1 span {
+      font-size: 25px;
+    }
+    .search-list {
+      height: calc(100% -350px);
+    }
+  }
+
+  @media screen and (min-width:801px) and (max-width: 1025px) {
+    .search-page {
+      height: 150px;
+    }
+    .title-text {
+      padding-left: 120px;
+      margin-top: 15px;
+    }
+    .title-text h1 {
+      font-size: 28px;
+    }
+    .title-text h1 span {
+      font-size: 28px;
+    }
+    .search-list {
+      height: calc(100% -350px);
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .search-page {
+      height: 350px;
+    }
+    .title-text {
+      padding-top: 15px;
+      padding-left: 60px;
+    }
+    .title-text h1 {
+      font-size: 45.87px;
+    }
+    .title-text h1 span {
+      font-size: 45.87px;
+    }
+    .search-list {
+      height: calc(100% -350px);
+    }
+  }
