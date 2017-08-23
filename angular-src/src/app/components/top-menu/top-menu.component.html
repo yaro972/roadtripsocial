@@ -46,15 +46,20 @@
           <!-- <a (click)="onCollapseSubmenu()" (mouseenter)="onCollapseSubmenu()" (mouseleave)="onCollapseSubmenu()" (mouseover)="onCollapseSubmenu()"
             [ngClass]="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <img src="{{imageFace}}" width="30" /> <span class="caret"></span></a> -->
           <!-- <ul class="dropdown-menu" [collapse]="isCollapseSubmenu" [class.is-active]="!isCollapseSubmenu"> -->
-          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/profile">
+                           <span><img src="{{imageFace}}" width="30" /></span> Mon profil 
+                            </a>
+          </li> -->
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/profile">
                            <span><img src="{{imageFace}}" width="30" /></span> Mon profil 
                             </a>
           </li>
-          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/change-password">
               Changer son mot de passe</a>
-          </li>
+          </li> -->
           <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/list-membres">Rechercher un membre
                             
