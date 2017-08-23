@@ -79,21 +79,20 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.onShowMemberList = false;
   }
   onSendMessage() {
-    let messageElement = {
+    const messageElement = {
       receiver: this.selectedMember,
       messageText: this.sendMailForm.get('messageInput').value,
       sender: JSON.parse(localStorage.getItem('user'))._id
     }
 
-    this.subSendMessage = this._auth.sendMessage().subscribe(data => {
-      if (data.err) {
+    this.subSendMessage = this._auth.sendMessage(messageElement)
+      .subscribe(data => {
+        if (data.err) {
 
-      } else {
+        } else {
 
-      }
-    });
-
-
+        }
+      });
   };
 
   ngOnDestroy() {

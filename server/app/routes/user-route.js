@@ -514,11 +514,14 @@ router.post('/member-details', passport.authenticate('jwt', {
   });
 });
 
+/**
+ * Route d'enregistrement d'un message envoyé
+ */
 router.post('send-message', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-
-
+  // Ajout de la date d'envoi = Date du jour
+  req.body.msg.sendDate = new Date();
 
 });
 
