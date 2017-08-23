@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgModel } from '@angular/Forms';
+import { NgModel } from '@angular/forms';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
