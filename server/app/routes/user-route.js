@@ -514,5 +514,12 @@ router.post('/member-details', passport.authenticate('jwt', {
   });
 });
 
+router.post('send-message', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+
+
+});
 
 module.exports = router;

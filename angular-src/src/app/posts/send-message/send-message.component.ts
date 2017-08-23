@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { User } from './../../core/user';
 import { AuthService } from './../../services/auth/auth.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'rts-send-message',
@@ -27,9 +28,11 @@ export class SendMessageComponent implements OnInit, OnDestroy {
 
   // Sauvegarde des souscriptions
   subSearchMembers: Subscription;
+  subSendMessage: Subscription;
   constructor(
     private _fb: FormBuilder,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -76,14 +79,32 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.onShowMemberList = false;
   }
   onSendMessage() {
+    let messageElement = {
+      receiver: this.selectedMember,
+      messageText: this.sendMailForm.get('messageInput').value,
+      sender: JSON.parse(localStorage.getItem('user'))._id
+    }
 
-    alert('Send message');
+    this.subSendMessage = this._auth.sendMessage().subscribe(data => {
+      if (data.err) {
+
+      } else {
+
+      }
+    });
+
+
   };
 
   ngOnDestroy() {
     if (this.subSearchMembers) {
       this.subSearchMembers.unsubscribe();
       this.subSearchMembers = null;
+    }
+
+    if (this.subSendMessage) {
+      this.subSendMessage.unsubscribe();
+      this.subSendMessage = null;
     }
   }
 }
