@@ -113,14 +113,15 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
+      this.sub = null;
     }
 
     if (this.subRoute) {
-      this.subRoute.unsubscribe();
+      this.subRoute = null;
     }
 
     if (this.subGetMember) {
-      this.subGetMember.unsubscribe();
+      this.subGetMember = null;
     }
   }
 }

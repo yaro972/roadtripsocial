@@ -63,7 +63,9 @@ export class CivilityFormComponent implements OnInit, OnDestroy {
 
   onRegisterSubmitPart(el) {
     // Reconstitution de la date de naissance
-    let birthdate = new Date(this.registerForm.value.moisNaissance + '/' + this.registerForm.value.jourNaissance + '/' + this.registerForm.value.anneeNaissance);
+    const birthdate = new Date(this.registerForm.value.moisNaissance + '/' +
+      this.registerForm.value.jourNaissance + '/' +
+      this.registerForm.value.anneeNaissance);
 
     // Stockage de cette date dans l'objet this.registerForm.value, avant envoi au backend
     this.registerForm.value.birthdate = birthdate;
@@ -87,6 +89,7 @@ export class CivilityFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
+      this.sub = null;
     }
   }
 }

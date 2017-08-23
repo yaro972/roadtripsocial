@@ -14,6 +14,10 @@ export class SubMenuComponent implements OnInit {
 
   links = [
     {
+      url: '/send-message',
+      text: 'Envoyer un message'
+    }
+    , {
       url: '/profile',
       text: 'Voir mon profil'
     },

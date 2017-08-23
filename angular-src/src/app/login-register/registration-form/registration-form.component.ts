@@ -141,9 +141,11 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
+      this.sub = null;
     }
     if (this.subPseudo) {
       this.subPseudo.unsubscribe();
+      this.subPseudo = null;
     }
   }
 }

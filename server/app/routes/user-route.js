@@ -452,12 +452,35 @@ router.post('/change-password', passport.authenticate('jwt', {
 
 });
 
+/**
+ *Recherche un utilisateur quelque soit le champs
+ */
 router.post('/search-member', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
 
   User.searchMembers(req.body.itemToFind, function (err, rslt) {
-    console.log('searchMembers /search', err, rslt);
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        membersList: rslt
+      });
+    }
+  });
+});
+
+/**
+ *Recherche un utilisateur par son pseudo
+ */
+router.post('/search-member-by-nickname', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  User.searchMembersByNickname(req.body.nickname, function (err, rslt) {
     if (err) {
       res.json({
         err: err

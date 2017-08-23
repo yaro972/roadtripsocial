@@ -200,18 +200,22 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   ngOnDestroy() {
     if (this.subGetSaveStatus) {
       this.subGetSaveStatus.unsubscribe();
+      this.subGetSaveStatus = null;
     }
 
     if (this.subUpdateProfile) {
       this.subUpdateProfile.unsubscribe();
+      this.subUpdateProfile = null;
     }
 
     if (this.sub) {
       this.sub.unsubscribe();
+      this.sub = null;
     }
 
     if (this.ageSubsciption) {
       this.ageSubsciption.unsubscribe();
+      this.ageSubsciption = null;
     }
   };
 

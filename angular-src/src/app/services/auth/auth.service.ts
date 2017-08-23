@@ -237,7 +237,7 @@ export class AuthService {
   }
 
   /**
- * Fonction de recherche d'un membre'
+ * Fonction de recherche d'un membre sur l'ensemble de sa fiche
  * @param itemToFind Element à rechercher
  */
   searchMembers(itemToFind) {
@@ -255,7 +255,31 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  /**
+  * Fonction de recherche d'un membre basé sur son pseudo
+  * @param itemToFind Element à rechercher
+  */
+  searchMemberByNickname(nickname: String) {
+    const headers = new Headers();
+    this.loadToken();
 
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/search-member-by-nickname', {
+        nickname: nickname
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+
+
+  /**
+   * Retourne le détail d'une fiche utilisateur
+   * @param id Id du membre
+   */
   memberdetails(id) {
     const headers = new Headers();
     this.loadToken();

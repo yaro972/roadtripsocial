@@ -18,6 +18,7 @@ import { ChangePasswordComponent } from './pass-security/change-password/change-
 
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
+import { SendMessageComponent } from './posts/send-message/send-message.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,11 @@ const routes: Routes = [
     path: '',
     component: FooterComponent,
     outlet: 'footer'
+  },
+  {
+    path: 'send-message',
+    component: SendMessageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

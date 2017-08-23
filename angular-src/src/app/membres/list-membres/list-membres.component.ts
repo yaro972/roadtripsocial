@@ -94,6 +94,7 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subSearch) {
       this.subSearch.unsubscribe();
+      this.subSearch = null;
     }
   }
 }

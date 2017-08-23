@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 // import Moment from 'moment';
 // import moment from 'moment';
 // import moment from 'moment/src/moment';
+import * as moment from 'moment';
 
 @Pipe({
   name: 'fromNow'
@@ -14,9 +15,9 @@ export class FromNowPipe implements PipeTransform {
   // The transform method will be called when the pipe is used
   // within a template
   transform(value) {
-    //   if (value && (value instanceof Date ||
-    //     typeof value === 'number')) {
-    //     return new moment(value).fromNow();
-    //   }
+    if (value && (value instanceof Date ||
+      typeof value === 'number')) {
+      //   return new moment(value).fromNow();
+    }
   }
 }
