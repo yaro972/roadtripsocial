@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           let firstConn = JSON.parse(u).firstConn
 
           if (firstConn) {
-            //Première connexion ou profil incomplet
+            // Première connexion ou profil incomplet
             this._router.navigate(['/profile']);
           } else {
             // => Routage vers l'accueil des messages
@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       } else {
         this._flashMessage.grayOut(true);
-        this._flashMessage.show('Veuillez vérifier votre address email', {
+        this._flashMessage.show('Veuillez vérifier votre adresse email', {
           cssClass: 'alert alert-danger text-center',
           timeout: 2500
         });

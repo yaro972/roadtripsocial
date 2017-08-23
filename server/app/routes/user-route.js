@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-const User = require('../models/user-model');
+
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../inc/.config');
@@ -11,6 +11,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+// Models
+const User = require('../models/user-model');
+const Messages = require('../models/messages-model');
 
 var WEBURL = 'http://localhost:4200';
 // WEBURL = 'https://f0fed797.ngrok.io';
@@ -517,12 +520,57 @@ router.post('/member-details', passport.authenticate('jwt', {
 /**
  * Route d'enregistrement d'un message envoyé
  */
-router.post('send-message', passport.authenticate('jwt', {
+router.post('/send-message', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-  // Ajout de la date d'envoi = Date du jour
-  req.body.msg.sendDate = new Date();
 
+  let newMessage = new Messages({
+    "sendDate": new Date(),
+    "content": req.body.msg.content,
+    "receiver": req.body.msg.receiver,
+    "sender": req.body.msg.sender,
+    "isRead": false,
+    "parentId": req.body.msg.parentId
+
+  });
+
+  // Ajout de la date d'envoi = Date du jour
+
+  Messages.addNewMessage(newMessage, function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      User.getUserById(req.body.msg.receiver._id, function (err, user) {
+        if (err) {
+          res.json({
+            err: err
+          });
+        } else {
+          // => Envoi du mail
+          // Road Trip Social
+          let mailContent = 'Bonjour, <br /><br /> Vous avez reçu un nouveau message <br /><br/> L\'equipe Road Trip Social ';
+
+
+          mail.sendMail('Road Trip Social <no-reply@roadtripsocial.com>', user.mail, 'Création de compte', mailContent, null, function (err, info) {
+            if (err) {
+              res.json({
+                err: err
+              });
+            } else {
+              res.json({
+                err: null,
+                text: info
+              });
+            }
+
+          });
+          // Fin Envoi du mail
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;

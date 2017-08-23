@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/Forms';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
 import { User } from './../../core/user';
 import { AuthService } from './../../services/auth/auth.service';
@@ -32,7 +33,8 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   constructor(
     private _fb: FormBuilder,
     private _auth: AuthService,
-    private _flashMessage: FlashMessagesService
+    private _flashMessage: FlashMessagesService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -80,17 +82,25 @@ export class SendMessageComponent implements OnInit, OnDestroy {
   }
   onSendMessage() {
     const messageElement = {
+      parentId: null,
       receiver: this.selectedMember,
-      messageText: this.sendMailForm.get('messageInput').value,
+      content: this.sendMailForm.get('messageInput').value,
       sender: JSON.parse(localStorage.getItem('user'))._id
     }
 
     this.subSendMessage = this._auth.sendMessage(messageElement)
       .subscribe(data => {
         if (data.err) {
-
+          this._flashMessage.show('Problème lors de l\'envoi du message', {
+            cssClass: 'alert alert-danger text-center',
+            timeout: 2500
+          });
         } else {
-
+          this._flashMessage.show('Le message a bien été envoyé', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+          this._router.navigate(['/feeds']);
         }
       });
   };

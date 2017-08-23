@@ -305,7 +305,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(environment.BACKENDURL + '/api/user/send-message', msg, {
+      .post(environment.BACKENDURL + '/api/user/send-message', { msg: msg }, {
         headers: headers
       })
       .map(res => res.json());
