@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Création du schéma à la base de données
 
@@ -13,16 +14,14 @@ let messagerieSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  receiver: {
-    type: String,
-    required: true,
-    default: null
-  },
-  sender: {
-    type: String,
-    required: true,
-    default: null
-  },
+  receiver: [{
+    type: Schema.Types.ObjectId,
+    ref: 'users'
+  }],
+  sender: [{
+    type: Schema.Types.ObjectId,
+    ref: 'users'
+  }],
   parentId: {
     type: String,
     required: false,
