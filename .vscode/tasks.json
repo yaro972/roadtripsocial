@@ -4,9 +4,15 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "taskName": "serve",
-      "command": "cd front ; ng serve",
-      "type": "shell"
+      "type": "typescript",
+      "tsconfig": "angular-src\\src\\tsconfig.app.json",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
   ]
 }

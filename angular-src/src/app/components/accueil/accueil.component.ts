@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
+
 
 import { Users } from './users'
 
@@ -18,9 +21,16 @@ export class AccueilComponent implements OnInit {
 
   journey: Number = 157;
 
-  constructor() { }
+  constructor(
+    private _authService: AuthService,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
+    if (this._authService.loggedIn()) {
+      this._router.navigate(['/feeds']);
+    }
+
     this.isConnected = false;
 
     // Si des elements sont présents mais erronés

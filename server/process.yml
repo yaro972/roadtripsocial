@@ -1,0 +1,18 @@
+apps:  
+  - script : server.js
+    name : 'backend'
+    watch  : true
+    instances: 4
+    env    :
+      NODE_ENV: development
+      FRONTPORT: 3000
+      FRONTIP: localhost
+    env_stage:
+      NODE_ENV: developpement
+      FRONTPORT: 3000
+      FRONTIP: 192.168.0.104
+    env_production:
+      NODE_ENV: production
+      FRONTPORT: 3000
+      FRONTIP: vps354082.ovh.net
+

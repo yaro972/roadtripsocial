@@ -43,7 +43,7 @@ var UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: '/assets/images/avatar/Anonymous.png'
+    default: 'Anonymous.png'
   },
   presentation: {
     type: String,
@@ -74,7 +74,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-var User = module.exports = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
 
 /**
  * Recherche du nom de l'utilisateur à partir de son Id
@@ -200,12 +200,19 @@ User.updateProfile = function (user, callback) {
   delete user.jourNaissance;
   delete user.moisNaissance;
   delete user.anneeNaissance;
+
+  if (!user.avatar.length) {
+    user.avatar = 'Anonymous.png';
+  }
+
   user.firstConn = false;
 
-  User.update({
+  User.findOneAndUpdate({
       nickname: user.nickname
     }, {
       $set: user
+    }, {
+      new: true
     },
     callback);
 };
@@ -293,6 +300,9 @@ User.findByToken = function (token, callback) {
   }, callback);
 };
 
+/**
+ * Recherche un membre quelque soit le champs
+ */
 User.searchMembers = function (toFind, callback) {
 
   let regEx = new RegExp(toFind, 'i');
@@ -340,10 +350,38 @@ User.searchMembers = function (toFind, callback) {
   }, callback);
 };
 
+/**
+ * Recherche un membre via le pseudo
+ */
+User.searchMembersByNickname = function (nickname, callback) {
+
+  let regEx = new RegExp(nickname, 'i');
+  User.find({
+      $or: [{
+        nickname: {
+          $regex: regEx
+        }
+      }]
+    }, {
+      _id: 1,
+      nickname: 1,
+      avatar: 1
+
+    }).limit(3)
+    .exec(function (err, documents) {
+      callback(err, documents)
+    });
+};
+
+/**
+ * Retourne le détail de la fiche d'un utilisateur
+ */
 User.memberDetails = function (memberId, callback) {
   User.findOne({
     _id: memberId
   }, {
     password: 0
   }, callback);
-}
+};
+
+module.exports = User;

@@ -1,0 +1,16 @@
+/* menu */
+.links-text{
+    text-decoration: none;
+    color:#CCE0F8;      
+}
+
+.links-list{
+    list-style: none;
+    text-align: left;    
+}
+
+.links-list li{
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+/* menu */

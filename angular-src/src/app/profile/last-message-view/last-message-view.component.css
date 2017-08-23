@@ -1,0 +1,9 @@
+.post-box {
+  min-height: 80px;
+  border: 1px solid 395a7b;
+  padding: 20px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #395a7b;
+  border-radius: 3px;
+}

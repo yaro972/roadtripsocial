@@ -2,6 +2,8 @@ footer {}
 
 .footer {
   background-color: #42515f;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 footer p {

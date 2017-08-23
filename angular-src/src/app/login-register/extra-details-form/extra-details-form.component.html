@@ -1,0 +1,103 @@
+<!-- Pays habités et visités - Etape 3 -->
+
+<div class="row">
+
+  <div class="main-register col-md-4 col-md-push-4 col-sm-6 col-sm-push-3 col-xs-12 ">
+    <h4 class="text-left">Vos voyages & vous</h4>
+    <div class="row">
+
+      <form [formGroup]="registerForm" class="form-vertical  col-xs-10 col-xs-offset-1" *ngIf="active" (ngSubmit)="onRegisterSubmitPart(extraDetails)"
+        novalidate>
+
+        <div class="row">
+          <!-- Choix de la photo de profil -->
+          <div class="form-group">
+            <label for="photoProfile">Photo de votre profil</label>
+            <div class="col-xs-offset-2">
+              <!-- <div class="row"> -->
+
+              <!-- Preview -->
+              <div class="row" *ngIf="photoProfUpload">
+                <p>Previsualisation</p>
+                <div class="col-xs-5 col-xs-offset-3">
+                  <img src="{{photoProfUpload | showImage}}" alt="" class="img img-thumbnail img-responsive">
+                </div>
+              </div>
+              <!-- Preview -->
+              <div class="row">
+                <div class="col-xs-10 text-center">
+                  <input #fileInput type="file" (change)="addFileEvent(fileInput)" accept="image/*" />
+                  <!-- <button class="btn btn-default addFileButton" (click)="addFile()" [disabled]="!isAddFile">Choisir</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Choix de la photo de profil -->
+        </div>
+
+
+
+        <!-- Champs de Présentation de l'utilisateur -->
+        <div class="row">
+          <div class="col-xs-offset-2">
+            <textarea rows="8" cols="70" class="form-control" id="presentation" placeholder="Présentez-vous" formControlName="presentation"
+              name="presentation" [formGroup]="registerForm">
+                </textarea>
+          </div>
+        </div>
+        <!-- Champs de Présentation de l'utilisateur -->
+
+
+
+
+        <!-- Pays visités -->
+        <div class="row">
+          <div class="form-group">
+            <label for="visitedCountry" class="control-label">Vos différents pays visités</label>
+            <div class="col-xs-offset-2">
+              <div class="row">
+                <div class="col-xs-9">
+                  <input type="text" class="form-control" id="visitedCountry" placeholder="Pays visités" formControlName="visitedCountry" name="visitedCountry"
+                    [formGroup]="registerForm">
+                </div>
+                <div class="col-xs-1">
+                  <a class="btn btn-success add" (click)="addCountry()">+</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Liste des pays entrés -->
+          <div class="row">
+            <div class="col-xs-offset-3">
+              <!-- <div class="row">
+                    <div class="col-xs-offset-1"> -->
+              <div *ngFor="let countryName of countriesList">
+                <div class="row">
+                  <div class="countryLine">
+                    <div class="col-xs-10">{{countryName}}</div>
+
+                    <div class="col-xs-1">
+                      <a class="btn btn-danger remove" (click)="removeCountry(countryName)">-</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- </div>
+                  </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- Pays visités -->
+
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-default register-button" [disabled]="!registerForm.valid">Finir l'inscription</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Fin - Pays habités et visités - Etape 3 -->

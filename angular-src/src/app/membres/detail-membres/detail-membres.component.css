@@ -1,0 +1,156 @@
+.profile-page {
+  background-color: #2c3e50;
+  color: #e7dee7;
+}
+
+.slider {
+  background-image: url('/assets/images/bg_page_profile.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 10px;
+}
+
+.separation {
+  border-bottom-color: #e77b20;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.title-text h1 {
+  font-family: Lato;
+  font-weight: 300;
+  text-align: left;
+}
+
+.title-text h1 span {
+  font-family: Lato;
+  font-weight: 400;
+  text-align: left;
+}
+
+
+/* menu */
+
+li {
+  display: inline-block;
+  width: 150px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+li a {
+  color: #868181;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: #2887e0;
+  text-decoration: none;
+}
+
+.activeMenuLeftClass {
+  border-left: 1px solid #e77b20;
+  border-bottom: 1px solid #e77b20;
+  color: #e77b20;
+}
+
+.activeMenuLeftClass a {
+  color: #e77b20;
+}
+
+.activeMenuRightClass {
+  border-right: 1px solid #e77b20;
+  border-bottom: 1px solid #e77b20;
+  color: #e77b20;
+}
+
+.activeMenuRightClass a {
+  color: #e77b20;
+}
+
+
+/* menu */
+
+
+/* Ajout d'un post */
+
+textarea {
+  height: 35px;
+}
+
+textarea:hover {
+  height: 80px;
+  transition: all 0.35s, height 1s;
+}
+
+
+/* Ajout d'un post */
+
+
+/* Media Queries */
+
+@media screen and (max-width: 640px) {
+  .slider {
+    height: 150px;
+  }
+  .title-text {
+    padding-top: 2px;
+    padding-left: 15px;
+  }
+  .title-text h1 {
+    font-size: 25px;
+  }
+  .title-text h1 span {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width:800px) {
+  .slider {
+    height: 150px;
+  }
+  .title-text {
+    padding-top: 6px;
+    padding-left: 60px;
+  }
+  .title-text h1 {
+    font-size: 25px;
+  }
+  .title-text h1 span {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width:801px) and (max-width: 1025px) {
+  .slider {
+    height: 150px;
+  }
+  .title-text {
+    padding-left: 120px;
+  }
+  .title-text h1 {
+    font-size: 28px;
+  }
+  .title-text h1 span {
+    font-size: 28px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .slider {
+    height: 350px;
+  }
+  .title-text {
+    padding-top: 15px;
+    padding-left: 60px;
+  }
+  .title-text h1 {
+    font-size: 45.87px;
+  }
+  .title-text h1 span {
+    font-size: 45.87px;
+  }
+}
