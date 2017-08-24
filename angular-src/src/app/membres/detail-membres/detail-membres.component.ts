@@ -14,14 +14,20 @@ import { ProfileViewComponent } from './../../profile/profile-view/profile-view.
 })
 export class DetailMembresComponent implements OnInit, OnDestroy {
   user: User;
+
   suivi: false;
   isOwnProfile: Boolean;
   getUserProfile: Boolean;
 
+  // Connexions Ajax actives
   sub: any;
   subRoute: any;
   subGetMember: any;
+
+  // Référence de l'utilisateur
   id: String;
+  ownerId: String;
+
   isPostActive: Boolean;
 
 
@@ -76,7 +82,7 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
 
     this.subRoute = this._route.params.subscribe(params => {
       this.id = params['id'];
-
+      this.ownerId = this.id;
       this.getUserDetails(this.id);
     });
   }
