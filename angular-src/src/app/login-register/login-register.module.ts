@@ -14,6 +14,7 @@ import { CivilityFormComponent } from './civility-form/civility-form.component';
 import { ExtraDetailsFormComponent } from './extra-details-form/extra-details-form.component';
 
 import { ShowImagesModule } from './../show-images/show-images.module';
+import { AuthService } from './../services/auth/auth.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +29,12 @@ import { ShowImagesModule } from './../show-images/show-images.module';
     CivilityFormComponent,
     ExtraDetailsFormComponent,
     LoginComponent
+<<<<<<< HEAD
+=======
+  ],
+  providers: [
+    AuthService
+>>>>>>> master
   ]
 })
 export class LoginRegisterModule { }
