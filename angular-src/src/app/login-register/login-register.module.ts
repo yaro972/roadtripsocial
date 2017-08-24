@@ -29,12 +29,9 @@ import { AuthService } from './../services/auth/auth.service';
     CivilityFormComponent,
     ExtraDetailsFormComponent,
     LoginComponent
-<<<<<<< HEAD
-=======
   ],
   providers: [
     AuthService
->>>>>>> master
   ]
 })
 export class LoginRegisterModule { }
