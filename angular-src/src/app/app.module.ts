@@ -26,6 +26,8 @@ import { ListMembersService } from './services/list-members/list-members.service
 
 import { PostsService } from './services/posts/posts.service';
 
+import { ChatboxService } from './components/chatbox/chatbox.service';
+
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 
@@ -39,6 +41,7 @@ import { FeedsComponent } from './components/feeds/feeds.component';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
 
 import { ShowImagesModule } from './show-images/show-images.module';
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { ShowImagesModule } from './show-images/show-images.module';
     TopMenuComponent,
     FeedsComponent,
     SubMenuComponent,
+    ChatboxComponent,
 
   ],
   imports: [
@@ -72,7 +76,8 @@ import { ShowImagesModule } from './show-images/show-images.module';
     AuthService,
     FileUploadService,
     ListMembersService,
-    PostsService
+    PostsService,
+    ChatboxService
   ],
   bootstrap: [AppComponent]
 })

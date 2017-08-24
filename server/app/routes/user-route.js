@@ -109,8 +109,7 @@ router.post('/register-extra-details', function (req, res) {
     } else {
       // Renomme le fichier
       fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
-        if (err) {
-          // debugger
+        if (err) {          
         }
 
         // Ajout de l'utilisateur dans la DB
@@ -286,7 +285,7 @@ router.post('/update-profile', passport.authenticate('jwt', {
       // Renomme le fichier
       fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
         if (err) {
-          // debugger
+          
         }
         // Sauvegarde le profile dans la Db
         User.updateProfile(req.body, function (err, newUserProfile) {
