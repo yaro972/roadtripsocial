@@ -73,6 +73,25 @@ posts.getPosts = function (callback) {
 };
 
 /**
+ * Récupère l'ensemble des posts d'un membre spécifié
+ */
+posts.getOwnerPosts = function (ownerId, callback) {
+  posts
+    .find({
+      autorId: ownerId
+    }, {}, {
+      sort: {
+        'datePost': -1
+      }
+    })
+    .populate('autorId', null, {
+      _id: ownerId
+    }) // <--
+    .exec(callback)
+};
+
+
+/**
  * Supprime un post de la Db
  */
 posts.deletePost = function (id, callback) {

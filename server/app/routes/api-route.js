@@ -106,6 +106,7 @@ router.post('/get-last-post', passport.authenticate('jwt', {
 });
 
 
+
 /**
  * Récupère l'ensemble des posts de la base de donnée
  */
@@ -125,6 +126,29 @@ router.get('/get-post', passport.authenticate('jwt', {
     }
   });
 });
+
+
+/**
+ * Récupère l'ensemble des posts d'un membre spécifié
+ */
+router.post('/get-owner-post', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  Posts.getOwnerPosts(req.body.ownerId, function (err, data) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        posts: data
+      });
+    }
+  });
+});
+
 
 /**
  *Supprime un post de la Db
