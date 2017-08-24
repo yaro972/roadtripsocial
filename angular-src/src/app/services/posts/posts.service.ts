@@ -70,6 +70,22 @@ export class PostsService {
       .map(res => res.json());
   }
 
+
+  /**
+   * Récupère tous les posts d'un utilisateur spécifié
+   */
+  getOwnerPosts(ownerId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/get-owner-post', { ownerId: ownerId }, { headers: headers })
+      .map(res => res.json());
+  }
+
   /**
    * Supprime un post
    * @param id Clef liée au commentaire

@@ -29,8 +29,8 @@ export class FeedsComponent implements OnInit, OnDestroy {
     const newPostObject = {
       datePost: new Date,
       details: this.newPost,
-      autors: userElem.nickname,
-      avatar: userElem.avatar,
+      autorId: userElem._id,
+      commentTo: null
     }
 
     this.sub = this._postService.sendNewPost(newPostObject).subscribe(data => {

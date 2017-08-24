@@ -39,14 +39,19 @@ router.post('/uploadFile', upload.any(), function (req, res) {
 router.get('/display-photo/:img', function (req, res) {
   // Si le nom de l'image n'a pas été donné, l'image par défaut d'avatar est renvoyé
   if (!req.params.img) {
-    req.params.img = 'Anonymous.png'
+    req.params.img = 'Anonymous.png';
   }
   if (fs.existsSync(path.join(__dirname, '../../uploads', req.params.img))) {
     fs.readFile(path.join(__dirname, '../../uploads', req.params.img), function (err, data) {
-      if (err) throw err;
-      console.log(data);
+      if (err) {
+        res.json({
+          err: err
+        });
+      } else {
+        res.send(data);
+      }
 
-      res.send(data);
+
 
     });
   } else {
@@ -66,8 +71,8 @@ router.post('/new-post', passport.authenticate('jwt', {
   let newPostItem = new Posts({
     "datePost": req.body.datePost,
     "details": req.body.details,
-    "autors": req.body.autors,
-    "avatar": req.body.avatar
+    "autorId": req.body.autorId,
+    "commentTo": req.body.commentTo
   });
 
   Posts.addNewPost(newPostItem, function (err, result) {
@@ -106,6 +111,7 @@ router.post('/get-last-post', passport.authenticate('jwt', {
 });
 
 
+
 /**
  * Récupère l'ensemble des posts de la base de donnée
  */
@@ -125,6 +131,29 @@ router.get('/get-post', passport.authenticate('jwt', {
     }
   });
 });
+
+
+/**
+ * Récupère l'ensemble des posts d'un membre spécifié
+ */
+router.post('/get-owner-post', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  Posts.getOwnerPosts(req.body.ownerId, function (err, data) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        posts: data
+      });
+    }
+  });
+});
+
 
 /**
  *Supprime un post de la Db

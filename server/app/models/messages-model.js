@@ -14,14 +14,14 @@ let messagerieSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  receiver: [{
+  receiver: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
-  }],
-  sender: [{
+    ref: 'User'
+  },
+  sender: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
-  }],
+    ref: 'User'
+  },
   parentId: {
     type: String,
     required: false,

@@ -16,7 +16,7 @@ import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
   styleUrls: ['./post-view.component.css']
 })
 export class PostViewComponent implements OnInit, OnDestroy {
-  @Input() owner: any;
+  @Input() ownerId: String;
   postItems: String[];
   commentShow: Boolean;
   newComment: String;
@@ -99,16 +99,24 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.commentShow = false;
-    this.showPosts();
+    if (this.ownerId) {
+      this.showOwnerPosts(this.ownerId);
+    } else {
+      this.showPosts();
+    }
+
     this.commentList = {};
+
+    console.log(this.ownerId);
 
   }
 
   /**
    * Affiche tous les posts
    */
-  showPosts(author?: any) {
+  showPosts() {
     this._postsService.getPosts().subscribe(data => {
+      // debugger
       if (data.err) {
         console.log(data.err);
       } else {
@@ -117,6 +125,19 @@ export class PostViewComponent implements OnInit, OnDestroy {
     });
   };
 
+  /**
+  * Affiche tous les posts de l'utilisateur spécifié
+  */
+  showOwnerPosts(ownerId: String) {
+    this._postsService.getOwnerPosts(ownerId).subscribe(data => {
+      // debugger
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        this.postItems = data.posts;
+      }
+    });
+  };
 
   onClickAddComment(id) {
     this.commentShow = id;
@@ -131,9 +152,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     const newCommentObj = {
       text: this.newComment,
-      avatar: u.avatar,
       dateComment: new Date(),
-      autor: u.nickname,
+      autorId: u._id,
       parent_id: postItemId
     };
 
