@@ -573,4 +573,22 @@ router.post('/send-message', passport.authenticate('jwt', {
   });
 });
 
+
+router.post('/get-nbunread-messages', function (req, res) {
+  Messages.getUnreadMessages(req.body.userId, function (err, nbUnread) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbUnread: nbUnread
+      });
+    }
+  });
+
+
+});
+
 module.exports = router;

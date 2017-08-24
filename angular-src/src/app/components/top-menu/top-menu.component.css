@@ -1,30 +1,38 @@
-.navbar {
-  margin-bottom: 0;
-}
+  .navbar {
+    margin-bottom: 0;
+  }
 
-.navbar ul {
-   padding-top: 18px; 
-}
+  .navbar ul {
+    padding-top: 18px;
+  }
 
-.navbar-inverse {
-  background-color: #42515f;
-}
+  .navbar-inverse {
+    background-color: #42515f;
+  }
 
-.nav {
-  background-color: #42515f;
-}
+  .nav {
+    background-color: #42515f;
+  }
 
-.navbar-brand img {
-  display: inline-block;
-}
+  .navbar-brand img {
+    display: inline-block;
+  }
 
-.navbar-brand span {
-  color: #ffffff;
-}
+  .navbar-brand span {
+    color: #ffffff;
+  }
 
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.active>a:focus,
-.navbar-inverse .navbar-nav>.active>a:hover {
-  color: #a3ccff;
-  background-color: #48535e;
-}
+  .navbar-inverse .navbar-nav>.active>a,
+  .navbar-inverse .navbar-nav>.active>a:focus,
+  .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #a3ccff;
+    background-color: #48535e;
+  }
+
+  .unreadMessages {
+    color: rgb(231, 123, 32);
+  }
+
+  .nounreadMessage {
+    color: rgb(204, 204, 204);
+  }

@@ -311,4 +311,22 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  /**
+   * Liste des messages non lus pour l'utilisateur donné
+   * @param userId Id du membre
+   */
+  getUnreadMessages(userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/get-nbunread-messages', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 }

@@ -45,4 +45,17 @@ messagerie.addNewMessage = function (newMessage, callback) {
   newMessage.save(callback);
 };
 
+/**
+ * Récupère le nombre de messages non lus
+ */
+messagerie.getUnreadMessages = function (userId, callback) {
+  messagerie
+    .find({
+      receiver: userId,
+      isRead: false
+    })
+    .count()
+    .exec(callback);
+};
+
 module.exports = messagerie;

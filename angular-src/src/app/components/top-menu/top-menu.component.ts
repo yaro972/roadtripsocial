@@ -28,7 +28,10 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
   authService: AuthService;
   isLogged = false;
 
+  nbUnreadPosts: Number;
+  subGetUnreadMessages: any;
   sub: any;
+  isNewMessage: Boolean;
 
   constructor(
     public _authService: AuthService,
@@ -37,6 +40,8 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
   ) {
 
     this.collapseSubMen = this._authService.collapseSubMen;
+
+    // this.nbUnreadPosts = 42;
   }
 
   ngOnInit() {
@@ -52,10 +57,16 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
       } else {
         this.imageFace = 'Anonymous.png';
       }
-
     }
+    // this.unreadMessages = false;
+
+    // this.nbUnreadPosts = 0;
+    this.isunreadMessage();
   }
 
+  /**
+   * Déconnexion de l'utilisateur
+   */
   onLogoutClick() {
     this._authService.logout();
     this._flashMessage.grayOut(true);
@@ -66,9 +77,37 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
     this._router.navigate(['/']);
   }
 
+  /**
+   * Réc
+   */
   onCollapseSubmenu() {
     this.isCollapseSubmenu = !this.isCollapseSubmenu;
   }
+
+  /**
+   * Vérifie si tous les messages ont été lus
+   */
+  isunreadMessage(): void {
+    const userId = JSON.parse(localStorage.getItem('user'))._id;
+
+
+    this.subGetUnreadMessages = this._authService
+      .getUnreadMessages(userId)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+          this.nbUnreadPosts = -1;
+        } else {
+          this.nbUnreadPosts = data.nbUnread;
+          if (this.nbUnreadPosts > 0) {
+            this.isNewMessage = true;
+          } else {
+            this.isNewMessage = false;
+          }
+        }
+      });
+  }
+
 
   ngAfterContentChecked() {
     const userProfile = localStorage.getItem('user');
@@ -82,9 +121,15 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
         this.imageFace = 'Anonymous.png';
       }
     }
-
   }
 
+  /**
+   * Destruction de la vue
+   */
   ngOnDestroy() {
+    if (this.subGetUnreadMessages) {
+      this.subGetUnreadMessages.unsubscribe();
+      this.subGetUnreadMessages = null;
+    }
   }
 }

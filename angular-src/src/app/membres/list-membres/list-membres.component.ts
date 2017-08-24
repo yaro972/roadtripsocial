@@ -78,8 +78,6 @@ export class ListMembresComponent implements OnInit, OnDestroy {
         if (el.err) {
           console.log(el.err)
         } else {
-          console.log(el);
-
           this.membersList = el.membersList;
         }
       });

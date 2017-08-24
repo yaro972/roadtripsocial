@@ -107,7 +107,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     this.commentList = {};
 
-    console.log(this.ownerId);
+
 
   }
 
@@ -161,9 +161,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
       if (data.err) {
         console.log(data.err);
       } else {
-        console.log(data);
-        // this.showPosts();
-        // this.commentList.push(data.posts);
         this.commentList = data.posts;
       }
     });
@@ -179,7 +176,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
         console.log(data.err);
       } else {
         this.postItems = data.posts;
-        console.log(data);
         this.showPosts();
       }
     });
