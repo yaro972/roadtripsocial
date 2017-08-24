@@ -32,14 +32,14 @@ posts.getPostElement = function (owner, callback) {
   posts.findOne({
     owner: owner
   }, callback);
-}
+};
 
 /**
  * Ajoute un nouveau post
  */
 posts.addNewPost = function (newPost, callback) {
   newPost.save(callback);
-}
+};
 
 /**
  * Récupère le dernier post d'un utilisateur
@@ -69,7 +69,7 @@ posts.getPosts = function (callback) {
       }
     })
     .populate('autorId') // <--
-    .exec(callback)
+    .exec(callback);
 };
 
 /**
@@ -77,9 +77,7 @@ posts.getPosts = function (callback) {
  */
 posts.getOwnerPosts = function (ownerId, callback) {
   posts
-    .find({
-      autorId: ownerId
-    }, {}, {
+    .find({}, {}, {
       sort: {
         'datePost': -1
       }
@@ -87,7 +85,7 @@ posts.getOwnerPosts = function (ownerId, callback) {
     .populate('autorId', null, {
       _id: ownerId
     }) // <--
-    .exec(callback)
+    .exec(callback);
 };
 
 
