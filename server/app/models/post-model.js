@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Création du schéma à la base de données
 
@@ -13,16 +14,13 @@ let postSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  autors: {
-    type: String,
-    required: true
-  },
-  avatar: {
-    type: String,
-    default: "Anonymous.png"
+  autorId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   commentTo: {
-    type: Number
+    type: Schema.Types.ObjectId,
+    ref: 'Posts'
   }
 });
 
@@ -48,11 +46,13 @@ posts.addNewPost = function (newPost, callback) {
  */
 posts.findLast = function (nickname, callback) {
   posts.findOne({
-    autors: nickname
-  }, {
+      autors: nickname
+    }, {
 
     }, {
-      sort: { 'datePost': -1 }
+      sort: {
+        'datePost': -1
+      }
     },
     callback);
 };
@@ -61,14 +61,15 @@ posts.findLast = function (nickname, callback) {
  * Récupère l'ensemble des posts
  */
 posts.getPosts = function (callback) {
-  posts.find(
-    {},
-    {},
-    {
-      sort: { 'datePost': -1 }
-    },
-    callback
-  );
+
+  posts
+    .find({}, {}, {
+      sort: {
+        'datePost': -1
+      }
+    })
+    .populate('autorId') // <--
+    .exec(callback)
 };
 
 /**

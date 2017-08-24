@@ -9,10 +9,11 @@
             <div class="col-xs-2">
               <div class="row">
                 <div class="col-xs-9">
-                  <img src="{{postItem.avatar | showImage }}" alt="" class="img img-responsive img-thumbnail">
+                  <img src="{{postItem.autorId.avatar | showImage }}" alt="" class="img img-responsive img-thumbnail">
+
                 </div>
                 <div class="col-xs-12">
-                  {{postItem.autors}}
+                  {{postItem.autorId.nickname}}
                 </div>
                 <div class="col-xs-8 date-post">
                   {{postItem.datePost |date:'dd/MM/y'}}

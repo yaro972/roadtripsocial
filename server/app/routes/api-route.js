@@ -66,8 +66,8 @@ router.post('/new-post', passport.authenticate('jwt', {
   let newPostItem = new Posts({
     "datePost": req.body.datePost,
     "details": req.body.details,
-    "autors": req.body.autors,
-    "avatar": req.body.avatar
+    "autorId": req.body.autorId,
+    "commentTo": req.body.commentTo
   });
 
   Posts.addNewPost(newPostItem, function (err, result) {

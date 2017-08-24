@@ -109,10 +109,12 @@ export class PostViewComponent implements OnInit, OnDestroy {
    */
   showPosts(author?: any) {
     this._postsService.getPosts().subscribe(data => {
+      // debugger
       if (data.err) {
         console.log(data.err);
       } else {
         this.postItems = data.posts;
+
       }
     });
   };
@@ -131,9 +133,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     const newCommentObj = {
       text: this.newComment,
-      avatar: u.avatar,
       dateComment: new Date(),
-      autor: u.nickname,
+      autorId: u._id,
       parent_id: postItemId
     };
 

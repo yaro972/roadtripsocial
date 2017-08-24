@@ -1,13 +1,14 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Création du schéma à la base de données
 
 let modelSchema = mongoose.Schema({
   parent_id: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: 'Posts'
   },
   dateComment: {
     type: Date,
