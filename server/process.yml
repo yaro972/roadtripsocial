@@ -9,19 +9,19 @@ apps:
       FRONTIP: localhost
       BACKPORT: 3000
       BACKIP: localhost
-      DEBUG: *
+      DEBUG: "*"
     env_stage:
-      NODE_ENV: developpement
+      NODE_ENV: development
       FRONTPORT: 3200
       FRONTIP: 192.168.0.104
       BACKPORT: 3000
       BACKIP: 192.168.0.104
-      DEBUG: *
+      DEBUG: "*"
     env_production:
       NODE_ENV: production
       FRONTPORT: 3200
       FRONTIP: vps354082.ovh.net
       BACKPORT: 3000
       BACKIP: vps354082.ovh.net
-      DEBUG: *
+      DEBUG: "*"
 

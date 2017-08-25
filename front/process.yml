@@ -10,7 +10,7 @@ apps:
       BACKPORT: 3000
       BACKIP: localhost
     env_stage:
-      NODE_ENV: developpement
+      NODE_ENV: development
       FRONTPORT: 3200
       FRONTIP: 192.168.0.104
       BACKPORT: 3000
