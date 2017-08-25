@@ -1,3 +1,16 @@
 .container {
   margin: 0 auto;
 }
+
+.contentMembers {
+  background: 333;
+  color: #fff;
+}
+
+.contentBox {
+  background: lightgrey;
+}
+
+.inputText {
+  width: 300px;
+}

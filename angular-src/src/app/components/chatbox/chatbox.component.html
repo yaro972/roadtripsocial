@@ -1,13 +1,13 @@
-<h1>
+<h2>
   Salon de discussions instantanées
-</h1>
+</h2>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <h3>Membres</h3>
+    <div class="col-md-4 contentMembers">
+      <h4>Membres</h4>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8 contentBox">
       <div class="chatbox">
         <p *ngFor="let messages of listMessages">
           {{ messages }}</p>
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="row">
-    <form action="" class="form-control">
+    <form action="" class="form-group">
       <input type="text" class="inputText" [(ngModel)]="currentMessage" placeholder="Entrez votre texte ici" name="currentMessage">
       <button (click)="onSendMessage()" class="btn btn-primary">Envoyer</button>
     </form>
