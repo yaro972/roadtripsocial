@@ -30,24 +30,24 @@ cache:
   - node_modules/
 
 
-lint_front:
-  stage: test
+lint_backend:
+  stage: build
   environment: dev
   script:
     - cd ./server; npm run lint
     
-lint_front:
-  stage: test
+lint_angular:
+  stage: build
   environment: dev
   script:
     - cd ./angular-src; ng lint
 
-lint_middle:
+lint_frontend:
   stage: build
   environment: dev
   script:
-#  - cd ./server; npm run lint
-  - echo lint
+    - cd ./front; npm run lint
+    - echo lint
 
 
 
