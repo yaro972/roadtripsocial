@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild, Output, EventEmitter, AfterViewChecked } from '@angular/core';
-import { AuthService } from './../../services/auth/auth.service';
 import { NgModel } from '@angular/forms';
-import { FlashMessagesService } from 'angular2-flash-messages';
 
+import { AuthService } from './../../services/auth/auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { ProfileEditService } from './../../services/profile-edit/profile-edit.service';
 
 import { FileUploadService } from '../../services/file-upload/file-upload.service';

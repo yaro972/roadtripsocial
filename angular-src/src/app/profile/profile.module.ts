@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
-import { ProfileEditService } from './../services/profile-edit/profile-edit.service';
-
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { LastMessageViewComponent } from './last-message-view/last-message-view.component';
-import { FeedsModule } from './../feeds/feeds.module';
 
+import { ProfileEditService } from './../services/profile-edit/profile-edit.service';
+
+import { FeedsModule } from './../feeds/feeds.module';
 import { ShowImagesModule } from './../show-images/show-images.module';
 
 @NgModule({

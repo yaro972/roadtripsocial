@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProfileModule } from './../profile/profile.module';
+import { ShowImagesModule } from './../show-images/show-images.module';
 
 import { DetailMembresComponent } from './detail-membres/detail-membres.component';
 import { ListMembresComponent } from './list-membres/list-membres.component';
-import { ListFriendsComponent } from './list-friends/list-friends.component';
-import { ShowImagesModule } from './../show-images/show-images.module';
+
 import { FeedsModule } from './../feeds/feeds.module';
 
 @NgModule({
@@ -17,17 +17,16 @@ import { FeedsModule } from './../feeds/feeds.module';
     ProfileModule,
     FormsModule,
     ReactiveFormsModule,
-    FeedsModule,
-    ShowImagesModule
+    ShowImagesModule,
+    FeedsModule
   ],
   declarations: [
     DetailMembresComponent,
-    ListMembresComponent,
-    ListFriendsComponent
+    ListMembresComponent
   ],
   exports: [
-    ListMembresComponent,
-    ListFriendsComponent
+    DetailMembresComponent,
+    ListMembresComponent
   ]
 })
 export class MembresModule { }

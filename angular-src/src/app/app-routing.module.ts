@@ -11,7 +11,7 @@ import { LoginComponent } from './login-register/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
-import { FeedsComponent } from './components/feeds/feeds.component';
+import { FeedsComponent } from './feeds/feeds/feeds.component';
 
 import { ResetPasswordComponent } from './pass-security/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './pass-security/change-password/change-password.component';
@@ -20,7 +20,7 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 
 
-import { MessagerieComponent } from './messagerie/messagerie.component';
+// import { MessagerieComponent } from './messagerie/messagerie.component';
 
 const routes: Routes = [
   {
@@ -67,11 +67,11 @@ const routes: Routes = [
     component: ChangePasswordComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'messagerie',
-    component: MessagerieComponent,
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: 'messagerie',
+  //   component: MessagerieComponent,
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: 'reset-password/:token',
     component: ResetPasswordComponent

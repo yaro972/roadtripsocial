@@ -29,15 +29,13 @@ import { PostsService } from './services/posts/posts.service';
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 
+
 import { LoginRegisterModule } from './login-register/login-register.module';
 import { MembresModule } from './membres/membres.module';
-
 import { ProfileModule } from './profile/profile.module';
 import { PassSecurityModule } from './pass-security/pass-security.module';
-
-
 import { ShowImagesModule } from './show-images/show-images.module';
-import { MessagerieModule } from './messagerie/messagerie.module';
+// import { MessagerieModule } from './messagerie/messagerie.module';
 import { FeedsModule } from './feeds/feeds.module';
 
 @NgModule({
@@ -62,7 +60,7 @@ import { FeedsModule } from './feeds/feeds.module';
     PassSecurityModule,
     ShowImagesModule,
     MembresModule,
-    MessagerieModule,
+    // MessagerieModule,
     FeedsModule
   ],
   providers: [

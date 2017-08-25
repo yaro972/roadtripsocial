@@ -8,8 +8,11 @@ import { FromNowPipe } from './comment/from-now.pipe';
 import { ShowImagesModule } from './../show-images/show-images.module';
 import { FeedsComponent } from './feeds/feeds.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
+import { ListFriendsComponent } from './list-friends/list-friends.component';
+
 
 import { SendMessageComponent } from './send-message/send-message.component';
+import { FriendsConnectedComponent } from './friends-connected/friends-connected.component';
 
 @NgModule({
   imports: [
@@ -17,6 +20,7 @@ import { SendMessageComponent } from './send-message/send-message.component';
     FormsModule,
     ShowImagesModule,
     ReactiveFormsModule
+
   ],
   declarations: [
     PostViewComponent,
@@ -24,12 +28,15 @@ import { SendMessageComponent } from './send-message/send-message.component';
     FromNowPipe,
     SendMessageComponent,
     FeedsComponent,
-    SubMenuComponent
+    SubMenuComponent,
+    FriendsConnectedComponent,
+    ListFriendsComponent
   ],
   exports: [
     PostViewComponent,
     SendMessageComponent,
-    PostViewComponent
+    FeedsComponent,
+    ListFriendsComponent
   ]
 })
 export class FeedsModule { }
