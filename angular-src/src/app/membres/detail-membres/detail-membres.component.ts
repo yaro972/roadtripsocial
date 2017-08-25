@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 import { User } from '../../core/user';
-import { PostViewComponent } from './../../posts/post-view/post-view.component';
+import { PostViewComponent } from './../../feeds/post-view/post-view.component';
 import { ProfileViewComponent } from './../../profile/profile-view/profile-view.component';
 
 @Component({

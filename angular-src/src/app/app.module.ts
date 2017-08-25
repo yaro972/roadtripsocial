@@ -31,14 +31,14 @@ import { CollapseModule } from 'ngx-bootstrap';
 
 import { LoginRegisterModule } from './login-register/login-register.module';
 import { MembresModule } from './membres/membres.module';
-import { PostsModule } from './posts/posts.module';
 
 import { ProfileModule } from './profile/profile.module';
 import { PassSecurityModule } from './pass-security/pass-security.module';
-import { FeedsComponent } from './components/feeds/feeds.component';
-import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
+
 
 import { ShowImagesModule } from './show-images/show-images.module';
+import { MessagerieModule } from './messagerie/messagerie.module';
+import { FeedsModule } from './feeds/feeds.module';
 
 @NgModule({
   declarations: [
@@ -46,10 +46,7 @@ import { ShowImagesModule } from './show-images/show-images.module';
     AboutComponent,
     AccueilComponent,
     FooterComponent,
-    TopMenuComponent,
-    FeedsComponent,
-    SubMenuComponent,
-
+    TopMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -61,11 +58,12 @@ import { ShowImagesModule } from './show-images/show-images.module';
     FormsModule,
     LoginRegisterModule,
     FlashMessagesModule,
-    PostsModule,
     ProfileModule,
     PassSecurityModule,
     ShowImagesModule,
-    MembresModule
+    MembresModule,
+    MessagerieModule,
+    FeedsModule
   ],
   providers: [
     AuthGuard,

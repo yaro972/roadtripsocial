@@ -57,10 +57,11 @@ test:
 
 deploy_to_staging:
  stage: staging
- environment: 
-   dev   
+ environment: staging   
  script:
    - echo "Go to staging"
+ only: 
+  - quality
  when: on_success
 
 deploy_to_production:
@@ -70,6 +71,6 @@ deploy_to_production:
     - echo "Go to production"
     - cd ./front; ./node_modules/@angular/cli/bin/ng build
   only:
-    - master
+    - production
   when: manual
 

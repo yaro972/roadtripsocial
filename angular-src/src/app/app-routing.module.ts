@@ -18,7 +18,9 @@ import { ChangePasswordComponent } from './pass-security/change-password/change-
 
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
-import { SendMessageComponent } from './posts/send-message/send-message.component';
+
+
+import { MessagerieComponent } from './messagerie/messagerie.component';
 
 const routes: Routes = [
   {
@@ -66,6 +68,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'messagerie',
+    component: MessagerieComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'reset-password/:token',
     component: ResetPasswordComponent
   },
@@ -82,11 +89,6 @@ const routes: Routes = [
     path: '',
     component: FooterComponent,
     outlet: 'footer'
-  },
-  {
-    path: 'send-message',
-    component: SendMessageComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: '**',

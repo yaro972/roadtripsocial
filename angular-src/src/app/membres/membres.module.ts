@@ -9,7 +9,7 @@ import { DetailMembresComponent } from './detail-membres/detail-membres.componen
 import { ListMembresComponent } from './list-membres/list-membres.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
 import { ShowImagesModule } from './../show-images/show-images.module';
-import { PostsModule } from './../posts/posts.module';
+import { FeedsModule } from './../feeds/feeds.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { PostsModule } from './../posts/posts.module';
     ProfileModule,
     FormsModule,
     ReactiveFormsModule,
-    PostsModule,
+    FeedsModule,
     ShowImagesModule
   ],
   declarations: [

@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { PostViewComponent } from './post-view/post-view.component';
 import { CommentComponent } from './comment/comment.component';
 import { FromNowPipe } from './comment/from-now.pipe';
 import { ShowImagesModule } from './../show-images/show-images.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FeedsComponent } from './feeds/feeds.component';
+import { SubMenuComponent } from './sub-menu/sub-menu.component';
 
 import { SendMessageComponent } from './send-message/send-message.component';
 
@@ -19,11 +22,14 @@ import { SendMessageComponent } from './send-message/send-message.component';
     PostViewComponent,
     CommentComponent,
     FromNowPipe,
-    SendMessageComponent
+    SendMessageComponent,
+    FeedsComponent,
+    SubMenuComponent
   ],
   exports: [
     PostViewComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    PostViewComponent
   ]
 })
-export class PostsModule { }
+export class FeedsModule { }
