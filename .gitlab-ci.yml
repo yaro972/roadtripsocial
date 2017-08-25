@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:latest
+image: teracy/angular-cli:latest
 #image: teracy/angular-cli:latest
 
 # Pick zero or more services to be used on all builds.
@@ -17,6 +17,7 @@ before_script:
  - ls -l
  - cd ./server; npm install --silent --loglevel warn ; cd ..
  - cd ./front; npm install --silent  --loglevel warn ; cd ..
+ - cd ./angular-src; npm install --silent  --loglevel warn ; cd ..
 
 stages:
   - build
@@ -29,12 +30,17 @@ cache:
   - node_modules/
 
 
-#lint_front:
-#  stage: test
-#  environment: dev
-#  script:
-#    - cd ./front; npm run lint
-#    - cd ./front; ./node_modules/@angular/cli/bin/ng test --single-run=true --browsers PhantomJS --watch=false
+lint_front:
+  stage: test
+  environment: dev
+  script:
+    - cd ./server; npm run lint
+    
+lint_front:
+  stage: test
+  environment: dev
+  script:
+    - cd ./angular-src; ng lint
 
 lint_middle:
   stage: build
