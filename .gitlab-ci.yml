@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:latest
+image: teracy/angular-cli:latest
 #image: teracy/angular-cli:latest
 
 # Pick zero or more services to be used on all builds.
@@ -14,48 +14,90 @@ image: node:latest
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 
 before_script:
+ # Install ssh-agent if not already installed, it is required by Docker.
+ # (change apt-get to yum if you use a CentOS-based image)
+ - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+ # Run ssh-agent (inside the build environment)
+ - eval $(ssh-agent -s)
+
+ # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+ - ssh-add <(echo "$SSH_PRIVATE_KEY")
+
+ # For Docker builds disable host key checking. Be aware that by adding that
+ # you are suspectible to man-in-the-middle attacks.
+ # WARNING: Use this only with the Docker executor, if you use it with shell
+ # you will overwrite your user's SSH config.
+ - mkdir -p ~/.ssh
+ - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+ # In order to properly check the server's host key, assuming you created the
+ # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
+ # instead.
+ # - mkdir -p ~/.ssh
+ # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
  - ls -l
  - cd ./server; npm install --silent --loglevel warn ; cd ..
  - cd ./front; npm install --silent  --loglevel warn ; cd ..
+ - cd ./angular-src; npm install --silent  --loglevel warn ; cd ..
 
 stages:
   - build
   - test
+  - staging
   - deploy
+  - production
 
 
 cache:
   paths:
   - node_modules/
 
-
-#lint_front:
-#  stage: test
-#  environment: dev
-#  script:
-#    - cd ./front; npm run lint
-#    - cd ./front; ./node_modules/@angular/cli/bin/ng test --single-run=true --browsers PhantomJS --watch=false
-
-lint_middle:
+lint_backend:
   stage: build
   environment: dev
   script:
-#  - cd ./server; npm run lint
-  - echo lint
-
-
-
-#test_front:
-#  stage: build
-#  environment: qa
-#  script:
-#    - cd ./front; npm test
-#    - cd ./front; ./node_modules/@angular/cli/bin/ng build
-
-
-test_middle:
-  stage: test
-  environment: qa
+    - cd ./server; npm run lint
+    
+lint_angular:
+  stage: build
+  environment: dev
   script:
-#  - cd ./server;npm test
-  - echo test
+    - cd ./angular-src; ng lint
+
+lint_frontend:
+  stage: build
+  environment: dev
+  script:
+    - cd ./front; npm run lint    
+
+test:
+ stage: test
+ environment: dev
+ script:    
+   - echo "Test step"
+
+deploy_to_staging:
+ stage: build
+ environment: staging   
+ script:
+   - echo "Go to staging"
+   # try to connect to Staging
+   - ssh yaro@192.168.0.104
+
+   # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
+   - cd /home/yaro ; ./deploy.sh
+
+ only: 
+  - master
+ when: on_success
+
+deploy_to_production:
+  stage: production
+  environment: production
+  script:
+    - echo "Go to production"
+    - cd ./front; ./node_modules/@angular/cli/bin/ng build
+  only:
+    - master
+  when: manual
+
