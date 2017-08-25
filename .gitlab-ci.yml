@@ -22,13 +22,14 @@ before_script:
 stages:
   - build
   - test
+  - staging
   - deploy
+  - production
 
 
 cache:
   paths:
   - node_modules/
-
 
 lint_backend:
   stage: build
@@ -46,22 +47,29 @@ lint_frontend:
   stage: build
   environment: dev
   script:
-    - cd ./front; npm run lint
-    - echo lint
+    - cd ./front; npm run lint    
 
+test:
+ stage: test
+ environment: dev
+ script:    
+   - echo "Test step"
 
+deploy_to_staging:
+ stage: staging
+ environment: 
+   dev   
+ script:
+   - echo "Go to staging"
+ when: on_success
 
-#test_front:
-#  stage: build
-#  environment: qa
-#  script:
-#    - cd ./front; npm test
-#    - cd ./front; ./node_modules/@angular/cli/bin/ng build
-
-
-test_middle:
-  stage: test
-  environment: qa
+deploy_to_production:
+  stage: production
+  environment: production
   script:
-#  - cd ./server;npm test
-  - echo test
+    - echo "Go to production"
+    - cd ./front; ./node_modules/@angular/cli/bin/ng build
+  only:
+    - master
+  when: manual
+
