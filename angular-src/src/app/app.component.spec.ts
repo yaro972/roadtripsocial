@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { By }              from '@angular/platform-browser';
-import { DebugElement }    from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { FlashMessagesService, FlashMessagesModule } from 'angular2-flash-messages';
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-    // declarations: [ AppComponent],
+      // declarations: [ AppComponent],
       imports: [
         RouterTestingModule,
         FlashMessagesModule
@@ -19,8 +19,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ]
-    // }).compileComponents();
-  });
+      // }).compileComponents();
+    });
   }));
 
   it('should create the app', async(() => {

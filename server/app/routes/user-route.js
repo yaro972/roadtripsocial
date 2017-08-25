@@ -43,17 +43,23 @@ router.put('/register', function (req, res) {
         msg: 'Erreur lors de l\'ajout d\'un nouvel utilisateur ' + err
       });
     } else {
-      res.json({
-        succeed: true,
-        msg: 'L\'utilisateur  ' + user + 'a bien été rajouté'
-      });
       // Road Trip Social
-
       let mailContent = 'Bonjour, <br /><br /> Votre compte <span style="color: black;  font - weight: bold;">\' ' + user.nickname + ' \'</span> a bien été créé sur le site Road Trip Social. <br /><br />Un seul lien pour vous connecter : </br><a href="' + WEBURL + '/login" >Road Trip Social -> Login</a ><br /><br /> Partagez vite vos derniers voyages et aventures !<br /><br/> L\'equipe Road Trip Social ';
 
 
       mail.sendMail('Road Trip Social <no-reply@roadtripsocial.com>', user.mail, 'Création de compte', mailContent, null, function (err, info) {
-        console.log(err, info);
+        if (err) {
+          res.json({
+            err: err
+          });
+        } else {
+          res.json({
+            err: null,
+            succeed: true,
+            msg: 'L\'utilisateur  ' + user + 'a bien été rajouté'
+          });
+        }
+
       });
     }
   });
@@ -370,15 +376,23 @@ router.post('/reset-password', function (req, res) {
             succeed: false
           });
         } else {
-          res.json({
-            succeed: true
-          });
 
           let mailContent = 'Bonjour, <br /><br /> Votre mot de pass <span style="color: black;  font - weight: bold;">\' ' + user.nickname + ' \'</span> a été modifié sur le site Road Trip Social. <br /><br />Un seul lien pour vous connecter : </br><a href="' + WEBURL + '/login" >Road Trip Social -> Login</a ><br /><br /> Partagez vite vos derniers voyages et aventures !<br /><br/> L\'equipe Road Trip Social ';
 
 
           mail.sendMail('Road Trip Social <no-reply@roadtripsocial.com>', user.email, 'Réinitialisation du mot de passe', mailContent, null, function (err, info) {
-            console.log(err, info);
+            if (err) {
+              res.json({
+                err: err
+              });
+            } else {
+              res.json({
+                err: null,
+                succeed: true,
+                txt: info
+              });
+            }
+
           });
         }
       });
@@ -439,9 +453,18 @@ router.post('/change-password', passport.authenticate('jwt', {
 
 
             mail.sendMail('Road Trip Social <no-reply@roadtripsocial.com>', user.email, 'Création de compte', mailContent, null, function (err, info) {
-              console.log(err, info);
+              if (err) {
+                res.json({
+                  err: err
+                });
+              } else {
+                res.json({
+                  err: null,
+                  succeed: true,
+                  txt: info
+                });
+              }
             });
-
           }
         });
 
