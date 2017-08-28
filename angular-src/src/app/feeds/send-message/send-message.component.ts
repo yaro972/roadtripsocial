@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
@@ -15,6 +15,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./send-message.component.css']
 })
 export class SendMessageComponent implements OnInit, OnDestroy {
+  @Input() friendName;
   // Definition des éléments du formulaire
   sendMailForm: FormGroup;
   toInput = new FormControl('', Validators.required);

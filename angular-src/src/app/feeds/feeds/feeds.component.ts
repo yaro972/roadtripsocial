@@ -13,6 +13,9 @@ export class FeedsComponent implements OnInit, OnDestroy {
   newPost: String;
   sub: any;
 
+  showFormEvent: Boolean;
+  friendName: String;
+
   constructor(
     private _authService: AuthService,
     private _postService: PostsService
@@ -41,6 +44,18 @@ export class FeedsComponent implements OnInit, OnDestroy {
       }
     });
   };
+
+  /**
+   * Active la vue du formulaire
+   */
+  onShowForm() {
+    console.log(1, '-', new Date())
+    this.showFormEvent = true;
+  }
+
+  onSendMessage() {
+    this.showFormEvent = false;
+  }
 
   /**
    * Nettoyage lors de la destruction de la vue

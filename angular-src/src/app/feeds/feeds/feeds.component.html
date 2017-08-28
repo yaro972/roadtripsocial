@@ -71,17 +71,35 @@
 
             <div class="col-xs-2 ">
               <!-- Liste d'amis -->
-              <div class="row">
+              <!-- <div class="row list-friends">
                 <div class="col-md-12">
                   <rts-list-friends></rts-list-friends>
                 </div>
-              </div>
+              </div> -->
               <!-- Liste d'amis -->
 
-              <!-- Nouveau message -->
+              <!-- Utilisateurs connectés -->
               <div class="row">
+                <div class="col-md-12 connected-friends">
+                  <rts-friends-connected></rts-friends-connected>
+                </div>
+              </div>
+              <!-- Utilisateurs connectés -->
+
+              <!-- Nouveau message -->
+              <div class="row" (click)="onShowForm()" *ngIf="!showFormEvent">
+                <div class="col-md-10 col-md-push-1">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">@</span>
+                    <input type="text" id="to" name="toInput" placeholder="@destinataire" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row send-message" *ngIf="showFormEvent">
                 <div class="col-md-12">
-                  <rts-send-message></rts-send-message>
+                  <rts-send-message [friendName]=friendName (messageSend)=o nSendMessage()></rts-send-message>
                 </div>
               </div>
               <!-- Nouveau message -->
