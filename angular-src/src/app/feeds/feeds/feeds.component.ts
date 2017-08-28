@@ -1,28 +1,37 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterContentChecked } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { PostsService } from '../../services/posts/posts.service';
 import { environment } from './../../../environments/environment';
+import { SendMessageService } from './../service/send-message.service';
 
 @Component({
   selector: 'rts-feeds',
   templateUrl: './feeds.component.html',
   styleUrls: ['./feeds.component.css']
 })
-export class FeedsComponent implements OnInit, OnDestroy {
+export class FeedsComponent implements OnInit, OnDestroy, AfterContentChecked {
   userAvatar: String;
   newPost: String;
   sub: any;
+  subSendMessageService: any;
 
   showFormEvent: Boolean;
+  isMessagerieShown: any;
   friendName: String;
+
 
   constructor(
     private _authService: AuthService,
-    private _postService: PostsService
-  ) { }
+    private _postService: PostsService,
+    private _sendMessageService: SendMessageService
+  ) {
+
+  }
 
   ngOnInit() {
     this.userAvatar = environment.BACKENDURL + '/api/display-photo/' + JSON.parse(localStorage.getItem('user')).avatar;
+
+
   }
 
   // Ajout d'un post
@@ -57,6 +66,18 @@ export class FeedsComponent implements OnInit, OnDestroy {
     this.showFormEvent = false;
   }
 
+
+
+  ngAfterContentChecked() {
+    this.subSendMessageService = this._sendMessageService.isShown()
+      .subscribe(status => {
+        this.isMessagerieShown = status;
+      });
+
+
+  }
+
+
   /**
    * Nettoyage lors de la destruction de la vue
    */
@@ -64,6 +85,11 @@ export class FeedsComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
       this.sub = null;
+    }
+
+    if (this.subSendMessageService) {
+      this.subSendMessageService.unsubscribe();
+      this.subSendMessageService = null;
     }
   }
 }

@@ -9,15 +9,14 @@ import { LastMessageViewComponent } from './last-message-view/last-message-view.
 
 import { ProfileEditService } from './../services/profile-edit/profile-edit.service';
 
-import { FeedsModule } from './../feeds/feeds.module';
+
 import { ShowImagesModule } from './../show-images/show-images.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ShowImagesModule,
-    FeedsModule
+    ShowImagesModule
   ],
   declarations: [
     ProfileComponent,
@@ -30,7 +29,8 @@ import { ShowImagesModule } from './../show-images/show-images.module';
     ProfileEditService
   ],
   exports: [
-    ProfileViewComponent
+    ProfileViewComponent,
+    ProfileComponent
   ]
 })
 export class ProfileModule { }

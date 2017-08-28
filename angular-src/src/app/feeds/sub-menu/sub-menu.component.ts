@@ -30,6 +30,10 @@ export class SubMenuComponent implements OnInit, OnDestroy {
     this._sendMessageService.showMessagerie();
   }
 
+  onClickShowFeeds() {
+    this._sendMessageService.hideMessagerie();
+  }
+
   onLogoutClick() {
     this._authService.logout();
     this._flashMessage.grayOut(true);

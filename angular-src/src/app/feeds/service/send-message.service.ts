@@ -12,23 +12,12 @@ export class SendMessageService {
   }
 
   showMessagerie() {
-    // const observable = new Observable(observer => {
-    this.isActive = true;
-    // observer.next(this.isActive);
-    // });
 
-    // return observable;
-    console.log(1)
-    return this.isActive;
+    this.isActive = true;
   }
 
   hideMessagerie() {
-    const observable = new Observable(observer => {
-      this.isActive = false;
-      observer.next(this.isActive);
-    });
-
-    return observable;
+    this.isActive = false;
   }
 
   isShown() {

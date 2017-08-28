@@ -90,24 +90,31 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
    * Vérifie si tous les messages ont été lus
    */
   isunreadMessage(): void {
-    const userId = JSON.parse(localStorage.getItem('user'))._id;
+    const userProfile = JSON.parse(localStorage.getItem('user'))
+    let userId;
+
+    if (userProfile) {
+      userId = JSON.parse(localStorage.getItem('user'))._id;
 
 
-    this.subGetUnreadMessages = this._authService
-      .getUnreadMessages(userId)
-      .subscribe(data => {
-        if (data.err) {
-          console.log(data.err);
-          this.nbUnreadPosts = -1;
-        } else {
-          this.nbUnreadPosts = data.nbUnread;
-          if (this.nbUnreadPosts > 0) {
-            this.isNewMessage = true;
+      this.subGetUnreadMessages = this._authService
+        .getUnreadMessages(userId)
+        .subscribe(data => {
+          if (data.err) {
+            console.log(data.err);
+            this.nbUnreadPosts = -1;
           } else {
-            this.isNewMessage = false;
+            this.nbUnreadPosts = data.nbUnread;
+            if (this.nbUnreadPosts > 0) {
+              this.isNewMessage = true;
+            } else {
+              this.isNewMessage = false;
+            }
           }
-        }
-      });
+        });
+
+    }
+
   }
 
   showUnreadMessage() {

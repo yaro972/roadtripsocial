@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-
 
 import { Users } from './users'
 
@@ -11,8 +10,11 @@ import { Users } from './users'
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.css']
 })
-export class AccueilComponent implements OnInit {
+
+export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy {
   isConnected: Boolean;
+
+
 
   users: Users = {
     registered: 15,
@@ -24,15 +26,14 @@ export class AccueilComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _router: Router
-  ) { }
+  ) {
+    if (this._authService.loggedIn()) {
+      // this._router.navigate(['/feeds']);
+      this.isConnected = true;
+    }
+  }
 
   ngOnInit() {
-    if (this._authService.loggedIn()) {
-      this._router.navigate(['/feeds']);
-    }
-
-    this.isConnected = false;
-
     // Si des elements sont présents mais erronés
     // => Vidage du localStorage
 
@@ -44,10 +45,24 @@ export class AccueilComponent implements OnInit {
       localStorage.clear();
     }
 
-    if (localStorage.getItem('token')) {
+
+
+    if (this._authService.loggedIn()) {
+      // this._router.navigate(['/feeds']);
+
       this.isConnected = true;
     }
-
   }
+
+
+  ngAfterContentChecked() {
+
+    if (this._authService.loggedIn()) {
+      // this._router.navigate(['/feeds']);
+      this.isConnected = true;
+    }
+  }
+
+  ngOnDestroy() { }
 
 }

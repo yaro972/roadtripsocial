@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 
-import { AccueilComponent } from './components/accueil/accueil.component';
+import { AccueilModule } from './accueil/accueil.module';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
@@ -35,7 +35,6 @@ import { MembresModule } from './membres/membres.module';
 import { ProfileModule } from './profile/profile.module';
 import { PassSecurityModule } from './pass-security/pass-security.module';
 import { ShowImagesModule } from './show-images/show-images.module';
-// import { MessagerieModule } from './messagerie/messagerie.module';
 import { FeedsModule } from './feeds/feeds.module';
 
 
@@ -43,7 +42,6 @@ import { FeedsModule } from './feeds/feeds.module';
   declarations: [
     AppComponent,
     AboutComponent,
-    AccueilComponent,
     FooterComponent,
     TopMenuComponent
   ],
@@ -55,13 +53,13 @@ import { FeedsModule } from './feeds/feeds.module';
     HttpModule,
     ReactiveFormsModule,
     FormsModule,
+    AccueilModule,
     LoginRegisterModule,
     FlashMessagesModule,
     ProfileModule,
     PassSecurityModule,
     ShowImagesModule,
     MembresModule,
-    // MessagerieModule,
     FeedsModule
   ],
   providers: [

@@ -8,11 +8,13 @@ import { User } from '../../core/user';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
   authToken: any;
   user: User;
+
 
   collapseSubMen = false;
   public userChangeSubject = new Subject<User>();
@@ -111,6 +113,20 @@ export class AuthService {
 
   loggedIn() {
     return tokenNotExpired();
+  }
+
+  isLogged() {
+    const isLoggedObserv = new Observable(observable => {
+      if (localStorage.getItem('token')) {
+        console.log(true)
+        observable.next(true);
+      } else {
+        console.log(false)
+        observable.next(false);
+      }
+    });
+
+    return isLoggedObserv;
   }
 
   /**
@@ -329,4 +345,7 @@ export class AuthService {
       })
       .map(res => res.json());
   }
+
+
+
 }

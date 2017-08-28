@@ -8,8 +8,9 @@ import { ShowImagesModule } from './../show-images/show-images.module';
 
 import { DetailMembresComponent } from './detail-membres/detail-membres.component';
 import { ListMembresComponent } from './list-membres/list-membres.component';
+import { PostViewComponent } from './post-view/post-view.component';
 
-import { FeedsModule } from './../feeds/feeds.module';
+
 
 @NgModule({
   imports: [
@@ -17,12 +18,12 @@ import { FeedsModule } from './../feeds/feeds.module';
     ProfileModule,
     FormsModule,
     ReactiveFormsModule,
-    ShowImagesModule,
-    FeedsModule
+    ShowImagesModule
   ],
   declarations: [
     DetailMembresComponent,
-    ListMembresComponent
+    ListMembresComponent,
+    PostViewComponent
   ],
   exports: [
     DetailMembresComponent,
