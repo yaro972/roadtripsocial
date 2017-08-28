@@ -13,6 +13,7 @@ import { ListFriendsComponent } from './list-friends/list-friends.component';
 
 import { SendMessageComponent } from './send-message/send-message.component';
 import { FriendsConnectedComponent } from './friends-connected/friends-connected.component';
+import { SendMessageService } from './service/send-message.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,9 @@ import { FriendsConnectedComponent } from './friends-connected/friends-connected
     SendMessageComponent,
     FeedsComponent,
     ListFriendsComponent
+  ],
+  providers: [
+    SendMessageService
   ]
 })
 export class FeedsModule { }
