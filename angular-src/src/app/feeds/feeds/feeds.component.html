@@ -6,7 +6,7 @@
       <div class="col-xs-12">
         <div class="row feeds-header">
           <div class="col-xs-1">
-            <img src="{{userAvatar}}" alt="" class="img img-responsive img-rounded">
+            <img src="{{userAvatar}}" alt="" class="img img-responsive img-circle">
           </div>
           <div class="col-xs-10 text-center">
             <h2>Votre flux d'actualité</h2>
@@ -35,8 +35,12 @@
               <div class="row">
                 <div class="col-xs-10 col-xs-offset-1" *ngIf="isMessagerieShown">
                   <rts-messagerie> </rts-messagerie>
-                  {{isMessagerieShown}}
                 </div>
+
+                <div class="col-xs-10 col-xs-offset-1">
+                  <rts-messagerie> </rts-messagerie>
+                </div>
+
                 <div class="col-xs-10 col-xs-offset-1" *ngIf="!isMessagerieShown">
                   <div class="row">
                     <div class="col-xs-8 col-xs-offset-2">
