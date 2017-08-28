@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { AuthGuard } from '../../guard/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from './../../../environments/environment';
+import { SendMessageService } from './../../feeds/service/send-message.service';
 
 @Component({
   selector: 'rts-top-menu',
@@ -36,7 +37,8 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
   constructor(
     public _authService: AuthService,
     private _router: Router,
-    private _flashMessage: FlashMessagesService
+    private _flashMessage: FlashMessagesService,
+    private _sendMessageService: SendMessageService
   ) {
 
     this.collapseSubMen = this._authService.collapseSubMen;
@@ -108,6 +110,9 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
       });
   }
 
+  showUnreadMessage() {
+    this._sendMessageService.showMessagerie();
+  }
 
   ngAfterContentChecked() {
     const userProfile = localStorage.getItem('user');

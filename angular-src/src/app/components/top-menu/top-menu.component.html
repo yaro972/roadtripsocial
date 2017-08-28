@@ -61,8 +61,8 @@
               Changer son mot de passe</a>
           </li> -->
 
-          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
-            <a routerLink="/messagerie" title="Messagerie">
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}" (click)="showUnreadMessage()">
+            <a title="Messagerie">
               <span class="glyphicon glyphicon-envelope" [ngClass]="{ 'unreadMessages': isNewMessage, 'nounreadMessage': !isNewMessage }"></span>
               <span class="badge" > {{nbUnreadPosts}}</span>
             </a>
