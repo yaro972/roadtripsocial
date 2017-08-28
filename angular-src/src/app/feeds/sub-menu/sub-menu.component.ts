@@ -1,44 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
+import { SendMessageService } from './../service/send-message.service';
+
 @Component({
   selector: 'rts-sub-menu',
   templateUrl: './sub-menu.component.html',
   styleUrls: ['./sub-menu.component.css']
 })
-export class SubMenuComponent implements OnInit {
+export class SubMenuComponent implements OnInit, OnDestroy {
 
-  links = [
-    {
-      url: '/send-message',
-      text: 'Envoyer un message'
-    }
-    , {
-      url: '/profile',
-      text: 'Voir mon profil'
-    },
-    {
-      url: '/change-password',
-      text: 'Changer mon mot de passe'
-    },
-    {
-      url: '/list-membres',
-      text: 'Rechercher un ami'
-    }
-  ]
-
+  subSendMessageService: any;
 
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private _flashMessage: FlashMessagesService
+    private _flashMessage: FlashMessagesService,
+    private _sendMessageService: SendMessageService
   ) { }
 
   ngOnInit() {
+  }
+
+  showSendMessageEvent() {
+    this._sendMessageService.showMessagerie();
   }
 
   onLogoutClick() {
@@ -49,5 +38,9 @@ export class SubMenuComponent implements OnInit {
       timeout: 1500
     });
     this._router.navigate(['/']);
+  }
+
+  ngOnDestroy() {
+
   }
 }
