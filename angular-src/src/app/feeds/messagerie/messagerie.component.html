@@ -5,27 +5,21 @@
     <div class="row">
       <div class="col-sm-4 col-lg-4">
         <!-- Entete -->
-        <h4 style="display: inline-block;">Messagerie </h4><a> <span class="glyphicon glyphicon-envelope"></span> </a>
+        <h4>Messagerie </h4><a> <span class="glyphicon glyphicon-envelope"></span> </a>
         <div class="row">
           <div class="col-xs-12">
 
             <div class="col-md-12">
               <rts-send-message [doShownMessageInput]="true" (receiverName)="onNewContact($event)" [resetForm]="resetForm"></rts-send-message>
             </div>
-
-
-            <!-- <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">@</span>
-              <input type="text" id="to" name="toInput" placeholder="@destinataire" class="form-control" [formGroup]="sendMailForm" [value]="nickname">
-            </div> -->
           </div>
         </div>
         <!-- Entete -->
 
         <!-- Liste de conversation -->
-        <div class="row">
-          <ul style="list-style-type: none;" class="col-xs-12">
-            <li class="contact-list" *ngFor="let contactMessenger of contactMessengerList; let i=index">
+        <div class="row contact-list">
+          <ul class="col-xs-12 ">
+            <li *ngFor="let contactMessenger of contactMessengerList; let i=index">
               <div class="row">
                 <a (click)="onClickContactMessager(i)">
                   <div class="col-sm-5 col-md-5">
@@ -61,7 +55,7 @@
         <!-- Entete -->
 
         <!-- Conversation -->
-        <div class="row" style="border:1px solid block; background-color: #3f3f3f; padding:5px;">
+        <div class="row conversation-block">
           <div class="col-xs-12" style="border:1px solid block; background-color: #3f3f3f; padding:5px; ">
             <ul style="list-style-type: none;">
               <li>

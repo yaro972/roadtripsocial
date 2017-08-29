@@ -1,0 +1,29 @@
+h4 {
+  display: inline-block;
+}
+
+.contact-list ul {
+  list-style-type: none;
+}
+
+.contact-list li {
+  border: 1px solid #2E5782;
+  background-color: #283f56;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 4px;
+  color: #fefefe;
+}
+
+.contact-list a {
+  color: #fefefe;
+}
+
+
+/* conversation */
+
+.conversation-block {
+  border: 1px solid block;
+  background-color: #3f3f3f;
+  padding: 5px;
+}
