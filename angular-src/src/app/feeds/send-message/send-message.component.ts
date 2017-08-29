@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, EventEmitter, AfterContentChecked } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,15 +8,22 @@ import { User } from './../../core/user';
 import { AuthService } from './../../services/auth/auth.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
 
 @Component({
   selector: 'rts-send-message',
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.css']
 })
-export class SendMessageComponent implements OnInit, OnDestroy {
+export class SendMessageComponent implements OnInit, OnDestroy, AfterContentChecked {
   @Input() friendName;
   // Definition des éléments du formulaire
+  @Input() doShownMessageInput;
+  @Input() resetForm;
+  @Output() receiverName = new EventEmitter();
+
   sendMailForm: FormGroup;
   toInput = new FormControl('', Validators.required);
 
@@ -56,23 +63,25 @@ export class SendMessageComponent implements OnInit, OnDestroy {
           this.onToInputChange();
         }
       });
-
   }
 
   onToInputChange() {
-    if (this.sendMailForm.get('toInput').value.length) {
-      this.subSearchMembers = this._auth
-        .searchMemberByNickname(this.sendMailForm
-          .get('toInput').value)
-        .subscribe(data => {
-          if (data.err) {
-            console.log(data.err)
-          } else {
-            this.memberList = data.membersList;
-            this.onShowMemberList = true;
-          }
-        });
+    if (this.sendMailForm.get('toInput').value) {
+      if (this.sendMailForm.get('toInput').value.length) {
+        this.subSearchMembers = this._auth
+          .searchMemberByNickname(this.sendMailForm
+            .get('toInput').value)
+          .subscribe(data => {
+            if (data.err) {
+              console.log(data.err)
+            } else {
+              this.memberList = data.membersList;
+              this.onShowMemberList = true;
+            }
+          });
+      }
     }
+
   };
 
   onSelectReceiver(index) {
@@ -80,7 +89,10 @@ export class SendMessageComponent implements OnInit, OnDestroy {
     this.nickname = this.selectedMember.nickname;
     this.toInput.reset(this.nickname);
     this.onShowMemberList = false;
+    this.receiverName.emit(this.selectedMember);
   }
+
+
   onSendMessage() {
     const messageElement = {
       parentId: null,
@@ -105,6 +117,13 @@ export class SendMessageComponent implements OnInit, OnDestroy {
         }
       });
   };
+
+  ngAfterContentChecked() {
+    console.log(2, this.resetForm)
+    if (this.resetForm === true) {
+      this.toInput.reset();
+    }
+  }
 
   ngOnDestroy() {
     if (this.subSearchMembers) {

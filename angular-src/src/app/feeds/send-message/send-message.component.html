@@ -26,16 +26,18 @@
       </div>
 
       <!-- Corps du message -->
-      <div class="form-group" [ngClass]="{ 
+      <div *ngIf="!doShownMessageInput">
+        <div class="form-group" [ngClass]="{ 
          'has-error': messageInput.invalid && (messageInput.dirty || messageInput.touched), 
          'has-success': messageInput.valid && (messageInput.dirty || messageInput.touched) 
         }">
 
-        <textarea name="messageInput" formControlName="messageInput" id="message" cols="30" rows="2" placeholder="message ..." class="form-control"
-          [formGroup]="sendMailForm"></textarea>
-      </div>
-      <div class="form-group  text-right">
-        <button type="submit" class=" btn btn-success" [disabled]="!sendMailForm.valid">Envoyer <span class="glyphicon glyphicon-arrow-right"></span></button>
+          <textarea name="messageInput" formControlName="messageInput" id="message" cols="30" rows="2" placeholder="message ..." class="form-control"
+            [formGroup]="sendMailForm"></textarea>
+        </div>
+        <div class="form-group  text-right">
+          <button type="submit" class=" btn btn-success" [disabled]="!sendMailForm.valid">Envoyer <span class="glyphicon glyphicon-arrow-right"></span></button>
+        </div>
       </div>
     </form>
   </div>

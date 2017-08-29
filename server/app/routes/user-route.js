@@ -56,7 +56,8 @@ router.put('/register', function (req, res) {
           res.json({
             err: null,
             succeed: true,
-            msg: 'L\'utilisateur  ' + user + 'a bien été rajouté'
+            msg: 'L\'utilisateur  ' + user + 'a bien été rajouté',
+            info: info
           });
         }
 
@@ -116,7 +117,9 @@ router.post('/register-extra-details', function (req, res) {
       // Renomme le fichier
       fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
         if (err) {
-          // debugger
+          res.json({
+            err: "Fichier inexistant"
+          });
         }
 
         // Ajout de l'utilisateur dans la DB
@@ -292,7 +295,9 @@ router.post('/update-profile', passport.authenticate('jwt', {
       // Renomme le fichier
       fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
         if (err) {
-          // debugger
+          res.json({
+            err: "Fichier inexistant"
+          });
         }
         // Sauvegarde le profile dans la Db
         User.updateProfile(req.body, function (err, newUserProfile) {
@@ -340,7 +345,8 @@ router.post('/lost-password', function (req, res) {
             } else {
               res.json({
                 succeed: true,
-                token: token
+                token: token,
+                profile: userP
               });
             }
           });

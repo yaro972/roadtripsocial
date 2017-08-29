@@ -365,11 +365,11 @@ User.searchMembersByNickname = function (nickname, callback) {
     }, {
       _id: 1,
       nickname: 1,
-      avatar: 1
-
+      avatar: 1,
+      country: 1
     }).limit(3)
     .exec(function (err, documents) {
-      callback(err, documents)
+      callback(err, documents);
     });
 };
 
