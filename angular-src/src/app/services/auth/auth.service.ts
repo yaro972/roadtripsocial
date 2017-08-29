@@ -347,5 +347,19 @@ export class AuthService {
   }
 
 
+  getMessengerContactList() {
+    const headers = new Headers();
+    this.loadToken();
+    const userId = JSON.parse(localStorage.getItem('user'))._id;
 
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/get-contact-list', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 }
