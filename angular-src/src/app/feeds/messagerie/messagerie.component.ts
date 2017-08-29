@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./messagerie.component.css']
 })
 export class MessagerieComponent implements OnInit {
-
+  friendName: String;
   constructor() { }
 
   ngOnInit() {
   }
+
+  onSendMessage() { }
 
 }
