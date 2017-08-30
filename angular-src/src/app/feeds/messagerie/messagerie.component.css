@@ -15,8 +15,17 @@ h4 {
   color: #fefefe;
 }
 
+.contact-list li:hover {
+  background-color: #4A88D0;
+  color: orange;
+}
+
 .contact-list a {
   color: #fefefe;
+}
+
+.contact-list a:hover {
+  color: orange;
 }
 
 

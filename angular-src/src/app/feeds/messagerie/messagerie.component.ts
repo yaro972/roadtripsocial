@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,13 +9,12 @@ import { AuthService } from './../../services/auth/auth.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-
 @Component({
   selector: 'rts-messagerie',
   templateUrl: './messagerie.component.html',
   styleUrls: ['./messagerie.component.css']
 })
-export class MessagerieComponent implements OnInit {
+export class MessagerieComponent implements OnInit, OnDestroy {
   friendName: String;
 
   selectedContact: any;
@@ -27,55 +26,12 @@ export class MessagerieComponent implements OnInit {
   });
   // Formulaire
 
-  // Fake
-  contactMessengerList = [
-    {
-      _id: '000',
-      nickname: 'M. X. 01',
-      lastPostDate: '28 aout',
-      avatar: 'http://via.placeholder.com/250x250',
-      country: 'France'
-    },
-    {
-      _id: '001',
-      nickname: 'M. X. 02',
-      lastPostDate: '27 aout',
-      avatar: 'http://via.placeholder.com/250x250',
-      country: 'Italy'
-    },
-    {
-      _id: '002',
-      nickname: 'M. X. 03',
-      lastPostDate: '26 aout',
-      avatar: 'http://via.placeholder.com/250x250',
-      country: 'Vietnam'
-    },
-    {
-      _id: '003',
-      nickname: 'M. X. 04',
-      lastPostDate: '25 aout',
-      avatar: 'http://via.placeholder.com/250x250',
-      country: 'England'
-    },
-    {
-      _id: '004',
-      nickname: 'M. X. 05',
-      lastPostDate: '24 aout',
-      avatar: 'http://via.placeholder.com/250x250',
-      country: 'Spain'
-    },
-    {
-      _id: '005',
-      nickname: 'M. X. 06',
-      lastPostDate: '23 aout',
-      avatar: 'http://via.placeholder.com/250x250',
-      country: 'Belgium'
-    },
-  ]
+  // Saiuvegarde de la souscripton en cours
+  subGetMessengerContactList: Subscription;
+  subSendMessage: Subscription;
+  // Saiuvegarde de la souscripton en cours
 
-  // Fake
-
-
+  contactMessengerList = [];
 
   constructor(
     private _fb: FormBuilder,
@@ -85,15 +41,75 @@ export class MessagerieComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onContactMessengerList();
   }
 
   onSendMessage() { }
+
   onSubmitClick() {
     const newMessage = {
-      senders: this.selectedContact,
-      content: this.newMessageForm.controls.newMessage.value
+      sender: this._auth.getOwnId(),
+      receiver: this.selectedContact,
+      content: this.newMessageForm.controls.newMessage.value,
+      parentId: null
     }
-    console.log(newMessage);
+
+
+    this.subSendMessage = this._auth.sendMessage(newMessage)
+      .subscribe(data => {
+        if (data.err) {
+          this._flashMessage.show('Problème lors de l\'envoi du message', {
+            cssClass: 'alert alert-danger text-center',
+            timeout: 2500
+          });
+        } else {
+          this._flashMessage.show('Le message a bien été envoyé', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+          this._router.navigate(['/feeds']);
+        }
+      });
+  }
+
+  onContactMessengerList() {
+    this.subGetMessengerContactList = this._auth.getMessengerContactList().subscribe((data) => {
+
+      console.log(data)
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        console.log(data.contactList)
+        this.contactMessengerList = this.prepareData(data.contactList);
+
+      }
+    });
+  }
+
+  prepareData(list: Array<any>): Array<any> {
+    const tmp: Array<any> = [];
+    let saveDate: Date;
+
+    for (let i = 0; i < list.length; i++) {
+
+      if (list[i].lastPostDate) {
+        saveDate = list[i].lastPostDate;
+      }
+
+      if (list[i].userA && list[i].userA._id !== this._auth.getOwnId()) {
+        list[i].userA.lastPostDate = saveDate;
+        tmp.push(list[i].userA);
+      }
+
+      if (list[i].userB && list[i].userB._id !== this._auth.getOwnId()) {
+        list[i].userB.lastPostDate = saveDate;
+        tmp.push(list[i].userB);
+      }
+    }
+
+    console.log(tmp)
+
+    return tmp;
   }
 
   onClickContactMessager(contactIndex) {
@@ -105,5 +121,17 @@ export class MessagerieComponent implements OnInit {
   onNewContact(event) {
     console.log(event)
     this.selectedContact = event;
+  }
+
+  ngOnDestroy() {
+    if (this.subGetMessengerContactList) {
+      this.subGetMessengerContactList.unsubscribe();
+      this.subGetMessengerContactList = null;
+    }
+
+    if (this.subSendMessage) {
+      this.subSendMessage.unsubscribe();
+      this.subSendMessage = null;
+    }
   }
 }

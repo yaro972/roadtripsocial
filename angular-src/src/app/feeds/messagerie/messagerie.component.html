@@ -18,16 +18,16 @@
 
         <!-- Liste de conversation -->
         <div class="row contact-list">
-          <ul class="col-xs-12 ">
+          <ul class="col-xs-12 " *ngIf="contactMessengerList">
             <li *ngFor="let contactMessenger of contactMessengerList; let i=index">
               <div class="row">
                 <a (click)="onClickContactMessager(i)">
                   <div class="col-sm-5 col-md-5">
-                    <img src="{{contactMessenger.avatar}}" class="img img-responsive img-circle">
+                    <img src="{{contactMessenger.avatar | showImage}}" class="img img-responsive img-circle">
                   </div>
                   <div class="col-sm-7 col-md-7">
                     <p>{{contactMessenger.nickname}}</p>
-                    <p>{{contactMessenger.lastPostDate}}</p>
+                    <p>{{contactMessenger.lastPostDate|date:'dd MMM'}}</p>
                   </div>
                 </a>
               </div>

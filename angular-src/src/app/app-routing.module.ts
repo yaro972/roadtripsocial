@@ -15,6 +15,8 @@ import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { ResetPasswordComponent } from './pass-security/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './pass-security/change-password/change-password.component';
 
+import { FeedsComponent } from './feeds/feeds/feeds.component'
+
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 
@@ -64,6 +66,11 @@ const routes: Routes = [
   {
     path: 'reset-password/:token',
     component: ResetPasswordComponent
+  },
+  {
+    path: 'feeds',
+    component: FeedsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'about',

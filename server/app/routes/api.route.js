@@ -2,15 +2,15 @@
 
 var express = require('express');
 var router = express.Router();
-const User = require('../models/user-model');
+const User = require('../models/user.model');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../inc/.config');
 let path = require('path');
 const fs = require('fs');
 
-const Posts = require('../models/post-model');
-const Comments = require('../models/comment-model');
+const Posts = require('../models/post.model');
+const Comments = require('../models/comment.model');
 
 var multer = require('multer');
 

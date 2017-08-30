@@ -104,6 +104,10 @@ export class AuthService {
     this.authToken = token;
   }
 
+  getOwnId() {
+    return JSON.parse(localStorage.getItem('user'))._id;
+  }
+
   logout() {
     this.authToken = null;
     this.user = null;
@@ -355,7 +359,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-type', 'application/json');
     return this._http
-      .post(environment.BACKENDURL + '/api/user/get-contact-list', {
+      .post(environment.BACKENDURL + '/api/user/get-messenger-contact-list', {
         userId: userId
       }, {
         headers: headers

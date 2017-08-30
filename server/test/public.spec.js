@@ -10,7 +10,7 @@ let server = require('../server');
 let should = chai.should();
 chai.use(chaiHttp);
 
-let User = require('../app/models/user-model');
+let User = require('../app/models/user.model');
 
 // var assert = require('assert');
 

@@ -12,8 +12,9 @@ const fs = require('fs');
 const path = require('path');
 
 // Models
-const User = require('../models/user-model');
-const Messages = require('../models/messages-model');
+const User = require('../models/user.model');
+const Messages = require('../models/messages.model');
+const MessageThread = require('../models/message-thread.model');
 
 var WEBURL = 'http://localhost:4200';
 // WEBURL = 'https://f0fed797.ngrok.io';
@@ -376,7 +377,7 @@ router.post('/reset-password', function (req, res) {
         succeed: false
       });
     } else {
-      User.resetPassword(req.body.token, req.body.newPass, function (err, result) {
+      User.resetPassword(req.body.token, req.body.newPass, function (err) {
         if (err) {
           res.json({
             succeed: false
@@ -444,7 +445,7 @@ router.post('/change-password', passport.authenticate('jwt', {
       if (isMatch) {
         // Mise à jour du nouveau mot de passe
 
-        User.updatePassword(nickname, req.body.newPass, function (err, result) {
+        User.updatePassword(nickname, req.body.newPass, function (err) {
           if (err) {
             res.json({
               'succeed': false,
@@ -552,28 +553,130 @@ router.post('/member-details', passport.authenticate('jwt', {
 router.post('/send-message', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
+  let threadId = 0;
+  // Controle si un thread existe déjà
+  MessageThread.getThreadName(req.body.msg.receiver._id, req.body.msg.sender, function (err, result) {
 
-  let newMessage = new Messages({
-    "sendDate": new Date(),
-    "content": req.body.msg.content,
-    "receiver": req.body.msg.receiver,
-    "sender": req.body.msg.sender,
-    "isRead": false,
-    "parentId": req.body.msg.parentId
-
-  });
-
-  // Ajout de la date d'envoi = Date du jour
-
-  Messages.addNewMessage(newMessage, function (err, result) {
+    // Si une erreur
     if (err) {
       res.json({
         err: err
       });
     } else {
+      if (result === null) {
+        // Pas de thread existant
+        MessageThread.addNewThread(req.body.msg.receiver._id, req.body.msg.sender, function (err, result) {
+
+          if (err) {
+            res.json({
+              err: err
+            });
+          } else {
+            threadId = result._doc._id; // Sauvegarde de l'id du thread
+            // Ajout du nouveau message
+            addNewMessage(req, threadId, function (rslt) {
+
+              if (rslt) {
+                res.json({
+                  err: err
+                });
+              } else {
+                updateLastDateMessage(threadId, new Date(), function (err, result) {
+
+                  if (err) {
+                    res.json({
+                      err: err
+                    });
+                  } else {
+                    res.json({
+                      err: null,
+                      data: result
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
+      } else {
+        // Un thread existe  
+        threadId = result._doc._id; // Sauvegarde de l'id du thread
+        // Ajout du nouveau message
+        addNewMessage(req, threadId, function (rslt) {
+          if (rslt.err) {
+            res.json({
+              err: err
+            });
+          } else {
+            updateLastDateMessage(threadId, new Date(), function (err, result) {
+              if (err) {
+                res.json({
+                  err: err
+                });
+              } else {
+                res.json({
+                  err: null,
+                  data: result
+                });
+              }
+            });
+          }
+        });
+      }
+    }
+  });
+});
+
+/**
+ * Met à jour la date du dernier message
+ * @param {ID} threadId Id du thread
+ * @param {Date} newDate Date du jour
+ * @param {Function} callback Function de callback
+ */
+function updateLastDateMessage(threadId, newDate, callback) {
+  MessageThread.updatePostDate(threadId, newDate, function (err, result) {
+    if (err) {
+      callback({
+        err: err
+      });
+    } else {
+      callback({
+        err: null,
+        result: result
+      });
+    }
+  });
+}
+
+/**
+ * Ajoute un nouveau message 
+ * @param {*} req Requête
+ * @param {*} callback Function de callback
+ */
+function addNewMessage(req, threadId, callback) {
+
+  // Contenu du nouveau message
+  let newMessage = new Messages({
+    "sendDate": new Date(),
+    "content": req.body.msg.content,
+    "receiver": req.body.msg.receiver._id,
+    "sender": req.body.msg.sender,
+    "isRead": false,
+    "parentId": req.body.msg.parentId,
+    'threadId': threadId
+  });
+
+  // Ajout de la date d'envoi = Date du jour
+
+  Messages.addNewMessage(newMessage, function (err) {
+    if (err) {
+      callback({
+        err: err
+      });
+    } else {
       User.getUserById(req.body.msg.receiver._id, function (err, user) {
         if (err) {
-          res.json({
+          callback({
             err: err
           });
         } else {
@@ -582,13 +685,13 @@ router.post('/send-message', passport.authenticate('jwt', {
           let mailContent = 'Bonjour, <br /><br /> Vous avez reçu un nouveau message <br /><br/> L\'equipe Road Trip Social ';
 
 
-          mail.sendMail('Road Trip Social <no-reply@roadtripsocial.com>', user.mail, 'Création de compte', mailContent, null, function (err, info) {
+          mail.sendMail('Road Trip Social <no-reply@roadtripsocial.com>', user.email, '[RTS] - Nouveau message', mailContent, null, function (err, info) {
             if (err) {
-              res.json({
+              callback({
                 err: err
               });
             } else {
-              res.json({
+              callback({
                 err: null,
                 text: info
               });
@@ -600,9 +703,12 @@ router.post('/send-message', passport.authenticate('jwt', {
       });
     }
   });
-});
+}
 
 
+/**
+ * Calcul le nombre de messages non lus
+ */
 router.post('/get-nbunread-messages', function (req, res) {
   Messages.getUnreadMessages(req.body.userId, function (err, nbUnread) {
     if (err) {
@@ -617,6 +723,25 @@ router.post('/get-nbunread-messages', function (req, res) {
     }
   });
 
+
+  /**
+   * Récupère la liste des contacts
+   */
+  router.post('/get-messenger-contact-list', function (req, res) {
+
+    MessageThread.getMessengerContactList(req.body.userId, function (err, list) {
+      if (err) {
+        res.json({
+          err: err
+        });
+      } else {
+        res.json({
+          err: null,
+          contactList: list
+        });
+      }
+    });
+  });
 
 });
 

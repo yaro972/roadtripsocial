@@ -31,6 +31,10 @@ let messagerieSchema = mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  threadId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Thread'
   }
 });
 

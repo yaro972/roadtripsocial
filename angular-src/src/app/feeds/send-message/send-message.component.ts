@@ -119,7 +119,6 @@ export class SendMessageComponent implements OnInit, OnDestroy, AfterContentChec
   };
 
   ngAfterContentChecked() {
-    console.log(2, this.resetForm)
     if (this.resetForm === true) {
       this.toInput.reset();
     }

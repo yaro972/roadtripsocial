@@ -65,9 +65,9 @@ require('./app/inc/passport')(passport);
 
 
 // Fichiers de configuration des routes
-var api = require('./app/routes/api-route');
-var userApi = require('./app/routes/user-route');
-var admin = require('./app/routes/admin-route');
+var api = require('./app/routes/api.route');
+var userApi = require('./app/routes/user.route');
+var admin = require('./app/routes/admin.route');
 
 
 // ===========================

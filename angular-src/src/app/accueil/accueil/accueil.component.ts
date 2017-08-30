@@ -28,7 +28,7 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     private _router: Router
   ) {
     if (this._authService.loggedIn()) {
-      // this._router.navigate(['/feeds']);
+      this._router.navigate(['/feeds']);
       this.isConnected = true;
     }
   }
@@ -48,7 +48,7 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
 
 
     if (this._authService.loggedIn()) {
-      // this._router.navigate(['/feeds']);
+      this._router.navigate(['/feeds']);
 
       this.isConnected = true;
     }
@@ -58,7 +58,7 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
   ngAfterContentChecked() {
 
     if (this._authService.loggedIn()) {
-      // this._router.navigate(['/feeds']);
+      this._router.navigate(['/feeds']);
       this.isConnected = true;
     }
   }

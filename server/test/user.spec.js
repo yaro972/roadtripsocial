@@ -13,7 +13,7 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 
 let mongoose = require("mongoose");
-let User = require('../app/models/user-model');
+let User = require('../app/models/user.model');
 
 describe('User Model', function () {
   let user;
