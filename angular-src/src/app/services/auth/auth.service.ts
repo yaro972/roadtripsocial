@@ -429,4 +429,19 @@ export class AuthService {
       })
       .map(res => res.json());
   }
+
+
+  /**
+   * Récupération du nombres d'utilisateur
+   */
+  getNbUseregistred() {
+    const headers = new Headers();
+
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/api/user/getNbUseregistred', {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 };

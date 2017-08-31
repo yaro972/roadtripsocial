@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Users } from './users'
 
@@ -13,13 +14,15 @@ import { Users } from './users'
 
 export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy {
   isConnected: Boolean;
-
+  subGetNbUseregistred: Subscription;
 
 
   users: Users = {
     registered: 15,
     online: 7
   }
+
+  registredUsers: Number;
 
   journey: Number = 157;
 
@@ -52,8 +55,23 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
 
       this.isConnected = true;
     }
+
+    this.getNbUseregistred();
   }
 
+
+  /**
+   * Récupération du nombre d'utilisateurs
+   */
+  getNbUseregistred() {
+    this.subGetNbUseregistred = this._authService.getNbUseregistred().subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        this.registredUsers = data.nbRegistredUsers;
+      }
+    });
+  };
 
   ngAfterContentChecked() {
 
@@ -63,6 +81,10 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     }
   }
 
-  ngOnDestroy() { }
-
+  ngOnDestroy() {
+    if (this.subGetNbUseregistred) {
+      this.subGetNbUseregistred.unsubscribe();
+      this.subGetNbUseregistred = null;
+    }
+  }
 }

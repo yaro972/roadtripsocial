@@ -10,8 +10,6 @@ import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { SendMessageService } from './../service/send-message.service'
 
-import { JsonPipe } from '@angular/common';
-
 @Component({
   selector: 'rts-messagerie',
   templateUrl: './messagerie.component.html',

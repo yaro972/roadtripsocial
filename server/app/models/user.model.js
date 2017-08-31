@@ -384,4 +384,13 @@ User.memberDetails = function (memberId, callback) {
   }, callback);
 };
 
+/**
+ * Récupération du nombre d'utilisateurs
+ */
+
+User.getNbUseregistred = function (callback) {
+  User.count({})
+    .exec(callback);
+};
+
 module.exports = User;
