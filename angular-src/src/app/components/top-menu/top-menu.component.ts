@@ -119,6 +119,7 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
 
   showUnreadMessage() {
     this._sendMessageService.showMessagerie();
+    this._router.navigate(['/feeds']);
   }
 
   ngAfterContentChecked() {
