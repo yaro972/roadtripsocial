@@ -54,6 +54,7 @@ stages:
   - build
   - test
   - staging
+  - e2e
   - deploy
   - production
 
@@ -98,8 +99,15 @@ build_angular:
  stage: build
  environment: dev
  script:    
-   - echo "Test step angular"
+   - echo "Build Angular step "
    - echo ng build
+
+build_angular:
+ stage: e2e
+ environment: dev
+ script:    
+   - echo "E2E Angular Testing"
+   
 
 deploy_to_staging:
  stage: deploy
