@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { FileUploadService } from '../../services/file-upload/file-upload.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
+import { SendMessageService } from './../../feeds/service/send-message.service';
+
 @Component({
   selector: 'rts-list-membres',
   templateUrl: './list-membres.component.html',
@@ -26,7 +28,8 @@ export class ListMembresComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _authService: AuthService,
     private _membersService: ListMembersService,
-    private _fileService: FileUploadService
+    private _fileService: FileUploadService,
+    private _sendMessageService: SendMessageService
   ) { }
 
   ngOnInit() {
@@ -65,10 +68,12 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    */
   onSendPrivateMessage(index) {
     // TODO : Afficher input d'envoi 
-    let receiver = this.membersList[index];
-    console.log(receiver)
+    const receiver = this.membersList[index];
 
-    alert('Message privé ' + index);
+    this._sendMessageService.showMessagerie();
+    this._sendMessageService.setReceiver(receiver);
+    this._router.navigate(['/feeds']);
+
     return false;
   }
 

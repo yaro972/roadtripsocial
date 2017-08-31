@@ -8,6 +8,8 @@ import { User } from './../../core/user';
 import { AuthService } from './../../services/auth/auth.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { SendMessageService } from './../service/send-message.service'
+
 
 @Component({
   selector: 'rts-messagerie',
@@ -20,6 +22,7 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
   threadList: Array<any>;
   resetForm: Boolean;
 
+  selectedUser: any;
   ownId: String;
   // Formulaire
   newMessageForm: FormGroup = new FormGroup({
@@ -40,12 +43,18 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
     private _fb: FormBuilder,
     private _auth: AuthService,
     private _flashMessage: FlashMessagesService,
-    private _router: Router
+    private _router: Router,
+    private _SendMessageService: SendMessageService
   ) { }
 
   ngOnInit() {
     this.ownId = this._auth.getOwnId();
     this.onContactMessengerList();
+
+    if (this._SendMessageService.getReceiver()) {
+      this.selectedContact = this._SendMessageService.getReceiver();
+      this.selectedUser = this.selectedContact;
+    }
   }
 
   onSendMessage() { }

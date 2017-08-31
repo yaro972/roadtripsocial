@@ -18,6 +18,7 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./send-message.component.css']
 })
 export class SendMessageComponent implements OnInit, OnDestroy, AfterContentChecked {
+  @Input() selectedUser;
   @Input() friendName;
   // Definition des éléments du formulaire
   @Input() doShownMessageInput;
@@ -53,6 +54,10 @@ export class SendMessageComponent implements OnInit, OnDestroy, AfterContentChec
       });
 
     this.nickname = '';
+    if (this.selectedUser) {
+      this.nickname = this.selectedUser.nickname;
+    }
+
     this.onShowMemberList = false;
 
     // Surveille tout changement sur le champs Input du formulaire
