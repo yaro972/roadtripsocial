@@ -62,4 +62,17 @@ messagerie.getUnreadMessages = function (userId, callback) {
     .exec(callback);
 };
 
+messagerie.getThreadMessages = function (threadId, callback) {
+  messagerie
+    .find({
+      threadId: threadId
+    })
+    .sort({
+      sendDate: -1
+    })
+    .populate('receiver')
+    .populate('sender')
+    .exec(callback);
+};
+
 module.exports = messagerie;

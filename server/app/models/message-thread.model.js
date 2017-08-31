@@ -21,6 +21,10 @@ const threadMessengerSchema = new Schema({
   lastPostDate: {
     type: Date,
     required: false
+  },
+  hasUnread: {
+    type: Boolean,
+    required: false
   }
 });
 
@@ -33,7 +37,8 @@ threadMessenger.addNewThread = function (userA, userB, callback) {
     name: '' + userA + userB,
     userA: userA,
     userB: userB,
-    lastPostDate: null
+    lastPostDate: null,
+    hasUnread: null
   };
 
   let newThread = new threadMessenger(newThreadContent);
@@ -63,7 +68,8 @@ threadMessenger.updatePostDate = function (threadId, newDate, callback) {
       _id: threadId
     }, {
       $set: {
-        lastPostDate: newDate
+        lastPostDate: newDate,
+        hasUnread: true
       }
     })
     .exec(callback);

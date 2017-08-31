@@ -350,7 +350,28 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  /**
+   *Récupère le flux des messages
+   */
+  getMessageFlow(threadId) {
+    const headers = new Headers();
+    this.loadToken();
 
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/get-thread-messages', {
+        threadId: threadId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+
+  /**
+   * Liste des contacts d'un utilisateur
+   */
   getMessengerContactList() {
     const headers = new Headers();
     this.loadToken();

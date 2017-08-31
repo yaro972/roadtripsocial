@@ -574,11 +574,13 @@ router.post('/send-message', passport.authenticate('jwt', {
           } else {
             threadId = result._doc._id; // Sauvegarde de l'id du thread
             // Ajout du nouveau message
+
+
             addNewMessage(req, threadId, function (rslt) {
 
-              if (rslt) {
+              if (rslt.err) {
                 res.json({
-                  err: err
+                  err: rslt.err
                 });
               } else {
                 updateLastDateMessage(threadId, new Date(), function (err, result) {
@@ -600,12 +602,13 @@ router.post('/send-message', passport.authenticate('jwt', {
         });
       } else {
         // Un thread existe  
-        threadId = result._doc._id; // Sauvegarde de l'id du thread
+        threadId = result._doc._id; // Sauvegarde de l'id du thread       
+
         // Ajout du nouveau message
         addNewMessage(req, threadId, function (rslt) {
           if (rslt.err) {
             res.json({
-              err: err
+              err: rslt.err
             });
           } else {
             updateLastDateMessage(threadId, new Date(), function (err, result) {
@@ -742,7 +745,24 @@ router.post('/get-nbunread-messages', function (req, res) {
       }
     });
   });
+});
 
+
+router.post('/get-thread-messages', function (req, res) {
+
+
+  Messages.getThreadMessages(req.body.threadId, function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        messageList: result
+      });
+    }
+  });
 });
 
 module.exports = router;
