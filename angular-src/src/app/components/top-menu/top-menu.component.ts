@@ -112,9 +112,7 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
             }
           }
         });
-
     }
-
   }
 
   showUnreadMessage() {
