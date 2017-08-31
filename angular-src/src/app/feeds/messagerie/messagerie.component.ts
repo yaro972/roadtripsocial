@@ -73,7 +73,7 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
             cssClass: 'alert alert-success text-center',
             timeout: 2500
           });
-          // this._router.navigate(['/feeds']);          
+          // this._router.navigate(['/feeds']);
         }
       });
   }

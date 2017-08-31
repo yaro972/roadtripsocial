@@ -44,17 +44,18 @@ posts.addNewPost = function (newPost, callback) {
 /**
  * Récupère le dernier post d'un utilisateur
  */
-posts.findLast = function (nickname, callback) {
+posts.findLast = function (autorId, callback) {
   posts.findOne({
-      autors: nickname
+      autorId: autorId
     }, {
 
     }, {
       sort: {
         'datePost': -1
       }
-    },
-    callback);
+    })
+    .limit(1)
+    .exec(callback);
 };
 
 /**
@@ -69,6 +70,7 @@ posts.getPosts = function (callback) {
       }
     })
     .populate('autorId') // <--
+    .populate('Posts') // <--
     .exec(callback);
 };
 
@@ -77,14 +79,15 @@ posts.getPosts = function (callback) {
  */
 posts.getOwnerPosts = function (ownerId, callback) {
   posts
-    .find({}, {}, {
+    .find({
+      ownerId: ownerId
+    }, {}, {
       sort: {
         'datePost': -1
       }
     })
-    .populate('autorId', null, {
-      _id: ownerId
-    }) // <--
+    .populate('autorId') // <--
+    .populate('Posts') // <--
     .exec(callback);
 };
 

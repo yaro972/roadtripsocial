@@ -96,7 +96,7 @@ router.post('/get-last-post', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
 
-  Posts.findLast(req.body.nickname, function (err, data) {
+  Posts.findLast(req.body.userId, function (err, data) {
     if (err) {
       res.json({
         err: err

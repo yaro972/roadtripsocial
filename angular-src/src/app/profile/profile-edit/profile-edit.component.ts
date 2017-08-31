@@ -135,14 +135,18 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   addCountry() {
-    this._profileService.addVisitedCountry(this.newVisitedCountry);
-    this.visitedCountryList = this._profileService.getallCities();
+    this._profileService
+      .addVisitedCountry(this.newVisitedCountry);
+    this.visitedCountryList = this._profileService
+      .getallCities();
     return false;
   };
 
   removeCountry(country) {
-    this._profileService.removeVisitedCountry(country);
-    this.visitedCountryList = this._profileService.getallCities();
+    this._profileService
+      .removeVisitedCountry(country);
+    this.visitedCountryList = this._profileService
+      .getallCities();
     this.newVisitedCountry = '';
     return false;
   };

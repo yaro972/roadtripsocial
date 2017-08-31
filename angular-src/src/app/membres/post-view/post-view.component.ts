@@ -115,28 +115,33 @@ export class PostViewComponent implements OnInit, OnDestroy {
    * Affiche tous les posts
    */
   showPosts() {
-    this._postsService.getPosts().subscribe(data => {
-      // debugger
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.postItems = data.posts;
-      }
-    });
+    this._postsService
+      .getPosts()
+      .subscribe(data => {
+        // debugger
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.postItems = data.posts;
+        }
+      });
   };
 
   /**
   * Affiche tous les posts de l'utilisateur spécifié
   */
   showOwnerPosts(ownerId: String) {
-    this._postsService.getOwnerPosts(ownerId).subscribe(data => {
-      // debugger
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.postItems = data.posts;
-      }
-    });
+    this._postsService
+      .getOwnerPosts(ownerId)
+      .subscribe(data => {
+        console.log(data)
+        // debugger
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.postItems = data.posts;
+        }
+      });
   };
 
   onClickAddComment(id) {
