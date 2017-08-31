@@ -20,6 +20,7 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   membersList: any[];
   isCountriesVisited: Boolean;
   searchInput: any;
+  ownId: String;
 
   constructor(
     private _router: Router,
@@ -29,7 +30,7 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
+    this.ownId = this._authService.getOwnId();
   }
 
   /**
@@ -53,8 +54,8 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    * Envoi d'un message dans le chat publique
    * @param id Id de l'utilisateur
    */
-  onSendMessage(member) {
-    alert('Message - Chat');
+  onSendMessage(index) {
+    alert('Message - Chat ' + index);
     return false;
   }
 
@@ -62,8 +63,12 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    * Envoi d'un message Privé
    * @param id Id de la personne
    */
-  onSendPrivateMessage(member) {
-    alert('Message privé');
+  onSendPrivateMessage(index) {
+    // TODO : Afficher input d'envoi 
+    let receiver = this.membersList[index];
+    console.log(receiver)
+
+    alert('Message privé ' + index);
     return false;
   }
 
@@ -74,13 +79,15 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   onSearchChange(item) {
     if (item.length >= 1) {
 
-      this.subSearch = this._authService.searchMembers(item).subscribe(el => {
-        if (el.err) {
-          console.log(el.err)
-        } else {
-          this.membersList = el.membersList;
-        }
-      });
+      this.subSearch = this._authService
+        .searchMembers(item)
+        .subscribe(el => {
+          if (el.err) {
+            console.log(el.err)
+          } else {
+            this.membersList = el.membersList;
+          }
+        });
     } else {
       this.membersList = [];
     }
