@@ -14,22 +14,31 @@ image: teracy/angular-cli:latest
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 
 before_script:
+ - apt-get update -y && apt-get install openssh-client ssh-askpass ca-certificates ssh sshpass  -y
  # Install ssh-agent if not already installed, it is required by Docker.
  # (change apt-get to yum if you use a CentOS-based image)
- - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-
+ - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client  -y )'
+ 
+ - ssh-keygen -t rsa -N "" -q -f ~/.ssh/id_rsa
+ 
  # Run ssh-agent (inside the build environment)
  - eval $(ssh-agent -s)
 
  # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
- - ssh-add <(echo "$SSH_PRIVATE_KEY")
+ - mkdir -p ~/.ssh
+
+ #- ls /root/.ssh/
+ - echo "$SSH_PRIVATE_KEY" >>~/.ssh/authorized_keys
+ - echo "$known_host_staging" >>~/.ssh/known_hosts
+
+ 
 
  # For Docker builds disable host key checking. Be aware that by adding that
  # you are suspectible to man-in-the-middle attacks.
  # WARNING: Use this only with the Docker executor, if you use it with shell
  # you will overwrite your user's SSH config.
  - mkdir -p ~/.ssh
- - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+ - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
  # In order to properly check the server's host key, assuming you created the
  # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
  # instead.
@@ -41,51 +50,77 @@ before_script:
  - cd ./angular-src; npm install --silent  --loglevel warn ; cd ..
 
 stages:
+  - lint
   - build
   - test
-  - staging
-  - deploy
+  - e2e
+  - staging  
   - production
-
 
 cache:
   paths:
   - node_modules/
 
 lint_backend:
-  stage: build
-  environment: dev
+  stage: lint
+  environment: dev_backend
   script:
     - cd ./server; npm run lint
     
 lint_angular:
-  stage: build
-  environment: dev
+  stage: lint
+  environment: dev_angular
   script:
     - cd ./angular-src; ng lint
 
 lint_frontend:
-  stage: build
-  environment: dev
+  stage: lint
+  environment: dev_frontend
   script:
     - cd ./front; npm run lint    
 
-test:
+test_backend:
  stage: test
- environment: dev
+ environment: dev_backend
  script:    
-   - echo "Test step"
+   - echo "Test step backend"
+   - echo "npm test"
+
+test_angular:
+ stage: test
+ environment: dev_angular
+ script:    
+   - echo "Test step angular"
+   - echo "ng test"
+
+build_angular:
+ stage: build
+ environment: test
+ script:    
+   - echo "Build Angular step "
+   - echo ng build
+
+e2e_angular:
+ stage: e2e
+ environment: test
+ script:    
+   - echo "E2E Angular Testing"
+   
 
 deploy_to_staging:
- stage: build
+ stage: staging
  environment: staging   
  script:
    - echo "Go to staging"
+   - chmod 700 ~/.ssh/
+   - chmod 600 ~/.ssh/*
+
+   
    # try to connect to Staging
-   - ssh yaro@192.168.0.104
+   - sshpass -p 'clg08usf?' ssh -t yaro@karthier.synology.me -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
-   - cd /home/yaro ; ./deploy.sh
+   #- cd /home/yaro ; ./deploy.sh
 
  only: 
   - master
@@ -96,7 +131,15 @@ deploy_to_production:
   environment: production
   script:
     - echo "Go to production"
-    - cd ./front; ./node_modules/@angular/cli/bin/ng build
+    - chmod 700 ~/.ssh/
+    - chmod 600 ~/.ssh/*
+
+   
+   # try to connect to Staging
+    - sshpass -p 'clg08usf?' ssh -t yaro@vps354082.ovh.net -p 22 -v   "cd /home/yaro/ ; ./deploy.sh"
+
+   # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
+   #- cd /home/yaro ; ./deploy.sh
   only:
     - master
   when: manual

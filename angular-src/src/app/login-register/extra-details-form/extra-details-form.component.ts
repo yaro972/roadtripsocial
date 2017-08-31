@@ -109,10 +109,7 @@ export class ExtraDetailsFormComponent implements OnInit, OnDestroy {
       this.sub = this._uploadService
         .upload(fileToUpload)
         .subscribe(res => {
-          console.log(res);
           const response = res.json().filename;
-
-
           this.photoProfUpload = res.json().filename;
         });
     }

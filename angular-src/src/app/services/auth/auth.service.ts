@@ -8,11 +8,13 @@ import { User } from '../../core/user';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
   authToken: any;
   user: User;
+
 
   collapseSubMen = false;
   public userChangeSubject = new Subject<User>();
@@ -102,6 +104,10 @@ export class AuthService {
     this.authToken = token;
   }
 
+  getOwnId() {
+    return JSON.parse(localStorage.getItem('user'))._id;
+  }
+
   logout() {
     this.authToken = null;
     this.user = null;
@@ -111,6 +117,20 @@ export class AuthService {
 
   loggedIn() {
     return tokenNotExpired();
+  }
+
+  isLogged() {
+    const isLoggedObserv = new Observable(observable => {
+      if (localStorage.getItem('token')) {
+        console.log(true)
+        observable.next(true);
+      } else {
+        console.log(false)
+        observable.next(false);
+      }
+    });
+
+    return isLoggedObserv;
   }
 
   /**
@@ -311,4 +331,102 @@ export class AuthService {
       .map(res => res.json());
   }
 
-}
+  /**
+   * Liste des messages non lus pour l'utilisateur donné
+   * @param userId Id du membre
+   */
+  getUnreadMessages(userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/get-nbunread-messages', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+  /**
+   *Récupère le flux des messages
+   */
+  getMessageFlow(threadId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/get-thread-messages', {
+        threadId: threadId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+
+  /**
+   * Liste des contacts d'un utilisateur
+   */
+  getMessengerContactList() {
+    const headers = new Headers();
+    this.loadToken();
+    const userId = JSON.parse(localStorage.getItem('user'))._id;
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/get-messenger-contact-list', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+  /**
+   * Fixe l'indicateur lu
+   * @param threadId Id du thread
+   * @param userId Id de l'utilisateur
+   */
+  setReadStatus(threadId, userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/set-thread-readstatus', {
+        userId: userId,
+        threadId: threadId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+  * Supprimme l'indicateur lu
+  * @param threadId Id du thread
+  * @param userId Id de l'utilisateur
+  */
+  removeReadStatus(threadId, userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/remove-thread-readstatus', {
+        userId: userId,
+        threadId: threadId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+};

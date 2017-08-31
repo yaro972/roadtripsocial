@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
-import { ProfileEditService } from './../services/profile-edit/profile-edit.service';
-
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { LastMessageViewComponent } from './last-message-view/last-message-view.component';
-import { PostsModule } from './../posts/posts.module';
+
+import { ProfileEditService } from './../services/profile-edit/profile-edit.service';
+
 
 import { ShowImagesModule } from './../show-images/show-images.module';
 
@@ -16,8 +16,7 @@ import { ShowImagesModule } from './../show-images/show-images.module';
   imports: [
     CommonModule,
     FormsModule,
-    ShowImagesModule,
-    PostsModule
+    ShowImagesModule
   ],
   declarations: [
     ProfileComponent,
@@ -30,7 +29,8 @@ import { ShowImagesModule } from './../show-images/show-images.module';
     ProfileEditService
   ],
   exports: [
-    ProfileViewComponent
+    ProfileViewComponent,
+    ProfileComponent
   ]
 })
 export class ProfileModule { }

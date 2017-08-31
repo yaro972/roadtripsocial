@@ -14,6 +14,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
   declarations: [
     ResetPasswordComponent,
     ChangePasswordComponent
+  ],
+  exports: [
+    ChangePasswordComponent
   ]
 })
 export class PassSecurityModule { }

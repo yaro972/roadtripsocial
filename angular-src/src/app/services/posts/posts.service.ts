@@ -39,9 +39,9 @@ export class PostsService {
 
   /**
    * Récupère le dernier message d'un utilisateur
-   * @param nickname Pseudo de l'utilisateur
+   * @param userId Pseudo de l'utilisateur
    */
-  getLastPost(nickname) {
+  getLastPost(userId) {
     const headers = new Headers();
     this.loadToken();
 
@@ -50,7 +50,7 @@ export class PostsService {
       .append('Content-type', 'application/json');
     return this._http
       .post(environment.BACKENDURL + '/api/get-last-post', {
-        nickname: nickname
+        userId: userId
       }, { headers: headers })
       .map(res => res.json());
   }

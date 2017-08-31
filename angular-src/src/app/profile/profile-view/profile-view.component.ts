@@ -46,7 +46,8 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   ngOnInit() {
-    this.age = this._profileService.calcAge(this.user.birthdate);
+    this.age = this._profileService
+      .calcAge(this.user.birthdate);
   }
 
   onFollow() {

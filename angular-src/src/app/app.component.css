@@ -11,6 +11,6 @@
   left: calc(50% - 125px);
   min-height: 30px;
   width: 250px;
-  z-index: 1000;
+  z-index: 2000;
   /* border: 5px solid red;   */
 }

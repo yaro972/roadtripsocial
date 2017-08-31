@@ -17,6 +17,7 @@
                         <img [src]="logo" alt="Road Trip"> RoadTrip
                         <span>Social</span>
                         </a>
+
       </div>
       <div id="navbar" class="collapse navbar-collapse" [collapse]="isCollapse" [class.is-active]="isCollapse">
 
@@ -60,6 +61,13 @@
             <a routerLink="/change-password">
               Changer son mot de passe</a>
           </li> -->
+
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}" (click)="showUnreadMessage()">
+            <a title="Messagerie">
+              <span class="glyphicon glyphicon-envelope" [ngClass]="{ 'unreadMessages': isNewMessage, 'nounreadMessage': !isNewMessage }"></span>
+              <span class="badge" > {{nbUnreadPosts}}</span>
+            </a>
+          </li>
           <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/list-membres">Rechercher un membre
                             
@@ -67,7 +75,7 @@
           </li>
           <li role="separator" class="divider"></li>
           <li *ngIf="_authService.loggedIn()">
-            <a (click)="onLogoutClick()" href="#">
+            <a (click)="onLogoutClick()" href="/">
                              Déconnexion <span class="glyphicon glyphicon-log-out"></span>
                             </a>
           </li>

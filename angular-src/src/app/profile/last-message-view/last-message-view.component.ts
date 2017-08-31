@@ -25,15 +25,17 @@ export class LastMessageViewComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.sub = this._postService.getLastPost(this.user.nickname).subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        if (data.lastPost) {
-          this.lastPostMessage = data.lastPost.details;
+    this.sub = this._postService
+      .getLastPost(this.user._id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          if (data.lastPost) {
+            this.lastPostMessage = data.lastPost.details;
+          }
         }
-      }
-    });
+      });
   }
 
   ngOnDestroy() {
