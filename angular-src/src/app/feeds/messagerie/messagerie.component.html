@@ -27,9 +27,10 @@
                     <img src="{{contactMessenger.avatar | showImage}}" class="img img-responsive img-circle">
                   </div>
                   <div class="col-sm-7 col-md-7">
-                    <p><span class="glyphicon glyphicon-asterisk" *ngIf="contactMessenger.hasUnread" title="Nouveaux messages non lus"></span>                      {{contactMessenger.nickname}}</p>
+                    <p><span class="glyphicon glyphicon-envelope" *ngIf="contactMessenger.hasUnread" title="Nouveaux messages non lus"></span>                      {{contactMessenger.nickname}}</p>
 
                     <p>{{contactMessenger.lastPostDate|date:'dd MMM'}}</p>
+                    <p>{{contactMessenger.lastPostDate|date:'HH:mm'}}</p>
                   </div>
                 </a>
               </div>
@@ -93,7 +94,7 @@
 
 
                 <!-- Message envoyé par l'utilisateur connecté -->
-                <div *ngIf="message.sender._id ===ownId">
+                <div *ngIf="message.sender._id ===ownId || message.receiver._id ===ownId">
                   <div class="row">
                     <div class="col-xs-8 col-xs-offset-4 conversation-block-content-ownMessage">
 
@@ -107,7 +108,7 @@
                 <!-- Message envoyé par l'utilisateur connecté -->
                 <div class="row">
                   <p class="text-right">
-                    {{message.lastPostDate | date:'dd MMM'}}
+                    {{message.sendDate | date:'dd.MMM - HH:mm'}}
                   </p>
                 </div>
               </li>

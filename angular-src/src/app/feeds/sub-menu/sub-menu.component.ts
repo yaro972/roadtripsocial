@@ -15,6 +15,10 @@ import { SendMessageService } from './../service/send-message.service';
 export class SubMenuComponent implements OnInit, OnDestroy {
 
   subSendMessageService: any;
+  nbUnreadPosts: Number;
+  subGetUnreadMessages: any;
+  isNewMessage: Boolean;
+
 
   constructor(
     private _authService: AuthService,
@@ -24,6 +28,7 @@ export class SubMenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.isunreadMessage();
   }
 
   showSendMessageEvent() {
@@ -33,6 +38,36 @@ export class SubMenuComponent implements OnInit, OnDestroy {
   onClickShowFeeds() {
     this._sendMessageService.hideMessagerie();
   }
+
+  /**
+    * Vérifie si tous les messages ont été lus
+    */
+  isunreadMessage(): void {
+    const userProfile = JSON.parse(localStorage.getItem('user'))
+    let userId;
+
+    if (userProfile) {
+      userId = JSON.parse(localStorage.getItem('user'))._id;
+
+
+      this.subGetUnreadMessages = this._authService
+        .getUnreadMessages(userId)
+        .subscribe(data => {
+          if (data.err) {
+            console.log(data.err);
+            this.nbUnreadPosts = -1;
+          } else {
+            this.nbUnreadPosts = data.nbUnread;
+            if (this.nbUnreadPosts > 0) {
+              this.isNewMessage = true;
+            } else {
+              this.isNewMessage = false;
+            }
+          }
+        });
+    }
+  }
+
 
   onLogoutClick() {
     this._authService.logout();
@@ -45,6 +80,9 @@ export class SubMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    if (this.subGetUnreadMessages) {
+      this.subGetUnreadMessages.unsubscribe();
+      this.subGetUnreadMessages = null;
+    }
   }
 }

@@ -10,6 +10,7 @@ import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { SendMessageService } from './../service/send-message.service'
 
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'rts-messagerie',
@@ -33,6 +34,9 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
   // Sauvegarde de la souscripton en cours
   subGetMessengerContactList: Subscription;
   subSendMessage: Subscription;
+  subGetMessageFlow: Subscription;
+  subSetReadStatus: Subscription;
+  subRemoveReadStatus: Subscription;
   // Sauvegarde de la souscripton en cours
 
   contactMessengerList = [];
@@ -57,8 +61,9 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
     }
   }
 
-  onSendMessage() { }
-
+  /**
+   * En cas de soumission du message
+   */
   onSubmitClick() {
     const newMessage = {
       sender: this._auth.getOwnId(),
@@ -82,14 +87,22 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
             cssClass: 'alert alert-success text-center',
             timeout: 2500
           });
+
+          this.subRemoveReadStatus = this._auth.removeReadStatus(this.threadId, this.selectedContact._id).subscribe(ev => {
+            if (ev.err) {
+              console.log(ev.err);
+            }
+          });
           // this._router.navigate(['/feeds']);
         }
       });
   }
 
+  /**
+   * Récupére la liste des utilisateurs enegistrés
+   */
   onContactMessengerList() {
     this.subGetMessengerContactList = this._auth.getMessengerContactList().subscribe((data) => {
-
       if (data.err) {
         console.log(data.err);
       } else {
@@ -99,6 +112,10 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
     });
   }
 
+  /**
+   * Mise en forme des données récupérées
+   * @param list Liste des utilisateurs récupérés
+   */
   prepareData(list: Array<any>): Array<any> {
     const tmp: Array<any> = [];
     let saveDate: Date;
@@ -112,8 +129,10 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
       }
 
       // Sauvegarde du status de lecture du flux
-      if (list[i].hasUnread) {
-        hasUnread = list[i].hasUnread;
+      if (list[i].read.indexOf(this.ownId) !== -1) {
+        hasUnread = false;
+      } else {
+        hasUnread = true;
       }
 
       if (list[i].userA && list[i].userA._id !== this._auth.getOwnId()) {
@@ -131,6 +150,10 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
     return tmp;
   }
 
+  /**
+   * Récupère le détail de l'utilisateur sélectionné
+   * @param contactIndex Index de l'utilisateur sélectionné
+   */
   onClickContactMessager(contactIndex) {
     console.log(contactIndex)
     this.selectedContact = this.contactMessengerList[contactIndex];
@@ -138,35 +161,53 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
 
     this.threadId = this.threadList[contactIndex]._id;
     this.onShowMessages(this.threadId);
+
+
+    this.subSetReadStatus = this._auth.setReadStatus(this.threadId, this.ownId)
+      .subscribe(ev => {
+        if (ev.err) {
+          console.log(ev.err);
+        }
+      });
+
   }
 
+
+  /**
+   * 
+   * @param threadId Affichage de la liste des messages d'un contact
+   */
   onShowMessages(threadId: String) {
-    this._auth.getMessageFlow(threadId).subscribe((data) => {
-      if (data.err) {
-        console.log(data.err)
-      } else {
-        this.messageFlow = data.messageList;
-
-        // TODO: changer status lecture message
-      }
-    });
+    this.subGetMessageFlow = this._auth.getMessageFlow(threadId)
+      .subscribe((data) => {
+        if (data.err) {
+          console.log(data.err)
+        } else {
+          this.messageFlow = data.messageList;
+        }
+      });
   }
 
-  amIowner(messageOwnerId) {
-
-  }
-
+  /**
+   * Récupère l'identifiant de l'utilisateur sélectionné
+   * @param event Evenement issu du click
+   */
   onNewContact(event) {
-    console.log(event)
     this.selectedContact = event;
   }
 
+  /**
+   * Mise à jour du contenu de l'ensemble de la page
+   */
   ngAfterContentInit() {
     if (this.threadId) {
       this.onShowMessages(this.threadId);
     }
   }
 
+  /**
+   * Destruction de la vue
+   */
   ngOnDestroy() {
     if (this.subGetMessengerContactList) {
       this.subGetMessengerContactList.unsubscribe();
@@ -176,6 +217,20 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
     if (this.subSendMessage) {
       this.subSendMessage.unsubscribe();
       this.subSendMessage = null;
+    }
+
+    if (this.subGetMessageFlow) {
+      this.subGetMessageFlow.unsubscribe();
+      this.subGetMessageFlow = null;
+    }
+
+    if (this.subSetReadStatus) {
+      this.subSetReadStatus.unsubscribe();
+      this.subSetReadStatus = null;
+    }
+    if (this.subRemoveReadStatus) {
+      this.subRemoveReadStatus.unsubscribe();
+      this.subRemoveReadStatus = null;
     }
   }
 }

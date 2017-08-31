@@ -713,7 +713,7 @@ function addNewMessage(req, threadId, callback) {
  * Calcul le nombre de messages non lus
  */
 router.post('/get-nbunread-messages', function (req, res) {
-  Messages.getUnreadMessages(req.body.userId, function (err, nbUnread) {
+  MessageThread.getUnreadMessages(req.body.userId, function (err, nbUnread) {
     if (err) {
       res.json({
         err: err
@@ -725,33 +725,71 @@ router.post('/get-nbunread-messages', function (req, res) {
       });
     }
   });
+});
 
+/**
+ * Récupère la liste des contacts
+ */
+router.post('/get-messenger-contact-list', function (req, res) {
 
-  /**
-   * Récupère la liste des contacts
-   */
-  router.post('/get-messenger-contact-list', function (req, res) {
+  MessageThread.getMessengerContactList(req.body.userId, function (err, list) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        contactList: list
+      });
+    }
+  });
+});
 
-    MessageThread.getMessengerContactList(req.body.userId, function (err, list) {
-      if (err) {
-        res.json({
-          err: err
-        });
-      } else {
-        res.json({
-          err: null,
-          contactList: list
-        });
-      }
-    });
+/**
+ * Positionne l'indicateur lu
+ */
+router.post('/get-thread-messages', function (req, res) {
+  Messages.getThreadMessages(req.body.threadId, function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        messageList: result
+      });
+    }
   });
 });
 
 
-router.post('/get-thread-messages', function (req, res) {
+
+/**
+ * Positionne l'indicateur lu
+ */
+router.post('/set-thread-readstatus', function (req, res) {
+  MessageThread.setReadStatus(req.body.threadId, req.body.userId, function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        messageList: result
+      });
+    }
+  });
+});
 
 
-  Messages.getThreadMessages(req.body.threadId, function (err, result) {
+/**
+ * Supprime l'indicateur lu
+ */
+router.post('/remove-thread-readstatus', function (req, res) {
+  MessageThread.removeReadStatus(req.body.threadId, req.body.userId, function (err, result) {
     if (err) {
       res.json({
         err: err

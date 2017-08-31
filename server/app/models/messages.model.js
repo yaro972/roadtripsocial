@@ -68,7 +68,7 @@ messagerie.getThreadMessages = function (threadId, callback) {
       threadId: threadId
     })
     .sort({
-      sendDate: -1
+      sendDate: 1
     })
     .populate('receiver')
     .populate('sender')

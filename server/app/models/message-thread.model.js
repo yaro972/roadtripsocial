@@ -25,7 +25,11 @@ const threadMessengerSchema = new Schema({
   hasUnread: {
     type: Boolean,
     required: false
-  }
+  },
+  read: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 
@@ -97,5 +101,51 @@ threadMessenger.getMessengerContactList = function (userId, callback) {
     .limit()
     .exec(callback);
 };
+
+threadMessenger.setReadStatus = function (threadId, userId, callback) {
+  threadMessenger
+    .findOneAndUpdate({
+      _id: threadId
+    }, {
+      $push: {
+        read: userId
+      }
+    })
+    .exec(callback);
+};
+
+threadMessenger.removeReadStatus = function (threadId, userId, callback) {
+  threadMessenger
+    .findOneAndUpdate({
+      _id: threadId
+    }, {
+      $pull: {
+        read: userId
+      }
+    })
+    .exec(callback);
+};
+
+threadMessenger.getUnreadMessages = function (userId, callback) {
+  threadMessenger
+    .find({
+      $and: [{
+          $or: [{
+            userA: userId
+          }, {
+            userB: userId
+          }]
+        },
+        {
+          "read": {
+            $ne: userId
+          }
+        }
+      ]
+    })
+    .count()
+    .exec(callback);
+};
+
 
 module.exports = threadMessenger;

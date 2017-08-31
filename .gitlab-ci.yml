@@ -53,11 +53,9 @@ stages:
   - lint
   - build
   - test
-  - staging
   - e2e
-  - deploy
+  - staging  
   - production
-
 
 cache:
   paths:
@@ -97,20 +95,20 @@ test_angular:
 
 build_angular:
  stage: build
- environment: dev
+ environment: test
  script:    
    - echo "Build Angular step "
    - echo ng build
 
-build_angular:
+e2e_angular:
  stage: e2e
- environment: dev
+ environment: test
  script:    
    - echo "E2E Angular Testing"
    
 
 deploy_to_staging:
- stage: deploy
+ stage: staging
  environment: staging   
  script:
    - echo "Go to staging"

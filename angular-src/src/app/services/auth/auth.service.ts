@@ -387,4 +387,46 @@ export class AuthService {
       })
       .map(res => res.json());
   }
-}
+
+  /**
+   * Fixe l'indicateur lu
+   * @param threadId Id du thread
+   * @param userId Id de l'utilisateur
+   */
+  setReadStatus(threadId, userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/set-thread-readstatus', {
+        userId: userId,
+        threadId: threadId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+  * Supprimme l'indicateur lu
+  * @param threadId Id du thread
+  * @param userId Id de l'utilisateur
+  */
+  removeReadStatus(threadId, userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/remove-thread-readstatus', {
+        userId: userId,
+        threadId: threadId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+};
