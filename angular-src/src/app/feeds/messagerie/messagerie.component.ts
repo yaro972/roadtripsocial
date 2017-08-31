@@ -174,7 +174,7 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
 
 
   /**
-   * 
+   * Affiche les messages
    * @param threadId Affichage de la liste des messages d'un contact
    */
   onShowMessages(threadId: String) {
