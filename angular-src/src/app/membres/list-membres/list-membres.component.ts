@@ -67,7 +67,6 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    * @param id Id de la personne
    */
   onSendPrivateMessage(index) {
-    // TODO : Afficher input d'envoi 
     const receiver = this.membersList[index];
 
     this._sendMessageService.showMessagerie();
