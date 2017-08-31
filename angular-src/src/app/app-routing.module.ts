@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-import { AccueilComponent } from './components/accueil/accueil.component';
+import { AccueilComponent } from './accueil/accueil/accueil.component';
 import { ListMembresComponent } from './membres/list-membres/list-membres.component';
 import { DetailMembresComponent } from './membres/detail-membres/detail-membres.component';
 import { RegisterComponent } from './login-register/register/register.component';
@@ -11,14 +11,17 @@ import { LoginComponent } from './login-register/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
-import { FeedsComponent } from './components/feeds/feeds.component';
 
 import { ResetPasswordComponent } from './pass-security/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './pass-security/change-password/change-password.component';
 
+import { FeedsComponent } from './feeds/feeds/feeds.component'
+
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
-import { SendMessageComponent } from './posts/send-message/send-message.component';
+
+
+
 
 const routes: Routes = [
   {
@@ -30,11 +33,6 @@ const routes: Routes = [
   {
     path: 'accueil',
     component: AccueilComponent
-  },
-  {
-    path: 'feeds',
-    component: FeedsComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'list-membres',
@@ -70,6 +68,11 @@ const routes: Routes = [
     component: ResetPasswordComponent
   },
   {
+    path: 'feeds',
+    component: FeedsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'about',
     component: AboutComponent
   },
@@ -82,11 +85,6 @@ const routes: Routes = [
     path: '',
     component: FooterComponent,
     outlet: 'footer'
-  },
-  {
-    path: 'send-message',
-    component: SendMessageComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: '**',

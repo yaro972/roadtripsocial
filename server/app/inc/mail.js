@@ -2,9 +2,6 @@
 
 // const nodemailer = require('nodemailer');
 var sendmail = require('sendmail')();
-const config = require('./.config');
-const fs = require('fs');
-
 
 /**
  * Permet d'envoyer un mail à l'utilisateur de l'application

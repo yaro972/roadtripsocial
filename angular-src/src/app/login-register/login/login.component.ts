@@ -65,9 +65,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this._authService.storeUserData(data.token, data.user);
 
-        let u = localStorage.getItem('user');
+        const u = localStorage.getItem('user');
         if (u) {
-          let firstConn = JSON.parse(u).firstConn
+          const firstConn = JSON.parse(u).firstConn
 
           if (firstConn) {
             // Première connexion ou profil incomplet

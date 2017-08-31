@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProfileModule } from './../profile/profile.module';
+import { ShowImagesModule } from './../show-images/show-images.module';
 
 import { DetailMembresComponent } from './detail-membres/detail-membres.component';
 import { ListMembresComponent } from './list-membres/list-membres.component';
-import { ListFriendsComponent } from './list-friends/list-friends.component';
-import { ShowImagesModule } from './../show-images/show-images.module';
-import { PostsModule } from './../posts/posts.module';
+import { PostViewComponent } from './post-view/post-view.component';
+
+
 
 @NgModule({
   imports: [
@@ -17,17 +18,16 @@ import { PostsModule } from './../posts/posts.module';
     ProfileModule,
     FormsModule,
     ReactiveFormsModule,
-    PostsModule,
     ShowImagesModule
   ],
   declarations: [
     DetailMembresComponent,
     ListMembresComponent,
-    ListFriendsComponent
+    PostViewComponent
   ],
   exports: [
-    ListMembresComponent,
-    ListFriendsComponent
+    DetailMembresComponent,
+    ListMembresComponent
   ]
 })
 export class MembresModule { }

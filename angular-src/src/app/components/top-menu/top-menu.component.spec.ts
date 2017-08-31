@@ -49,6 +49,6 @@ describe('TopMenuComponent', () => {
   xit('should Contain "Accueil" link', () => {
     de = fixture.debugElement.query(By.css('li:first-child'));
     el = de.nativeElement;
-    expect(el.textContent).toContain("Accueil");
+    expect(el.textContent).toContain('Accueil');
   });
 });

@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { AuthGuard } from '../../guard/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from './../../../environments/environment';
+import { SendMessageService } from './../../feeds/service/send-message.service';
 
 @Component({
   selector: 'rts-top-menu',
@@ -28,15 +29,20 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
   authService: AuthService;
   isLogged = false;
 
-  sub: any;
+  nbUnreadPosts: Number;
+  subGetUnreadMessages: any;
+  isNewMessage: Boolean;
 
   constructor(
     public _authService: AuthService,
     private _router: Router,
-    private _flashMessage: FlashMessagesService
+    private _flashMessage: FlashMessagesService,
+    private _sendMessageService: SendMessageService
   ) {
 
     this.collapseSubMen = this._authService.collapseSubMen;
+
+    // this.nbUnreadPosts = 42;
   }
 
   ngOnInit() {
@@ -52,10 +58,16 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
       } else {
         this.imageFace = 'Anonymous.png';
       }
-
     }
+    // this.unreadMessages = false;
+
+    // this.nbUnreadPosts = 0;
+    this.isunreadMessage();
   }
 
+  /**
+   * Déconnexion de l'utilisateur
+   */
   onLogoutClick() {
     this._authService.logout();
     this._flashMessage.grayOut(true);
@@ -66,8 +78,45 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
     this._router.navigate(['/']);
   }
 
+  /**
+   * Réc
+   */
   onCollapseSubmenu() {
     this.isCollapseSubmenu = !this.isCollapseSubmenu;
+  }
+
+  /**
+   * Vérifie si tous les messages ont été lus
+   */
+  isunreadMessage(): void {
+    const userProfile = JSON.parse(localStorage.getItem('user'))
+    let userId;
+
+    if (userProfile) {
+      userId = JSON.parse(localStorage.getItem('user'))._id;
+
+
+      this.subGetUnreadMessages = this._authService
+        .getUnreadMessages(userId)
+        .subscribe(data => {
+          if (data.err) {
+            console.log(data.err);
+            this.nbUnreadPosts = -1;
+          } else {
+            this.nbUnreadPosts = data.nbUnread;
+            if (this.nbUnreadPosts > 0) {
+              this.isNewMessage = true;
+            } else {
+              this.isNewMessage = false;
+            }
+          }
+        });
+    }
+  }
+
+  showUnreadMessage() {
+    this._sendMessageService.showMessagerie();
+    this._router.navigate(['/feeds']);
   }
 
   ngAfterContentChecked() {
@@ -82,9 +131,15 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
         this.imageFace = 'Anonymous.png';
       }
     }
-
   }
 
+  /**
+   * Destruction de la vue
+   */
   ngOnDestroy() {
+    if (this.subGetUnreadMessages) {
+      this.subGetUnreadMessages.unsubscribe();
+      this.subGetUnreadMessages = null;
+    }
   }
 }

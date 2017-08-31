@@ -50,59 +50,58 @@
 
 
           <!-- affichage de la liste -->
-          <div class="row search-result-line" *ngFor="let member of membersList">
-            <div class="col-xs-5" (click)="onShowDetail(member)">
-              <div class="row">
-                <div class="col-xs-6"><img src="{{member.avatar | showImage}}" alt="" class="img img-responsive img-circle"></div>
+          <div class="row " *ngFor="let member of membersList; let i= index">
+            <div *ngIf="member._id !==ownId">
+              <div class="search-result-line"></div>
+              <div class="col-xs-5" (click)="onShowDetail(member)">
+                <div class="row">
+                  <div class="col-xs-6 col-md-4"><img src="{{member.avatar | showImage}}" alt="" class="img img-responsive img-circle"></div>
 
-                <div class="col-xs-6">
-                  <div class="row">
-                    <div class="col-xs-12 search-name">
-                      {{member.firstname}} {{member.lastname}}
-                    </div>
-                    <div class="col-xs-12 search-city">
-                      {{member.city}}
+                  <div class="col-xs-6">
+                    <div class="row">
+                      <div class="col-xs-12 search-name">
+                        {{member.firstname}} {{member.lastname}}
+                      </div>
+                      <div class="col-xs-12 search-city">
+                        {{member.city}}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-xs-2" (click)="onFollow(member)">
-              <button class="btn btn-default btn-toFollow" *ngIf="!member.followed">Suivre <span class="glyphicon glyphicon-share-alt"></span>
+              <div class="col-xs-2" (click)="onFollow(member)">
+                <button class="btn btn-default btn-toFollow" *ngIf="!member.followed">Suivre <span class="glyphicon glyphicon-share-alt"></span>
              </button>
-              <button class="btn btn-default btn-followed" *ngIf="member.followed"><span class="glyphicon glyphicon-ok"> Suivi</span>
+                <button class="btn btn-default btn-followed" *ngIf="member.followed"><span class="glyphicon glyphicon-ok"> Suivi</span>
             </button>
-            </div>
-            <div class="col-xs-8  col-md-3 text-center search-visitedCountries" title="{{member.visitedCountries}}"><img src="/assets/images//pin1.png" alt="" width="25">
-              <p *ngIf="member.visitedCountries.length">Pays visités...</p>
-              <p *ngIf="!member.visitedCountries.length">Aucun pays</p>
-              <!-- <ul *ngFor="let country of member.visitedCountries">
+              </div>
+              <div class="col-xs-8  col-md-3 text-center search-visitedCountries" title="{{member.visitedCountries}}"><img src="/assets/images//pin1.png" alt="" width="25">
+                <p *ngIf="member.visitedCountries.length">Pays visités...</p>
+                <p *ngIf="!member.visitedCountries.length">Aucun pays</p>
+                <!-- <ul *ngFor="let country of member.visitedCountries">
                 <li>{{country}}</li>
               </ul> -->
-              <!-- <div class="row">
+                <!-- <div class="row">
                 <div *ngFor="let country of member.visitedCountries">
                   <p class="col-xs-6">{{country}}</p>
                 </div>
               </div> -->
-            </div>
-            <div class="col-xs-1 col-md-1 " (click)="onSendMessage(member)">
-              <p class="glyphicon glyphicon-comment action" title="Ecrire">
-              </p>
-            </div>
-            <div class="col-xs-1  col-md-1" (click)="onSendPrivateMessage(member)">
-              <p title="Envoyer un message privé" class="glyphicon glyphicon-envelope action">
-              </p>
+              </div>
+              <div class="col-xs-1 col-md-1 " (click)="onSendMessage(i)">
+                <p class="glyphicon glyphicon-comment action" title="Ecrire">
+                </p>
+              </div>
+              <div class="col-xs-1  col-md-1" (click)="onSendPrivateMessage(i)">
+                <p title="Envoyer un message privé" class="glyphicon glyphicon-envelope action">
+                </p>
+              </div>
             </div>
           </div>
           <!-- affichage de la liste -->
-
-
         </div>
       </div>
-
     </div>
   </div>
-
   <!-- Affichage des utilisateurs correspondants à la recherche -->
 
 </div>

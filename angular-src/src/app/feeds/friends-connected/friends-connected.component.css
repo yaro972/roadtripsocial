@@ -1,0 +1,19 @@
+/* Amis */
+
+.friends-text {
+  text-decoration: none;
+  /* color:#CCE0F8; */
+}
+
+.friends-list {
+  list-style: none;
+  text-align: left;
+}
+
+.friends-list li {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* Amis */

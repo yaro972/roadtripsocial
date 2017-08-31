@@ -1,0 +1,17 @@
+h4 {
+  display: inline-block;
+  color: rebeccapurple;
+}
+
+.contact-list {
+  list-style-type: none;
+  background-color: rosybrown;
+}
+
+.contact-list-element {
+  border: 1px solid black;
+  background-color: #0C375D;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 4px;
+}

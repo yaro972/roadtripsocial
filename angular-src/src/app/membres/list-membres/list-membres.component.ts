@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { FileUploadService } from '../../services/file-upload/file-upload.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
+import { SendMessageService } from './../../feeds/service/send-message.service';
+
 @Component({
   selector: 'rts-list-membres',
   templateUrl: './list-membres.component.html',
@@ -20,16 +22,18 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   membersList: any[];
   isCountriesVisited: Boolean;
   searchInput: any;
+  ownId: String;
 
   constructor(
     private _router: Router,
     private _authService: AuthService,
     private _membersService: ListMembersService,
-    private _fileService: FileUploadService
+    private _fileService: FileUploadService,
+    private _sendMessageService: SendMessageService
   ) { }
 
   ngOnInit() {
-
+    this.ownId = this._authService.getOwnId();
   }
 
   /**
@@ -53,8 +57,8 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    * Envoi d'un message dans le chat publique
    * @param id Id de l'utilisateur
    */
-  onSendMessage(member) {
-    alert('Message - Chat');
+  onSendMessage(index) {
+    alert('Message - Chat ' + index);
     return false;
   }
 
@@ -62,8 +66,13 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    * Envoi d'un message Privé
    * @param id Id de la personne
    */
-  onSendPrivateMessage(member) {
-    alert('Message privé');
+  onSendPrivateMessage(index) {
+    const receiver = this.membersList[index];
+
+    this._sendMessageService.showMessagerie();
+    this._sendMessageService.setReceiver(receiver);
+    this._router.navigate(['/feeds']);
+
     return false;
   }
 
@@ -74,15 +83,15 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   onSearchChange(item) {
     if (item.length >= 1) {
 
-      this.subSearch = this._authService.searchMembers(item).subscribe(el => {
-        if (el.err) {
-          console.log(el.err)
-        } else {
-          console.log(el);
-
-          this.membersList = el.membersList;
-        }
-      });
+      this.subSearch = this._authService
+        .searchMembers(item)
+        .subscribe(el => {
+          if (el.err) {
+            console.log(el.err)
+          } else {
+            this.membersList = el.membersList;
+          }
+        });
     } else {
       this.membersList = [];
     }

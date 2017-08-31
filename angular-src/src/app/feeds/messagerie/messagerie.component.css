@@ -1,0 +1,79 @@
+h4 {
+  display: inline-block;
+}
+
+.contact-list {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.contact-list ul {
+  list-style-type: none;
+}
+
+.contact-list li {
+  border: 1px solid #2E5782;
+  background-color: #283f56;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 4px;
+  color: #fefefe;
+}
+
+.contact-list li:hover {
+  background-color: #4A88D0;
+  color: orange;
+}
+
+.contact-list a {
+  color: #fefefe;
+}
+
+.contact-list a:hover {
+  color: orange;
+}
+
+
+/* conversation */
+
+.conversation {
+  border: 1px solid #2E5782;
+  background-color: #456586;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.conversation-block {
+  border: 1px solid black;
+  background-color: #3f3f3f;
+  padding: 5px;
+}
+
+.conversation-block-content {
+  border-right: 1px solid #2E5782;
+  background-color: #283f56;
+  padding: 4px;
+  box-shadow: 1px 1px 1px 0px black;
+}
+
+.conversation-block-content-ownMessage {
+  border-left: 1px solid #2E5782;
+  background-color: #6e8eaf;
+  box-shadow: 1px 1px 1px 0px black;
+}
+
+
+/* Ecriture réponse */
+
+.response {
+  margin-top: 15px;
+}
+
+.separator {
+  border-top: 1px solid orange;
+  padding-bottom: 10px;
+}

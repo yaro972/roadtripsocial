@@ -1,0 +1,27 @@
+/* menu */
+
+.links-text {
+  text-decoration: none;
+  color: #CCE0F8;
+}
+
+.links-list {
+  list-style: none;
+  text-align: left;
+}
+
+.links-list li {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* menu */
+
+.unreadMessages {
+  color: rgb(231, 123, 32);
+}
+
+.nounreadMessage {
+  color: rgb(204, 204, 204);
+}

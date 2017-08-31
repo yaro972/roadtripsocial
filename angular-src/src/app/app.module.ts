@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 
-import { AccueilComponent } from './components/accueil/accueil.component';
+import { AccueilModule } from './accueil/accueil.module';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
@@ -29,27 +29,21 @@ import { PostsService } from './services/posts/posts.service';
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 
+
 import { LoginRegisterModule } from './login-register/login-register.module';
 import { MembresModule } from './membres/membres.module';
-import { PostsModule } from './posts/posts.module';
-
 import { ProfileModule } from './profile/profile.module';
 import { PassSecurityModule } from './pass-security/pass-security.module';
-import { FeedsComponent } from './components/feeds/feeds.component';
-import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
-
 import { ShowImagesModule } from './show-images/show-images.module';
+import { FeedsModule } from './feeds/feeds.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    AccueilComponent,
     FooterComponent,
-    TopMenuComponent,
-    FeedsComponent,
-    SubMenuComponent,
-
+    TopMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -59,13 +53,14 @@ import { ShowImagesModule } from './show-images/show-images.module';
     HttpModule,
     ReactiveFormsModule,
     FormsModule,
+    AccueilModule,
     LoginRegisterModule,
     FlashMessagesModule,
-    PostsModule,
     ProfileModule,
     PassSecurityModule,
     ShowImagesModule,
-    MembresModule
+    MembresModule,
+    FeedsModule
   ],
   providers: [
     AuthGuard,
