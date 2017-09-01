@@ -16,8 +16,9 @@
         <div class="row">
           <div class="col-xs-4 col-xs-offset-4 text-center">
             <ul>
-              <li (click)="postActiveMode()" [ngClass]="{'activeMenuLeftClass': isPostActive}"><a>Ses derniers posts</a></li>
-              <li (click)="profilActiveMode()" [ngClass]="{'activeMenuRightClass': !isPostActive}"><a>Voir le profil complet</a></li>
+              <li (click)="profilActiveMode()" [ngClass]="{'activeMenuLeftClass': !isPostActive}"><a>Voir le profil complet</a></li>
+              <li (click)="postActiveMode()" [ngClass]="{'activeMenuRightClass': isPostActive}"><a>Ses derniers posts</a></li>
+
             </ul>
 
           </div>

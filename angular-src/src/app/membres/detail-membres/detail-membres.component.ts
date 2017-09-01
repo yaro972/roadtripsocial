@@ -74,7 +74,7 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUserProfile = false;
     this.getUserId();
-    this.isPostActive = true;
+    this.isPostActive = false;
   }
 
 
