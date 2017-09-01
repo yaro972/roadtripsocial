@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema;
 
 // Création du schéma à la base de données
 var UserSchema = new mongoose.Schema({
@@ -61,9 +62,10 @@ var UserSchema = new mongoose.Schema({
   visitedCountries: {
     type: Array
   },
-  friendsList: {
-    type: Array
-  },
+  friendsList: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   mustChangePassword: {
     type: Boolean,
     default: false
@@ -378,10 +380,12 @@ User.searchMembersByNickname = function (nickname, callback) {
  */
 User.memberDetails = function (memberId, callback) {
   User.findOne({
-    _id: memberId
-  }, {
-    password: 0
-  }, callback);
+      _id: memberId
+    }, {
+      password: 0
+    })
+    .populate('user')
+    .exec(callback);
 };
 
 /**
@@ -411,6 +415,37 @@ User.getNbTravelsegistred = function (callback) {
         }
       }
     ])
+    .exec(callback);
+};
+
+
+/**
+ * Ajout d'un ami dans la liste
+ */
+User.addFriend = function (userId, friendId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $push: {
+        friendsList: friendId
+      }
+    })
+    .exec(callback);
+};
+
+/**
+ * Suppression d'un ami dans la liste
+ */
+User.removeFriend = function (userId, friendId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $pull: {
+        friendsList: friendId
+      }
+    })
     .exec(callback);
 };
 

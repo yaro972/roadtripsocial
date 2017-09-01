@@ -41,6 +41,17 @@ Friends.addNewFriends = function (userId, friendId, callback) {
 
 };
 
+/**
+ * Recherche une demande
+ */
+Friends.showDemand = function (demandId, callback) {
+  Friends
+    .findOne({
+      _id: demandId
+    })
+    .populate('friendsList')
+    .exec(callback);
+};
 
 /**
  * Recherche une demande d'ami
@@ -94,14 +105,23 @@ Friends.showWaitingFriendsDemand = function (userId, callback) {
  */
 Friends.acceptFriendDemand = function (friendDemandId, callback) {
   Friends
-    .findOneAndUpdate({
+    // Suppression de la demande existante  - 01/092017
+    // Si la demande est validée, on la supprime de la liste
+
+    // .findOneAndUpdate({
+    //   _id: friendDemandId
+    // }, {
+    //   $set: {
+    //     accepted: true,
+    //     dateDemande: new Date()
+    //   }
+    // })
+    // .exec(callback);
+
+    .find({
       _id: friendDemandId
-    }, {
-      $set: {
-        accepted: true,
-        dateDemande: new Date()
-      }
     })
+    .remove()
     .exec(callback);
 };
 

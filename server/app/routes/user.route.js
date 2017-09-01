@@ -10,6 +10,7 @@ const mail = require('../inc/mail');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const async = require('async');
 
 // Models
 const User = require('../models/user.model');
@@ -933,21 +934,57 @@ router.post('/show-waiting-friends-demand', passport.authenticate('jwt', {
 });
 
 
+function addFriend(userId, friendId, callback) {
+  User.addFriend(userId, friendId, function (err, result) {
+    callback(err, result);
+  })
+}
+
 /**
  * Accepte la demande d'un ami
  */
 router.post('/accept-friend-demand', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-  Friends.acceptFriendDemand(req.body.friendDemandId, function (err, demands) {
+
+  Friends.showDemand(req.body.friendDemandId, function (err, demandDetail) {
     if (err) {
       res.json({
         err: err
       });
     } else {
-      res.json({
-        err: null,
-        demands: demands
+      // Récupération des identifiants des amis
+      let listUsers = demandDetail.friendsList;
+
+      async.parallel([
+        function (callback) {
+          addFriend(listUsers[0]._id, listUsers[1]._id, callback);
+        },
+        function (callback) {
+          addFriend(listUsers[1]._id, listUsers[0]._id, callback);
+        }
+      ], function (err, results) {
+        if (err) {
+          res.json({
+            err: err
+          });
+        } else {
+
+          // Suppression de la demande initiale
+          Friends.acceptFriendDemand(req.body.friendDemandId, function (err, demands) {
+            if (err) {
+              res.json({
+                err: err
+              });
+            } else {
+              res.json({
+                err: null,
+                demands: demands,
+                result: results
+              });
+            }
+          });
+        }
       });
     }
   });
@@ -995,7 +1032,7 @@ router.post('/nbWaintingFriendDemand', passport.authenticate('jwt', {
 });
 
 /**
- * Retrouve les amis en acceptés
+ * Retrouve les amis acceptés
  */
 router.post('/show-friends', passport.authenticate('jwt', {
   session: false
