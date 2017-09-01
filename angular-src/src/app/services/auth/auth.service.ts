@@ -429,4 +429,37 @@ export class AuthService {
       })
       .map(res => res.json());
   }
+<<<<<<< ours
+=======
+
+
+  /**
+   * Récupération du nombres d'utilisateur
+   */
+  getNbUseregistred() {
+    const headers = new Headers();
+
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/api/user/getNbUseregistred', {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+
+  /**
+ * Récupération du nombre de voyages déclarés
+ */
+  getNbTravelsegistred() {
+    const headers = new Headers();
+
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/api/user/getNbTravelsegistred', {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+>>>>>>> theirs
 };

@@ -712,7 +712,9 @@ function addNewMessage(req, threadId, callback) {
 /**
  * Calcul le nombre de messages non lus
  */
-router.post('/get-nbunread-messages', function (req, res) {
+router.post('/get-nbunread-messages', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
   MessageThread.getUnreadMessages(req.body.userId, function (err, nbUnread) {
     if (err) {
       res.json({
@@ -730,7 +732,9 @@ router.post('/get-nbunread-messages', function (req, res) {
 /**
  * Récupère la liste des contacts
  */
-router.post('/get-messenger-contact-list', function (req, res) {
+router.post('/get-messenger-contact-list', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
 
   MessageThread.getMessengerContactList(req.body.userId, function (err, list) {
     if (err) {
@@ -749,7 +753,9 @@ router.post('/get-messenger-contact-list', function (req, res) {
 /**
  * Positionne l'indicateur lu
  */
-router.post('/get-thread-messages', function (req, res) {
+router.post('/get-thread-messages', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
   Messages.getThreadMessages(req.body.threadId, function (err, result) {
     if (err) {
       res.json({
@@ -769,7 +775,9 @@ router.post('/get-thread-messages', function (req, res) {
 /**
  * Positionne l'indicateur lu
  */
-router.post('/set-thread-readstatus', function (req, res) {
+router.post('/set-thread-readstatus', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
   MessageThread.setReadStatus(req.body.threadId, req.body.userId, function (err, result) {
     if (err) {
       res.json({
@@ -788,7 +796,9 @@ router.post('/set-thread-readstatus', function (req, res) {
 /**
  * Supprime l'indicateur lu
  */
-router.post('/remove-thread-readstatus', function (req, res) {
+router.post('/remove-thread-readstatus', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
   MessageThread.removeReadStatus(req.body.threadId, req.body.userId, function (err, result) {
     if (err) {
       res.json({
@@ -798,6 +808,44 @@ router.post('/remove-thread-readstatus', function (req, res) {
       res.json({
         err: null,
         messageList: result
+      });
+    }
+  });
+});
+
+
+/**
+ * Récupération du nombre d'utilisateurs
+ */
+router.get('/getNbUseregistred', function (req, res) {
+  User.getNbUseregistred(function (err, nbRegistredUsers) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbRegistredUsers: nbRegistredUsers
+      });
+    }
+  });
+});
+
+/**
+ * Récupération du nombre de voyages déclarés
+ */
+router.get('/getNbTravelsegistred', function (req, res) {
+  User.getNbTravelsegistred(function (err, nbRegistredTravels) {
+
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbRegistredTravels: nbRegistredTravels
       });
     }
   });

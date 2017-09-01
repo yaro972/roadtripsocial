@@ -384,4 +384,34 @@ User.memberDetails = function (memberId, callback) {
   }, callback);
 };
 
+/**
+ * Récupération du nombre d'utilisateurs
+ */
+
+User.getNbUseregistred = function (callback) {
+  User.count({})
+    .exec(callback);
+};
+
+/**
+ * Récupération du nombre de voyages déclarés
+ */
+
+User.getNbTravelsegistred = function (callback) {
+  User
+    .aggregate([{
+        $unwind: "$visitedCountries"
+      },
+      {
+        $group: {
+          _id: "$visitedCountries",
+          nb: {
+            $sum: "$visitedCountries.times"
+          }
+        }
+      }
+    ])
+    .exec(callback);
+};
+
 module.exports = User;
