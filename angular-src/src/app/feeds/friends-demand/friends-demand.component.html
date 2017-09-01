@@ -18,33 +18,18 @@
         <div class="row userDetails-presentation">
           <!-- </div> -->
           <a (click)="onShowDetail(i)">
-            <div>
-              <div *ngIf=" demand.friendsList[0]._id !=ownId ">
+            <div *ngFor="let friend of demand.friendsList">
+              <div *ngIf=" friend._id !=ownId ">
                 <!-- Photo de profile -->
                 <div class="col-xs-2 ">
-                  <img src=" {{demand.friendsList[0].avatar | showImage}} " class="img img-responsive img-circle ">
+                  <img src=" {{friend.avatar | showImage}} " class="img img-responsive img-circle ">
 
                 </div>
                 <!-- Résumé -->
                 <div class="col-xs-10 ">
-                  <p> {{demand.friendsList[0].nickname}}
+                  <p> {{friend.nickname}}
                   </p>
-                  <p> {{demand.friendsList[0].firstname}} {{demand.friendsList[0].lastname}}
-                  </p>
-                </div>
-              </div>
-
-              <!-- Deuxieme champs -->
-              <div *ngIf="demand.friendsList[1]._id !=ownId ">
-                <!-- Photo de profile -->
-                <div class="col-xs-2 ">
-                  <img src=" {{demand.friendsList[1].avatar | showImage}} " class="img img-responsive img-circle ">
-                </div>
-                <!-- Résumé -->
-                <div class="col-xs-10 ">
-                  <p> {{demand.friendsList[1].nickname}}
-                  </p>
-                  <p> {{demand.friendsList[1].firstname}} {{demand.friendsList[1].lastname}}
+                  <p> {{friend.firstname}} {{friend.lastname}}
                   </p>
                 </div>
               </div>
