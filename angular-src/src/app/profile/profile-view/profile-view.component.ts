@@ -22,7 +22,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class ProfileViewComponent implements OnInit, OnDestroy {
   @Input() user: User;
   @Input() suivi: Boolean;
-  @Input() isOwnProfile: Boolean;
+  // @Input() isOwnProfile: Boolean;
+  isOwnProfile: Boolean;
 
   @ViewChild('fileInput') fileInput;
 
@@ -50,6 +51,9 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this._authService.getOwnId() === this.user._id) {
+      this.isOwnProfile = true;
+    }
     this.age = this._profileService
       .calcAge(this.user.birthdate);
   }

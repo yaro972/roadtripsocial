@@ -384,7 +384,7 @@ User.memberDetails = function (memberId, callback) {
     }, {
       password: 0
     })
-    .populate('user')
+    .populate('friendsList')
     .exec(callback);
 };
 

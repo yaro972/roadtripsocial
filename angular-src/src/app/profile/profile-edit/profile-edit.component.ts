@@ -23,7 +23,8 @@ import { User } from '../../core/user';
 export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() user: User;
   @Input() suivi: Boolean;
-  @Input() isOwnProfile: Boolean;
+  // @Input() isOwnProfile: Boolean;
+  isOwnProfile: Boolean;
 
   @Input() onSavedEvent: Boolean;
   @Output() newUser: EventEmitter<User> = new EventEmitter();
@@ -66,10 +67,16 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   ngOnInit() {
+
+    if (this._authService.getOwnId() === this.user) {
+      this.isOwnProfile = true;
+    }
+
     this.genderIco = 'fa fa-mars';
     if (this.user.gender === 1) {
       this.genderIco = 'fa fa-venus';
     }
+
 
 
     // this.calculateAge();
@@ -81,11 +88,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
     this.visitedCountryList = this._profileService.getallCities();
     this.photoProfUpload = this.user.avatar;
 
-    this.subGetSaveStatus = this._profileService.getSaveStatus().subscribe((saveStatus) => {
-      if (saveStatus === true) {
-        this.save();
-      }
-    });
+    this.subGetSaveStatus = this._profileService
+      .getSaveStatus()
+      .subscribe((saveStatus) => {
+        if (saveStatus === true) {
+          this.save();
+        }
+      });
 
     if (this.onSavedEvent) {
       this.save();
@@ -108,30 +117,33 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
 
     this.user.avatar = this.photoProfUpload;
 
-    this.subUpdateProfile = this._authService.updateProfile(this.user).subscribe(data => {
+    this.subUpdateProfile = this._authService
+      .updateProfile(this.user)
+      .subscribe(data => {
 
-      if (data.err) {
-        this._flashMessage.grayOut(true);
-        this._flashMessage.show('Une Erreur est apparue lors de la mise à jour de votre profile', {
-          cssClass: 'alert alert-danger text-center',
-          timeout: 2500
-        });
-        this.newUser.emit(this.user);
-      } else {
-        const uTmp = JSON.parse(localStorage.getItem('user'));
-        uTmp.birthdate = data.newProfile.birthdate;
-        uTmp.avatar = data.newProfile.avatar;
-        localStorage.setItem('user', JSON.stringify(uTmp));
+        if (data.err) {
+          this._flashMessage.grayOut(true);
+          this._flashMessage.show('Une Erreur est apparue lors de la mise à jour de votre profile', {
+            cssClass: 'alert alert-danger text-center',
+            timeout: 2500
+          });
+          this.newUser.emit(this.user);
+        } else {
+          const uTmp = JSON.parse(localStorage.getItem('user'));
+          uTmp.birthdate = data.newProfile.birthdate;
+          uTmp.avatar = data.newProfile.avatar;
+          localStorage.setItem('user', JSON.stringify(uTmp));
 
-        this._flashMessage.grayOut(true);
-        this._flashMessage.show('Votre profil a bien été mis à jour', {
-          cssClass: 'alert alert-success text-centePr',
-          timeout: 2500
-        });
+          this._flashMessage.grayOut(true);
+          this._flashMessage.show('Votre profil a bien été mis à jour', {
+            cssClass: 'alert alert-success text-centePr',
+            timeout: 2500
+          });
 
-        this.newUser.emit(data.newProfile);
-      }
-    });
+          this._profileService.onSaveEvent(false);
+          this.newUser.emit(data.newProfile);
+        }
+      });
   }
 
   addCountry() {
@@ -165,7 +177,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, AfterViewChecked
     const birthD = new Date(this.user.birthdate);
 
     this.jourNaissance = '' + birthD.getDate();
-    this.moisNaissance = '' + birthD.getMonth();
+    this.moisNaissance = '' + (birthD.getMonth() + 1);
     this.anneeNaissance = '' + birthD.getFullYear();
   };
 
