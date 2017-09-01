@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, AfterViewChecked, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from './../../services/auth/auth.service';
 import { NgModel } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.css']
 })
-export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class ProfileViewComponent implements OnInit, OnDestroy {
   @Input() user: User;
   @Input() suivi: Boolean;
   @Input() isOwnProfile: Boolean;
@@ -36,7 +36,7 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   visitedCountryList: CitiesClass[];
 
   age: Number;
-  ageSubsciption: Subscription;
+  subAddFollow: Subscription;
 
   constructor(
     private _authService: AuthService,
@@ -56,9 +56,25 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
 
   onFollow() {
     this.suivi = !this.suivi;
+
+    this.subAddFollow = this._authService
+      .addFollow(this._authService.getOwnId(), this.user._id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this._flashMessage.show('Une demande d\'ami a été envoyée ', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+        }
+      });
+    return false;
   }
-  ngAfterViewChecked() {
+  unFollow() {
+    this.suivi = !this.suivi;
   }
+
 
   onSendPrivateMessage(u) {
     this._sendMessageService.showMessagerie();
@@ -68,6 +84,9 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   ngOnDestroy() {
-
+    if (this.subAddFollow) {
+      this.subAddFollow.unsubscribe();
+      this.subAddFollow = null;
+    }
   };
 }

@@ -55,7 +55,8 @@ export class ListMembresComponent implements OnInit, OnDestroy {
    */
   onFollow(member) {
     this.subAddFollow = this._authService
-      .addFollow(this._authService.getOwnId(), member._id).subscribe(data => {
+      .addFollow(this._authService.getOwnId(), member._id)
+      .subscribe(data => {
         if (data.err) {
           console.log(data.err);
         } else {
@@ -67,6 +68,12 @@ export class ListMembresComponent implements OnInit, OnDestroy {
       });
     return false;
   }
+
+  /**
+   * Suppression de la liste d'amis
+   * @param member Id du membre
+   */
+  unfollow(member) { }
   /**
    * Envoi d'un message dans le chat publique
    * @param id Id de l'utilisateur
