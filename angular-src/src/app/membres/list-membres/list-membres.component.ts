@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Subscription } from 'rxjs/Subscription';
 
 import { ListMembersService } from '../../services/list-members/list-members.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -9,6 +9,7 @@ import { FileUploadService } from '../../services/file-upload/file-upload.servic
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
 import { SendMessageService } from './../../feeds/service/send-message.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'rts-list-membres',
@@ -23,13 +24,15 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   isCountriesVisited: Boolean;
   searchInput: any;
   ownId: String;
+  subAddFollow: Subscription;
 
   constructor(
     private _router: Router,
     private _authService: AuthService,
     private _membersService: ListMembersService,
     private _fileService: FileUploadService,
-    private _sendMessageService: SendMessageService
+    private _sendMessageService: SendMessageService,
+    private _flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -37,20 +40,31 @@ export class ListMembresComponent implements OnInit, OnDestroy {
   }
 
   /**
-   *  Afficahge de la fiche détaillée de l'utilisateur
+   *  Affichage de la fiche détaillée de l'utilisateur
    * @param id Id de l'utilisateur
    */
   onShowDetail(member) {
     this._router.navigate(['/details-membres', member._id]);
   }
 
+
+
   /**
-   * Modification du statut de suivi de l'utilisateur
+   * Envoi d'une demande d'ami
    * @param id Id de l'utilisateur
    */
   onFollow(member) {
-    // member[member._id].followed = !member[member._id].followed;
-    alert('Follow');
+    this.subAddFollow = this._authService
+      .addFollow(this._authService.getOwnId(), member._id).subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this._flashMessage.show('Une demande d\'ami a été envoyée ', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+        }
+      });
     return false;
   }
   /**
@@ -104,6 +118,10 @@ export class ListMembresComponent implements OnInit, OnDestroy {
     if (this.subSearch) {
       this.subSearch.unsubscribe();
       this.subSearch = null;
+    }
+    if (this.subAddFollow) {
+      this.subAddFollow.unsubscribe();
+      this.subAddFollow = null;
     }
   }
 }

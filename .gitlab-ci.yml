@@ -117,7 +117,7 @@ deploy_to_staging:
 
    
    # try to connect to Staging
-   - sshpass -p 'clg08usf?' ssh -t yaro@karthier.synology.me -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
+   #- sshpass -p 'clg08usf?' ssh -t yaro@karthier.synology.me -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
    #- cd /home/yaro ; ./deploy.sh
@@ -142,5 +142,6 @@ deploy_to_production:
    #- cd /home/yaro ; ./deploy.sh
   only:
     - master
-  when: manual
+  #when: manual
+  when: on_success
 

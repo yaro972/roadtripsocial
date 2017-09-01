@@ -17,6 +17,7 @@ export class FeedsComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   showFormEvent: Boolean;
   isMessagerieShown: any;
+  isWaintingFriendsShown: any;
   friendName: String;
 
 
@@ -45,23 +46,27 @@ export class FeedsComponent implements OnInit, OnDestroy, AfterContentChecked {
       commentTo: null
     }
 
-    this.sub = this._postService.sendNewPost(newPostObject).subscribe(data => {
-      if (data.err) {
-        console.log(data.err)
-      } else {
+    this.sub = this._postService
+      .sendNewPost(newPostObject)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err)
+        } else {
 
-      }
-    });
+        }
+      });
   };
 
   /**
-   * Active la vue du formulaire
+   * Active la vue du formulaire d'envoi de message
    */
   onShowForm() {
-    console.log(1, '-', new Date())
     this.showFormEvent = true;
   }
 
+  /**
+   * Désacive la vue du formulaire d'envoi de message
+   */
   onSendMessage() {
     this.showFormEvent = false;
   }
@@ -69,9 +74,16 @@ export class FeedsComponent implements OnInit, OnDestroy, AfterContentChecked {
 
 
   ngAfterContentChecked() {
-    this.subSendMessageService = this._sendMessageService.isShown()
+    this.subSendMessageService = this._sendMessageService
+      .isShown()
       .subscribe(status => {
         this.isMessagerieShown = status;
+      });
+
+    this.subSendMessageService = this._sendMessageService
+      .isWaitingFriendsShown()
+      .subscribe(status => {
+        this.isWaintingFriendsShown = status;
       });
 
 

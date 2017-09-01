@@ -459,4 +459,117 @@ export class AuthService {
       })
       .map(res => res.json());
   }
+
+
+  /**
+   * Demande d'ajout d'un ami
+   */
+  addFollow(userId, friendId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/add-friend', {
+        userId: userId,
+        friendId: friendId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+   * Retrouve les demandes d'amis en attente
+   */
+  showWaitingFriendsDemand(userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/show-waiting-friends-demand', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+  * Accepte la demande d'un ami
+  */
+  acceptDemand(friendDemandId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/accept-friend-demand', {
+        friendDemandId: friendDemandId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+
+  /**
+  * Refuse la demande d'un ami
+  */
+  refusedDemand(friendDemandId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/refuse-friend-demand', {
+        friendDemandId: friendDemandId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+  * Calcule le nb de demandes d'amis en attente
+  */
+  nbWaintingFriendDemand(userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/nbWaintingFriendDemand', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+  * Retrouve les amis en acceptés
+  */
+  showFriends(userId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/show-friends', {
+        userId: userId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+
 };

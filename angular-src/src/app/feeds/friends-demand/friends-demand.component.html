@@ -1,0 +1,66 @@
+<div class="row">
+  <h3 *ngIf="nbWaitingDemands>1">Vous avez {{nbWaitingDemands}} demandes d'amis en attente</h3>
+  <h3 *ngIf="nbWaitingDemands===1">Vous avez {{nbWaitingDemands}} demande d'amis en attente</h3>
+  <h3 *ngIf="nbWaitingDemands===0">Aucune demande en attente</h3>
+</div>
+
+<!-- Liste des demandes en attente -->
+<div class="row">
+  <ul>
+    <li class="row userDetails" *ngFor="let demand of waitingfriendListDemands; let i = index">
+      <!-- Qui -->
+      <!-- date -->
+      <!-- Accepter -->
+      <!-- Refuser -->
+
+      <div class="col-xs-5">
+
+        <div class="row userDetails-presentation">
+          <!-- </div> -->
+          <a href="">
+            <div>
+              <div *ngIf="demand.friendsList[0]._id !=ownId">
+                <!-- Photo de profile -->
+                <div class="col-xs-2">
+                  <img src="{{demand.friendsList[0].avatar | showImage}}" class="img img-responsive img-circle">
+
+                </div>
+                <!-- Résumé -->
+                <div class="col-xs-10">
+                  <p> {{demand.friendsList[0].nickname}}
+                  </p>
+                  <p> {{demand.friendsList[0].firstname}} {{demand.friendsList[0].lastname}}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Deuxieme champs -->
+              <div *ngIf="demand.friendsList[1]._id !=ownId">
+                <!-- Photo de profile -->
+                <div class="col-xs-2">
+                  <img src="{{demand.friendsList[1].avatar | showImage}}" class="img img-responsive img-circle">
+                </div>
+                <!-- Résumé -->
+                <div class="col-xs-10">
+                  <p> {{demand.friendsList[1].nickname}}
+                  </p>
+                  <p> {{demand.friendsList[1].firstname}} {{demand.friendsList[1].lastname}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-3 dateDemande"> Demande du {{demand.dateDemande | date:'dd MMM'}}</div>
+      <div class="col-xs-2">
+        <button class="btn btn-default-accept" title="Accepter" (click)="onClickAccept(i)"><img src="/assets/images/ok.png" alt="Accept button"></button>
+      </div>
+      <div class="col-xs-2">
+        <button class="btn btn-position btn-default-refused" title="Refuser" (click)="onClickRefused(i)"><img src="/assets/images/remove.png" alt="Refuse button"></button>
+      </div>
+
+    </li>
+    <div class="separation"></div>
+  </ul>
+</div>

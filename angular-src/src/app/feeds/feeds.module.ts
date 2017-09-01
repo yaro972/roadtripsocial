@@ -20,6 +20,7 @@ import { MessagerieComponent } from './messagerie/messagerie.component';
 import { MembresModule } from './../membres/membres.module';
 import { PassSecurityModule } from './../pass-security/pass-security.module';
 import { ProfileModule } from './../profile/profile.module';
+import { FriendsDemandComponent } from './friends-demand/friends-demand.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { ProfileModule } from './../profile/profile.module';
     SubMenuComponent,
     FriendsConnectedComponent,
     ListFriendsComponent,
-    MessagerieComponent
+    MessagerieComponent,
+    FriendsDemandComponent
   ],
   exports: [
     PostViewComponent,
