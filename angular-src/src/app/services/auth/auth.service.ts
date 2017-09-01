@@ -429,8 +429,6 @@ export class AuthService {
       })
       .map(res => res.json());
   }
-<<<<<<< ours
-=======
 
 
   /**
@@ -461,5 +459,4 @@ export class AuthService {
       })
       .map(res => res.json());
   }
->>>>>>> theirs
 };
