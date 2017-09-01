@@ -393,4 +393,25 @@ User.getNbUseregistred = function (callback) {
     .exec(callback);
 };
 
+/**
+ * Récupération du nombre de voyages déclarés
+ */
+
+User.getNbTravelsegistred = function (callback) {
+  User
+    .aggregate([{
+        $unwind: "$visitedCountries"
+      },
+      {
+        $group: {
+          _id: "$visitedCountries",
+          nb: {
+            $sum: "$visitedCountries.times"
+          }
+        }
+      }
+    ])
+    .exec(callback);
+};
+
 module.exports = User;

@@ -15,16 +15,17 @@ import { Users } from './users'
 export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy {
   isConnected: Boolean;
   subGetNbUseregistred: Subscription;
+  subGetNbTravelsegistred: Subscription;
 
 
-  users: Users = {
-    registered: 15,
+  users = {
     online: 7
   }
 
   registredUsers: Number;
+  nbRegistredTravels: Number;
 
-  journey: Number = 157;
+
 
   constructor(
     private _authService: AuthService,
@@ -57,6 +58,7 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     }
 
     this.getNbUseregistred();
+    this.getNbTravelsegistred();
   }
 
 
@@ -73,6 +75,21 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     });
   };
 
+
+  /**
+ * Récupération du nombre de voyages déclarés
+ */
+  getNbTravelsegistred() {
+    this.subGetNbTravelsegistred = this._authService.getNbTravelsegistred().subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        this.nbRegistredTravels = data.nbRegistredTravels.length;
+      }
+    });
+  };
+
+
   ngAfterContentChecked() {
 
     if (this._authService.loggedIn()) {
@@ -85,6 +102,11 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     if (this.subGetNbUseregistred) {
       this.subGetNbUseregistred.unsubscribe();
       this.subGetNbUseregistred = null;
+    }
+
+    if (this.subGetNbTravelsegistred) {
+      this.subGetNbTravelsegistred.unsubscribe();
+      this.subGetNbTravelsegistred = null;
     }
   }
 }

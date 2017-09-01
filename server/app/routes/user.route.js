@@ -832,4 +832,23 @@ router.get('/getNbUseregistred', function (req, res) {
   });
 });
 
+/**
+ * Récupération du nombre de voyages déclarés
+ */
+router.get('/getNbTravelsegistred', function (req, res) {
+  User.getNbTravelsegistred(function (err, nbRegistredTravels) {
+
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbRegistredTravels: nbRegistredTravels
+      });
+    }
+  });
+});
+
 module.exports = router;
