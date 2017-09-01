@@ -934,10 +934,16 @@ router.post('/show-waiting-friends-demand', passport.authenticate('jwt', {
 });
 
 
+/**
+ * Function d'ajout d'un ami dans la liste
+ * @param {String} userId Identifiant de l'utilisateur à modifier
+ * @param {String} friendId Identifiant de l'ami
+ * @param {Function} callback function de callback
+ */
 function addFriend(userId, friendId, callback) {
   User.addFriend(userId, friendId, function (err, result) {
     callback(err, result);
-  })
+  });
 }
 
 /**
