@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentChecked, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Users } from './users'
 
@@ -13,15 +14,18 @@ import { Users } from './users'
 
 export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy {
   isConnected: Boolean;
+  subGetNbUseregistred: Subscription;
+  subGetNbTravelsegistred: Subscription;
 
 
-
-  users: Users = {
-    registered: 15,
+  users = {
     online: 7
   }
 
-  journey: Number = 157;
+  registredUsers: Number;
+  nbRegistredTravels: Number;
+
+
 
   constructor(
     private _authService: AuthService,
@@ -52,7 +56,38 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
 
       this.isConnected = true;
     }
+
+    this.getNbUseregistred();
+    this.getNbTravelsegistred();
   }
+
+
+  /**
+   * Récupération du nombre d'utilisateurs
+   */
+  getNbUseregistred() {
+    this.subGetNbUseregistred = this._authService.getNbUseregistred().subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        this.registredUsers = data.nbRegistredUsers;
+      }
+    });
+  };
+
+
+  /**
+ * Récupération du nombre de voyages déclarés
+ */
+  getNbTravelsegistred() {
+    this.subGetNbTravelsegistred = this._authService.getNbTravelsegistred().subscribe(data => {
+      if (data.err) {
+        console.log(data.err);
+      } else {
+        this.nbRegistredTravels = data.nbRegistredTravels.length;
+      }
+    });
+  };
 
 
   ngAfterContentChecked() {
@@ -63,6 +98,15 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     }
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    if (this.subGetNbUseregistred) {
+      this.subGetNbUseregistred.unsubscribe();
+      this.subGetNbUseregistred = null;
+    }
 
+    if (this.subGetNbTravelsegistred) {
+      this.subGetNbTravelsegistred.unsubscribe();
+      this.subGetNbTravelsegistred = null;
+    }
+  }
 }
