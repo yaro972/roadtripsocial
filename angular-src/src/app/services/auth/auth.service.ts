@@ -553,23 +553,5 @@ export class AuthService {
       .map(res => res.json());
   };
 
-  /**
-  * Retrouve les amis en acceptés
-  */
-  showFriends(userId) {
-    const headers = new Headers();
-    this.loadToken();
-
-    headers.append('Authorization', this.authToken);
-    headers.append('Content-type', 'application/json');
-    return this._http
-      .post(environment.BACKENDURL + '/api/user/show-friends', {
-        userId: userId
-      }, {
-        headers: headers
-      })
-      .map(res => res.json());
-  };
-
 
 };

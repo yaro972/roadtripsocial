@@ -157,25 +157,5 @@ Friends.nbWaintingFriendDemand = function (userId, callback) {
     .exec(callback);
 };
 
-/**
- * Retrouve les amis en acceptés 
- */
-Friends.showFriends = function (userId, callback) {
-  Friends
-    .find({
-      $and: [{
-          friendsList: userId
-        },
-        {
-          accepted: true
-        }
-      ]
-    })
-    .populate('friendsList')
-    .sort({
-      'friendsList.nickname': 1
-    })
-    .exec(callback);
-};
 
 module.exports = Friends;

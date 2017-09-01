@@ -1031,25 +1031,6 @@ router.post('/nbWaintingFriendDemand', passport.authenticate('jwt', {
   });
 });
 
-/**
- * Retrouve les amis acceptés
- */
-router.post('/show-friends', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  Friends.showFriends(req.body.userId, function (err, friends) {
-    if (err) {
-      res.json({
-        err: err
-      });
-    } else {
-      res.json({
-        err: null,
-        friends: friends
-      });
-    }
-  });
-});
 
 
 
