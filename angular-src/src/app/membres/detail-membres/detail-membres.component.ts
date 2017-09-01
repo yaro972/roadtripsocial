@@ -7,6 +7,8 @@ import { User } from '../../core/user';
 import { PostViewComponent } from './../../feeds/post-view/post-view.component';
 import { ProfileViewComponent } from './../../profile/profile-view/profile-view.component';
 
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'rts-detail-membres',
   templateUrl: './detail-membres.component.html',
@@ -15,9 +17,10 @@ import { ProfileViewComponent } from './../../profile/profile-view/profile-view.
 export class DetailMembresComponent implements OnInit, OnDestroy {
   user: User;
 
-  suivi: false;
+  suivi: Boolean;
   isOwnProfile: Boolean;
   getUserProfile: Boolean;
+  subGetProfile: Subscription;
 
   // Connexions Ajax actives
   sub: any;
@@ -44,7 +47,6 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
 
 
   getUserId() {
-
     this.subRoute = this._route.params.subscribe(params => {
       this.id = params['id'];
       this.ownerId = this.id;
@@ -53,18 +55,43 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   }
 
   getUserDetails(id) {
-    this.subGetMember = this._authService.memberdetails(id).subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-
-        this.user = data.memberDetails;
-        this.getUserProfile = true;
-      }
-    });
+    this.subGetMember = this._authService
+      .memberdetails(id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.user = data.memberDetails;
+          this.getUserProfile = true;
+          this.isFriend(this.user);
+        }
+      });
   }
 
+  isFriend(u) {
+    const ownId = this._authService.getOwnId();
 
+    // if (this.user._id !== this._authService.getOwnId()) {
+    //   this.subGetProfile = this._authService
+    //     .memberdetails(this._authService.getOwnId())
+    //     .subscribe(data => {
+    //       if (data.err) {
+    //         console.log(data.err);
+    //       } else {
+    let follow = false;
+
+    for (let i = 0; i < u.friendsList.length; i++) {
+      if (u.friendsList[i]._id === ownId) {
+        follow = true;
+      }
+    }
+
+    this.suivi = follow;
+
+    //   }
+    // });
+    // }
+  }
 
   postActiveMode() {
     this.isPostActive = true;
@@ -86,6 +113,11 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
 
     if (this.subGetMember) {
       this.subGetMember = null;
+    }
+
+    if (this.subGetProfile) {
+      this.subGetProfile.unsubscribe();
+      this.subGetProfile = null;
     }
   }
 }

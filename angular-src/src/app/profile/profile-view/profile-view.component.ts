@@ -39,6 +39,7 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
   age: Number;
   subAddFollow: Subscription;
 
+
   constructor(
     private _authService: AuthService,
     private _flashMessage: FlashMessagesService,
@@ -78,6 +79,7 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
   unFollow() {
     this.suivi = !this.suivi;
   }
+
 
 
   onSendPrivateMessage(u) {
