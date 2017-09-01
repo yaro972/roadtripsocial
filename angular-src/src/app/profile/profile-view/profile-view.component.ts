@@ -9,6 +9,8 @@ import { FileUploadService } from '../../services/file-upload/file-upload.servic
 import { CitiesClass } from './../../services/profile-edit/list-cities';
 import { User } from '../../core/user';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
+import { SendMessageService } from './../../feeds/service/send-message.service';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -40,7 +42,9 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
     private _authService: AuthService,
     private _flashMessage: FlashMessagesService,
     private _uploadService: FileUploadService,
-    private _profileService: ProfileEditService
+    private _profileService: ProfileEditService,
+    private _sendMessageService: SendMessageService,
+    private _router: Router
   ) {
     this._authService.collapseSubMen = true;
   }
@@ -54,6 +58,13 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
     this.suivi = !this.suivi;
   }
   ngAfterViewChecked() {
+  }
+
+  onSendPrivateMessage(u) {
+    this._sendMessageService.showMessagerie();
+    this._sendMessageService.setReceiver(u._id);
+    this._router.navigate(['/feeds']);
+
   }
 
   ngOnDestroy() {
