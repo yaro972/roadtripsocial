@@ -15,6 +15,8 @@ import { ExtraDetailsFormComponent } from './extra-details-form/extra-details-fo
 
 import { ShowImagesModule } from './../show-images/show-images.module';
 import { AuthService } from './../services/auth/auth.service';
+import { ChatboxService } from './../components/chatbox/chatbox.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { AuthService } from './../services/auth/auth.service';
     LoginComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    ChatboxService
   ]
 })
 export class LoginRegisterModule { }

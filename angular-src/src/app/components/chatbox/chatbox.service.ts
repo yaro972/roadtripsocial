@@ -6,17 +6,23 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class ChatboxService {
-
-  constructor() { }
   private url = environment.SOCKETURL;
   private socket;
+
+  constructor() { }
 
   sendMsg(msg) {
     this.socket.emit('message', msg);
   }
 
+  newUserConnected(user) {
+    this.socket.emit('newUser', user);
+  }
+
+disconnect(){}
+
   getMsg() {
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
       this.socket = io(this.url);
       this.socket.on('message', (data) => {
         console.log(data)

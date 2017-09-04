@@ -28,7 +28,9 @@ var compression = require('compression');
 var helmet = require('helmet');
 
 const config = require('./app/inc/.config');
+const onlineModule = require('./app/inc/online.class');
 
+var connectedUser = [];
 
 // Port par défaut de l'application
 let port = process.env.BACKPORT || config.srv.port;
@@ -75,7 +77,7 @@ require('./app/inc/passport')(passport);
 var api = require('./app/routes/api.route');
 var userApi = require('./app/routes/user.route');
 var admin = require('./app/routes/admin.route');
-
+var chat = require('./app/routes/chat.route');
 
 // ===========================
 // Base de données
@@ -115,10 +117,8 @@ mongoose.connect(config.db.connString(), options)
 // Routes
 app.use('/api/user', userApi);
 app.use('/api', api);
-
-
-
 app.use('/admin', admin);
+app.use('/chat', chat);
 
 app.use(function (req, res) {
   res.status(404);
@@ -160,12 +160,28 @@ app.listen(port, ip, function () {
 // ===========================
 // Chat
 // ===========================
-io.on('connection', function (socket) {
-  console.log('utilisateur connecté');
-  socket.on('message', function (msg) {    
-    socket.emit('message', msg);
-  });
-});
+// io.on('connection', function (socket) {
+//   console.log('utilisateur connecté');
+
+//   onlineModule.addNewUser();
+
+//   socket.on('newUser', function (user) {
+//     connectedUser.push(user);
+
+//     console.log(connectedUser)
+//   });
+
+//   socket.on('message', function (msg) {
+//     let m = new Date() + msg;
+//     io.emit('message', msg);
+//   });
+
+//   socket.on('disconnect', function () {
+//     io.emit('user disconnected');
+//     onlineModule.removeUser();
+
+//   });
+// });
 http.listen(5000, ip, function () {
   console.log('Serveur de chat démarré sur le port 5000...');
 });

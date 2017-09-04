@@ -7,6 +7,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../inc/.config');
 const mail = require('../inc/mail');
+const onlineModule = require('../inc/online.class');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -1067,7 +1068,14 @@ router.post('/remove-friend', passport.authenticate('jwt', {
   });
 });
 
+/**
+ * Nombre d'utilisateurs connectés
+ */
+router.get('/nb-online', function (req, res) {
 
-
+  res.json({
+    nbConnected: onlineModule.getNbUser()
+  });
+});
 
 module.exports = router;

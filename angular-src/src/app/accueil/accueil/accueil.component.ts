@@ -16,11 +16,10 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
   isConnected: Boolean;
   subGetNbUseregistred: Subscription;
   subGetNbTravelsegistred: Subscription;
+  subNbOnlineUsers: Subscription;
 
 
-  users = {
-    online: 7
-  }
+  usersOnline: Number
 
   registredUsers: Number;
   nbRegistredTravels: Number;
@@ -59,6 +58,7 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
 
     this.getNbUseregistred();
     this.getNbTravelsegistred();
+    this.getNbusersOnlineUsers();
   }
 
 
@@ -66,13 +66,15 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
    * Récupération du nombre d'utilisateurs
    */
   getNbUseregistred() {
-    this.subGetNbUseregistred = this._authService.getNbUseregistred().subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.registredUsers = data.nbRegistredUsers;
-      }
-    });
+    this.subGetNbUseregistred = this._authService
+      .getNbUseregistred()
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.registredUsers = data.nbRegistredUsers;
+        }
+      });
   };
 
 
@@ -80,16 +82,30 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
  * Récupération du nombre de voyages déclarés
  */
   getNbTravelsegistred() {
-    this.subGetNbTravelsegistred = this._authService.getNbTravelsegistred().subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.nbRegistredTravels = data.nbRegistredTravels.length;
-      }
-    });
+    this.subGetNbTravelsegistred = this._authService
+      .getNbTravelsegistred()
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.nbRegistredTravels = data.nbRegistredTravels.length;
+        }
+      });
   };
 
 
+
+  getNbusersOnlineUsers() {
+    this.subNbOnlineUsers = this._authService
+      .getNbOnlineUsers()
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.usersOnline = data.nbConnected;
+        }
+      });
+  }
   ngAfterContentChecked() {
 
     if (this._authService.loggedIn()) {
@@ -107,6 +123,10 @@ export class AccueilComponent implements OnInit, AfterContentChecked, OnDestroy 
     if (this.subGetNbTravelsegistred) {
       this.subGetNbTravelsegistred.unsubscribe();
       this.subGetNbTravelsegistred = null;
+    }
+    if (this.subNbOnlineUsers) {
+      this.subNbOnlineUsers.unsubscribe();
+      this.subNbOnlineUsers = null;
     }
   }
 }
