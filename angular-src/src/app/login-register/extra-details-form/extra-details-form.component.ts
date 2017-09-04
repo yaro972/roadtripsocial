@@ -91,6 +91,8 @@ export class ExtraDetailsFormComponent implements OnInit, OnDestroy {
   addCountry() {
     this.countriesList.push(this.registerForm.value.visitedCountry);
     this.visitedCountryValue = '';
+
+    this.registerForm.controls.visitedCountry.reset();
   }
 
   removeCountry(country) {
