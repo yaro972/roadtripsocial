@@ -14,6 +14,10 @@ let messagerieSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   receiver: {
     type: Schema.Types.ObjectId,
     ref: 'User'

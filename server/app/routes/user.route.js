@@ -10,9 +10,11 @@ const mail = require('../inc/mail');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const async = require('async');
 
 // Models
 const User = require('../models/user.model');
+const Friends = require('../models/friends.model');
 const Messages = require('../models/messages.model');
 const MessageThread = require('../models/message-thread.model');
 
@@ -850,5 +852,226 @@ router.get('/getNbTravelsegistred', function (req, res) {
     }
   });
 });
+
+
+/**
+ * Vérifie si l'enregistrement existe déjà
+ * @param {*} req Requete du serveur
+ * @param {*} callback Function de callback
+ */
+function isFriendsDemandExists(req, callback) {
+  Friends.searchFriendDemand(req.body.userId, req.body.friendId, function (err, result) {
+
+    if (err) {
+      callback(err);
+    } else {
+      if (result.length) {
+        // Un enregistrement existe
+        callback(null, true);
+      } else {
+        // Pas d'enregistrement existant
+        callback(null, false);
+      }
+    }
+  });
+}
+
+
+/**
+ * Demande d'ajout d'un ami
+ */
+router.post('/add-friend', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  isFriendsDemandExists(req, function (err, exists) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      if (exists) {
+        res.json({
+          err: null,
+          exists: true
+        });
+      } else {
+        // Ajout de la nouvelle liaison
+        Friends.addNewFriends(req.body.userId, req.body.friendId, function (err) {
+          if (err) {
+            res.json({
+              err: err
+            });
+          } else {
+            res.json({
+              err: null
+            });
+          }
+        });
+      }
+    }
+  });
+
+});
+
+/**
+ * Retrouve les demandes d'amis en attente
+ */
+router.post('/show-waiting-friends-demand', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Friends.showWaitingFriendsDemand(req.body.userId, function (err, demands) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        demands: demands
+      });
+    }
+  });
+});
+
+
+/**
+ * Function d'ajout d'un ami dans la liste
+ * @param {String} userId Identifiant de l'utilisateur à modifier
+ * @param {String} friendId Identifiant de l'ami
+ * @param {Function} callback function de callback
+ */
+function addFriend(userId, friendId, callback) {
+  User.addFriend(userId, friendId, function (err, result) {
+    callback(err, result);
+  });
+}
+
+/**
+ * Accepte la demande d'un ami
+ */
+router.post('/accept-friend-demand', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+
+  Friends.showDemand(req.body.friendDemandId, function (err, demandDetail) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      // Récupération des identifiants des amis
+      let listUsers = demandDetail.friendsList;
+
+      async.parallel([
+        function (callback) {
+          addFriend(listUsers[0]._id, listUsers[1]._id, callback);
+        },
+        function (callback) {
+          addFriend(listUsers[1]._id, listUsers[0]._id, callback);
+        }
+      ], function (err, results) {
+        if (err) {
+          res.json({
+            err: err
+          });
+        } else {
+
+          // Suppression de la demande initiale
+          Friends.acceptFriendDemand(req.body.friendDemandId, function (err, demands) {
+            if (err) {
+              res.json({
+                err: err
+              });
+            } else {
+              res.json({
+                err: null,
+                demands: demands,
+                result: results
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+});
+
+/**
+ * Refuse la demande d'un ami
+ */
+router.post('/refuse-friend-demand', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Friends.refuseFriendDemand(req.body.friendDemandId, function (err, demands) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        demands: demands
+      });
+    }
+  });
+});
+
+
+/**
+ * Calcule le nb de demandes d'amis en attente
+ */
+router.post('/nbWaintingFriendDemand', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Friends.nbWaintingFriendDemand(req.body.userId, function (err, nbWaiting) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbWaiting: nbWaiting
+      });
+    }
+  });
+});
+
+
+/**
+ * Suppression d'un ami
+ */
+router.post('/remove-friend', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  async.parallel([
+    function (callback) {
+      User.removeFriend(req.body.userId, req.body.friendId, function (err, rslt) {
+        callback(err, rslt);
+      });
+    },
+    function (callback) {
+      User.removeFriend(req.body.friendId, req.body.userId, function (err, rslt) {
+        callback(err, rslt);
+      });
+    },
+  ], function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      //
+      // debugger
+      res.json({
+        err: null,
+        result: result
+      });
+    }
+  });
+});
+
+
+
 
 module.exports = router;

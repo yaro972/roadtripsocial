@@ -16,8 +16,13 @@ export class SubMenuComponent implements OnInit, OnDestroy {
 
   subSendMessageService: any;
   nbUnreadPosts: Number;
+  nbWaitingDemands: Number;
+  nbWaitingFriend: Number;
+
   subGetUnreadMessages: any;
+  subIsWaitingDemands: any;
   isNewMessage: Boolean;
+  isWaitingDemand: Boolean;
 
 
   constructor(
@@ -29,14 +34,29 @@ export class SubMenuComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isunreadMessage();
+    this.isWaitingDemands();
   }
 
   showSendMessageEvent() {
-    this._sendMessageService.showMessagerie();
+    this._sendMessageService
+      .showMessagerie();
+    this._sendMessageService
+      .hideWaitingFriendsEvent();
   }
 
+
+  showWaitingFriendsEvent() {
+    this._sendMessageService
+      .hideMessagerie();
+    this._sendMessageService
+      .showWaitingFriend();
+  };
+
   onClickShowFeeds() {
-    this._sendMessageService.hideMessagerie();
+    this._sendMessageService
+      .hideMessagerie();
+    this._sendMessageService
+      .hideWaitingFriendsEvent();
   }
 
   /**
@@ -68,6 +88,29 @@ export class SubMenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Vérifie si des demandes d'amis sont en attente
+   */
+  isWaitingDemands(): void {
+    const userId = this._authService.getOwnId();
+
+
+    this.subIsWaitingDemands = this._authService
+      .nbWaintingFriendDemand(userId)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+          this.nbWaitingDemands = -1;
+        } else {
+          this.nbWaitingDemands = data.nbWaiting;
+          if (this.nbUnreadPosts > 0) {
+            this.isWaitingDemand = true;
+          } else {
+            this.isWaitingDemand = false;
+          }
+        }
+      });
+  }
 
   onLogoutClick() {
     this._authService.logout();
@@ -83,6 +126,10 @@ export class SubMenuComponent implements OnInit, OnDestroy {
     if (this.subGetUnreadMessages) {
       this.subGetUnreadMessages.unsubscribe();
       this.subGetUnreadMessages = null;
+    }
+    if (this.subIsWaitingDemands) {
+      this.subIsWaitingDemands.unsubscribe();
+      this.subIsWaitingDemands = null;
     }
   }
 }

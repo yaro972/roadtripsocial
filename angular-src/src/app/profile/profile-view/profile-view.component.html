@@ -50,7 +50,7 @@
             <a class="glyphicon glyphicon-comment action" title="Ecrire" aria-hidden="true"></a>
           </div>
           <div class="col-xs-4 col-md-1">
-            <a class="glyphicon glyphicon-envelope action" title="Envoyer un message privé" aria-hidden="true"></a>
+            <a class="glyphicon glyphicon-envelope action" title="Envoyer un message privé" aria-hidden="true" (click)="onSendPrivateMessage(user)"></a>
           </div>
 
           <div class="col-xs-4 col-md-4 action action-follow">
@@ -58,7 +58,7 @@
               <span class="glyphicon glyphicon-star-empty" title="Suivre"></span> Suivre
             </a>
 
-            <a *ngIf="suivi" (click)="onFollow()" class="action action-follow">
+            <a *ngIf="suivi" (click)="unFollow()" class="action action-follow">
               <span class="glyphicon glyphicon-star" title="Suivi"></span> Suivi
             </a>
           </div>
@@ -104,13 +104,13 @@
       </div>
       <div class="rows" *ngIf="user.friendsList">
         <div class="col-xs-12">
-          <h4>Mes amis</h4>
+          <h4>Amis</h4>
         </div>
         <div class="col-sm-12 col-md-8">
           <div class="row">
             <div *ngFor="let friend of user.friendsList">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-                <a href="{{friend.link}}"> <img class="img img-responsive img-circle profile-face" src="{{friend.imgProfile}}" title="{{friend.name}}"></a>
+                <a href="/details-membres/{{friend._id}}"> <img class="img img-responsive img-circle profile-face" src="{{friend.avatar | showImage}}" title="{{friend.nickname}}"></a>
               </div>
             </div>
           </div>

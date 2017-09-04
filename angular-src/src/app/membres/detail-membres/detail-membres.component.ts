@@ -7,6 +7,8 @@ import { User } from '../../core/user';
 import { PostViewComponent } from './../../feeds/post-view/post-view.component';
 import { ProfileViewComponent } from './../../profile/profile-view/profile-view.component';
 
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'rts-detail-membres',
   templateUrl: './detail-membres.component.html',
@@ -15,9 +17,10 @@ import { ProfileViewComponent } from './../../profile/profile-view/profile-view.
 export class DetailMembresComponent implements OnInit, OnDestroy {
   user: User;
 
-  suivi: false;
+  suivi: Boolean;
   isOwnProfile: Boolean;
   getUserProfile: Boolean;
+  subGetProfile: Subscription;
 
   // Connexions Ajax actives
   sub: any;
@@ -30,41 +33,6 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
 
   isPostActive: Boolean;
 
-
-
-
-  profileImg = 'https://randomuser.me/api/portraits/men/80.jpg';
-  profileFriendsList = [{
-    name: 'Joe',
-    imgProfile: 'https://randomuser.me/api/portraits/men/81.jpg',
-    link: ''
-  },
-  {
-    name: 'Jack',
-    imgProfile: 'https://randomuser.me/api/portraits/men/82.jpg',
-    link: ''
-  },
-  {
-    name: 'Duke',
-    imgProfile: 'https://randomuser.me/api/portraits/men/83.jpg',
-    link: ''
-  },
-  {
-    name: 'Elton',
-    imgProfile: 'https://randomuser.me/api/portraits/men/84.jpg',
-    link: ''
-  }
-  ];
-
-  /*
-  => https://randomuser.me/
-  "picture": {
-          "large": "https://randomuser.me/api/portraits/men/83.jpg",
-          "medium": "https://randomuser.me/api/portraits/med/men/83.jpg",
-          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/83.jpg"
-        },
-  */
-
   constructor(
     private _route: ActivatedRoute,
     private _authService: AuthService
@@ -74,12 +42,11 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUserProfile = false;
     this.getUserId();
-    this.isPostActive = true;
+    this.isPostActive = false;
   }
 
 
   getUserId() {
-
     this.subRoute = this._route.params.subscribe(params => {
       this.id = params['id'];
       this.ownerId = this.id;
@@ -88,20 +55,43 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
   }
 
   getUserDetails(id) {
-    this.subGetMember = this._authService.memberdetails(id).subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-
-        this.user = data.memberDetails;
-        this.getUserProfile = true;
-
-        this.addFakeData();
-      }
-    });
+    this.subGetMember = this._authService
+      .memberdetails(id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.user = data.memberDetails;
+          this.getUserProfile = true;
+          this.isFriend(this.user);
+        }
+      });
   }
 
+  isFriend(u) {
+    const ownId = this._authService.getOwnId();
 
+    // if (this.user._id !== this._authService.getOwnId()) {
+    //   this.subGetProfile = this._authService
+    //     .memberdetails(this._authService.getOwnId())
+    //     .subscribe(data => {
+    //       if (data.err) {
+    //         console.log(data.err);
+    //       } else {
+    let follow = false;
+
+    for (let i = 0; i < u.friendsList.length; i++) {
+      if (u.friendsList[i]._id === ownId) {
+        follow = true;
+      }
+    }
+
+    this.suivi = follow;
+
+    //   }
+    // });
+    // }
+  }
 
   postActiveMode() {
     this.isPostActive = true;
@@ -109,11 +99,6 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
 
   profilActiveMode() {
     this.isPostActive = false;
-  }
-
-  addFakeData() {
-
-    this.user.friendsList = this.profileFriendsList;
   }
 
   ngOnDestroy() {
@@ -128,6 +113,11 @@ export class DetailMembresComponent implements OnInit, OnDestroy {
 
     if (this.subGetMember) {
       this.subGetMember = null;
+    }
+
+    if (this.subGetProfile) {
+      this.subGetProfile.unsubscribe();
+      this.subGetProfile = null;
     }
   }
 }
