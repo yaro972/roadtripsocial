@@ -3,36 +3,35 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { environment } from './../../../environments/environment';
 import * as io from 'socket.io-client';
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class ChatboxService {
-  private url = environment.SOCKETURL;
-  private socket;
+  constructor(private _http: Http) { }
 
-  constructor() { }
-
-  sendMsg(msg) {
-    this.socket.emit('message', msg);
-  }
-
-  newUserConnected(user) {
-    this.socket.emit('newUser', user);
-  }
-
-disconnect(){}
-
-  getMsg() {
-    const observable = new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('message', (data) => {
-        console.log(data)
-
-        observer.next(data)
-      });
-      return () => {
-        this.socket.disconnect();
-      };
+  getChatByRoom(room) {
+    return new Promise((resolve, reject) => {
+      this._http.get(environment.BACKENDURL + '/chat/' + room)
+        .map(res => res.json())
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
     });
-    return observable;
+  }
+
+  saveChat(data) {
+    return new Promise((resolve, reject) => {
+      this._http.post(environment.BACKENDURL + '/chat', data)
+        .map(res => res.json())
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
   }
 }
