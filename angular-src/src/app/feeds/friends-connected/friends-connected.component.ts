@@ -3,8 +3,6 @@ import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 
-import { JsonPipe } from '@angular/common';
-
 @Component({
   selector: 'rts-friends-connected',
   templateUrl: './friends-connected.component.html',
