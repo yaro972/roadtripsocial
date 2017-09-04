@@ -60,8 +60,6 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
   }
 
   onFollow() {
-    this.suivi = !this.suivi;
-
     this.subAddFollow = this._authService
       .addFollow(this._authService.getOwnId(), this.user._id)
       .subscribe(data => {
@@ -72,12 +70,27 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
             cssClass: 'alert alert-success text-center',
             timeout: 2500
           });
+          // this.suivi = !this.suivi;
         }
       });
     return false;
   }
   unFollow() {
-    this.suivi = !this.suivi;
+    this.subAddFollow = this._authService
+      .unFollow(this._authService.getOwnId(), this.user._id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this._flashMessage.show('Vous n\'êtes plus ami', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+
+          this.suivi = !this.suivi;
+        }
+      });
+    return false;
   }
 
 

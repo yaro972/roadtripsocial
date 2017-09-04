@@ -46,7 +46,7 @@
     <div class="col-xs-12">
       <!-- <h3>Liste des membres</h3> -->
       <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
+        <div class="col-xs-6 col-xs-offset-3">
 
 
           <!-- affichage de la liste -->
@@ -69,12 +69,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-xs-2" (click)="onFollow(member)">
+              <!-- <div class="col-xs-2" (click)="onFollow(member)">
                 <button class="btn btn-default btn-toFollow" *ngIf="!member.followed">Suivre <span class="glyphicon glyphicon-share-alt"></span>
              </button>
                 <button class="btn btn-default btn-followed" *ngIf="member.followed"><span class="glyphicon glyphicon-ok"> Suivi</span>
             </button>
-              </div>
+              </div> -->
               <div class="col-xs-8  col-md-3 text-center search-visitedCountries" title="{{member.visitedCountries}}"><img src="/assets/images//pin1.png" alt="" width="25">
                 <p *ngIf="member.visitedCountries.length">Pays visités...</p>
                 <p *ngIf="!member.visitedCountries.length">Aucun pays</p>

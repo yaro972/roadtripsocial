@@ -1038,6 +1038,38 @@ router.post('/nbWaintingFriendDemand', passport.authenticate('jwt', {
 });
 
 
+/**
+ * Suppression d'un ami
+ */
+router.post('/remove-friend', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  async.parallel([
+    function (callback) {
+      User.removeFriend(req.body.userId, req.body.friendId, function (err, rslt) {
+        callback(err, rslt);
+      });
+    },
+    function (callback) {
+      User.removeFriend(req.body.friendId, req.body.userId, function (err, rslt) {
+        callback(err, rslt);
+      });
+    },
+  ], function (err, result) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      //
+      // debugger
+      res.json({
+        err: null,
+        result: result
+      });
+    }
+  });
+});
 
 
 

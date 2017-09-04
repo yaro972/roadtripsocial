@@ -309,47 +309,50 @@ User.searchMembers = function (toFind, callback) {
 
   let regEx = new RegExp(toFind, 'i');
   User.find({
-    $or: [{
-        nickname: {
-          $regex: regEx
+      $or: [{
+          nickname: {
+            $regex: regEx
+          }
+        }, {
+          firstname: {
+            $regex: regEx
+          }
+        },
+        {
+          lastname: {
+            $regex: regEx
+          }
+        },
+        {
+          city: {
+            $regex: regEx
+          }
+        },
+        {
+          visitedCountries: {
+            $regex: regEx
+          }
+        },
+        {
+          country: {
+            $regex: regEx
+          }
         }
-      }, {
-        firstname: {
-          $regex: regEx
-        }
-      },
-      {
-        lastname: {
-          $regex: regEx
-        }
-      },
-      {
-        city: {
-          $regex: regEx
-        }
-      },
-      {
-        visitedCountries: {
-          $regex: regEx
-        }
-      },
-      {
-        country: {
-          $regex: regEx
-        }
-      }
-    ]
-  }, {
-    _id: 1,
-    nickname: 1,
-    firstname: 1,
-    lastname: 1,
-    avatar: 1,
-    city: 1,
-    country: 1,
-    visitedCountries: 1
+      ]
+    }, {
+      _id: 1,
+      nickname: 1,
+      firstname: 1,
+      lastname: 1,
+      avatar: 1,
+      city: 1,
+      country: 1,
+      visitedCountries: 1,
+      friendsList: 1
 
-  }, callback);
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**

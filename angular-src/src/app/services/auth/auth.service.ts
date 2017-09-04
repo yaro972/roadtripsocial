@@ -553,5 +553,25 @@ export class AuthService {
       .map(res => res.json());
   };
 
+  /**
+   * Suppression d'un ami
+   * @param userId Identifiant de l'utilisateur
+   * @param friendId Identifiant de l'ami
+   */
+  unFollow(userId, friendId) {
+    const headers = new Headers();
+    this.loadToken();
 
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/api/user/remove-friend', {
+        userId: userId,
+        friendId: friendId
+      }, {
+        headers: headers
+      })
+      .map(res => res.json());
+
+  };
 };
