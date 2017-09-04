@@ -13,6 +13,13 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
+// Chat Modules
+// var io = require('socket.io');
+const http = require('http').Server(express());
+var io = require('socket.io')(http);
+// const server = http.createServer();
+// io = io.listen(server);
+
 // Mise en place du debogage
 var debug = require('debug')('http');
 // Compression des données Http
@@ -148,6 +155,19 @@ app.use(function (err, req, res) {
 app.listen(port, ip, function () {
   // console.log('Serveur démarré sur le port : ' + port + ' IP :' + ip);
   debug('Serveur démarré sur le port : ' + port + ' IP :' + ip);
+});
+
+// ===========================
+// Chat
+// ===========================
+io.on('connection', function (socket) {
+  console.log('utilisateur connecté');
+  socket.on('message', function (msg) {    
+    socket.emit('message', msg);
+  });
+});
+http.listen(5000, ip, function () {
+  console.log('Serveur de chat démarré sur le port 5000...');
 });
 
 // Pour les tests unitaires

@@ -26,6 +26,8 @@ import { ListMembersService } from './services/list-members/list-members.service
 
 import { PostsService } from './services/posts/posts.service';
 
+import { ChatboxService } from './components/chatbox/chatbox.service';
+
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 
@@ -37,13 +39,18 @@ import { PassSecurityModule } from './pass-security/pass-security.module';
 import { ShowImagesModule } from './show-images/show-images.module';
 import { FeedsModule } from './feeds/feeds.module';
 
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     FooterComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    FeedsComponent,
+    SubMenuComponent,
+    ChatboxComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,8 @@ import { FeedsModule } from './feeds/feeds.module';
     AuthService,
     FileUploadService,
     ListMembersService,
-    PostsService
+    PostsService,
+    ChatboxService
   ],
   bootstrap: [AppComponent]
 })

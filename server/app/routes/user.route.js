@@ -119,11 +119,7 @@ router.post('/register-extra-details', function (req, res) {
     } else {
       // Renomme le fichier
       fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
-        if (err) {
-          res.json({
-            err: "Fichier inexistant"
-          });
-        }
+        if (err) {}
 
         // Ajout de l'utilisateur dans la DB
         User.addExtraDetails(req.body.nickname, req.body.extraDetails, function (err, user) {

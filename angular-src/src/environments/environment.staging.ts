@@ -5,5 +5,10 @@
 
 export const environment = {
   production: false,
+<<<<<<< HEAD
   BACKENDURL: 'http://192.168.0.104:3000'
+=======
+  BACKENDURL: 'http://192.168.0.104:3000',
+  SOCKETURL: 'http://192.168.0.104:5000'
+>>>>>>> chat
 };
