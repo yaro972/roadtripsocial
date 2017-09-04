@@ -13,7 +13,8 @@ export class ChatboxService {
 
   getChatByRoom(room) {
     return new Promise((resolve, reject) => {
-      this._http.get(environment.BACKENDURL + '/chat/' + room)
+      this._http
+        .get(environment.BACKENDURL + '/chat/' + room)
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);
@@ -25,7 +26,8 @@ export class ChatboxService {
 
   saveChat(data) {
     return new Promise((resolve, reject) => {
-      this._http.post(environment.BACKENDURL + '/chat', data)
+      this._http
+        .post(environment.BACKENDURL + '/chat', data)
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);

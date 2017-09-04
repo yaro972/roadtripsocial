@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@ang
 import { NgModel } from '@angular/forms';
 import { ChatboxService } from './chatbox.service';
 import { environment } from './../../../environments/environment';
+import { AuthService } from './../../services/auth/auth.service';
+
 
 import * as io from 'socket.io-client';
 
@@ -16,19 +18,24 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
 
   chats: any;
   joinned: Boolean = false;
-  newUser = { nickname: '', room: '' };
-  msgData = { room: '', nickname: '', message: '' };
+  newUser = { userId: '', room: '' };
+  msgData = { room: '', userId: '', message: '' };
   socket = io(environment.SOCKETURL);
 
-  constructor(private chatService: ChatboxService) { }
+  constructor(
+    private chatService: ChatboxService,
+    private _auth: AuthService
+  ) { }
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user'));
+    const userId = this._auth.getOwnId();
+
     if (user !== null) {
       this.getChatByRoom(user.room);
       this.msgData = {
         room: user.room,
-        nickname: user.nickname,
+        userId: userId,
         message: ''
       }
       this.joinned = true;
@@ -37,7 +44,11 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
     this.socket.on('new-message', function (data) {
       if (data.message.room === JSON.parse(localStorage.getItem('user')).room) {
         this.chats.push(data.message);
-        this.msgData = { room: user.room, nickname: user.nickname, message: '' }
+        this.msgData = {
+          room: user.room,
+          userId: userId,
+          message: ''
+        }
         this.scrollToBottom();
       }
     }.bind(this));
@@ -66,17 +77,19 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
   joinRoom() {
     const date = new Date();
     localStorage.setItem('user', JSON.stringify(this.newUser));
+    const userId = this._auth.getOwnId();
+
     this.getChatByRoom(this.newUser.room);
     this.msgData = {
       room: this.newUser.room,
-      nickname: this.newUser.nickname,
+      userId: this.newUser.userId,
       message: ''
     };
     this.joinned = true;
 
     this.socket.emit('save-message', {
       room: this.newUser.room,
-      nickname: this.newUser.nickname,
+      userId: this.newUser.userId,
       message: 'Join this room',
       updated_at: date
     });
@@ -96,10 +109,11 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
   logout() {
     const date = new Date();
     const user = JSON.parse(localStorage.getItem('user'));
+    const userId = this._auth.getOwnId();
     this.socket
       .emit('save-message', {
         room: user.room,
-        nickname: user.nickname,
+        userId: userId,
         message: 'Left this room',
         updated_at: date
       });

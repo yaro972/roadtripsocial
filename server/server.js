@@ -13,12 +13,8 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
-// Chat Modules
-// var io = require('socket.io');
 const http = require('http').Server(express());
-var io = require('socket.io')(http);
-// const server = http.createServer();
-// io = io.listen(server);
+
 
 // Mise en place du debogage
 var debug = require('debug')('http');
@@ -28,9 +24,6 @@ var compression = require('compression');
 var helmet = require('helmet');
 
 const config = require('./app/inc/.config');
-const onlineModule = require('./app/inc/online.class');
-
-var connectedUser = [];
 
 // Port par défaut de l'application
 let port = process.env.BACKPORT || config.srv.port;
@@ -157,33 +150,10 @@ app.listen(port, ip, function () {
   debug('Serveur démarré sur le port : ' + port + ' IP :' + ip);
 });
 
-// ===========================
-// Chat
-// ===========================
-// io.on('connection', function (socket) {
-//   console.log('utilisateur connecté');
 
-//   onlineModule.addNewUser();
-
-//   socket.on('newUser', function (user) {
-//     connectedUser.push(user);
-
-//     console.log(connectedUser)
-//   });
-
-//   socket.on('message', function (msg) {
-//     let m = new Date() + msg;
-//     io.emit('message', msg);
-//   });
-
-//   socket.on('disconnect', function () {
-//     io.emit('user disconnected');
-//     onlineModule.removeUser();
-
-//   });
-// });
 http.listen(5000, ip, function () {
-  console.log('Serveur de chat démarré sur le port 5000...');
+  // console.log('Serveur de chat démarré sur le port 5000...');
+  debug('Serveur de chat démarré sur le port 5000...');
 });
 
 // Pour les tests unitaires
