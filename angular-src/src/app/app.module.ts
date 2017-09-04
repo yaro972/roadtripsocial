@@ -47,8 +47,6 @@ import { ChatboxComponent } from './components/chatbox/chatbox.component';
     AboutComponent,
     FooterComponent,
     TopMenuComponent,
-    FeedsComponent,
-    SubMenuComponent,
     ChatboxComponent,
 
   ],

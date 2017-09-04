@@ -11,7 +11,6 @@ import { LoginComponent } from './login-register/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
-import { FeedsComponent } from './components/feeds/feeds.component';
 import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 import { ResetPasswordComponent } from './pass-security/reset-password/reset-password.component';
