@@ -52,8 +52,8 @@ var UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['membre', 'admin'],
-    default: 'membre'
+    enum: ['m', 'a'],
+    default: 'm'
   },
   firstConn: {
     type: Boolean,
@@ -90,8 +90,10 @@ User.getUserById = function (id, callback) {
  */
 User.getUserByNickname = function (nickname, callback) {
   User.findOne({
-    'nickname': nickname
-  }, callback);
+      'nickname': nickname
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -101,7 +103,10 @@ User.getUserByFirstname = function (firstname, callback) {
   var query = {
     firstname: firstname
   };
-  User.findOne(query, callback);
+  User
+    .findOne(query)
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -111,7 +116,10 @@ User.getUserByLastname = function (lastname, callback) {
   var query = {
     lastname: lastname
   };
-  User.findOne(query, callback);
+  User
+    .findOne(query)
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -298,8 +306,10 @@ User.updatePassword = function (nickname, newPassword, callback) {
  */
 User.findByToken = function (token, callback) {
   User.findOne({
-    'token': token
-  }, callback);
+      'token': token
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**

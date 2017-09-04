@@ -19,7 +19,7 @@ export class FeedsComponent implements OnInit, OnDestroy, AfterContentChecked {
   isMessagerieShown: any;
   isWaintingFriendsShown: any;
   friendName: String;
-
+  userId = String;
 
   constructor(
     private _authService: AuthService,
@@ -32,7 +32,7 @@ export class FeedsComponent implements OnInit, OnDestroy, AfterContentChecked {
   ngOnInit() {
     this.userAvatar = environment.BACKENDURL + '/api/display-photo/' + JSON.parse(localStorage.getItem('user')).avatar;
 
-
+    this.userId = this._authService.getOwnId();
   }
 
   // Ajout d'un post
