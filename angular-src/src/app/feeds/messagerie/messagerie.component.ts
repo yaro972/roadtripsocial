@@ -86,11 +86,13 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
             timeout: 2500
           });
 
-          this.subRemoveReadStatus = this._auth.removeReadStatus(this.threadId, this.selectedContact._id).subscribe(ev => {
-            if (ev.err) {
-              console.log(ev.err);
-            }
-          });
+          this.subRemoveReadStatus = this._auth
+            .removeReadStatus(this.threadId, this.selectedContact._id)
+            .subscribe(ev => {
+              if (ev.err) {
+                console.log(ev.err);
+              }
+            });
           // this._router.navigate(['/feeds']);
         }
       });
@@ -100,14 +102,15 @@ export class MessagerieComponent implements OnInit, OnDestroy, AfterContentInit 
    * Récupére la liste des utilisateurs enegistrés
    */
   onContactMessengerList() {
-    this.subGetMessengerContactList = this._auth.getMessengerContactList().subscribe((data) => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.threadList = data.contactList; // Sauvegarde de la liste des flux
-        this.contactMessengerList = this.prepareData(data.contactList);
-      }
-    });
+    this.subGetMessengerContactList = this._auth.getMessengerContactList()
+      .subscribe((data) => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.threadList = data.contactList; // Sauvegarde de la liste des flux
+          this.contactMessengerList = this.prepareData(data.contactList);
+        }
+      });
   }
 
   /**

@@ -7,8 +7,8 @@ image: teracy/angular-cli:latest
 # Pick zero or more services to be used on all builds.
 # Only needed when using a docker container to run your tests in.
 # Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-service
-#services:
-#  - mongo:latest
+services:
+  - mongo:latest
 
 # This folder is cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
@@ -135,12 +135,13 @@ deploy_to_production:
     - chmod 600 ~/.ssh/*
 
    
-   # try to connect to Staging
+   # try to connect to Production
     - sshpass -p 'clg08usf?' ssh -t yaro@vps354082.ovh.net -p 22 -v   "cd /home/yaro/ ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
    #- cd /home/yaro ; ./deploy.sh
   only:
     - master
-  when: manual
+  #when: manual
+  when: on_success
 

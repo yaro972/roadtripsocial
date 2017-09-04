@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema;
 
 // Création du schéma à la base de données
 var UserSchema = new mongoose.Schema({
@@ -51,8 +52,8 @@ var UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['membre', 'admin'],
-    default: 'membre'
+    enum: ['m', 'a'],
+    default: 'm'
   },
   firstConn: {
     type: Boolean,
@@ -61,9 +62,10 @@ var UserSchema = new mongoose.Schema({
   visitedCountries: {
     type: Array
   },
-  friendsList: {
-    type: Array
-  },
+  friendsList: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   mustChangePassword: {
     type: Boolean,
     default: false
@@ -88,8 +90,10 @@ User.getUserById = function (id, callback) {
  */
 User.getUserByNickname = function (nickname, callback) {
   User.findOne({
-    'nickname': nickname
-  }, callback);
+      'nickname': nickname
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -99,7 +103,10 @@ User.getUserByFirstname = function (firstname, callback) {
   var query = {
     firstname: firstname
   };
-  User.findOne(query, callback);
+  User
+    .findOne(query)
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -109,7 +116,10 @@ User.getUserByLastname = function (lastname, callback) {
   var query = {
     lastname: lastname
   };
-  User.findOne(query, callback);
+  User
+    .findOne(query)
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -296,8 +306,10 @@ User.updatePassword = function (nickname, newPassword, callback) {
  */
 User.findByToken = function (token, callback) {
   User.findOne({
-    'token': token
-  }, callback);
+      'token': token
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -307,47 +319,50 @@ User.searchMembers = function (toFind, callback) {
 
   let regEx = new RegExp(toFind, 'i');
   User.find({
-    $or: [{
-        nickname: {
-          $regex: regEx
+      $or: [{
+          nickname: {
+            $regex: regEx
+          }
+        }, {
+          firstname: {
+            $regex: regEx
+          }
+        },
+        {
+          lastname: {
+            $regex: regEx
+          }
+        },
+        {
+          city: {
+            $regex: regEx
+          }
+        },
+        {
+          visitedCountries: {
+            $regex: regEx
+          }
+        },
+        {
+          country: {
+            $regex: regEx
+          }
         }
-      }, {
-        firstname: {
-          $regex: regEx
-        }
-      },
-      {
-        lastname: {
-          $regex: regEx
-        }
-      },
-      {
-        city: {
-          $regex: regEx
-        }
-      },
-      {
-        visitedCountries: {
-          $regex: regEx
-        }
-      },
-      {
-        country: {
-          $regex: regEx
-        }
-      }
-    ]
-  }, {
-    _id: 1,
-    nickname: 1,
-    firstname: 1,
-    lastname: 1,
-    avatar: 1,
-    city: 1,
-    country: 1,
-    visitedCountries: 1
+      ]
+    }, {
+      _id: 1,
+      nickname: 1,
+      firstname: 1,
+      lastname: 1,
+      avatar: 1,
+      city: 1,
+      country: 1,
+      visitedCountries: 1,
+      friendsList: 1
 
-  }, callback);
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -378,10 +393,12 @@ User.searchMembersByNickname = function (nickname, callback) {
  */
 User.memberDetails = function (memberId, callback) {
   User.findOne({
-    _id: memberId
-  }, {
-    password: 0
-  }, callback);
+      _id: memberId
+    }, {
+      password: 0
+    })
+    .populate('friendsList')
+    .exec(callback);
 };
 
 /**
@@ -411,6 +428,37 @@ User.getNbTravelsegistred = function (callback) {
         }
       }
     ])
+    .exec(callback);
+};
+
+
+/**
+ * Ajout d'un ami dans la liste
+ */
+User.addFriend = function (userId, friendId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $push: {
+        friendsList: friendId
+      }
+    })
+    .exec(callback);
+};
+
+/**
+ * Suppression d'un ami dans la liste
+ */
+User.removeFriend = function (userId, friendId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $pull: {
+        friendsList: friendId
+      }
+    })
     .exec(callback);
 };
 

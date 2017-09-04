@@ -1,27 +1,13 @@
-<p>
-  friends-connected works!
-</p>
-
 <!-- <p>Liste d'amis</p> -->
 <div class="row">
   <div class="col-md-8 col-xs-12 col-sm-12 col-lg-5">
-    <ul class="friends-list">
-      <li><a href="" class="friends-text">
-    <img class="img img-responsive img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/jgoillot/128.jpg" alt="" />
-  </a>
-      </li>
+    <ul class="friends-list" *ngIf="userDetails">
+      <li *ngFor="let friend of userDetails.friendsList" title="{{friend.nickname}}">
+        <a href="/profile/{{friend._id}}" class="friends-text">
+          
 
-      <li>
-        <a href="" class="friends-text">
-      <img class="img img-responsive img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mattsince87/128.jpg" alt="" />
+    <img class="img img-responsive img-circle" src="{{friend.avatar |showImage}}" alt="" />
   </a>
-      </li>
-
-      <li>
-        <a href="" class="friends-text">
-      <img class="img img-responsive img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/eduardo_olv/128.jpg" alt="" />
-  </a>
-      </li>
 
     </ul>
   </div>

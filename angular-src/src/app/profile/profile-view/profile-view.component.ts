@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, AfterViewChecked, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from './../../services/auth/auth.service';
 import { NgModel } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -9,6 +9,8 @@ import { FileUploadService } from '../../services/file-upload/file-upload.servic
 import { CitiesClass } from './../../services/profile-edit/list-cities';
 import { User } from '../../core/user';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
+import { SendMessageService } from './../../feeds/service/send-message.service';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -17,10 +19,11 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.css']
 })
-export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class ProfileViewComponent implements OnInit, OnDestroy {
   @Input() user: User;
   @Input() suivi: Boolean;
-  @Input() isOwnProfile: Boolean;
+  // @Input() isOwnProfile: Boolean;
+  isOwnProfile: Boolean;
 
   @ViewChild('fileInput') fileInput;
 
@@ -34,29 +37,75 @@ export class ProfileViewComponent implements OnInit, AfterViewChecked, OnDestroy
   visitedCountryList: CitiesClass[];
 
   age: Number;
-  ageSubsciption: Subscription;
+  subAddFollow: Subscription;
+
 
   constructor(
     private _authService: AuthService,
     private _flashMessage: FlashMessagesService,
     private _uploadService: FileUploadService,
-    private _profileService: ProfileEditService
+    private _profileService: ProfileEditService,
+    private _sendMessageService: SendMessageService,
+    private _router: Router
   ) {
     this._authService.collapseSubMen = true;
   }
 
   ngOnInit() {
+    if (this._authService.getOwnId() === this.user._id) {
+      this.isOwnProfile = true;
+    }
     this.age = this._profileService
       .calcAge(this.user.birthdate);
   }
 
   onFollow() {
-    this.suivi = !this.suivi;
+    this.subAddFollow = this._authService
+      .addFollow(this._authService.getOwnId(), this.user._id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this._flashMessage.show('Une demande d\'ami a été envoyée ', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+          // this.suivi = !this.suivi;
+        }
+      });
+    return false;
   }
-  ngAfterViewChecked() {
+  unFollow() {
+    this.subAddFollow = this._authService
+      .unFollow(this._authService.getOwnId(), this.user._id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this._flashMessage.show('Vous n\'êtes plus ami', {
+            cssClass: 'alert alert-success text-center',
+            timeout: 2500
+          });
+
+          this.suivi = !this.suivi;
+        }
+      });
+    return false;
+  }
+
+
+
+  onSendPrivateMessage(u) {
+    this._sendMessageService.showMessagerie();
+    this._sendMessageService.setReceiver(u._id);
+    this._router.navigate(['/feeds']);
+
   }
 
   ngOnDestroy() {
-
+    if (this.subAddFollow) {
+      this.subAddFollow.unsubscribe();
+      this.subAddFollow = null;
+    }
   };
 }

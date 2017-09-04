@@ -71,11 +71,6 @@
                 <div *ngIf="message.sender._id !==ownId">
                   <div class="row">
                     <div class="col-xs-2 col-md-2 col-lg-2">
-                      <div *ngIf="message.receiver._id !== ownId">
-                        <a href="/details-membres/{{message.receiver._id}}">
-                <img src="{{message.receiver.avatar | showImage}}" class="img img-responsive img-circle" >
-                      </a>
-                      </div>
                       <div *ngIf="message.sender._id !== ownId">
                         <a href="/details-membres/{{message.sender._id}}">
                 <img src="{{message.sender.avatar | showImage}}" class="img img-responsive img-circle">
@@ -94,7 +89,7 @@
 
 
                 <!-- Message envoyé par l'utilisateur connecté -->
-                <div *ngIf="message.sender._id ===ownId || message.receiver._id ===ownId">
+                <div *ngIf="message.sender._id ===ownId">
                   <div class="row">
                     <div class="col-xs-8 col-xs-offset-4 conversation-block-content-ownMessage">
 
