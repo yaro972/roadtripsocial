@@ -55,43 +55,55 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onLoginSubmit() {
     // Register User
-    this.sub = this._authService.loginUser(this.loginForm.value).subscribe(data => {
-      if (data.succeed) {
-        this._flashMessage.grayOut(true);
-        this._flashMessage.show('Vous êtes connecté', {
-          cssClass: 'alert alert-success text-center',
-          timeout: 2500
-        });
-
-        this._authService.storeUserData(data.token, data.user);
-
-        const u = localStorage.getItem('user');
-        if (u) {
-          const firstConn = JSON.parse(u).firstConn
-
-          if (firstConn) {
-            // Première connexion ou profil incomplet
-            this._router.navigate(['/profile']);
-          } else {
-            // => Routage vers l'accueil des messages
-            this._router.navigate(['/feeds']);
-          }
+    this.sub = this._authService
+      .loginUser(this.loginForm.value)
+      .subscribe(data => {
+        if (data.user.isLocked) {
+          this._flashMessage.grayOut(true);
+          this._flashMessage.show('Votre compte est bloqué. Contactez votre administrateur', {
+            cssClass: 'alert alert-danger text-center',
+            timeout: 2500
+          });
+          this._router.navigate(['/login']);
         } else {
-          // Erreur de chargement du profil
-          this._router.navigate(['/profile']);
+          if (data.succeed && !data.user.isLocked) {
+            this._flashMessage.grayOut(true);
+            this._flashMessage.show('Vous êtes connecté', {
+              cssClass: 'alert alert-success text-center',
+              timeout: 2500
+            });
+
+            this._authService.storeUserData(data.token, data.user);
+
+            const u = localStorage.getItem('user');
+            if (u) {
+              const firstConn = JSON.parse(u).firstConn
+
+              if (firstConn) {
+                // Première connexion ou profil incomplet
+                this._router.navigate(['/profile']);
+              } else {
+                // => Routage vers l'accueil des messages
+                this._router.navigate(['/feeds']);
+              }
+            } else {
+              // Erreur de chargement du profil
+              this._router.navigate(['/profile']);
+            }
+
+
+
+          } else {
+            this._flashMessage.grayOut(true);
+            this._flashMessage.show('Nom ou mot de passe erroné', {
+              cssClass: 'alert alert-danger text-center',
+              timeout: 2500
+            });
+            this._router.navigate(['/login']);
+          }
         }
 
-
-
-      } else {
-        this._flashMessage.grayOut(true);
-        this._flashMessage.show('Nom ou mot de passe erroné', {
-          cssClass: 'alert alert-danger text-center',
-          timeout: 2500
-        });
-        this._router.navigate(['/login']);
-      }
-    });
+      });
   }
 
   onLostPass() {

@@ -1,0 +1,42 @@
+<div class="admin-user" *ngIf="userList">
+  <h2 class="text-center">
+    Gestion des utilisateurs
+  </h2>
+
+  <div class="row col-xs-4 col-xs-offset-4">
+    <p>
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <table class="table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Pseudo</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userList; let i = index">
+            <td style="width: 30px;">{{i}}</td>
+            <td>{{user.nickname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.firstname}}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="onLock(i)" *ngIf="!user.isLocked">Bloquer</button>
+              <button class="btn btn-sm  btn-success" (click)="onUnlock(i)" *ngIf="user.isLocked">Débloquer</button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-warning" (click)="passToAdmin(i)" *ngIf="user.role==='m' || user.role==='membre'">Passer admin</button>
+              <button class="btn btn-sm btn-success" (click)="setToMember(i)" *ngIf="user.role==='a' || user.role==='admin'">Passer membre</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+/* Global */
+
+.admin-user {
+  margin-top: 20px;
+}
+
+
+/* Tableau */
+
+thead {
+  background-color: #A8A1A1;
+  color: #ececec;
+}
+
+td {
+  width: 350px;
+}
