@@ -39,13 +39,16 @@ import { PassSecurityModule } from './pass-security/pass-security.module';
 import { ShowImagesModule } from './show-images/show-images.module';
 import { FeedsModule } from './feeds/feeds.module';
 import { ChatboxModule } from './chatbox/chatbox.module';
+import { AdminModule } from './admin/admin.module';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     FooterComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    AdminUsersComponent
 
   ],
   imports: [
@@ -64,7 +67,8 @@ import { ChatboxModule } from './chatbox/chatbox.module';
     ShowImagesModule,
     MembresModule,
     FeedsModule,
-    ChatboxModule
+    ChatboxModule,
+    AdminModule
   ],
   providers: [
     AuthGuard,

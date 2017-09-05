@@ -1,0 +1,91 @@
+/* Page */
+
+.col-xs-12 {
+  min-height: 720px;
+}
+
+.col-backline {
+  border-bottom-color: #cccccc;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin: 10px 0;
+  width: 100%;
+  position: relative;
+  top: 76px;
+  z-index: 0;
+}
+
+.header-block {
+  /* margin-left: 50px;
+  margin-right: 50px; */
+  box-shadow: 1px 2px 7px 0px #cecece;
+  height: 150px;
+  z-index: 1;
+  background-color: #bfbfbf;
+}
+
+
+/* Entete */
+
+.header {
+  /* box-shadow: 1px 2px 7px 0px black; */
+}
+
+.header img {
+  display: inline-block;
+}
+
+.header h2::before {
+  content: url('/assets/images/earth_globe.png');
+}
+
+.header h2 span {
+  color: #b77421;
+}
+
+.header h3 {
+  padding-right: 286px;
+  /* padding-bottom: 1px; */
+  /* margin-bottom: 36px; */
+  color: red;
+  /* font-size: 1rem; */
+}
+
+
+/* separateur */
+
+.separator {
+  /* border-color: 1px solid #b77421;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%; */
+  border-bottom-color: #e77b20;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+
+/* Bouton du menu */
+
+.menu-row {
+  margin-top: 70px;
+}
+
+.menu-panel {
+  height: 284px;
+  box-shadow: 2px 3px 11px #cccccc;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 10px;
+  border-top: 10px solid #b77421;
+}
+
+.menu-panel p {
+  margin-top: 15px;
+}
+
+.menu-panel img {
+  display: inline-block;
+}

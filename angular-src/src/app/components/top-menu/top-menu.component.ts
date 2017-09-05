@@ -32,6 +32,7 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
   nbUnreadPosts: Number;
   subGetUnreadMessages: any;
   isNewMessage: Boolean;
+  adminStatus: Boolean;
 
   constructor(
     public _authService: AuthService,
