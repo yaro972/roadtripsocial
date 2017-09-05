@@ -40,16 +40,13 @@ import { ShowImagesModule } from './show-images/show-images.module';
 import { FeedsModule } from './feeds/feeds.module';
 import { ChatboxModule } from './chatbox/chatbox.module';
 import { AdminModule } from './admin/admin.module';
-import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     FooterComponent,
-    TopMenuComponent,
-    AdminUsersComponent
-
+    TopMenuComponent
   ],
   imports: [
     BrowserModule,
