@@ -73,6 +73,11 @@
                             
                             </a>
           </li>
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/chatbox">Salon de discussion
+                            
+                            </a>
+          </li>
           <li role="separator" class="divider"></li>
           <li *ngIf="_authService.loggedIn()">
             <a (click)="onLogoutClick()" href="/">

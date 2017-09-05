@@ -26,6 +26,8 @@ import { ListMembersService } from './services/list-members/list-members.service
 
 import { PostsService } from './services/posts/posts.service';
 
+
+
 import { AuthGuard } from './guard/auth.guard';
 import { CollapseModule } from 'ngx-bootstrap';
 
@@ -36,7 +38,7 @@ import { ProfileModule } from './profile/profile.module';
 import { PassSecurityModule } from './pass-security/pass-security.module';
 import { ShowImagesModule } from './show-images/show-images.module';
 import { FeedsModule } from './feeds/feeds.module';
-
+import { ChatboxModule } from './chatbox/chatbox.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { FeedsModule } from './feeds/feeds.module';
     AboutComponent,
     FooterComponent,
     TopMenuComponent
+
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import { FeedsModule } from './feeds/feeds.module';
     PassSecurityModule,
     ShowImagesModule,
     MembresModule,
-    FeedsModule
+    FeedsModule,
+    ChatboxModule
   ],
   providers: [
     AuthGuard,

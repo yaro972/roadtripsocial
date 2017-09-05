@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  BACKENDURL: 'http://localhost:3000'
+  BACKENDURL: 'http://localhost:3000',
+  SOCKETURL: 'http://localhost:5000'
 };

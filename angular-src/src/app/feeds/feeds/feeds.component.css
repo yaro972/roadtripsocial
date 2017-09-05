@@ -141,7 +141,11 @@
 
 /* formmulaire d'envoi de message */
 
-.send-message {}
+.chatbox {
+  position: fixed;
+  bottom: 15px;
+  left: calc(100% - 500px);
+}
 
 
 /* formmulaire d'envoi de message */
