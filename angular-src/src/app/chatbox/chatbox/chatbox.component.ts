@@ -5,8 +5,6 @@ import { environment } from './../../../environments/environment';
 import { AuthService } from './../../services/auth/auth.service';
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
-import { JsonPipe } from '@angular/common';
-
 import * as io from 'socket.io-client';
 
 

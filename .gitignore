@@ -112,3 +112,5 @@ server/uploads/*
 **/.config.js
 server/app/inc/.config-prod.js
 fake-user-generator/yarn.lock
+front/public/3rdpartylicenses.txt
+front/public/**

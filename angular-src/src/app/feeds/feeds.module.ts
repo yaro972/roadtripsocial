@@ -21,6 +21,7 @@ import { MembresModule } from './../membres/membres.module';
 import { PassSecurityModule } from './../pass-security/pass-security.module';
 import { ProfileModule } from './../profile/profile.module';
 import { FriendsDemandComponent } from './friends-demand/friends-demand.component';
+import { ChatboxModule } from './../chatbox/chatbox.module';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { FriendsDemandComponent } from './friends-demand/friends-demand.componen
     ReactiveFormsModule,
     MembresModule,
     PassSecurityModule,
-    ProfileModule
+    ProfileModule,
+    ChatboxModule
   ],
   declarations: [
     PostViewComponent,

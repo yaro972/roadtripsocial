@@ -15,7 +15,7 @@ import { ExtraDetailsFormComponent } from './extra-details-form/extra-details-fo
 
 import { ShowImagesModule } from './../show-images/show-images.module';
 import { AuthService } from './../services/auth/auth.service';
-import { ChatboxService } from './../components/chatbox/chatbox.service';
+import { ChatboxModule } from './../chatbox/chatbox.module';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { ChatboxService } from './../components/chatbox/chatbox.service';
     FormsModule,
     ReactiveFormsModule,
     FlashMessagesModule,
-    ShowImagesModule
+    ShowImagesModule,
+    ChatboxModule
   ],
   declarations: [
     RegisterComponent,
@@ -33,8 +34,7 @@ import { ChatboxService } from './../components/chatbox/chatbox.service';
     LoginComponent
   ],
   providers: [
-    AuthService,
-    ChatboxService
+    AuthService
   ]
 })
 export class LoginRegisterModule { }
