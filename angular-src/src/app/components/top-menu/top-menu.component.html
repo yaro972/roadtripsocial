@@ -85,7 +85,7 @@
                              Déconnexion <span class="glyphicon glyphicon-log-out"></span>
                             </a>
           </li>
-          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+          <li *ngIf="_authService.loggedIn() && isAdmin" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
             <a routerLink="/admin">Admin                            
                             </a>
           </li>

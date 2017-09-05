@@ -45,9 +45,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
     }
 
     this.commentList = {};
-
-
-
   }
 
   /**
@@ -59,7 +56,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
         console.log(data.err);
       } else {
         this.postItems = data.posts;
-        console.log(data)
       }
     });
   };

@@ -28,7 +28,7 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
   public user: User;
   authService: AuthService;
   isLogged = false;
-
+  isAdmin: Boolean;
   nbUnreadPosts: Number;
   subGetUnreadMessages: any;
   isNewMessage: Boolean;
@@ -58,6 +58,13 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
         this.imageFace = environment.BACKENDURL + '/api/display-photo/' + this.user.avatar;
       } else {
         this.imageFace = 'Anonymous.png';
+      }
+
+
+      if (this.user.role === 'a' || this.user.role === 'admin') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
       }
     }
     // this.unreadMessages = false;
@@ -130,6 +137,14 @@ export class TopMenuComponent implements OnInit, OnDestroy, AfterContentChecked 
         this.imageFace = environment.BACKENDURL + '/api/display-photo/' + this.user.avatar;
       } else {
         this.imageFace = 'Anonymous.png';
+      }
+    }
+
+    if (this.user) {
+      if (this.user.role === 'a' || this.user.role === 'admin') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
       }
     }
   }
