@@ -1,9 +1,11 @@
-import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { ChatboxService } from './chatbox.service';
 import { environment } from './../../../environments/environment';
 import { AuthService } from './../../services/auth/auth.service';
+import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
+import { JsonPipe } from '@angular/common';
 
 import * as io from 'socket.io-client';
 
@@ -13,13 +15,13 @@ import * as io from 'socket.io-client';
   templateUrl: './chatbox.component.html',
   styleUrls: ['./chatbox.component.css']
 })
-export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
+export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked, OnDestroy {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   chats: any;
   joinned: Boolean = false;
-  newUser = { userId: '', room: '' };
-  msgData = { room: '', userId: '', message: '' };
+  newUser = { nickname: '', avatar: '', userId: '', room: '' };
+  msgData = { room: '', nickname: '', avatar: '', userId: '', message: '' };
   socket = io(environment.SOCKETURL);
 
   constructor(
@@ -36,6 +38,8 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
       this.msgData = {
         room: user.room,
         userId: userId,
+        nickname: user.nickname,
+        avatar: user.avatar,
         message: ''
       }
       this.joinned = true;
@@ -47,6 +51,8 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
         this.msgData = {
           room: user.room,
           userId: userId,
+          nickname: user.nickname,
+          avatar: user.avatar,
           message: ''
         }
         this.scrollToBottom();
@@ -76,13 +82,15 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
 
   joinRoom() {
     const date = new Date();
-    localStorage.setItem('user', JSON.stringify(this.newUser));
+    // localStorage.setItem('user', JSON.stringify(this.newUser));
     const userId = this._auth.getOwnId();
 
     this.getChatByRoom(this.newUser.room);
     this.msgData = {
       room: this.newUser.room,
       userId: this.newUser.userId,
+      nickname: this.newUser.nickname,
+      avatar: this.newUser.avatar,
       message: ''
     };
     this.joinned = true;
@@ -90,6 +98,8 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
     this.socket.emit('save-message', {
       room: this.newUser.room,
       userId: this.newUser.userId,
+      nickname: this.newUser.nickname,
+      avatar: this.newUser.avatar,
       message: 'Join this room',
       updated_at: date
     });
@@ -114,12 +124,18 @@ export class ChatboxComponent implements OnInit, OnInit, AfterViewChecked {
       .emit('save-message', {
         room: user.room,
         userId: userId,
+        nickname: user.nickname,
+        avatar: user.avatar,
         message: 'Left this room',
         updated_at: date
       });
-    localStorage
-      .removeItem('user');
+    // localStorage
+    //   .removeItem('user');
     this.joinned = false;
   }
 
+
+  ngOnDestroy() {
+    this.logout();
+  }
 }

@@ -13,12 +13,12 @@ server.listen(5000);
 
 // socket io
 io.on('connection', function (socket) {
-  // console.log('User connected');
+  console.log('User connected');
   debug('User connected');
   onlineModule.addNewUser();
 
   socket.on('disconnect', function () {
-    // console.log('User disconnected');
+    console.log('User disconnected');
     debug('User disconnected');
     onlineModule.removeUser();
   });

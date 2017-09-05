@@ -9,6 +9,8 @@ var ChatSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  nickname: String,
+  avatar: String,
   message: String,
   updated_at: {
     type: Date,
