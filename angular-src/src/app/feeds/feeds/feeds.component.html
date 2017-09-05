@@ -93,23 +93,18 @@
               </div>
               <!-- Utilisateurs connectés -->
 
-              <!-- Nouveau message -->
-              <!-- <div class="row" (click)="onShowForm()" *ngIf="!showFormEvent">
-                <div class="col-md-10 col-md-push-1">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input type="text" id="to" name="toInput" placeholder="@destinataire" class="form-control">
+
+
+              <!-- Chat -->
+
+              <!-- <div class="row" *ngClass="{'chatbox':!isChatboxActive,'chatbox-active':isChatboxActive}">
+                <div class="col-md-6 col-xs-3 col-sm-6 .push-right">
+                  <div class="row">
+                    <rts-chatbox></rts-chatbox>
                   </div>
                 </div>
-              </div>
-
-
-              <div class="row send-message" *ngIf="showFormEvent">
-                <div class="col-md-12">
-                  <rts-send-message [friendName]=friendName (messageSend)=o nSendMessage()></rts-send-message>
-                </div>
               </div> -->
-              <!-- Nouveau message -->
+              <!-- Chat -->
 
               <!-- Chat -->
               <!-- <rts-chatbox></rts-chatbox> -->

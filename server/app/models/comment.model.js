@@ -15,10 +15,14 @@ let modelSchema = mongoose.Schema({
     default: Date.now()
   },
   autor: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   avatar: {
+    type: String,
+    required: false
+  },
+  nickname: {
     type: String,
     required: false
   },
@@ -39,6 +43,7 @@ comment.addComment = function (newComment, callback) {
     "dateComment": newComment.dateComment,
     "autor": newComment.autor,
     "avatar": newComment.avatar,
+    "nickname": newComment.nickname,
     "text": newComment.text
   });
 

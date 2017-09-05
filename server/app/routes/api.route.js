@@ -189,9 +189,17 @@ router.post('/add-comment', passport.authenticate('jwt', {
         err: err
       });
     } else {
-      res.json({
-        err: null,
-        posts: data
+      Posts.addNewComment(data._doc.parent_id, data._doc._id, function (err, posts) {
+        if (err) {
+          res.json({
+            err: err
+          });
+        } else {
+          res.json({
+            err: null,
+            posts: posts
+          });
+        }
       });
     }
   });

@@ -30,8 +30,8 @@
               </div>
 
               <div class="row">
-                <div class="col-xs-2 col-xs-offset-2 text-center"> <button class="btn btn-default btn-comment" (click)="dropPost(postItem._id)"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></div>
-                <div class="col-xs-2 col-xs-offset-2 text-center"> <button class="btn btn-default btn-comment" (click)="onClickAddComment(postItem._id)"><span class="glyphicon glyphicon-pencil"></span> Commenter</button></div>
+                <div class="col-xs-2 col-xs-offset-2 text-center" *ngIf="postItem.autorId._id === ownId"> <button class="btn btn-default btn-comment" (click)="dropPost(postItem._id)"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></div>
+                <div class="col-xs-2 col-xs-offset-2 text-center" *ngIf="postItem.autorId._id !== ownId"> <button class="btn btn-default btn-comment" (click)="onClickAddComment(postItem._id)"><span class="glyphicon glyphicon-pencil"></span> Commenter</button></div>
               </div>
             </div>
           </div>
@@ -47,10 +47,10 @@
               <!-- /input-group -->
             </div>
           </div>
-          <!-- 
+
           <div class="row">
             <div class="col-xs-12" *ngIf="commentList">
-              <div class="comment row" *ngFor="let comment of commentList">
+              <div class="comment row" *ngFor="let comment of postItem.commentId">
                 <div class="comment col-xs-9 col-xs-offset-2">
                   <div class="row">
                     <div class="col-xs-2">
@@ -71,14 +71,14 @@
                       <div class="row">
                         <div class="col-xs-12">
                           <p>
-                            {{comment.details}}
+                            {{comment.text}}
                           </p>
                         </div>
                       </div>
-                      <div class="row">                       
+                      <div class="row">
                         <div class="col-xs-2 col-xs-offset-3">
                           <button class="btn btn-default btn-response" (click)="addResponse(comment.id)"><span class="fa fa-reply"></span> Répondre</button>
-                        </div>                     
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -86,7 +86,7 @@
                 <div class="clearfix"></div>
               </div>
             </div>
-          </div> -->
+          </div>
 
         </div>
       </div>
