@@ -27,7 +27,6 @@ export class FriendsConnectedComponent implements OnInit, OnDestroy {
         } else {
           this.userDetails = data.memberDetails;
           this.friends = this.userDetails.friendsList;
-          console.log(this.userDetails)
         }
       });
   }

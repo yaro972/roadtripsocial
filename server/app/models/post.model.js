@@ -18,10 +18,10 @@ let postSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  commentTo: {
+  commentId: [{
     type: Schema.Types.ObjectId,
-    ref: 'Posts'
-  }
+    ref: 'comment'
+  }]
 });
 
 
@@ -71,6 +71,7 @@ posts.getPosts = function (callback) {
     })
     .populate('autorId') // <--
     .populate('Posts') // <--
+    .populate('commentId') // <--
     .exec(callback);
 };
 
@@ -88,6 +89,7 @@ posts.getOwnerPosts = function (ownerId, callback) {
     })
     .populate('autorId') // <--
     .populate('Posts') // <--
+    .populate('commentId') // <--
     .exec(callback);
 };
 
@@ -99,6 +101,22 @@ posts.deletePost = function (id, callback) {
   posts.deleteOne({
     _id: id
   }, callback);
+};
+
+posts.addNewComment = function (postId, commentId, callback) {
+  posts
+    .findOneAndUpdate({
+      _id: postId
+    }, {
+      $push: {
+        commentId: commentId
+      }
+    })
+    .populate('autorId') // <--
+    .populate('Posts') // <--
+    .populate('commentId') // <--
+    .exec(callback);
+
 };
 
 module.exports = posts;
