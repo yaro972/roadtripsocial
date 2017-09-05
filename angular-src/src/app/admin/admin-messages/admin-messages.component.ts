@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminAccueilService } from './../admin-accueil.service';
 
 @Component({
   selector: 'rts-admin-messages',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminMessagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _adminAccueilService: AdminAccueilService
+  ) { }
 
   ngOnInit() {
   }

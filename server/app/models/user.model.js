@@ -73,6 +73,10 @@ var UserSchema = new mongoose.Schema({
   token: {
     type: String,
     default: ''
+  },
+  isLocked: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -459,6 +463,92 @@ User.removeFriend = function (userId, friendId, callback) {
         friendsList: friendId
       }
     })
+    .exec(callback);
+};
+
+/**
+ * Récupère tous les utilisateurs
+ */
+User.getAllUsers = function (callback) {
+  User
+    .find()
+    .populate('friendsList')
+    .exec(callback);
+};
+
+/**
+ * Bloque un utilisateur
+ */
+User.lockUser = function (userId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $set: {
+        isLocked: true
+      }
+    })
+    .populate('friendsList')
+    .exec(callback);
+};
+
+/**
+ * Débloque un utilisateur
+ */
+User.unlockUser = function (userId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $set: {
+        isLocked: false
+      }
+    })
+    .populate('friendsList')
+    .exec(callback);
+};
+
+/**
+ * Applique les droits d'administrateur
+ */
+User.passToAdmin = function (userId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $set: {
+        role: 'a'
+      }
+    })
+    .populate('friendsList')
+    .exec(callback);
+};
+
+/**
+ * Compte le nombre d'administrateurs
+ */
+User.countAdmin = function ( callback) {
+  User
+    .find({
+      role: 'a'
+    })
+    .count()
+    .exec(callback);
+};
+
+/**
+ * Supprime les droits d'administrateur
+ */
+User.setToMember = function (userId, callback) {
+  User
+    .findOneAndUpdate({
+      _id: userId
+    }, {
+      $set: {
+        role: 'm'
+      }
+    })
+    .populate('friendsList')
     .exec(callback);
 };
 
