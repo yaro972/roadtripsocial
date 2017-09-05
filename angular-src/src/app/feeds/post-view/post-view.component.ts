@@ -27,73 +27,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
   commentList: any;
   ownId: String;
 
-  postItemList = [{
-    id: 1,
-    avatar: 'Anonymous.png',
-    autor: 'J.Doe',
-    // tslint:disable-next-line:max-line-length
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '01/08/2017',
-    comments: [{
-      id: 3,
-      autor: 'G. America',
-      avatar: 'Anonymous.png',
-      // tslint:disable-next-line:max-line-length
-      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-      datePost: '02/08/2017'
-    },
-    {
-      id: 4,
-      autor: 'France',
-      avatar: 'Anonymous.png',
-      // tslint:disable-next-line:max-line-length
-      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-      datePost: '04/08/2017'
-    },
-    {
-      id: 5,
-      autor: 'Madininina',
-      avatar: 'Anonymous.png',
-      // tslint:disable-next-line:max-line-length
-      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-      datePost: '04/08/2017'
-    },
-    ]
-  },
-  {
-    id: 2,
-    avatar: 'Anonymous.png',
-    autor: 'J.Doe1',
-    // tslint:disable-next-line:max-line-length
-    details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-    datePost: '01/08/2017',
-    comments: [{
-      id: 6,
-      autor: 'G. America1',
-      avatar: 'Anonymous.png',
-      // tslint:disable-next-line:max-line-length
-      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-      datePost: '02/08/2017'
-    },
-    {
-      id: 7,
-      autor: 'France1',
-      avatar: 'Anonymous.png',
-      // tslint:disable-next-line:max-line-length
-      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-      datePost: '04/08/2017'
-    },
-    {
-      id: 8,
-      autor: 'Madininina1',
-      avatar: 'Anonymous.png',
-      // tslint:disable-next-line:max-line-length
-      details: 'Nisi mihi Phaedrum, inquam, tu mentitum aut Zenonem putas, quorum utrumque audivi, cum mihi nihil sane praeter sedulitatem probarent, omnes mihi ',
-      datePost: '04/08/2017'
-    },
-    ]
-  }
-  ];
+
 
   constructor(
     private _postsService: PostsService,
@@ -125,6 +59,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
         console.log(data.err);
       } else {
         this.postItems = data.posts;
+        console.log(data)
       }
     });
   };
@@ -156,17 +91,23 @@ export class PostViewComponent implements OnInit, OnDestroy {
     const newCommentObj = {
       text: this.newComment,
       dateComment: new Date(),
-      autorId: u._id,
+      autorId: this._authService.getOwnId(),
+      nickname: u.nickname,
+      avatar: u.avatar,
       parent_id: postItemId
     };
 
-    this.sub = this._postsService.addComment(newCommentObj).subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.commentList = data.posts;
-      }
-    });
+    this.sub = this._postsService
+      .addComment(newCommentObj)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.commentList = data.posts;
+
+          this.showPosts();
+        }
+      });
   };
 
   /**
@@ -174,14 +115,16 @@ export class PostViewComponent implements OnInit, OnDestroy {
    * @param id Id du post à supprimer
    */
   dropPost(id) {
-    this._postsService.deletePost(id).subscribe(data => {
-      if (data.err) {
-        console.log(data.err);
-      } else {
-        this.postItems = data.posts;
-        this.showPosts();
-      }
-    });
+    this._postsService
+      .deletePost(id)
+      .subscribe(data => {
+        if (data.err) {
+          console.log(data.err);
+        } else {
+          this.postItems = data.posts;
+          this.showPosts();
+        }
+      });
   }
 
 
@@ -195,6 +138,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.sub) {
       this.sub.subscribe();
+      this.sub = null;
     }
   };
 }
