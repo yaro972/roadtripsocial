@@ -9,6 +9,8 @@ import { FileUploadService } from '../../services/file-upload/file-upload.servic
 import { ShowImagePipe } from './../../show-images/pipes/show-image.pipe';
 
 
+import { JsonPipe } from '@angular/common';
+
 
 @Component({
   selector: 'rts-post-view',
@@ -23,6 +25,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
   sub: any;
   // commentList: any[];
   commentList: any;
+  ownId: String;
 
   postItemList = [{
     id: 1,
@@ -94,10 +97,12 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private _postsService: PostsService,
-    private _fileService: FileUploadService
+    private _fileService: FileUploadService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.ownId = this._authService.getOwnId();
     this.commentShow = false;
     if (this.ownerId) {
       this.showOwnerPosts(this.ownerId);

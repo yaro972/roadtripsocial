@@ -142,9 +142,19 @@
 /* formmulaire d'envoi de message */
 
 .chatbox {
-  position: fixed;
+  position: relative;
+  width: 200px;
   bottom: 15px;
-  left: calc(100% - 500px);
+  top: 33px;
+  right: -400px;
+}
+
+.chatbox-active {
+  position: relative;
+  width: 200px;
+  bottom: 15px;
+  top: 33px;
+  right: 600px;
 }
 
 
@@ -152,3 +162,23 @@
 
 
 /* Partie Droite */
+
+@media screen and (max-width: 410px) {
+  /* .chatbox {
+    position: fixed;
+    bottom: 15px;
+    left: calc(100% - 500px);
+    width: 80px;
+  } */
+}
+
+@media screen and (min-width: 411px) and (max-width: 1024px) {
+  /* .chatbox {
+    position: fixed;
+    bottom: 15px;
+    left: calc(100% - 500px);
+    width: 80px;
+  } */
+}
+
+@media screen and (min-width: 1025px) {}
