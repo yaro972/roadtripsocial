@@ -116,7 +116,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
    */
   showPosts() {
     this._postsService.getPosts().subscribe(data => {
-      // debugger
       if (data.err) {
         console.log(data.err);
       } else {
@@ -130,7 +129,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
   */
   showOwnerPosts(ownerId: String) {
     this._postsService.getOwnerPosts(ownerId).subscribe(data => {
-      // debugger
       if (data.err) {
         console.log(data.err);
       } else {

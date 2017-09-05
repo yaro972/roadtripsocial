@@ -7,6 +7,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../inc/.config');
 const mail = require('../inc/mail');
+const onlineModule = require('../inc/online.class');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -18,8 +19,8 @@ const Friends = require('../models/friends.model');
 const Messages = require('../models/messages.model');
 const MessageThread = require('../models/message-thread.model');
 
-var WEBURL = 'http://localhost:4200';
-// WEBURL = 'https://f0fed797.ngrok.io';
+var WEBURL = 'http://www.thierry-aronoff.fr:3200';
+
 
 /**
  * Route d'ajout d'un nouvel utilisateur (Psuedonyme et mot de passe)
@@ -120,9 +121,7 @@ router.post('/register-extra-details', function (req, res) {
       // Renomme le fichier
       fs.rename(path.join(__dirname, '../../uploads/', originalAvatarFileName), path.join(__dirname, '../../uploads/', newAvatarFilename), function (err) {
         if (err) {
-          res.json({
-            err: "Fichier inexistant"
-          });
+          //
         }
 
         // Ajout de l'utilisateur dans la DB
@@ -1071,7 +1070,14 @@ router.post('/remove-friend', passport.authenticate('jwt', {
   });
 });
 
+/**
+ * Nombre d'utilisateurs connectés
+ */
+router.get('/nb-online', function (req, res) {
 
-
+  res.json({
+    nbConnected: onlineModule.getNbUser()
+  });
+});
 
 module.exports = router;

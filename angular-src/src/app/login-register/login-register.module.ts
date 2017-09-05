@@ -15,13 +15,16 @@ import { ExtraDetailsFormComponent } from './extra-details-form/extra-details-fo
 
 import { ShowImagesModule } from './../show-images/show-images.module';
 import { AuthService } from './../services/auth/auth.service';
+import { ChatboxModule } from './../chatbox/chatbox.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     FlashMessagesModule,
-    ShowImagesModule
+    ShowImagesModule,
+    ChatboxModule
   ],
   declarations: [
     RegisterComponent,

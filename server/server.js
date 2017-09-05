@@ -13,6 +13,9 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
+const http = require('http').Server(express());
+
+
 // Mise en place du debogage
 var debug = require('debug')('http');
 // Compression des données Http
@@ -21,7 +24,6 @@ var compression = require('compression');
 var helmet = require('helmet');
 
 const config = require('./app/inc/.config');
-
 
 // Port par défaut de l'application
 let port = process.env.BACKPORT || config.srv.port;
@@ -68,7 +70,7 @@ require('./app/inc/passport')(passport);
 var api = require('./app/routes/api.route');
 var userApi = require('./app/routes/user.route');
 var admin = require('./app/routes/admin.route');
-
+var chat = require('./app/routes/chat.route');
 
 // ===========================
 // Base de données
@@ -108,10 +110,8 @@ mongoose.connect(config.db.connString(), options)
 // Routes
 app.use('/api/user', userApi);
 app.use('/api', api);
-
-
-
 app.use('/admin', admin);
+app.use('/chat', chat);
 
 app.use(function (req, res) {
   res.status(404);
@@ -148,6 +148,12 @@ app.use(function (err, req, res) {
 app.listen(port, ip, function () {
   // console.log('Serveur démarré sur le port : ' + port + ' IP :' + ip);
   debug('Serveur démarré sur le port : ' + port + ' IP :' + ip);
+});
+
+
+http.listen(5000, ip, function () {
+  // console.log('Serveur de chat démarré sur le port 5000...');
+  debug('Serveur de chat démarré sur le port 5000...');
 });
 
 // Pour les tests unitaires
