@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AdminAccueilService } from './../admin-accueil.service';
+import { AdminService } from './../admin.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -14,7 +14,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   subDeleteUser: Subscription;
 
   constructor(
-    private _adminAccueilService: AdminAccueilService,
+    private _adminService: AdminService,
     private _flashMessage: FlashMessagesService,
   ) { }
 
@@ -25,7 +25,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   onLock(indice) {
     const selectedUser = this.userList[indice];
 
-    this.subDeleteUser = this._adminAccueilService
+    this.subDeleteUser = this._adminService
       .lockUser(selectedUser._id)
       .subscribe(data => {
         if (data.err) {
@@ -49,7 +49,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   onUnlock(indice) {
     const selectedUser = this.userList[indice];
 
-    this.subDeleteUser = this._adminAccueilService
+    this.subDeleteUser = this._adminService
       .unlockUser(selectedUser._id)
       .subscribe(data => {
         if (data.err) {
@@ -69,7 +69,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
 
 
   getallUsers() {
-    this.subGetUser = this._adminAccueilService
+    this.subGetUser = this._adminService
       .getAllUsers()
       .subscribe(data => {
         if (data.err) {
@@ -83,7 +83,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   passToAdmin(indice) {
     const selectedUser = this.userList[indice];
 
-    this.subDeleteUser = this._adminAccueilService
+    this.subDeleteUser = this._adminService
       .passToAdmin(selectedUser._id)
       .subscribe(data => {
         if (data.err) {
@@ -105,7 +105,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   setToMember(indice) {
     const selectedUser = this.userList[indice];
 
-    this.subDeleteUser = this._adminAccueilService
+    this.subDeleteUser = this._adminService
       .setToMember(selectedUser._id)
       .subscribe(data => {
 

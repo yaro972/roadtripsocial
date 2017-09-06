@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { AdminAccueilService } from './admin-accueil.service';
+import { AdminService } from './admin.service';
 
 describe('AdminAccueilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AdminAccueilService]
+      providers: [AdminService]
     });
   });
 
-  it('should be created', inject([AdminAccueilService], (service: AdminAccueilService) => {
+  it('should be created', inject([AdminService], (service: AdminService) => {
     expect(service).toBeTruthy();
   }));
 });

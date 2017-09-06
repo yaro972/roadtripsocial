@@ -51,4 +51,24 @@ comment.addComment = function (newComment, callback) {
   newCommentObj.save(callback);
 };
 
+/**
+ * Récupère tous les commentaires
+ */
+comment.getAllComments = function (callback) {
+  comment
+    .find({})
+    .exec(callback);
+};
+
+
+/**
+ * Supprime un commentaire
+ */
+comment.dropComment = function (commentId, callback) {
+  comment
+    .remove({
+      _id: commentId
+    }, callback);
+};
+
 module.exports = comment;
