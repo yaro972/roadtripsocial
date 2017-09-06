@@ -80,7 +80,7 @@ export class AdminAccueilService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .get(environment.BACKENDURL + '/api/user/all-users',
+      .get(environment.BACKENDURL + '/admin/all-users',
       {
         headers: headers
       })
@@ -99,7 +99,7 @@ export class AdminAccueilService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(environment.BACKENDURL + '/api/user/lock-user', {
+      .post(environment.BACKENDURL + '/admin/lock-user', {
         userId: userId
       },
       {
@@ -120,7 +120,7 @@ export class AdminAccueilService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(environment.BACKENDURL + '/api/user/unlock-user', {
+      .post(environment.BACKENDURL + '/admin/unlock-user', {
         userId: userId
       },
       {
@@ -140,7 +140,7 @@ export class AdminAccueilService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(environment.BACKENDURL + '/api/user/pass-to-admin', {
+      .post(environment.BACKENDURL + '/admin/pass-to-admin', {
         userId: userId
       },
       {
@@ -162,7 +162,7 @@ export class AdminAccueilService {
     headers
       .append('Content-type', 'application/json');
     return this._http
-      .post(environment.BACKENDURL + '/api/user/set-to-member', {
+      .post(environment.BACKENDURL + '/admin/set-to-member', {
         userId: userId
       },
       {
@@ -170,5 +170,43 @@ export class AdminAccueilService {
       })
       .map(res => res.json());
   }
+
+  /**
+   * Récupère tous les messages
+   */
+  getAllMessages() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/admin/get-all-messages',
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  };
+
+  /**
+   * Récupère tous les commentaires
+   */
+  getAllComments() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/admin/get-all-comments',
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+
 
 }
