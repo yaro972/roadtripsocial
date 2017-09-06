@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminAccueilService } from './../admin-accueil.service';
+import { AdminService } from './../admin.service';
 
 @Component({
   selector: 'rts-admin-statistics',
@@ -9,7 +9,7 @@ import { AdminAccueilService } from './../admin-accueil.service';
 export class AdminStatisticsComponent implements OnInit {
 
   constructor(
-    private _adminAccueilService: AdminAccueilService
+    private _adminService: AdminService
   ) { }
 
   ngOnInit() {

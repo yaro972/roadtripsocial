@@ -18,6 +18,9 @@ const User = require('../models/user.model');
 const Friends = require('../models/friends.model');
 const Messages = require('../models/messages.model');
 const MessageThread = require('../models/message-thread.model');
+const Posts = require('../models/post.model');
+const Comments = require('../models/comment.model');
+
 
 /**
  * Route principlae de la page d'accueil
@@ -143,6 +146,130 @@ router.post('/set-to-member', passport.authenticate('jwt', {
     }
   });
 });
+
+
+/**
+ * Récupère tous les posts
+ */
+router.get('/get-all-posts', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Posts.getAllPosts(function (err, posts) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        posts: posts
+      });
+    }
+  });
+});
+
+
+/**
+ * Récupère tous les commentaires
+ */
+router.get('/get-all-comments', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Comments.getAllComments(function (err, comments) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        comments: comments
+      });
+    }
+  });
+});
+
+/**
+ * Récupère tous les Messages
+ */
+router.get('/get-all-messages', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Messages.getAllMessages(function (err, messages) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        messages: messages
+      });
+    }
+  });
+});
+
+
+/**
+ * Supprime un message
+ */
+router.post('/drop-message', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Messages.dropMessage(req.body.messageId, function (err, message) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        message: message
+      });
+    }
+  });
+});
+
+/**
+ * Supprime un post
+ */
+router.post('/drop-post', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Posts.dropPost(req.body.postId, function (err, post) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        post: post
+      });
+    }
+  });
+});
+
+/**
+ * Supprime un commentaire
+ */
+router.post('/drop-comment', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Comments.dropComment(req.body.commentId, function (err, comment) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        comment: comment
+      });
+    }
+  });
+});
+
 
 
 

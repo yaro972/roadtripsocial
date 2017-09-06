@@ -6,7 +6,7 @@ import { environment } from './../../environments/environment';
 
 
 @Injectable()
-export class AdminAccueilService {
+export class AdminService {
   isUsermanagement: Boolean;
   isMessageManagement: Boolean;
   isStattistics: Boolean;
@@ -207,6 +207,85 @@ export class AdminAccueilService {
       .map(res => res.json());
   }
 
+  /**
+   * Récupère tous les posts
+   */
+  getAllPosts() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/admin/get-all-posts',
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 
 
+  /**
+    * Supprime un message
+    * @param commentId Id du message
+    */
+  deleteMessage(messageId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/admin/drop-message', {
+        messageId: messageId
+      },
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+  /**
+    * Supprime un post
+    * @param postId Id du post
+  */
+  deletePost(postId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/admin/drop-post', {
+        postId: postId
+      },
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+  /**
+  * Supprime un commentaire
+  * @param commentId Id du commentaire
+  */
+  deleteComment(commentId) {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .post(environment.BACKENDURL + '/admin/drop-comment', {
+        commentId: commentId
+      },
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 }

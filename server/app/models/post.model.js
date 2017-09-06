@@ -119,4 +119,18 @@ posts.addNewComment = function (postId, commentId, callback) {
 
 };
 
+/**
+ * Récupère tous les posts
+ */
+posts.getAllPosts = function (callback) {
+  posts
+    .find()
+    .populate('autorId') // <--
+    .populate('Posts') // <--
+    .populate('commentId') // <--
+    .exec(callback);
+};
+
+
+
 module.exports = posts;
