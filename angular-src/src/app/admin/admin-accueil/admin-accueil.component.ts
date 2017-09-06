@@ -16,16 +16,13 @@ export class AdminAccueilComponent implements OnInit, OnDestroy {
 
   manageUsers() {
     this._adminAccueilService.setUserManagement();
-    alert('Manage Users - Not implemented');
   };
 
   manageMessages() {
     this._adminAccueilService.setMessagesManagement();
-    alert('Manage Messages - Not implemented');
   };
   showStatistics() {
     this._adminAccueilService.setStatistics()
-    alert('Manage Statistics - Not implemented');
   };
   ngOnInit() {
     this._adminAccueilService.setManagementPanel();
