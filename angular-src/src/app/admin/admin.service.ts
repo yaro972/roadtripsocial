@@ -9,7 +9,7 @@ import { environment } from './../../environments/environment';
 export class AdminService {
   isUsermanagement: Boolean;
   isMessageManagement: Boolean;
-  isStattistics: Boolean;
+  isStatistics: Boolean;
 
   isManagementPanel: Boolean;
 
@@ -31,17 +31,17 @@ export class AdminService {
 
   setUserManagement() {
     this.isUsermanagement = true;
-    this.isStattistics = false;
+    this.isStatistics = false;
     this.isMessageManagement = false;
   }
   setMessagesManagement() {
     this.isUsermanagement = false;
-    this.isStattistics = false;
+    this.isStatistics = false;
     this.isMessageManagement = true;
   }
   setStatistics() {
     this.isUsermanagement = false;
-    this.isStattistics = true;
+    this.isStatistics = true;
     this.isMessageManagement = false;
   }
 
@@ -52,7 +52,7 @@ export class AdminService {
     return this.isMessageManagement;
   }
   getStatistics() {
-    return this.isStattistics;
+    return this.isStatistics;
   }
 
   loadToken() {

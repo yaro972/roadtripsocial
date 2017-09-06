@@ -40,13 +40,13 @@
 
     <!-- <div class="separator"></div> -->
     <div class="row">
-      <div class="col-xs-12" *ngIf="_adminService.isUsermanagement">
+      <div class="col-xs-12" *ngIf="isUsermanagement">
         <rts-admin-users></rts-admin-users>
       </div>
-      <div class="col-xs-12" *ngIf="_adminService.isMessageManagement">
+      <div class="col-xs-12" *ngIf="isMessageManagement">
         <rts-admin-messages></rts-admin-messages>
       </div>
-      <div class="col-xs-8 col-xs-push-2" *ngIf="_adminService.isStattistics">
+      <div class="col-xs-8 col-xs-push-2" *ngIf="isStatistics">
         <rts-admin-statistics></rts-admin-statistics>
       </div>
     </div>
