@@ -69,10 +69,16 @@ init:
   cache:
     key: ${CI_BUILD_REF_NAME}
     paths:
-      - node_modules/
+      - ./server/node_modules/
+      - ./front/node_modules/
+      - ./angular-src/node_modules/
+
   artifacts:
     paths:
      - node_modules/
+     - ./server/node_modules/
+     - ./front/node_modules/
+     - ./angular-src/node_modules/
      - build/
 
 lint_backend:
