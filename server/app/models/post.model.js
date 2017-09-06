@@ -119,4 +119,38 @@ posts.addNewComment = function (postId, commentId, callback) {
 
 };
 
+/**
+ * Récupère tous les posts
+ */
+posts.getAllPosts = function (callback) {
+  posts
+    .find()
+    .populate('autorId') // <--
+    .populate('Posts') // <--
+    .populate('commentId') // <--
+    .exec(callback);
+};
+
+/**
+ * Affiche le détail d'un post
+ */
+posts.getPostDetail = function (postId, callback) {
+  posts
+    .find({
+      _id: postId
+    })
+    .populate('autorId') // <--
+    .populate('Posts') // <--
+    .populate('commentId') // <--
+    .exec(callback);
+};
+
+
+posts.dropPost = function (postId, callback) {
+  posts
+    .remove({
+      _id: postId
+    }, callback);
+};
+
 module.exports = posts;

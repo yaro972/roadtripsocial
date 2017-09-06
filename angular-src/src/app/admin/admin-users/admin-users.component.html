@@ -1,12 +1,7 @@
-<div class="admin-user" *ngIf="userList">
+<div class="admin-user" *ngIf="userList.length">
   <h2 class="text-center">
     Gestion des utilisateurs
   </h2>
-
-  <div class="row col-xs-4 col-xs-offset-4">
-    <p>
-    </p>
-  </div>
 
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
@@ -17,7 +12,8 @@
             <th>Pseudo</th>
             <th>Prénom</th>
             <th>Nom</th>
-            <th></th>
+            <th>Action</th>
+            <th>Autorisation</th>
           </tr>
         </thead>
         <tbody>

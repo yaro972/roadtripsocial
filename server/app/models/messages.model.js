@@ -79,4 +79,28 @@ messagerie.getThreadMessages = function (threadId, callback) {
     .exec(callback);
 };
 
+/**
+ * Récupère tous les messages
+ */
+messagerie.getAllMessages = function (callback) {
+  messagerie
+    .find({})
+    .sort({
+      sendDate: 1
+    })
+    .populate('receiver')
+    .populate('sender')
+    .exec(callback);
+};
+
+/**
+ * Supprime un message
+ */
+messagerie.dropMessage = function (messageId, callback) {
+  messagerie
+    .remove({
+      _id: messageId
+    }, callback);
+};
+
 module.exports = messagerie;

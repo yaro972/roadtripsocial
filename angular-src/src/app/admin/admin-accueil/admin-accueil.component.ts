@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { AdminAccueilService } from './../admin-accueil.service';
+import { AdminService } from './../admin.service';
 
 
 @Component({
@@ -11,27 +11,24 @@ import { AdminAccueilService } from './../admin-accueil.service';
 export class AdminAccueilComponent implements OnInit, OnDestroy {
 
   constructor(
-    private _adminAccueilService: AdminAccueilService
+    private _adminService: AdminService
   ) { }
 
   manageUsers() {
-    this._adminAccueilService.setUserManagement();
-    alert('Manage Users - Not implemented');
+    this._adminService.setUserManagement();
   };
 
   manageMessages() {
-    this._adminAccueilService.setMessagesManagement();
-    alert('Manage Messages - Not implemented');
+    this._adminService.setMessagesManagement();
   };
   showStatistics() {
-    this._adminAccueilService.setStatistics()
-    alert('Manage Statistics - Not implemented');
+    this._adminService.setStatistics()
   };
   ngOnInit() {
-    this._adminAccueilService.setManagementPanel();
+    this._adminService.setManagementPanel();
   }
 
   ngOnDestroy() {
-    this._adminAccueilService.unsetManagementPanel();
+    this._adminService.unsetManagementPanel();
   }
 }

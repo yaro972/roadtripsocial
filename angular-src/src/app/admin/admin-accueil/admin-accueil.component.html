@@ -17,13 +17,13 @@
         <button class="col-xs-3 menu-panel text-center btn btn-default" (click)="manageUsers()">
           <!-- <button class="btn btn-default"> -->
           <img src="/assets/images/admin/users.png" alt="Gestion des utilisateurs" title="Gestion des utilisateurs" class="img img-responsive img-rounded">
-          <p class="">Administrer</p>
+          <p class="">Gestion des utilisateurs</p>
           </button>
         <!-- </div> -->
 
         <button class="col-xs-3 menu-panel text-center btn btn-default" (click)="manageMessages()">
           <img src="/assets/images/admin/Messages.png" alt="Gestion des messages" title="Gestion des messages" class="img img-responsive img-rounded">
-          <p class="">Administrer</p>
+          <p class="">Gestion des messages</p>
 
           </button>
 
@@ -31,7 +31,7 @@
         <button class="col-xs-3 menu-panel text-center btn btn-default" (click)="showStatistics()">
           <img src="/assets/images/admin/statistics.png" alt="Affichage des statistiques d'utilisation" title="Affichage des statistiques d'utilisation"
             class="img img-responsive img-rounded">
-          <p class="">Administrer</p>
+          <p class="">Statistiques d'utilisation</p>
             </button>
 
       </div>
@@ -40,10 +40,10 @@
 
     <!-- <div class="separator"></div> -->
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12" *ngIf="_adminService.isUsermanagement">
         <rts-admin-users></rts-admin-users>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-12" *ngIf="_adminService.isMessageManagement">
         <rts-admin-messages></rts-admin-messages>
       </div>
       <div class="col-xs-12">
