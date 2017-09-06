@@ -3,99 +3,126 @@
     Gestion des Messages
   </h2>
 
-  <h3>Listes des messages</h3>
-  <div class="row" *ngIf="messagesList">
-    <div class="col-xs-10 col-xs-offset-1">
-      <table class="table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date</th>
-            <th>Auteur</th>
-            <th>Destinataire</th>
-            <th>Message</th>
-            <th>Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let message of messagesList; let i = index">
-            <td style="width: 30px;">{{i}}</td>
-            <td>{{message.sendDate | date:'dd MMM'}}</td>
-            <td>{{message.sender.nickname}}</td>
-            <td>{{message.receiver.nickname}}</td>
-            <td>{{message.content}}</td>
-            <td title="Message">M</td>
 
-            <td>
-              <button class="btn btn-sm btn-danger" (click)="onDeleteMessage(i)">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1 menu-left">
+      <table class="table">
+        <tr>
+          <td>
+            <span class="glyphicon glyphicon-pencil text-primary"></span><a href="#messages">Listes des messages</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="glyphicon glyphicon-flash text-success"></span><a href="#posts">Liste des posts</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="glyphicon glyphicon-file text-info"></span><a href="#comments">Listes des commentaires</a>
+          </td>
+        </tr>
       </table>
     </div>
-  </div>
-
-  <h3>Listes des Posts</h3>
-  <div class="row" *ngIf="postsList">
-    <div class="col-xs-10 col-xs-offset-1">
-      <table class="table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date</th>
-            <th>Auteur</th>
-            <th>Message</th>
-            <th>Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let post of postsList; let i = index">
-            <td style="width: 30px;">{{i}}</td>
-            <td>{{post.datePost | date:'dd MMM'}}</td>
-            <td>{{post.autorId.nickname}}</td>
-            <td>{{post.details}}</td>
-            <td title="Post">P</td>
-
-            <td>
-              <button class="btn btn-sm btn-danger" (click)="onDeletePost(i)">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+    <div class="col-md-9">
 
 
-  <h3>Listes des commentaires</h3>
-  <div class="row" *ngIf="postsList">
-    <div class="col-xs-10 col-xs-offset-1">
-      <table class="table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date</th>
-            <th>Auteur</th>
-            <th>Message</th>
-            <th>Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let comment of commentsList; let i = index">
-            <td style="width: 30px;">{{i}}</td>
-            <td>{{comment.dateComment | date:'dd MMM'}}</td>
-            <td>{{comment.nickname}}</td>
-            <td>{{comment.text}}</td>
-            <td title="Comment">C</td>
+      <h3 *ngIf="messagesList.length" id="messages">Listes des messages</h3>
+      <div class="row" *ngIf="messagesList.length">
+        <div class="col-xs-10 col-xs-offset-1">
+          <table class="table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Destinataire</th>
+                <th>Message</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let message of messagesList; let i = index">
+                <!-- {{message | json}} -->
+                <td style="width: 30px;">{{i+1}}</td>
+                <td>{{message.sendDate | date:'dd MMM'}}</td>
+                <td *ngIf="message.sender">{{message.sender.nickname}}</td>
+                <td *ngIf="message.receiver">{{message.receiver.nickname}}</td>
+                <td>{{message.content}}</td>
+                <td title="Message">M</td>
 
-            <td>
-              <button class="btn btn-sm btn-danger" (click)="onDeleteComment(i)">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="onDeleteMessage(i)">Supprimer</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3 *ngIf="postsList.length" id="posts">Listes des Posts</h3>
+      <div class="row" *ngIf="postsList.length">
+        <div class="col-xs-10 col-xs-offset-1">
+          <table class="table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Message</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let post of postsList; let i = index">
+                <td style="width: 30px;">{{i+1}}</td>
+                <td>{{post.datePost | date:'dd MMM'}}</td>
+                <td>{{post.autorId.nickname}}</td>
+                <td>{{post.details}}</td>
+                <td title="Post">P</td>
+
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="onDeletePost(i)">Supprimer</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <h3 *ngIf="commentsList.length" id="comments">Listes des commentaires</h3>
+      <div class="row" *ngIf="commentsList.length">
+        <div class="col-xs-10 col-xs-offset-1">
+          <table class="table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Message</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comment of commentsList; let i = index">
+                <td style="width: 30px;">{{i+1}}</td>
+                <td>{{comment.dateComment | date:'dd MMM'}}</td>
+                <td>{{comment.nickname}}</td>
+                <td>{{comment.text}}</td>
+                <td title="Comment">C</td>
+
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="onDeleteComment(i)">Supprimer</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 

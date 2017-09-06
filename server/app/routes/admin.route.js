@@ -236,16 +236,34 @@ router.post('/drop-message', passport.authenticate('jwt', {
 router.post('/drop-post', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-  Posts.dropPost(req.body.postId, function (err, post) {
+
+  Posts.getPostDetail(req.body.postId, function (err, postDetail) {
     if (err) {
       res.json({
         err: err
       });
     } else {
-      res.json({
-        err: null,
-        post: post
+      postDetail.forEach(function (post) {
+        post._doc.commentId.forEach(function (commentEl) {
+          Comments
+            .dropComment(commentEl._doc._id, function (err, data) {
+
+            });
+        });
       });
+      Posts
+        .dropPost(req.body.postId, function (err, post) {
+          if (err) {
+            res.json({
+              err: err
+            });
+          } else {
+            res.json({
+              err: null,
+              post: post
+            });
+          }
+        });
     }
   });
 });

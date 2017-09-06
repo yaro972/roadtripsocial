@@ -3,6 +3,7 @@ import { AdminService } from './../admin.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'rts-admin-messages',
@@ -43,7 +44,6 @@ export class AdminMessagesComponent implements OnInit, OnDestroy {
           console.log(data.err);
         } else {
           this.messagesList = data.messages;
-          console.log(this.messagesList)
         }
       });
   }
@@ -101,6 +101,7 @@ export class AdminMessagesComponent implements OnInit, OnDestroy {
             timeout: 2500
           })
           this.getAllPosts();
+          this.getAllComments();
         }
       });
   }

@@ -100,8 +100,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
           console.log(data.err);
         } else {
           this.commentList = data.posts;
-
+          this.newComment = '';
           this.showPosts();
+
         }
       });
   };
