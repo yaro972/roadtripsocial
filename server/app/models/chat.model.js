@@ -32,9 +32,24 @@ chat.getChat = function (room, callback) {
     .exec(callback);
 };
 
+/**
+ * Sauve le message
+ */
 chat.saveChat = function (msg, callback) {
   chat
     .create(msg, callback);
+};
+
+
+/**
+ * Nb messages dans le chat
+ */
+
+chat.nbChatMsg = function (callback) {
+  chat
+    .find()
+    .count()
+    .exec(callback);
 };
 
 

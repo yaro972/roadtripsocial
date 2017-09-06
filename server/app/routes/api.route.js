@@ -205,4 +205,25 @@ router.post('/add-comment', passport.authenticate('jwt', {
   });
 });
 
+
+/**
+ * Récupère le nombre de commentaires
+ */
+router.get('/nb-comments', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Comments.nbComment(function (err, nbComments) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbComments: nbComments
+      });
+    }
+  });
+});
+
 module.exports = router;

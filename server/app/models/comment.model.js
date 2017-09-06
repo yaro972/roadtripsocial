@@ -71,4 +71,15 @@ comment.dropComment = function (commentId, callback) {
     }, callback);
 };
 
+
+/**
+ * Récupère le nombre de commentaires
+ */
+comment.nbComment = function (callback) {
+  comment
+    .find()
+    .count()
+    .exec(callback);
+}
+
 module.exports = comment;

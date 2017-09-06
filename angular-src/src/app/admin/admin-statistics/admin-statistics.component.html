@@ -1,3 +1,103 @@
-<p>
-  admin-statistics works!
-</p>
+<div class="admin-stat">
+  <div class="row">
+
+    <!-- Utilisateurs en ligne -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbUsers">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content dark-blue">
+          <div class="circle-tile-description text-faded"> Utilisateurs</div>
+          <div class="circle-tile-number text-faded ">{{nbUsers}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- utilisateurs inscrits -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbUsers">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content red">
+          <div class="circle-tile-description text-faded"> Utilisateurs en lignes </div>
+          <div class="circle-tile-number text-faded ">{{nbOnlineUsers}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nb mails envoyés -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbSendMails">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading orange"><i class="fa fa-envelope fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content orange">
+          <div class="circle-tile-description text-faded"> Mails envoyés </div>
+          <div class="circle-tile-number text-faded ">{{nbSendMails}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nb messages chat -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbChatMessages">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading purple"><i class="fa fa-retweet fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content purple">
+          <div class="circle-tile-description text-faded">Messages Chat </div>
+          <div class="circle-tile-number text-faded ">{{nbChatMessages}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nb Messages -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbMessages">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading dark-gray"><i class="fa fa-paper-plane fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content dark-gray">
+          <div class="circle-tile-description text-faded"> Nb messages privés</div>
+          <div class="circle-tile-number text-faded ">{{nbMessages}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nb posts -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbPosts">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading green"><i class="fa fa-file-text fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content green">
+          <div class="circle-tile-description text-faded"> Nb posts </div>
+          <div class="circle-tile-number text-faded ">{{nbPosts}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nb Commentaires -->
+    <div class="col-lg-2 col-sm-6" *ngIf="nbComments">
+      <div class="circle-tile ">
+        <a href="#">
+          <div class="circle-tile-heading blue"><i class="fa fa-comments fa-fw fa-3x"></i></div>
+        </a>
+        <div class="circle-tile-content blue">
+          <div class="circle-tile-description text-faded"> Nb Commentaires </div>
+          <div class="circle-tile-number text-faded ">{{nbComments}}</div>
+          <a class="circle-tile-footer" href="#">More Info <i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -46,7 +46,7 @@
       <div class="col-xs-12" *ngIf="_adminService.isMessageManagement">
         <rts-admin-messages></rts-admin-messages>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-8 col-xs-push-2" *ngIf="_adminService.isStattistics">
         <rts-admin-statistics></rts-admin-statistics>
       </div>
     </div>

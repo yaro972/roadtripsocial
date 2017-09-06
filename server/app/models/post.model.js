@@ -145,7 +145,9 @@ posts.getPostDetail = function (postId, callback) {
     .exec(callback);
 };
 
-
+/**
+ * Supprime un post
+ */
 posts.dropPost = function (postId, callback) {
   posts
     .remove({
