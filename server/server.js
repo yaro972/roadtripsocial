@@ -28,6 +28,8 @@ const config = require('./app/inc/.config');
 // Port par défaut de l'application
 let port = process.env.BACKPORT || config.srv.port;
 let ip = process.env.BACKIP || config.srv.ip;
+let NODEPORT = process.env.NODEPORT || 5000;
+let NODEIP = process.env.NODEIP || config.srv.ip;
 
 if (process.env.NODE_ENV === 'test') {
   // Lancement des test unitaires
@@ -151,7 +153,7 @@ app.listen(port, ip, function () {
 });
 
 
-http.listen(5000, ip, function () {
+http.listen(NODEPORT, NODEIP, function () {
   // console.log('Serveur de chat démarré sur le port 5000...');
   debug('Serveur de chat démarré sur le port 5000...');
 });
