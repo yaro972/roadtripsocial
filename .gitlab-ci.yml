@@ -44,12 +44,10 @@ before_script:
  # instead.
  # - mkdir -p ~/.ssh
  # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
- - ls -l
- - cd ./server; npm install --silent --loglevel warn ; cd ..
- - cd ./front; npm install --silent  --loglevel warn ; cd ..
- - cd ./angular-src; npm install --silent  --loglevel warn ; cd ..
+ 
 
 stages:
+  - init
   - lint
   - build
   - test
@@ -60,6 +58,22 @@ stages:
 cache:
   paths:
   - node_modules/
+
+init:
+  stage: init
+  script:
+    - ls -l
+    - cd ./server; npm install --silent --loglevel warn ; cd ..
+    - cd ./front; npm install --silent  --loglevel warn ; cd ..
+    - cd ./angular-src; npm install --silent  --loglevel warn ; cd ..
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+     - node_modules/
+     - build/
 
 lint_backend:
   stage: lint
@@ -117,7 +131,7 @@ deploy_to_staging:
 
    
    # try to connect to Staging
-   - sshpass -p 'clg08usf?' ssh -t yaro@karthier.synology.me -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
+   - sshpass -p '$SSH_STAGING_PASS' ssh -t $SSH_STAGING_USER -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
    #- cd /home/yaro ; ./deploy.sh
@@ -136,7 +150,7 @@ deploy_to_production:
 
    
    # try to connect to Production
-    - sshpass -p 'clg08usf?' ssh -t yaro@vps354082.ovh.net -p 22 -v   "cd /home/yaro/ ; ./deploy.sh"
+    - sshpass -p '$SSH_PROD_PASS' ssh -t $SSH_PROD_USER -p 22 -v   "cd /home/yaro/ ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
    #- cd /home/yaro ; ./deploy.sh
