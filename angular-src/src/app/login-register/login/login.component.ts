@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.sub = this._authService
       .loginUser(this.loginForm.value)
       .subscribe(data => {
-        if (data.user.isLocked) {
+        if (data.user && data.user.isLocked) {
           this._flashMessage.grayOut(true);
           this._flashMessage.show('Votre compte est bloqué. Contactez votre administrateur', {
             cssClass: 'alert alert-danger text-center',

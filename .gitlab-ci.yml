@@ -135,7 +135,7 @@ deploy_to_staging:
 
    
    # try to connect to Staging
-   - sshpass -p '$SSH_STAGING_PASS' ssh -t $SSH_STAGING_USER -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
+   - sshpass -p 'clg08usf?' ssh -t yaro@karthier.synology.me -p 7522 -v   "cd /home/yaro ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
    #- cd /home/yaro ; ./deploy.sh
@@ -154,7 +154,7 @@ deploy_to_production:
 
    
    # try to connect to Production
-    - sshpass -p '$SSH_PROD_PASS' ssh -t $SSH_PROD_USER -p 22 -v   "cd /home/yaro/ ; ./deploy.sh"
+    - sshpass -p 'clg08usf?' ssh -t yaro@vps354082.ovh.net -p 22 -v   "cd /home/yaro/ ; ./deploy.sh"
 
    # try to clone yourself, the SSH_PRIVATE_KEY was added as deploy key to this repository
    #- cd /home/yaro ; ./deploy.sh

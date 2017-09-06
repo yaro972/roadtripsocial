@@ -6,6 +6,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { User } from '../../core/user'
 
 
+
 @Component({
   selector: 'rts-registration-form',
   templateUrl: './registration-form.component.html',
@@ -78,7 +79,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
           cssClass: 'alert alert-danger text-center',
           timeout: 2500
         });
-
+        console.log(data.err);
       } else {
         if (this.registerForm.value.passedChk) {
           this._flashMessage.grayOut(true);
@@ -87,11 +88,14 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
             timeout: 2500
           });
           this.register.emit(false);
+
           this._router.navigate(['/login']);
         } else {
           this.register.emit(true);
+
         }
-        this.userNickname.emit(this.registerForm.value.nickname);
+        // this.userNickname.emit(this.registerForm.value.nickname);
+        this.userNickname = this.registerForm.value.nickname;
       }
     });
   }

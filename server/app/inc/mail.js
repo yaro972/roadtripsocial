@@ -26,14 +26,15 @@ exports.sendMail = function (sender, receivers, subject, mailContent, isHtmlBody
     subject: subject,
     html: mailContent,
   }, function (err, reply) {
-    if (err) {
-      callback(err, reply);
-    } else {
-      mailDb.addNew(mailEl, function (err, mail) {
-        if (err) {
-          callback(err, reply);
-        }
-      });
-    }
+    callback(err, reply);
+    // if (err) {
+    //   callback(err, reply);
+    // } else {
+    mailDb.addNew(mailEl, function (err, mail) {
+      // if (err) {
+      // callback(err, reply);
+      // }
+    });
+    // }
   });
 };
