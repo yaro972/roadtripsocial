@@ -288,4 +288,57 @@ export class AdminService {
       })
       .map(res => res.json());
   }
+
+  /**
+  * Nb messages chat
+  */
+  getNbChats() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/admin/chat-message',
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+
+  /**
+  * Nb messages
+  */
+  getNbMessages() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/admin/nb-messages',
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
+  /**
+  * Nb mails
+  */
+  getNbMails() {
+    const headers = new Headers();
+    this.loadToken();
+
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/admin/nb-mails',
+      {
+        headers: headers
+      })
+      .map(res => res.json());
+  }
 }

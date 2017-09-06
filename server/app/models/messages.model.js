@@ -103,4 +103,16 @@ messagerie.dropMessage = function (messageId, callback) {
     }, callback);
 };
 
+/**
+ * Nb de messages
+ */
+messagerie.nbMsg = function (callback) {
+  messagerie
+    .find()
+    .count()
+    .exec(callback);
+};
+
+
+
 module.exports = messagerie;

@@ -20,6 +20,8 @@ const Messages = require('../models/messages.model');
 const MessageThread = require('../models/message-thread.model');
 const Posts = require('../models/post.model');
 const Comments = require('../models/comment.model');
+const Chat = require('../models/chat.model');
+const Mails = require('../models/mail.model');
 
 
 /**
@@ -288,6 +290,66 @@ router.post('/drop-comment', passport.authenticate('jwt', {
   });
 });
 
+
+/**
+ * Nb de messages chat
+ */
+router.get('/chat-message', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Chat.nbChatMsg(function (err, nbChatMsg) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbChatMsg: nbChatMsg
+      });
+    }
+  });
+});
+
+/**
+ * Nb de messages 
+ */
+router.get('/nb-messages', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Messages.nbMsg(function (err, nbMessages) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbMessages: nbMessages
+      });
+    }
+  });
+});
+
+/**
+ * Nb de mails
+ */
+router.get('/nb-mails', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  Mails.nbMails(function (err, nbMails) {
+    if (err) {
+      res.json({
+        err: err
+      });
+    } else {
+      res.json({
+        err: null,
+        nbMails: nbMails
+      });
+    }
+  });
+});
 
 
 

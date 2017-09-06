@@ -117,6 +117,19 @@ export class PostsService {
       .map(res => res.json());
   };
 
+  /**
+     *Nombresde commentaires
+     */
+  getNbComments() {
+    const headers = new Headers();
+    this.loadToken();
 
+    headers.append('Authorization', this.authToken);
+    headers
+      .append('Content-type', 'application/json');
+    return this._http
+      .get(environment.BACKENDURL + '/api/nb-comments', { headers: headers })
+      .map(res => res.json());
+  };
 
 };
