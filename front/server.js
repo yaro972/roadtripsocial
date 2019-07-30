@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/:var', rewrite('/'));
 
 // Fichiers de configuration des routes
-var client = require('./routes/public');
+var client = require('./app/routes/public');
 
 // Routes
 app.use('/', client);
