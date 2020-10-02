@@ -110,7 +110,7 @@ app/inc/config.js
 server/uploads/*
 **/config.js
 **/.config.js
-server/app/inc/.config-prod.js
+src/app/inc/.config-prod.js
 fake-user-generator/yarn.lock
 front/public/3rdpartylicenses.txt
 front/public/**

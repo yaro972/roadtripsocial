@@ -1,0 +1,110 @@
+<div class="row">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="col-xs-12">
+      <div class=" navbar-header">
+        <button type="button" class="navbar-toggle collapsed navbar-perso" (click)="isCollapse = !isCollapse" data-toggle="collapse"
+          data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+        <a *ngIf="!_authService.loggedIn()" class="navbar-brand" href="/src/angular-src/src" routerLinkActive="active">
+          <img [src]="logo" alt="Road Trip"> RoadTrip
+          <span>Social</span>
+        </a>
+        <a class="navbar-brand" href="/feeds" *ngIf="_authService.loggedIn()" routerLinkActive="active">
+                        <img [src]="logo" alt="Road Trip"> RoadTrip
+                        <span>Social</span>
+                        </a>
+
+      </div>
+      <div id="navbar" class="collapse navbar-collapse" [collapse]="isCollapse" [class.is-active]="isCollapse">
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/list-membres">
+                            Rechercher
+                            </a>
+          </li> -->
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/details-membres">
+                            Fiche d'un membre
+                            </a>
+          </li> -->
+          <li *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/register">
+                            Inscription
+                            </a>
+          </li>
+          <li *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/login">
+                            Connexion <span class="glyphicon glyphicon-log-in"></span>
+                            </a>
+          </li>
+          <!-- <li *ngIf="_authService.loggedIn()" class="dropdown"> -->
+          <!-- <a (click)="onCollapseSubmenu()" (mouseenter)="onCollapseSubmenu()" (mouseleave)="onCollapseSubmenu()" (mouseover)="onCollapseSubmenu()"
+            [ngClass]="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <img src="{{imageFace}}" width="30" /> <span class="caret"></span></a> -->
+          <!-- <ul class="dropdown-menu" [collapse]="isCollapseSubmenu" [class.is-active]="!isCollapseSubmenu"> -->
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/profile">
+                           <span><img src="{{imageFace}}" width="30" /></span> Mon profil
+                            </a>
+          </li> -->
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/profile">
+                           <span><img src="{{imageFace}}" width="30" /></span> Mon profil
+                            </a>
+          </li>
+          <!-- <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/change-password">
+              Changer son mot de passe</a>
+          </li> -->
+
+
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}" (click)="showUnreadMessage()">
+            <a title="Messagerie">
+              <span class="glyphicon glyphicon-envelope" [ngClass]="{ 'unreadMessages': isNewMessage, 'nounreadMessage': !isNewMessage }"></span>
+              <span class="badge" > {{nbUnreadPosts}}</span>
+            </a>
+          </li>
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/list-membres">Rechercher un membre
+
+                            </a>
+          </li>
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/chatbox">Salon de discussion
+
+                            </a>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li *ngIf="_authService.loggedIn()">
+            <a (click)="onLogoutClick()" href="/src/angular-src/src">
+              Déconnexion <span class="glyphicon glyphicon-log-out"></span>
+            </a>
+          </li>
+          <li *ngIf="_authService.loggedIn() && isAdmin" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/admin">Administrer le site
+            </a>
+          </li>
+          <li *ngIf="_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/about">
+                            A propos
+                            </a>
+          </li>
+          <!-- </ul> -->
+          <!-- </li> -->
+
+          <li *ngIf="!_authService.loggedIn()" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+            <a routerLink="/about">
+                            A propos
+                            </a>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+</div>
