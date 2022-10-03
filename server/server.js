@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
 const http = require('http').Server(express());
+const {Controllers} = require("./app/routes");
 
 
 // Mise en place du debogage
@@ -73,6 +74,8 @@ var api = require('./app/routes/api.route');
 var userApi = require('./app/routes/user.route');
 var admin = require('./app/routes/admin.route');
 var chat = require('./app/routes/chat.route');
+
+app.use(Controllers);
 
 // ===========================
 // Base de données
